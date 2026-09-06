@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#091428" />
+      <stop offset="100%" stop-color="#020813" />
+    </linearGradient>
+    <linearGradient id="box-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#14294d" />
+      <stop offset="100%" stop-color="#0d1b33" />
+    </linearGradient>
+  </defs>
+
+  <rect width="800" height="450" fill="url(#bg-grad)" rx="12" />
+
+  <rect x="30" y="25" width="290" height="34" rx="8" fill="#d97706" fill-opacity="0.1" stroke="#d97706" stroke-width="1" />
+  <text x="45" y="47" fill="#fbbf24" font-family="monospace" font-size="13" font-weight="bold">TOPOLOGY: ZABBIX SNMP MONITORING</text>
+
+  <!-- Central Zabbix Server -->
+  <g transform="translate(310, 90)">
+    <rect width="180" height="110" rx="12" fill="url(#box-grad)" stroke="#d97706" stroke-width="2" />
+    <circle cx="25" cy="30" r="10" fill="#d97706" fill-opacity="0.2" stroke="#d97706" stroke-width="1.5" />
+    <text x="45" y="34" fill="#ffffff" font-family="sans-serif" font-size="13" font-weight="bold">Zabbix Server 7.0</text>
+    <text x="20" y="60" fill="#fbbf24" font-family="monospace" font-size="10">Debian 12 + PostgreSQL</text>
+    <text x="20" y="80" fill="#94a3b8" font-family="monospace" font-size="10">Web GUI + Poller</text>
+    <text x="20" y="98" fill="#38bdf8" font-family="monospace" font-size="9">Alert: Telegram Bot</text>
+  </g>
+
+  <!-- Connectors -->
+  <line x1="400" y1="200" x2="180" y2="280" stroke="#38bdf8" stroke-width="2" stroke-dasharray="4,4" />
+  <line x1="400" y1="200" x2="400" y2="280" stroke="#10b981" stroke-width="2" stroke-dasharray="4,4" />
+  <line x1="400" y1="200" x2="620" y2="280" stroke="#a855f7" stroke-width="2" stroke-dasharray="4,4" />
+
+  <!-- Monitored Node 1: Routers -->
+  <g transform="translate(100, 280)">
+    <rect width="160" height="90" rx="10" fill="url(#box-grad)" stroke="#38bdf8" stroke-width="1.5" />
+    <text x="15" y="28" fill="#38bdf8" font-family="sans-serif" font-size="12" font-weight="bold">Core &amp; Dist Switches</text>
+    <text x="15" y="50" fill="#94a3b8" font-family="monospace" font-size="10">SNMPv2c / v3 Walk</text>
+    <text x="15" y="70" fill="#67e8f9" font-family="monospace" font-size="9">Port Bandwidth (bps)</text>
+  </g>
+
+  <!-- Monitored Node 2: Servers -->
+  <g transform="translate(320, 280)">
+    <rect width="160" height="90" rx="10" fill="url(#box-grad)" stroke="#10b981" stroke-width="1.5" />
+    <text x="15" y="28" fill="#10b981" font-family="sans-serif" font-size="12" font-weight="bold">Linux / Windows VM</text>
+    <text x="15" y="50" fill="#94a3b8" font-family="monospace" font-size="10">Zabbix Agent 2 (TCP 10050)</text>
+    <text x="15" y="70" fill="#86efac" font-family="monospace" font-size="9">CPU, RAM, Disk I/O</text>
+  </g>
+
+  <!-- Monitored Node 3: Access Points -->
+  <g transform="translate(540, 280)">
+    <rect width="160" height="90" rx="10" fill="url(#box-grad)" stroke="#a855f7" stroke-width="1.5" />
+    <text x="15" y="28" fill="#a855f7" font-family="sans-serif" font-size="12" font-weight="bold">Wireless APs / UniFi</text>
+    <text x="15" y="50" fill="#94a3b8" font-family="monospace" font-size="10">ICMP Ping &amp; SNMP</text>
+    <text x="15" y="70" fill="#d8b4fe" font-family="monospace" font-size="9">Client Count &amp; Uptime</text>
+  </g>
+</svg>

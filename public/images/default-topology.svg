@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="100%" height="100%">
+  <defs>
+    <linearGradient id="def-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a" />
+      <stop offset="100%" stop-color="#020617" />
+    </linearGradient>
+  </defs>
+  <rect width="800" height="450" fill="url(#def-bg)" rx="12" />
+  <circle cx="400" cy="200" r="70" fill="#00f0ff" fill-opacity="0.08" stroke="#00f0ff" stroke-width="2" stroke-dasharray="6,4" />
+  <circle cx="400" cy="200" r="35" fill="#00f0ff" fill-opacity="0.15" stroke="#00f0ff" stroke-width="2" />
+  <text x="400" y="206" fill="#00f0ff" font-family="monospace" font-size="20" font-weight="bold" text-anchor="middle">TKJ LAB</text>
+  <text x="400" y="310" fill="#94a3b8" font-family="sans-serif" font-size="14" text-anchor="middle">Network &amp; Server Infrastructure Topology</text>
+  <text x="400" y="335" fill="#00f0ff" font-family="monospace" font-size="11" text-anchor="middle">[SYSTEM TOPOLOGY DIAGRAM READY]</text>
+</svg>

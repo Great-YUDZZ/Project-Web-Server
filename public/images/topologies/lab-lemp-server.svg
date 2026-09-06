@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#051923" />
+      <stop offset="100%" stop-color="#000c14" />
+    </linearGradient>
+    <linearGradient id="box-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f2942" />
+      <stop offset="100%" stop-color="#0a192f" />
+    </linearGradient>
+    <filter id="glow-emerald" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="5" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <rect width="800" height="450" fill="url(#bg-grad)" rx="12" />
+
+  <rect x="30" y="25" width="280" height="34" rx="8" fill="#10b981" fill-opacity="0.1" stroke="#10b981" stroke-width="1" />
+  <text x="45" y="47" fill="#10b981" font-family="monospace" font-size="13" font-weight="bold">ARCHITECTURE: LEMP WEB STACK</text>
+
+  <!-- Client Browser -->
+  <g transform="translate(60, 190)">
+    <rect width="130" height="80" rx="10" fill="url(#box-grad)" stroke="#38bdf8" stroke-width="1.5" />
+    <text x="20" y="35" fill="#38bdf8" font-family="sans-serif" font-size="13" font-weight="bold">Client / User</text>
+    <text x="20" y="55" fill="#94a3b8" font-family="monospace" font-size="10">HTTP/2 / HTTPS</text>
+  </g>
+
+  <!-- Arrow Client -> Nginx -->
+  <line x1="190" y1="230" x2="270" y2="230" stroke="#38bdf8" stroke-width="3" stroke-dasharray="5,3" />
+  <polygon points="270,225 280,230 270,235" fill="#38bdf8" />
+  <text x="205" y="218" fill="#38bdf8" font-family="monospace" font-size="10">Port 80/443</text>
+
+  <!-- Nginx Reverse Proxy -->
+  <g transform="translate(280, 160)">
+    <rect width="160" height="140" rx="12" fill="url(#box-grad)" stroke="#10b981" stroke-width="2" filter="url(#glow-emerald)" />
+    <circle cx="30" cy="35" r="12" fill="#10b981" fill-opacity="0.2" stroke="#10b981" stroke-width="1.5" />
+    <text x="50" y="38" fill="#ffffff" font-family="sans-serif" font-size="14" font-weight="bold">Nginx 1.26</text>
+    <text x="20" y="65" fill="#10b981" font-family="monospace" font-size="10">Reverse Proxy</text>
+    <text x="20" y="85" fill="#94a3b8" font-family="monospace" font-size="10">Static File Handler</text>
+    <text x="20" y="105" fill="#94a3b8" font-family="monospace" font-size="10">SSL Termination</text>
+    <text x="20" y="125" fill="#38bdf8" font-family="monospace" font-size="10">FastCGI Passthrough</text>
+  </g>
+
+  <!-- Arrow Nginx -> PHP-FPM -->
+  <line x1="440" y1="230" x2="510" y2="230" stroke="#10b981" stroke-width="3" stroke-dasharray="5,3" />
+  <polygon points="510,225 520,230 510,235" fill="#10b981" />
+  <text x="445" y="218" fill="#10b981" font-family="monospace" font-size="9">php-fpm.sock</text>
+
+  <!-- PHP-FPM App -->
+  <g transform="translate(520, 160)">
+    <rect width="140" height="140" rx="12" fill="url(#box-grad)" stroke="#818cf8" stroke-width="2" />
+    <text x="20" y="38" fill="#ffffff" font-family="sans-serif" font-size="14" font-weight="bold">PHP 8.4-FPM</text>
+    <text x="20" y="65" fill="#a5b4fc" font-family="monospace" font-size="10">Laravel 12 App</text>
+    <text x="20" y="85" fill="#94a3b8" font-family="monospace" font-size="10">Business Logic</text>
+    <text x="20" y="105" fill="#94a3b8" font-family="monospace" font-size="10">Eloquent ORM</text>
+    <text x="20" y="125" fill="#94a3b8" font-family="monospace" font-size="10">Blade Engine</text>
+  </g>
+
+  <!-- Arrow PHP-FPM -> MariaDB -->
+  <line x1="590" y1="300" x2="590" y2="340" stroke="#f59e0b" stroke-width="3" />
+  <polygon points="585,340 590,350 595,340" fill="#f59e0b" />
+  <text x="600" y="330" fill="#f59e0b" font-family="monospace" font-size="10">TCP 3306</text>
+
+  <!-- MariaDB / MySQL -->
+  <g transform="translate(510, 350)">
+    <rect width="160" height="70" rx="10" fill="url(#box-grad)" stroke="#f59e0b" stroke-width="1.5" />
+    <text x="20" y="30" fill="#f59e0b" font-family="sans-serif" font-size="13" font-weight="bold">MariaDB 11.8</text>
+    <text x="20" y="50" fill="#94a3b8" font-family="monospace" font-size="10">Database / Persistent</text>
+  </g>
+</svg>
