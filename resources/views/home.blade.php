@@ -10,13 +10,10 @@
             <!-- Left Hero Content -->
             <div class="lg:col-span-7 space-y-6 sm:space-y-7 relative z-10">
                 
-                <!-- Floating Eyebrow Pill Badge (Digital Kensei Cyber Red Dot) -->
-                <div class="inline-flex items-center gap-2 sm:gap-2.5 px-3 sm:px-4 py-1.5 rounded-full glass-pill border-rose-500/30 text-[11px] sm:text-xs font-mono text-zinc-300 shadow-lg shadow-rose-600/10 max-w-full">
-                    <span class="relative flex h-2 w-2 shrink-0">
-                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-rose-500 opacity-75"></span>
-                        <span class="relative inline-flex rounded-full h-2 w-2 bg-rose-600"></span>
-                    </span>
-                    <span class="tracking-wide text-zinc-200 truncate sm:whitespace-normal">READY TO INNOVATE &bull; NETWORK ARCHITECT</span>
+                <!-- Eyebrow Pill Badge (Authentic Student Identity - Zero AI Slop) -->
+                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-white/10 bg-white/[0.04] text-[11px] sm:text-xs font-mono text-zinc-300 shadow-sm max-w-full">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+                    <span class="tracking-wide text-zinc-200 truncate sm:whitespace-normal">TEKNIK KOMPUTER &amp; JARINGAN / SMKN 1 DENPASAR</span>
                 </div>
 
                 <!-- Hero Main Headline (High Contrast Digital Kensei Typography) -->
@@ -25,9 +22,9 @@
                     <span class="text-transparent bg-clip-text bg-gradient-to-r from-red-500 via-rose-400 to-red-400">INFRASTRUCTURE</span>
                 </h1>
 
-                <!-- Hero Description -->
+                <!-- Hero Description (Grounded, Technically Accurate) -->
                 <p class="text-sm sm:text-base md:text-lg text-zinc-400 max-w-[50ch] leading-relaxed text-balance">
-                    Halo, saya <span class="text-white font-semibold">I Made Yuda Pramana</span>. Merancang arsitektur topologi jaringan berkecepatan tinggi, administrasi server Linux Debian mandiri, dan virtualisasi kelas enterprise.
+                    Halo, saya <span class="text-white font-medium">I Made Yuda Pramana</span>. Siswa Teknik Komputer &amp; Jaringan yang berfokus pada switching &amp; routing Cisco, administrasi baremetal server Debian LEMP, dan implementasi infrastruktur jaringan terstruktur.
                 </p>
 
                 <!-- CTA Actions & Social Cluster -->
@@ -40,7 +37,7 @@
                         Eksplorasi Lab
                     </a>
 
-                    <!-- Social Glass Cluster with Updated Contact Info -->
+                    <!-- Social Glass Cluster with Direct Contact Info -->
                     <div class="flex items-center justify-center sm:justify-start gap-2 pt-1 sm:pt-0 sm:pl-2">
                         <!-- GitHub -->
                         <a href="https://github.com/Great-YUDZZ" target="_blank" rel="noopener noreferrer" class="p-2.5 rounded-full glass-panel-interactive text-zinc-400 hover:text-white hover:border-rose-500/40 hover:bg-rose-600/15 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose-500" aria-label="GitHub Great-YUDZZ" title="GitHub: Great-YUDZZ">
@@ -65,101 +62,183 @@
                     </div>
                 </div>
 
-                <!-- Floating Metric Mini Bar -->
+                <!-- Grounded Engineering Metrics (Zero AI Slop) -->
                 <div class="pt-2 sm:pt-4 grid grid-cols-2 gap-3 sm:gap-4 max-w-md">
                     <div class="p-3.5 sm:p-4 rounded-2xl glass-panel-interactive hover:border-rose-500/30 transition-all">
                         <div class="flex items-baseline justify-between">
-                            <span class="text-2xl sm:text-3xl lg:text-4xl font-light tracking-tight text-white font-mono">99.9%</span>
-                            <span class="text-rose-500 text-xs font-mono">●</span>
+                            <span class="text-2xl sm:text-3xl lg:text-4xl font-light tracking-tight text-white font-mono">5</span>
+                            <span class="text-emerald-400 text-xs font-mono font-semibold">Resmi</span>
                         </div>
-                        <div class="text-[11px] sm:text-xs text-zinc-400 mt-1 font-medium leading-tight">Uptime Target &amp; SLA Jaringan</div>
+                        <div class="text-[11px] sm:text-xs text-zinc-400 mt-1 font-medium leading-tight">Sertifikasi Cisco NetAcad &amp; Komdigi</div>
                     </div>
 
                     <div class="p-3.5 sm:p-4 rounded-2xl glass-panel-interactive hover:border-rose-500/30 transition-all">
                         <div class="flex items-baseline justify-between">
-                            <span class="text-2xl sm:text-3xl lg:text-4xl font-light tracking-tight text-white font-mono">100%</span>
-                            <span class="text-rose-500 text-xs font-mono">●</span>
+                            <span class="text-2xl sm:text-3xl lg:text-4xl font-light tracking-tight text-white font-mono">4+</span>
+                            <span class="text-rose-400 text-xs font-mono font-semibold">Lab</span>
                         </div>
-                        <div class="text-[11px] sm:text-xs text-zinc-400 mt-1 font-medium leading-tight">Praktik Lab Nyata Baremetal</div>
+                        <div class="text-[11px] sm:text-xs text-zinc-400 mt-1 font-medium leading-tight">Topologi Jaringan Enterprise &amp; LEMP</div>
                     </div>
                 </div>
 
             </div>
 
-            <!-- Right Hero Visual (Interactive Real-Time Terminal / Neofetch) -->
+            <!-- Right Hero Visual: Authentic Cisco Catalyst 2960-X Rack Console (Zero AI Slop) -->
             <div class="lg:col-span-5 relative">
-                <!-- Cyber Crimson Ambient Glow behind Terminal -->
-                <div class="absolute -inset-2 bg-gradient-to-r from-red-600/30 via-orange-600/20 to-red-500/20 rounded-3xl blur-2xl opacity-70 pointer-events-none"></div>
+                <!-- Ambient Glow behind Hardware Chassis -->
+                <div class="absolute -inset-2 bg-gradient-to-r from-red-600/20 via-rose-600/10 to-transparent rounded-3xl blur-2xl opacity-60 pointer-events-none"></div>
 
-                <div class="w-full max-w-lg mx-auto lg:max-w-none rounded-2xl overflow-hidden border border-white/12 glass-panel shadow-2xl font-mono text-xs sm:text-sm relative z-10">
-                    <!-- Window Header -->
-                    <div class="flex items-center justify-between px-4 py-2.5 bg-white/[0.03] border-b border-white/[0.08] backdrop-blur-md">
-                        <div class="flex items-center space-x-2">
-                            <span class="w-3 h-3 rounded-full bg-[#ff5f56] inline-block"></span>
-                            <span class="w-3 h-3 rounded-full bg-[#ffbd2e] inline-block"></span>
-                            <span class="w-3 h-3 rounded-full bg-[#27c93f] inline-block"></span>
+                <div id="cisco-switch-chassis" class="w-full max-w-lg mx-auto lg:max-w-none rounded-2xl overflow-hidden border border-zinc-700/80 bg-gradient-to-b from-[#11131a] via-[#0b0d13] to-[#040508] shadow-2xl shadow-black/90 font-mono text-xs relative z-10">
+                    
+                    <!-- Rack Chassis Faceplate Header -->
+                    <div class="px-3.5 sm:px-4 py-2.5 bg-[#141824] border-b border-zinc-700/70 flex items-center justify-between gap-3 text-zinc-300 select-none">
+                        <!-- Cisco Branding -->
+                        <div class="flex items-center gap-2">
+                            <svg class="w-5 h-5 text-rose-500 shrink-0" viewBox="0 0 24 24" fill="currentColor">
+                                <rect x="2" y="10" width="2" height="6" rx="0.5"/>
+                                <rect x="6" y="6" width="2" height="14" rx="0.5"/>
+                                <rect x="10" y="8" width="2" height="10" rx="0.5"/>
+                                <rect x="14" y="4" width="2" height="18" rx="0.5"/>
+                                <rect x="18" y="7" width="2" height="12" rx="0.5"/>
+                                <rect x="22" y="11" width="2" height="4" rx="0.5"/>
+                            </svg>
+                            <div>
+                                <div class="text-[11px] font-bold tracking-wider text-white">CISCO CATALYST 2960-X</div>
+                                <div class="text-[9px] text-zinc-400">24-PORT GIGABIT POE+ / SFP UPLINK</div>
+                            </div>
                         </div>
-                        <span class="text-zinc-400 text-xs select-none">yuda@yudz: ~</span>
-                        <div class="w-10"></div>
+
+                        <!-- System Status & Mode Selector -->
+                        <div class="flex items-center gap-2 bg-black/50 px-2.5 py-1 rounded border border-zinc-800 text-[9px]">
+                            <button type="button" id="cisco-mode-btn" class="font-bold text-zinc-300 hover:text-white uppercase tracking-wider cursor-pointer transition-colors" title="Klik untuk mengganti mode LED switch">MODE</button>
+                            <div class="flex items-center gap-1.5 border-l border-zinc-700 pl-2">
+                                <span class="flex items-center gap-1" title="Port Status Mode">
+                                    <span id="led-mode-stat" class="w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-[0_0_6px_#34d399]"></span>
+                                    <span class="text-[8px]">STAT</span>
+                                </span>
+                                <span class="flex items-center gap-1" title="Port Speed Mode">
+                                    <span id="led-mode-speed" class="w-1.5 h-1.5 rounded-full bg-zinc-700"></span>
+                                    <span class="text-[8px]">SPEED</span>
+                                </span>
+                                <span class="flex items-center gap-1" title="Port Duplex Mode">
+                                    <span id="led-mode-duplex" class="w-1.5 h-1.5 rounded-full bg-zinc-700"></span>
+                                    <span class="text-[8px]">FDUP</span>
+                                </span>
+                            </div>
+                        </div>
                     </div>
 
-                    <!-- Terminal Content -->
-                    <div class="p-4 sm:p-5 space-y-3 text-zinc-300 leading-relaxed overflow-x-auto text-xs sm:text-sm">
-                        <div>
-                            <span class="text-emerald-400 font-semibold">yuda@yudz</span>:<span class="text-sky-400">~</span>$ neofetch
+                    <!-- RJ45 Physical Port Matrix (Staggered Dual Row) -->
+                    <div class="p-3 bg-black/70 border-b border-zinc-800">
+                        <div class="flex items-center justify-between text-[10px] text-zinc-500 mb-2">
+                            <span>PORT MATRIX (KLIK PORT UNTUK INSPEKSI)</span>
+                            <span class="text-emerald-400 font-semibold flex items-center gap-1">
+                                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+                                <span>6 PORT AKTIF</span>
+                            </span>
                         </div>
 
-                        <div class="space-y-1 text-zinc-400 pl-2 border-l-2 border-orange-500/80">
-                            <p><span class="text-zinc-100 font-bold">OS:</span> Debian GNU/Linux 13 (Trixie)</p>
-                            <p><span class="text-zinc-100 font-bold">Host:</span> yudz</p>
-                            <p><span class="text-zinc-100 font-bold">Kernel:</span> Linux 6.12-amd64</p>
-                            <p><span class="text-zinc-100 font-bold">DE:</span> GNOME (Wayland)</p>
-                            <p><span class="text-zinc-100 font-bold">CPU:</span> AMD Ryzen 5 6600H</p>
-                            <p><span class="text-zinc-100 font-bold">Memory:</span> 16GB</p>
-                            <p><span class="text-zinc-100 font-bold">Stack:</span> Nginx 1.26 &bull; MariaDB &bull; PHP 8.2</p>
-                        </div>
+                        <div class="p-2 bg-[#090b10] rounded-xl border border-zinc-800/90 shadow-inner space-y-1.5">
+                            <!-- Odd Ports Row (1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21, 23, Uplink G1) -->
+                            <div class="flex items-center justify-between gap-1 overflow-x-auto pb-0.5">
+                                @php
+                                    $oddPorts = [1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21, 23, 25];
+                                    $evenPorts = [2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26];
+                                    $activePorts = [1, 2, 8, 12, 24, 25];
+                                @endphp
+                                @foreach($oddPorts as $p)
+                                    @php
+                                        $isActive = in_array($p, $activePorts);
+                                        $isSfp = ($p === 25);
+                                    @endphp
+                                    <button type="button"
+                                            class="cisco-port-btn flex flex-col items-center justify-center p-1 rounded {{ $p === 1 ? 'ring-2 ring-rose-500 bg-zinc-800' : 'bg-zinc-900 hover:bg-zinc-800' }} border border-zinc-800 transition-all cursor-pointer shrink-0 min-w-[26px]"
+                                            data-port-number="{{ $p }}"
+                                            title="Port {{ $isSfp ? 'Gi0/25 (Uplink)' : 'Gi0/'.$p }}">
+                                        <span class="port-led w-1.5 h-1.5 rounded-full {{ $isActive ? 'bg-emerald-400 shadow-[0_0_5px_#34d399]' : 'bg-zinc-800' }} mb-1"></span>
+                                        <div class="w-4 h-3 bg-zinc-950 border border-zinc-700 rounded-xs flex items-center justify-center">
+                                            <span class="w-2.5 h-1 {{ $isSfp ? 'bg-amber-600/60' : 'bg-zinc-800' }} rounded-xs"></span>
+                                        </div>
+                                        <span class="text-[8px] text-zinc-400 mt-0.5">{{ $isSfp ? 'G1' : $p }}</span>
+                                    </button>
+                                @endforeach
+                            </div>
 
-                        <div class="pt-2">
-                            <span class="text-emerald-400 font-semibold">yuda@yudz</span>:<span class="text-sky-400">~</span>$ 
-                            <span class="inline-block w-2 h-4 ml-1 align-middle bg-orange-500 animate-pulse"></span>
+                            <!-- Even Ports Row (2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, Uplink G2) -->
+                            <div class="flex items-center justify-between gap-1 overflow-x-auto pt-0.5">
+                                @foreach($evenPorts as $p)
+                                    @php
+                                        $isActive = in_array($p, $activePorts);
+                                        $isSfp = ($p === 26);
+                                    @endphp
+                                    <button type="button"
+                                            class="cisco-port-btn flex flex-col items-center justify-center p-1 rounded bg-zinc-900 hover:bg-zinc-800 border border-zinc-800 transition-all cursor-pointer shrink-0 min-w-[26px]"
+                                            data-port-number="{{ $p }}"
+                                            title="Port {{ $isSfp ? 'Gi0/26 (Uplink)' : 'Gi0/'.$p }}">
+                                        <span class="port-led w-1.5 h-1.5 rounded-full {{ $isActive ? 'bg-emerald-400 shadow-[0_0_5px_#34d399]' : 'bg-zinc-800' }} mb-1"></span>
+                                        <div class="w-4 h-3 bg-zinc-950 border border-zinc-700 rounded-xs flex items-center justify-center">
+                                            <span class="w-2.5 h-1 {{ $isSfp ? 'bg-amber-600/60' : 'bg-zinc-800' }} rounded-xs"></span>
+                                        </div>
+                                        <span class="text-[8px] text-zinc-400 mt-0.5">{{ $isSfp ? 'G2' : $p }}</span>
+                                    </button>
+                                @endforeach
+                            </div>
                         </div>
                     </div>
+
+                    <!-- Port Telemetry Specs Panel -->
+                    <div class="p-3.5 bg-[#0b0e18] border-b border-zinc-800 space-y-2.5">
+                        <div class="flex items-center justify-between gap-2">
+                            <div class="flex items-center gap-2 truncate">
+                                <span id="cisco-display-port" class="px-2 py-0.5 rounded bg-rose-500/20 border border-rose-500/40 text-rose-300 font-bold text-xs">Gi0/1</span>
+                                <span id="cisco-display-title" class="text-white font-semibold text-xs truncate">Server LEMP Baremetal</span>
+                            </div>
+                            <span id="cisco-display-status" class="text-[11px] font-semibold text-emerald-400 shrink-0">UP (1000 Mbps Full)</span>
+                        </div>
+
+                        <div class="grid grid-cols-2 sm:grid-cols-3 gap-2 text-[10px] font-mono">
+                            <div class="p-2 rounded bg-black/40 border border-zinc-800/80">
+                                <div class="text-zinc-500">VLAN:</div>
+                                <div id="cisco-display-vlan" class="text-zinc-200 font-bold truncate">10 (LEMP_DMZ)</div>
+                            </div>
+                            <div class="p-2 rounded bg-black/40 border border-zinc-800/80">
+                                <div class="text-zinc-500">PERAN:</div>
+                                <div id="cisco-display-role" class="text-rose-400 font-bold truncate">Web Server Farm</div>
+                            </div>
+                            <div class="col-span-2 sm:col-span-1 p-2 rounded bg-black/40 border border-zinc-800/80">
+                                <div class="text-zinc-500">HOST:</div>
+                                <div id="cisco-display-host" class="text-zinc-300 truncate">Debian 13 Baremetal</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Authentic Cisco IOS CLI Console -->
+                    <div class="p-3.5 bg-[#05070c]">
+                        <div class="flex items-center justify-between gap-2 pb-2 mb-2 border-b border-zinc-800 text-[11px]">
+                            <div class="flex items-center gap-1.5">
+                                <button type="button" class="cisco-cli-tab px-2.5 py-1 rounded-md text-[10px] font-mono text-white bg-zinc-800 border border-zinc-700 transition-colors cursor-pointer" data-cli-tab="run">Running Config</button>
+                                <button type="button" class="cisco-cli-tab px-2.5 py-1 rounded-md text-[10px] font-mono text-zinc-400 hover:text-zinc-200 bg-transparent transition-colors cursor-pointer" data-cli-tab="switchport">Switchport</button>
+                                <button type="button" class="cisco-cli-tab px-2.5 py-1 rounded-md text-[10px] font-mono text-zinc-400 hover:text-zinc-200 bg-transparent transition-colors cursor-pointer" data-cli-tab="status">Status</button>
+                            </div>
+                            <span class="text-[10px] text-zinc-500">Cisco IOS v15.2</span>
+                        </div>
+
+                        <div class="text-[11px] leading-relaxed overflow-x-auto text-zinc-300 space-y-1">
+                            <div id="cisco-cli-prompt" class="text-emerald-400 font-semibold">cisco-sw01# show running-config interface Gi0/1</div>
+                            <pre id="cisco-cli-output" class="text-zinc-400 font-mono text-[10.5px] leading-snug whitespace-pre-wrap selection:bg-rose-500/30">interface GigabitEthernet0/1
+ description LEMP-PROD-BAREMETAL-SERVER
+ switchport mode access
+ switchport access vlan 10
+ spanning-tree portfast
+ speed 1000
+ duplex full
+ no shutdown</pre>
+                        </div>
+                    </div>
+
                 </div>
             </div>
 
-        </section>
-
-        <!-- Tech Ecosystem Ticker Bar -->
-        <section class="py-6 sm:py-8 border-y border-white/[0.06] overflow-hidden">
-            <div class="flex flex-col sm:flex-row items-center justify-between gap-4 sm:gap-6">
-                <div class="text-xs font-mono text-zinc-500 uppercase tracking-wider shrink-0 flex items-center gap-2">
-                    <span class="w-1.5 h-1.5 rounded-full bg-rose-500"></span>
-                    <span>Stack &bull; Hardware &bull; OS</span>
-                </div>
-                <div class="flex flex-wrap items-center justify-center sm:justify-end gap-x-4 sm:gap-x-8 gap-y-2.5 sm:gap-y-3 text-xs font-medium text-zinc-400">
-                    <span class="hover:text-white transition-colors flex items-center gap-2">
-                        <span class="w-2 h-2 rounded-sm bg-rose-500"></span> Cisco IOS Catalyst
-                    </span>
-                    <span class="hover:text-white transition-colors flex items-center gap-2">
-                        <span class="w-2 h-2 rounded-sm bg-red-600"></span> Cisco Packet Tracer
-                    </span>
-                    <span class="hover:text-white transition-colors flex items-center gap-2">
-                        <span class="w-2 h-2 rounded-sm bg-rose-400"></span> Debian GNU/Linux
-                    </span>
-                    <span class="hover:text-white transition-colors flex items-center gap-2">
-                        <span class="w-2 h-2 rounded-sm bg-emerald-500"></span> Nginx 1.26
-                    </span>
-                    <span class="hover:text-white transition-colors flex items-center gap-2">
-                        <span class="w-2 h-2 rounded-sm bg-cyan-500"></span> MariaDB 11.8
-                    </span>
-                    <span class="hover:text-white transition-colors flex items-center gap-2">
-                        <span class="w-2 h-2 rounded-sm bg-blue-500"></span> Docker &amp; Proxmox
-                    </span>
-                    <span class="hover:text-white transition-colors flex items-center gap-2">
-                        <span class="w-2 h-2 rounded-sm bg-purple-500"></span> WireGuard VPN
-                    </span>
-                </div>
-            </div>
         </section>
 
 
@@ -180,11 +259,10 @@
                             </div>
                             <div class="min-w-0">
                                 <div class="text-[11px] sm:text-xs font-mono text-rose-400 mb-1 flex items-center gap-1.5 truncate">
-                                    <span class="w-1.5 h-1.5 rounded-full bg-rose-500 animate-pulse shrink-0"></span>
                                     <span class="truncate">PROFIL &amp; DEDIKASI TEKNIK</span>
                                 </div>
                                 <div class="text-lg sm:text-xl font-bold text-white tracking-tight truncate">I Made Yuda Pramana</div>
-                                <div class="text-xs text-zinc-400 mt-0.5 truncate">Teknik Komputer &amp; Jaringan &bull; SMK Negeri</div>
+                                <div class="text-xs text-zinc-400 mt-0.5 truncate">Teknik Komputer &amp; Jaringan / SMKN 1 Denpasar</div>
                             </div>
                         </div>
 
@@ -193,7 +271,7 @@
                             <div class="p-3 sm:p-3.5 rounded-xl glass-pill flex flex-col xs:flex-row xs:items-center justify-between gap-1">
                                 <span class="text-zinc-500">STATUS:</span>
                                 <span class="text-emerald-400 font-semibold flex items-center gap-1.5">
-                                    <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
+                                    <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
                                     SIAP KERJA &amp; MAGANG
                                 </span>
                             </div>
@@ -203,7 +281,7 @@
                             </div>
                             <div class="p-3 sm:p-3.5 rounded-xl glass-pill flex flex-col xs:flex-row xs:items-center justify-between gap-1">
                                 <span class="text-zinc-500">HARDWARE / STACK:</span>
-                                <span class="text-rose-400 font-semibold">Cisco &bull; Linux Debian &bull; LEMP</span>
+                                <span class="text-rose-400 font-semibold">Cisco IOS, Linux Debian, LEMP</span>
                             </div>
                             <div class="p-3 sm:p-3.5 rounded-xl glass-pill flex flex-col xs:flex-row xs:items-center justify-between gap-1">
                                 <span class="text-zinc-500">LOKASI:</span>
@@ -214,10 +292,12 @@
                         <!-- Terminal Footer Badge -->
                         <div class="relative z-10 pt-2 border-t border-white/[0.08] flex items-center justify-between text-xs text-zinc-400">
                             <span class="flex items-center gap-2">
-                                <span class="w-2 h-2 rounded-full bg-rose-500"></span>
+                                <svg class="w-3.5 h-3.5 text-emerald-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
                                 Tersertifikasi Cisco &amp; KOMDIGI
                             </span>
-                            <span class="text-zinc-500 font-mono text-[11px]">BSrE &bull; NetAcad Verified</span>
+                            <span class="text-zinc-500 font-mono text-[11px]">BSrE / Cisco NetAcad</span>
                         </div>
                     </div>
                 </div>
@@ -226,7 +306,6 @@
                 <div class="lg:col-span-7 space-y-6 sm:space-y-8 reveal-slide-right">
                     <div class="space-y-3 sm:space-y-4">
                         <div class="inline-flex items-center gap-2 text-xs font-mono text-rose-400 uppercase tracking-wider">
-                            <span class="w-1.5 h-1.5 rounded-full bg-rose-500"></span>
                             <span>Dedikasi Pada Keandalan Infrastruktur</span>
                         </div>
                         <h2 class="text-2xl sm:text-4xl lg:text-5xl font-bold text-white tracking-tight leading-[1.15]">
@@ -251,18 +330,19 @@
                             <span>Denpasar, Bali, Indonesia</span>
                         </div>
                         <div class="px-3.5 py-1.5 rounded-full glass-pill border-rose-500/30 text-rose-300 flex items-center gap-2">
-                            <span class="w-2 h-2 rounded-full bg-rose-500 animate-pulse"></span>
+                            <svg class="w-3.5 h-3.5 text-rose-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
                             <span>Tersertifikasi Resmi Cisco &amp; KOMDIGI</span>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- DIGITAL KENSEI STATS GRID -->
+            <!-- STATS GRID -->
             <div class="mt-10 sm:mt-14">
                 <div class="flex items-center gap-3 mb-6 sm:mb-8">
-                    <span class="w-2.5 h-2.5 rounded-full bg-rose-500"></span>
-                    <h3 class="text-xl sm:text-2xl lg:text-3xl font-bold text-white tracking-tight">Stats Defining The Technical Profile</h3>
+                    <h3 class="text-xl sm:text-2xl lg:text-3xl font-bold text-white tracking-tight">Metrik &amp; Kredensial Portofolio</h3>
                 </div>
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
@@ -584,7 +664,7 @@
                     Showcase Lab &amp; Proyek Unggulan
                 </h2>
                 <p class="text-zinc-400 text-sm sm:text-base leading-relaxed text-balance">
-                    Dokumentasi topologi jaringan nyata, konfigurasi perangkat jaringan Cisco, serta deployment server Linux LEMP mandiri.
+                    Dokumentasi prject dan topologi jaringan nyata, konfigurasi perangkat jaringan Cisco, serta deployment server Linux LEMP mandiri.
                 </p>
             </div>
 
@@ -710,8 +790,8 @@
             <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8 sm:mb-10">
                 <div>
                     <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full glass-pill text-xs font-mono text-zinc-400 mb-3">
-                        <span class="w-1.5 h-1.5 rounded-full bg-rose-500 animate-pulse"></span>
-                        <span>Arsitektur &bull; Built With</span>
+                        <span class="w-1.5 h-1.5 rounded-full bg-rose-500"></span>
+                        <span>Arsitektur &amp; Stack Website</span>
                     </div>
                     <h2 class="text-2xl sm:text-4xl lg:text-5xl font-bold text-white tracking-tight">
                         Teknologi Pembangun Website Ini
@@ -738,13 +818,12 @@
                 <div class="relative z-20 flex items-center justify-between p-3.5 sm:p-5 border-b border-white/[0.08] bg-[#080c1b]/65 backdrop-blur-xl">
                     <div class="flex items-center gap-2.5">
                         <span class="relative flex h-2.5 w-2.5">
-                            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
                             <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
                         </span>
                         <span class="text-xs font-mono font-semibold tracking-wider text-emerald-400 uppercase">
                             Orbital Engine Aktif
                         </span>
-                        <span class="text-xs text-zinc-500 hidden sm:inline">&bull;</span>
+                        <span class="text-xs text-zinc-500 hidden sm:inline">/</span>
                         <span class="text-xs font-mono text-zinc-400 hidden sm:inline">
                             Berputar Otomatis
                         </span>
@@ -778,13 +857,12 @@
                     </div>
 
                     <div class="text-[11px] font-mono text-zinc-400 text-center flex items-center gap-1.5">
-                        <span class="text-rose-400">&bull;</span>
-                        <span>Drag untuk memutar &bull; Klik logo untuk fokus &bull; Klik 2x untuk detail teknologi</span>
+                        <span>Drag untuk memutar / Klik logo untuk fokus / Klik 2x untuk detail teknologi</span>
                     </div>
 
                     <div class="font-mono text-xs font-semibold text-zinc-300 flex items-center gap-2">
                         <span id="orrery-hud-counter" class="text-rose-400">01 / 08</span>
-                        <span class="text-zinc-600">&bull;</span>
+                        <span class="text-zinc-600">/</span>
                         <span id="orrery-hud-degree" class="text-emerald-400">090°</span>
                     </div>
                 </div>
@@ -964,7 +1042,7 @@
                     <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
                     <span id="modal-cert-status">Terverifikasi Resmi BSrE</span>
                 </span>
-                <span class="text-zinc-600">&bull;</span>
+                <span class="text-zinc-600">/</span>
                 <span id="modal-cert-id" class="text-zinc-400 truncate max-w-xs">No: -</span>
             </div>
 
@@ -1039,7 +1117,7 @@
             <!-- Lab Implementation Info -->
             <div class="p-4 rounded-xl bg-black/40 border border-white/[0.06] space-y-2">
                 <div class="text-xs font-mono text-zinc-400 flex items-center gap-1.5">
-                    <span class="text-rose-400">&bull;</span>
+                    <span class="text-rose-400 font-bold">&gt;</span>
                     <span>Catatan Implementasi TKJ Lab:</span>
                 </div>
                 <p id="modal-tech-lab-note" class="text-xs text-zinc-400 leading-relaxed">

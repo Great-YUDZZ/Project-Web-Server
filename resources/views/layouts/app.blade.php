@@ -44,11 +44,10 @@
                 <img src="{{ asset('images/logo.png') }}" alt="Logo" class="w-7 h-7 sm:w-8 sm:h-8 shrink-0 object-contain group-hover:scale-105 transition-transform duration-300">
                 <div class="flex flex-col">
                     <div class="font-bold text-white text-xs sm:text-base tracking-tight group-hover:text-rose-400 transition-colors flex items-center gap-1.5">
-                        <span class="w-1.5 h-1.5 rounded-full bg-rose-500 animate-pulse shrink-0"></span>
                         <span class="truncate max-w-[150px] xs:max-w-[200px] sm:max-w-none">I Made Yuda Pramana</span>
                     </div>
                     <div class="text-[10px] text-zinc-500 font-mono hidden sm:flex items-center gap-1">
-                        <span>TKJ &bull; Systems &bull; Infrastructure</span>
+                        <span>Teknik Komputer &amp; Jaringan</span>
                     </div>
                 </div>
             </a>
@@ -177,8 +176,8 @@
             <div class="max-w-7xl mx-auto mt-10 pt-6 border-t border-white/[0.04] flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-zinc-600 font-mono">
                 <div>&copy; {{ date('Y') }} I Made Yuda Pramana. All rights reserved.</div>
                 <div class="flex items-center gap-2">
-                    <span class="w-2 h-2 rounded-full bg-rose-500 animate-pulse"></span>
-                    <span>LEMP Stack &bull; Nginx 1.26 &bull; MariaDB &bull; PHP 8.4-FPM</span>
+                    <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                    <span>LEMP Stack (Debian 13, Nginx 1.26, MariaDB, PHP 8.4)</span>
                 </div>
             </div>
         </div>

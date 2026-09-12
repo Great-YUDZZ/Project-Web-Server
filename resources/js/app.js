@@ -1,6 +1,7 @@
 import { initInteractiveBackground } from './interactive-bg.js';
 import { initOrreryGallery } from './orrery-gallery.js';
 import { initGsapAnimations } from './gsap-animations.js';
+import { initCiscoSwitch } from './cisco-switch.js';
 import Swiper from 'swiper';
 import { EffectCoverflow, Pagination, Navigation, Keyboard, A11y } from 'swiper/modules';
 
@@ -264,6 +265,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initMobileMenu();
     initCertificateCoverflow();
     initOrreryGallery();
+    initCiscoSwitch();
 
     // Trigger ScrollTrigger refresh after initial DOM setup
     if (window.ScrollTrigger) {
