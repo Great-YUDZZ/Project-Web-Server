@@ -610,18 +610,28 @@ export const openOrreryTechModal = (tech) => {
     }
     if (dot) dot.style.background = tech.color;
 
-    modal.classList.remove('hidden');
-    modal.classList.add('flex');
-    document.body.style.overflow = 'hidden';
+    if (typeof window.animateModalOpen === 'function') {
+        window.animateModalOpen(modal, card);
+    } else {
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+        document.body.style.overflow = 'hidden';
+    }
 };
 
 // Global modal closer
 export const closeOrreryTechModal = () => {
     const modal = document.getElementById('orrery-tech-modal');
     if (!modal) return;
-    modal.classList.add('hidden');
-    modal.classList.remove('flex');
-    document.body.style.overflow = '';
+    const card = document.getElementById('modal-tech-card');
+
+    if (typeof window.animateModalClose === 'function') {
+        window.animateModalClose(modal, card);
+    } else {
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+        document.body.style.overflow = '';
+    }
 };
 
 // Bind to window for global access from Blade onclick and event listeners

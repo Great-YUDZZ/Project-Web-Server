@@ -1,58 +1,9 @@
 import { initInteractiveBackground } from './interactive-bg.js';
 import { initOrreryGallery } from './orrery-gallery.js';
+import { initGsapAnimations } from './gsap-animations.js';
 import Swiper from 'swiper';
 import { EffectCoverflow, Pagination, Navigation, Keyboard, A11y } from 'swiper/modules';
 
-// Reveal animation on scroll
-const revealElements = () => {
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('is-visible');
-                observer.unobserve(entry.target);
-            }
-        });
-    }, {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-    });
-
-    document.querySelectorAll('.reveal, .reveal-slide-left, .reveal-slide-right, .reveal-scale').forEach((el) => {
-        observer.observe(el);
-    });
-};
-
-// Animated numerical counters
-const animateCounters = () => {
-    const counters = document.querySelectorAll('[data-counter]');
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-                const el = entry.target;
-                const target = parseInt(el.dataset.counter, 10);
-                const duration = 1600;
-                const start = performance.now();
-
-                const update = (now) => {
-                    const elapsed = now - start;
-                    const progress = Math.min(elapsed / duration, 1);
-                    const eased = 1 - Math.pow(1 - progress, 3);
-                    el.textContent = Math.floor(target * eased);
-                    if (progress < 1) {
-                        requestAnimationFrame(update);
-                    } else {
-                        el.textContent = target;
-                    }
-                };
-
-                requestAnimationFrame(update);
-                observer.unobserve(el);
-            }
-        });
-    }, { threshold: 0.3 });
-
-    counters.forEach((el) => observer.observe(el));
-};
 
 // Portfolio Tab Switcher (ekizr.com signature feature)
 const initPortfolioTabs = () => {
@@ -305,8 +256,7 @@ const initCertificateCoverflow = () => {
 
 document.addEventListener('DOMContentLoaded', () => {
     initInteractiveBackground();
-    revealElements();
-    animateCounters();
+    initGsapAnimations();
     initPortfolioTabs();
     initSkillFilter();
     initActiveNavTracking();
@@ -314,6 +264,11 @@ document.addEventListener('DOMContentLoaded', () => {
     initMobileMenu();
     initCertificateCoverflow();
     initOrreryGallery();
+
+    // Trigger ScrollTrigger refresh after initial DOM setup
+    if (window.ScrollTrigger) {
+        window.ScrollTrigger.refresh();
+    }
 });
 
 

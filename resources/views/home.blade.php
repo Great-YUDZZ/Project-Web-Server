@@ -11,7 +11,7 @@
             <div class="lg:col-span-7 space-y-6 sm:space-y-7 relative z-10">
                 
                 <!-- Floating Eyebrow Pill Badge (Digital Kensei Cyber Red Dot) -->
-                <div class="inline-flex items-center gap-2 sm:gap-2.5 px-3 sm:px-4 py-1.5 rounded-full glass-pill border-rose-500/30 text-[11px] sm:text-xs font-mono text-zinc-300 animate-slide-up shadow-lg shadow-rose-600/10 max-w-full">
+                <div class="inline-flex items-center gap-2 sm:gap-2.5 px-3 sm:px-4 py-1.5 rounded-full glass-pill border-rose-500/30 text-[11px] sm:text-xs font-mono text-zinc-300 shadow-lg shadow-rose-600/10 max-w-full">
                     <span class="relative flex h-2 w-2 shrink-0">
                         <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-rose-500 opacity-75"></span>
                         <span class="relative inline-flex rounded-full h-2 w-2 bg-rose-600"></span>
@@ -20,18 +20,18 @@
                 </div>
 
                 <!-- Hero Main Headline (High Contrast Digital Kensei Typography) -->
-                <h1 class="text-3xl xs:text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-white leading-[1.1] text-balance animate-slide-up stagger-1">
+                <h1 class="text-3xl xs:text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-white leading-[1.1] text-balance">
                     NETWORK &amp; <br class="hidden sm:inline">
                     <span class="text-transparent bg-clip-text bg-gradient-to-r from-red-500 via-rose-400 to-red-400">INFRASTRUCTURE</span>
                 </h1>
 
                 <!-- Hero Description -->
-                <p class="text-sm sm:text-base md:text-lg text-zinc-400 max-w-[50ch] leading-relaxed text-balance animate-slide-up stagger-2">
+                <p class="text-sm sm:text-base md:text-lg text-zinc-400 max-w-[50ch] leading-relaxed text-balance">
                     Halo, saya <span class="text-white font-semibold">I Made Yuda Pramana</span>. Merancang arsitektur topologi jaringan berkecepatan tinggi, administrasi server Linux Debian mandiri, dan virtualisasi kelas enterprise.
                 </p>
 
                 <!-- CTA Actions & Social Cluster -->
-                <div class="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 animate-slide-up stagger-3">
+                <div class="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4">
                     <a href="#certifications" class="btn-primary group w-full sm:w-auto text-center justify-center">
                         <span>Lihat Sertifikasi Resmi</span>
                         <span class="w-6 h-6 rounded-full bg-black/25 flex items-center justify-center text-xs group-hover:translate-x-0.5 transition-transform">&rarr;</span>
@@ -66,7 +66,7 @@
                 </div>
 
                 <!-- Floating Metric Mini Bar -->
-                <div class="pt-2 sm:pt-4 grid grid-cols-2 gap-3 sm:gap-4 max-w-md animate-slide-up stagger-4">
+                <div class="pt-2 sm:pt-4 grid grid-cols-2 gap-3 sm:gap-4 max-w-md">
                     <div class="p-3.5 sm:p-4 rounded-2xl glass-panel-interactive hover:border-rose-500/30 transition-all">
                         <div class="flex items-baseline justify-between">
                             <span class="text-2xl sm:text-3xl lg:text-4xl font-light tracking-tight text-white font-mono">99.9%</span>
@@ -87,7 +87,7 @@
             </div>
 
             <!-- Right Hero Visual (Interactive Real-Time Terminal / Neofetch) -->
-            <div class="lg:col-span-5 relative animate-scale-in stagger-3">
+            <div class="lg:col-span-5 relative">
                 <!-- Cyber Crimson Ambient Glow behind Terminal -->
                 <div class="absolute -inset-2 bg-gradient-to-r from-red-600/30 via-orange-600/20 to-red-500/20 rounded-3xl blur-2xl opacity-70 pointer-events-none"></div>
 
@@ -927,7 +927,7 @@
 
 <!-- INTERACTIVE CERTIFICATE LIGHTBOX MODAL -->
 <div id="cert-modal" class="fixed inset-0 z-50 bg-black/90 backdrop-blur-2xl hidden items-center justify-center p-3 sm:p-6" role="dialog" aria-modal="true" aria-labelledby="modal-cert-title">
-    <div class="relative w-full max-w-4xl max-h-[92vh] glass-panel border-rose-500/40 rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl shadow-black flex flex-col animate-scale-in" onclick="event.stopPropagation()">
+    <div class="relative w-full max-w-4xl max-h-[92vh] glass-panel border-rose-500/40 rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl shadow-black flex flex-col" onclick="event.stopPropagation()">
         
         <!-- Modal Header Bar -->
         <div class="p-3.5 sm:p-5 border-b border-white/10 flex items-center justify-between bg-[#08080d]/90">
@@ -983,7 +983,7 @@
 
 <!-- 3D ORRERY TECHNOLOGY DETAIL MODAL (DOUBLE-CLICK DIALOG) -->
 <div id="orrery-tech-modal" class="fixed inset-0 z-50 bg-black/90 backdrop-blur-2xl hidden items-center justify-center p-3 sm:p-6" role="dialog" aria-modal="true" aria-labelledby="modal-tech-title">
-    <div id="modal-tech-card" class="relative w-full max-w-2xl max-h-[92vh] glass-panel border border-white/20 rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl shadow-black flex flex-col animate-scale-in" onclick="event.stopPropagation()">
+    <div id="modal-tech-card" class="relative w-full max-w-2xl max-h-[92vh] glass-panel border border-white/20 rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl shadow-black flex flex-col" onclick="event.stopPropagation()">
         
         <!-- Ambient Top Glow Tinted by Tech Color -->
         <div id="modal-tech-glow" class="absolute -top-16 left-1/2 -translate-x-1/2 w-64 h-64 rounded-full blur-3xl pointer-events-none opacity-40"></div>
@@ -1099,17 +1099,28 @@
             pdfLinkMobile.classList.add('hidden');
         }
 
-        modal.classList.remove('hidden');
-        modal.classList.add('flex');
-        document.body.style.overflow = 'hidden';
+        const card = modal.querySelector('.glass-panel');
+        if (typeof window.animateModalOpen === 'function') {
+            window.animateModalOpen(modal, card);
+        } else {
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            document.body.style.overflow = 'hidden';
+        }
     }
 
     function closeCertModal() {
         const modal = document.getElementById('cert-modal');
         if (!modal) return;
-        modal.classList.add('hidden');
-        modal.classList.remove('flex');
-        document.body.style.overflow = '';
+
+        const card = modal.querySelector('.glass-panel');
+        if (typeof window.animateModalClose === 'function') {
+            window.animateModalClose(modal, card);
+        } else {
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+            document.body.style.overflow = '';
+        }
     }
 
     // Close on backdrop click
