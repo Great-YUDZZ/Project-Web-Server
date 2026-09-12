@@ -83,159 +83,44 @@
 
             </div>
 
-            <!-- Right Hero Visual: Authentic Cisco Catalyst 2960-X Rack Console (Zero AI Slop) -->
+            <!-- Right Hero Visual (Interactive Real-Time Terminal / Neofetch) -->
             <div class="lg:col-span-5 relative">
-                <!-- Ambient Glow behind Hardware Chassis -->
-                <div class="absolute -inset-2 bg-gradient-to-r from-red-600/20 via-rose-600/10 to-transparent rounded-3xl blur-2xl opacity-60 pointer-events-none"></div>
+                <!-- Cyber Crimson Ambient Glow behind Terminal -->
+                <div class="absolute -inset-2 bg-gradient-to-r from-red-600/30 via-orange-600/20 to-red-500/20 rounded-3xl blur-2xl opacity-70 pointer-events-none"></div>
 
-                <div id="cisco-switch-chassis" class="w-full max-w-lg mx-auto lg:max-w-none rounded-2xl overflow-hidden border border-zinc-700/80 bg-gradient-to-b from-[#11131a] via-[#0b0d13] to-[#040508] shadow-2xl shadow-black/90 font-mono text-xs relative z-10">
-                    
-                    <!-- Rack Chassis Faceplate Header -->
-                    <div class="px-3.5 sm:px-4 py-2.5 bg-[#141824] border-b border-zinc-700/70 flex items-center justify-between gap-3 text-zinc-300 select-none">
-                        <!-- Cisco Branding -->
-                        <div class="flex items-center gap-2">
-                            <svg class="w-5 h-5 text-rose-500 shrink-0" viewBox="0 0 24 24" fill="currentColor">
-                                <rect x="2" y="10" width="2" height="6" rx="0.5"/>
-                                <rect x="6" y="6" width="2" height="14" rx="0.5"/>
-                                <rect x="10" y="8" width="2" height="10" rx="0.5"/>
-                                <rect x="14" y="4" width="2" height="18" rx="0.5"/>
-                                <rect x="18" y="7" width="2" height="12" rx="0.5"/>
-                                <rect x="22" y="11" width="2" height="4" rx="0.5"/>
-                            </svg>
-                            <div>
-                                <div class="text-[11px] font-bold tracking-wider text-white">CISCO CATALYST 2960-X</div>
-                                <div class="text-[9px] text-zinc-400">24-PORT GIGABIT POE+ / SFP UPLINK</div>
-                            </div>
+                <div class="w-full max-w-lg mx-auto lg:max-w-none rounded-2xl overflow-hidden border border-white/12 glass-panel shadow-2xl font-mono text-xs sm:text-sm relative z-10">
+                    <!-- Window Header -->
+                    <div class="flex items-center justify-between px-4 py-2.5 bg-white/[0.03] border-b border-white/[0.08] backdrop-blur-md">
+                        <div class="flex items-center space-x-2">
+                            <span class="w-3 h-3 rounded-full bg-[#ff5f56] inline-block"></span>
+                            <span class="w-3 h-3 rounded-full bg-[#ffbd2e] inline-block"></span>
+                            <span class="w-3 h-3 rounded-full bg-[#27c93f] inline-block"></span>
                         </div>
-
-                        <!-- System Status & Mode Selector -->
-                        <div class="flex items-center gap-2 bg-black/50 px-2.5 py-1 rounded border border-zinc-800 text-[9px]">
-                            <button type="button" id="cisco-mode-btn" class="font-bold text-zinc-300 hover:text-white uppercase tracking-wider cursor-pointer transition-colors" title="Klik untuk mengganti mode LED switch">MODE</button>
-                            <div class="flex items-center gap-1.5 border-l border-zinc-700 pl-2">
-                                <span class="flex items-center gap-1" title="Port Status Mode">
-                                    <span id="led-mode-stat" class="w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-[0_0_6px_#34d399]"></span>
-                                    <span class="text-[8px]">STAT</span>
-                                </span>
-                                <span class="flex items-center gap-1" title="Port Speed Mode">
-                                    <span id="led-mode-speed" class="w-1.5 h-1.5 rounded-full bg-zinc-700"></span>
-                                    <span class="text-[8px]">SPEED</span>
-                                </span>
-                                <span class="flex items-center gap-1" title="Port Duplex Mode">
-                                    <span id="led-mode-duplex" class="w-1.5 h-1.5 rounded-full bg-zinc-700"></span>
-                                    <span class="text-[8px]">FDUP</span>
-                                </span>
-                            </div>
-                        </div>
+                        <span class="text-zinc-400 text-xs select-none">yuda@yudz: ~</span>
+                        <div class="w-10"></div>
                     </div>
 
-                    <!-- RJ45 Physical Port Matrix (Staggered Dual Row) -->
-                    <div class="p-3 bg-black/70 border-b border-zinc-800">
-                        <div class="flex items-center justify-between text-[10px] text-zinc-500 mb-2">
-                            <span>PORT MATRIX (KLIK PORT UNTUK INSPEKSI)</span>
-                            <span class="text-emerald-400 font-semibold flex items-center gap-1">
-                                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
-                                <span>6 PORT AKTIF</span>
-                            </span>
+                    <!-- Terminal Content -->
+                    <div class="p-4 sm:p-5 space-y-3 text-zinc-300 leading-relaxed overflow-x-auto text-xs sm:text-sm">
+                        <div>
+                            <span class="text-emerald-400 font-semibold">yuda@yudz</span>:<span class="text-sky-400">~</span>$ neofetch
                         </div>
 
-                        <div class="p-2 bg-[#090b10] rounded-xl border border-zinc-800/90 shadow-inner space-y-1.5">
-                            <!-- Odd Ports Row (1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21, 23, Uplink G1) -->
-                            <div class="flex items-center justify-between gap-1 overflow-x-auto pb-0.5">
-                                @php
-                                    $oddPorts = [1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21, 23, 25];
-                                    $evenPorts = [2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26];
-                                    $activePorts = [1, 2, 8, 12, 24, 25];
-                                @endphp
-                                @foreach($oddPorts as $p)
-                                    @php
-                                        $isActive = in_array($p, $activePorts);
-                                        $isSfp = ($p === 25);
-                                    @endphp
-                                    <button type="button"
-                                            class="cisco-port-btn flex flex-col items-center justify-center p-1 rounded {{ $p === 1 ? 'ring-2 ring-rose-500 bg-zinc-800' : 'bg-zinc-900 hover:bg-zinc-800' }} border border-zinc-800 transition-all cursor-pointer shrink-0 min-w-[26px]"
-                                            data-port-number="{{ $p }}"
-                                            title="Port {{ $isSfp ? 'Gi0/25 (Uplink)' : 'Gi0/'.$p }}">
-                                        <span class="port-led w-1.5 h-1.5 rounded-full {{ $isActive ? 'bg-emerald-400 shadow-[0_0_5px_#34d399]' : 'bg-zinc-800' }} mb-1"></span>
-                                        <div class="w-4 h-3 bg-zinc-950 border border-zinc-700 rounded-xs flex items-center justify-center">
-                                            <span class="w-2.5 h-1 {{ $isSfp ? 'bg-amber-600/60' : 'bg-zinc-800' }} rounded-xs"></span>
-                                        </div>
-                                        <span class="text-[8px] text-zinc-400 mt-0.5">{{ $isSfp ? 'G1' : $p }}</span>
-                                    </button>
-                                @endforeach
-                            </div>
+                        <div class="space-y-1 text-zinc-400 pl-2 border-l-2 border-orange-500/80">
+                            <p><span class="text-zinc-100 font-bold">OS:</span> Debian GNU/Linux 13 (Trixie)</p>
+                            <p><span class="text-zinc-100 font-bold">Host:</span> yudz</p>
+                            <p><span class="text-zinc-100 font-bold">Kernel:</span> Linux 6.12-amd64</p>
+                            <p><span class="text-zinc-100 font-bold">DE:</span> GNOME (Wayland)</p>
+                            <p><span class="text-zinc-100 font-bold">CPU:</span> AMD Ryzen 5 6600H</p>
+                            <p><span class="text-zinc-100 font-bold">Memory:</span> 16GB</p>
+                            <p><span class="text-zinc-100 font-bold">Stack:</span> Nginx 1.26, MariaDB, PHP 8.4-FPM</p>
+                        </div>
 
-                            <!-- Even Ports Row (2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, Uplink G2) -->
-                            <div class="flex items-center justify-between gap-1 overflow-x-auto pt-0.5">
-                                @foreach($evenPorts as $p)
-                                    @php
-                                        $isActive = in_array($p, $activePorts);
-                                        $isSfp = ($p === 26);
-                                    @endphp
-                                    <button type="button"
-                                            class="cisco-port-btn flex flex-col items-center justify-center p-1 rounded bg-zinc-900 hover:bg-zinc-800 border border-zinc-800 transition-all cursor-pointer shrink-0 min-w-[26px]"
-                                            data-port-number="{{ $p }}"
-                                            title="Port {{ $isSfp ? 'Gi0/26 (Uplink)' : 'Gi0/'.$p }}">
-                                        <span class="port-led w-1.5 h-1.5 rounded-full {{ $isActive ? 'bg-emerald-400 shadow-[0_0_5px_#34d399]' : 'bg-zinc-800' }} mb-1"></span>
-                                        <div class="w-4 h-3 bg-zinc-950 border border-zinc-700 rounded-xs flex items-center justify-center">
-                                            <span class="w-2.5 h-1 {{ $isSfp ? 'bg-amber-600/60' : 'bg-zinc-800' }} rounded-xs"></span>
-                                        </div>
-                                        <span class="text-[8px] text-zinc-400 mt-0.5">{{ $isSfp ? 'G2' : $p }}</span>
-                                    </button>
-                                @endforeach
-                            </div>
+                        <div class="pt-2">
+                            <span class="text-emerald-400 font-semibold">yuda@yudz</span>:<span class="text-sky-400">~</span>$ 
+                            <span class="inline-block w-2 h-4 ml-1 align-middle bg-orange-500 animate-pulse"></span>
                         </div>
                     </div>
-
-                    <!-- Port Telemetry Specs Panel -->
-                    <div class="p-3.5 bg-[#0b0e18] border-b border-zinc-800 space-y-2.5">
-                        <div class="flex items-center justify-between gap-2">
-                            <div class="flex items-center gap-2 truncate">
-                                <span id="cisco-display-port" class="px-2 py-0.5 rounded bg-rose-500/20 border border-rose-500/40 text-rose-300 font-bold text-xs">Gi0/1</span>
-                                <span id="cisco-display-title" class="text-white font-semibold text-xs truncate">Server LEMP Baremetal</span>
-                            </div>
-                            <span id="cisco-display-status" class="text-[11px] font-semibold text-emerald-400 shrink-0">UP (1000 Mbps Full)</span>
-                        </div>
-
-                        <div class="grid grid-cols-2 sm:grid-cols-3 gap-2 text-[10px] font-mono">
-                            <div class="p-2 rounded bg-black/40 border border-zinc-800/80">
-                                <div class="text-zinc-500">VLAN:</div>
-                                <div id="cisco-display-vlan" class="text-zinc-200 font-bold truncate">10 (LEMP_DMZ)</div>
-                            </div>
-                            <div class="p-2 rounded bg-black/40 border border-zinc-800/80">
-                                <div class="text-zinc-500">PERAN:</div>
-                                <div id="cisco-display-role" class="text-rose-400 font-bold truncate">Web Server Farm</div>
-                            </div>
-                            <div class="col-span-2 sm:col-span-1 p-2 rounded bg-black/40 border border-zinc-800/80">
-                                <div class="text-zinc-500">HOST:</div>
-                                <div id="cisco-display-host" class="text-zinc-300 truncate">Debian 13 Baremetal</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Authentic Cisco IOS CLI Console -->
-                    <div class="p-3.5 bg-[#05070c]">
-                        <div class="flex items-center justify-between gap-2 pb-2 mb-2 border-b border-zinc-800 text-[11px]">
-                            <div class="flex items-center gap-1.5">
-                                <button type="button" class="cisco-cli-tab px-2.5 py-1 rounded-md text-[10px] font-mono text-white bg-zinc-800 border border-zinc-700 transition-colors cursor-pointer" data-cli-tab="run">Running Config</button>
-                                <button type="button" class="cisco-cli-tab px-2.5 py-1 rounded-md text-[10px] font-mono text-zinc-400 hover:text-zinc-200 bg-transparent transition-colors cursor-pointer" data-cli-tab="switchport">Switchport</button>
-                                <button type="button" class="cisco-cli-tab px-2.5 py-1 rounded-md text-[10px] font-mono text-zinc-400 hover:text-zinc-200 bg-transparent transition-colors cursor-pointer" data-cli-tab="status">Status</button>
-                            </div>
-                            <span class="text-[10px] text-zinc-500">Cisco IOS v15.2</span>
-                        </div>
-
-                        <div class="text-[11px] leading-relaxed overflow-x-auto text-zinc-300 space-y-1">
-                            <div id="cisco-cli-prompt" class="text-emerald-400 font-semibold">cisco-sw01# show running-config interface Gi0/1</div>
-                            <pre id="cisco-cli-output" class="text-zinc-400 font-mono text-[10.5px] leading-snug whitespace-pre-wrap selection:bg-rose-500/30">interface GigabitEthernet0/1
- description LEMP-PROD-BAREMETAL-SERVER
- switchport mode access
- switchport access vlan 10
- spanning-tree portfast
- speed 1000
- duplex full
- no shutdown</pre>
-                        </div>
-                    </div>
-
                 </div>
             </div>
 
