@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\CertificateController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\MessageController;
 use App\Http\Controllers\Admin\ProjectController;
@@ -35,12 +36,16 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/', fn () => redirect()->route('admin.dashboard'));
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/dashboard/server-metrics', [DashboardController::class, 'serverMetrics'])->name('dashboard.server-metrics');
 
     // CRUD Projects
     Route::resource('projects', ProjectController::class);
 
     // CRUD Skills
     Route::resource('skills', SkillController::class);
+
+    // CRUD Certificates
+    Route::resource('certificates', CertificateController::class);
 
     // Messages Inbox
     Route::get('/messages', [MessageController::class, 'index'])->name('messages.index');

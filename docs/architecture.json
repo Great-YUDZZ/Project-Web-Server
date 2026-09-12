@@ -1,0 +1,238 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "TKJ Digital Portfolio LEMP Runtime Architecture",
+    "output": "docs/architecture.html",
+    "quality_profile": "showcase",
+    "views": [
+      {
+        "id": "primary-path",
+        "label": "Primary HTTP Request Path",
+        "focus": ["clients", "nginx", "php_fpm", "kernel", "controllers", "mysql"],
+        "note": "Follow an HTTP request from client browser through Nginx, PHP-FPM, Laravel Kernel, and MVC controllers to MySQL."
+      },
+      {
+        "id": "edge-and-dns",
+        "label": "Edge Resolution & Ingress",
+        "focus": ["clients", "dns", "nginx", "fonts_cdn"],
+        "note": "Local mDNS/BIND9 resolution for yuda.local and static asset caching at Nginx."
+      },
+      {
+        "id": "presentation-storage",
+        "label": "Presentation & Storage",
+        "focus": ["controllers", "blade_engine", "storage", "nginx"],
+        "note": "Blade template compilation, Vite asset delivery, and public disk storage for topologies."
+      }
+    ]
+  },
+  "components": [
+    {
+      "id": "clients",
+      "type": "external",
+      "label": "Client Devices",
+      "sublabel": "Browsers / Mobile LAN",
+      "pos": [40, 290],
+      "size": [130, 60],
+      "tag": "Untrusted"
+    },
+    {
+      "id": "fonts_cdn",
+      "type": "external",
+      "label": "Bunny Fonts CDN",
+      "sublabel": "Instrument Sans",
+      "pos": [40, 120],
+      "size": [130, 60],
+      "tag": "External CDN"
+    },
+    {
+      "id": "dns",
+      "type": "cloud",
+      "label": "Local DNS & mDNS",
+      "sublabel": "BIND9 :53 / Avahi :5353",
+      "pos": [250, 120],
+      "size": [140, 60],
+      "tag": "yuda.local"
+    },
+    {
+      "id": "nginx",
+      "type": "security",
+      "label": "Nginx 1.26",
+      "sublabel": "Reverse Proxy :80",
+      "pos": [250, 290],
+      "size": [140, 60],
+      "tag": "Edge Ingress"
+    },
+    {
+      "id": "php_fpm",
+      "type": "backend",
+      "label": "PHP 8.4-FPM",
+      "sublabel": "UNIX Domain Socket",
+      "pos": [480, 290],
+      "size": [135, 60],
+      "tag": "OPcache JIT"
+    },
+    {
+      "id": "kernel",
+      "type": "backend",
+      "label": "Laravel 13 Kernel",
+      "sublabel": "Routing & Middleware",
+      "pos": [700, 290],
+      "size": [140, 60],
+      "tag": "Security Guards"
+    },
+    {
+      "id": "controllers",
+      "type": "backend",
+      "label": "MVC Controllers",
+      "sublabel": "Public & Admin Handlers",
+      "pos": [930, 290],
+      "size": [140, 60],
+      "tag": "App Logic"
+    },
+    {
+      "id": "mysql",
+      "type": "database",
+      "label": "MySQL 8",
+      "sublabel": "MariaDB / InnoDB :3306",
+      "pos": [1160, 290],
+      "size": [140, 60],
+      "brand": "mysql",
+      "tag": "Relational DB"
+    },
+    {
+      "id": "blade_engine",
+      "type": "frontend",
+      "label": "Blade & Vite Assets",
+      "sublabel": "Tailwind v4 / Swiper 3D",
+      "pos": [700, 450],
+      "size": [140, 60],
+      "tag": "SSR & UI"
+    },
+    {
+      "id": "storage",
+      "type": "database",
+      "label": "Local File Storage",
+      "sublabel": "public/storage link",
+      "pos": [930, 450],
+      "size": [140, 60],
+      "tag": "Topologies & PDFs"
+    }
+  ],
+  "boundaries": [
+    {
+      "kind": "region",
+      "label": "Server Host (Ubuntu 24.04 LTS / 10.10.22.34)",
+      "wraps": ["dns", "nginx", "php_fpm", "kernel", "controllers", "mysql", "blade_engine", "storage"],
+      "pad": 24
+    },
+    {
+      "kind": "security-group",
+      "label": "Ingress & Edge Services",
+      "wraps": ["dns", "nginx"],
+      "pad": 14
+    },
+    {
+      "kind": "security-group",
+      "label": "Application Runtime & Durable State",
+      "wraps": ["php_fpm", "kernel", "controllers", "mysql", "blade_engine", "storage"],
+      "pad": 14
+    }
+  ],
+  "connections": [
+    {
+      "id": "req-http",
+      "from": "clients",
+      "to": "nginx",
+      "label": "HTTP :80",
+      "variant": "emphasis",
+      "labelDy": 16
+    },
+    {
+      "id": "fastcgi-pass",
+      "from": "nginx",
+      "to": "php_fpm",
+      "label": "FastCGI sock",
+      "variant": "emphasis"
+    },
+    {
+      "id": "kernel-dispatch",
+      "from": "php_fpm",
+      "to": "kernel",
+      "label": "handle req",
+      "variant": "emphasis"
+    },
+    {
+      "id": "route-dispatch",
+      "from": "kernel",
+      "to": "controllers",
+      "label": "dispatch",
+      "variant": "emphasis"
+    },
+    {
+      "id": "db-query",
+      "from": "controllers",
+      "to": "mysql",
+      "label": "SQL / Eloquent",
+      "variant": "emphasis"
+    },
+    {
+      "id": "dns-query",
+      "from": "clients",
+      "to": "dns",
+      "label": "resolve yuda.local",
+      "variant": "dashed"
+    },
+    {
+      "id": "font-req",
+      "from": "clients",
+      "to": "fonts_cdn",
+      "label": "load fonts",
+      "variant": "dashed"
+    },
+    {
+      "id": "render-view",
+      "from": "controllers",
+      "to": "blade_engine",
+      "label": "render view",
+      "variant": "default"
+    },
+    {
+      "id": "file-access",
+      "from": "controllers",
+      "to": "storage",
+      "label": "read / write",
+      "variant": "default",
+      "labelDy": 24
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "Ingress & Edge Discovery",
+      "items": [
+        "Local mDNS (Avahi) and BIND9 resolve 'yuda.local' across the school LAN",
+        "Nginx 1.26 terminates port 80 with security headers and 30-day static asset cache",
+        "Direct block on hidden files prevents leakage of .git and .env credentials"
+      ]
+    },
+    {
+      "dot": "emerald",
+      "title": "Application Runtime (LEMP)",
+      "items": [
+        "PHP 8.4-FPM communicates via high-performance UNIX domain socket",
+        "Laravel 13 HTTP Kernel enforces rate limiting (5 req/min on login) and CSRF guards",
+        "Modular MVC controllers serve public student showcases and auth-gated admin CRUD"
+      ]
+    },
+    {
+      "dot": "rose",
+      "title": "Trust Boundaries & State",
+      "items": [
+        "Untrusted LAN clients and external font CDNs operate outside the server boundary",
+        "MariaDB / MySQL 8 InnoDB engine stores relational project, skill, and message models",
+        "Isolated public disk symlink serves uploaded network topology images and PDF files"
+      ]
+    }
+  ]
+}

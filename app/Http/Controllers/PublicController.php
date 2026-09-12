@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Certificate;
 use App\Models\Message;
 use App\Models\Project;
 use App\Models\Skill;
@@ -15,7 +16,7 @@ class PublicController extends Controller
     public function index()
     {
         $skills = Skill::orderBy('category')->orderByDesc('level')->get();
-        
+
         $featuredProjects = Project::where('is_featured', true)
             ->latest()
             ->take(4)
@@ -25,21 +26,31 @@ class PublicController extends Controller
             $featuredProjects = Project::latest()->take(4)->get();
         }
 
+        $certificates = Certificate::featured()
+            ->orderBy('order')
+            ->latest()
+            ->get();
+
+        if ($certificates->isEmpty()) {
+            $certificates = Certificate::orderBy('order')->latest()->get();
+        }
+
         $categories = [
             'networking' => $skills->where('category', 'networking'),
-            'sysadmin'   => $skills->where('category', 'sysadmin'),
-            'hardware'   => $skills->where('category', 'hardware'),
-            'tools'      => $skills->where('category', 'tools'),
+            'sysadmin' => $skills->where('category', 'sysadmin'),
+            'hardware' => $skills->where('category', 'hardware'),
+            'tools' => $skills->where('category', 'tools'),
         ];
 
         $stats = [
             'total_projects' => Project::count(),
-            'total_skills'   => Skill::count(),
-            'network_labs'   => Project::where('category', 'like', '%Network%')->count(),
-            'server_labs'    => Project::where('category', 'like', '%Sysadmin%')->orWhere('category', 'like', '%Virtual%')->count(),
+            'total_skills' => Skill::count(),
+            'total_certificates' => Certificate::count(),
+            'network_labs' => Project::where('category', 'like', '%Network%')->count(),
+            'server_labs' => Project::where('category', 'like', '%Sysadmin%')->orWhere('category', 'like', '%Virtual%')->count(),
         ];
 
-        return view('home', compact('skills', 'featuredProjects', 'categories', 'stats'));
+        return view('home', compact('skills', 'featuredProjects', 'categories', 'stats', 'certificates'));
     }
 
     /**
@@ -52,8 +63,8 @@ class PublicController extends Controller
         if ($search = $request->input('q')) {
             $query->where(function ($q) use ($search) {
                 $q->where('title', 'like', "%{$search}%")
-                  ->orWhere('description', 'like', "%{$search}%")
-                  ->orWhere('tools_used', 'like', "%{$search}%");
+                    ->orWhere('description', 'like', "%{$search}%")
+                    ->orWhere('tools_used', 'like', "%{$search}%");
             });
         }
 
@@ -94,9 +105,9 @@ class PublicController extends Controller
     {
         $validated = $request->validate([
             'sender_name' => ['required', 'string', 'max:100'],
-            'email'       => ['required', 'email', 'max:150'],
-            'subject'     => ['required', 'string', 'max:150'],
-            'message'     => ['required', 'string', 'max:2000'],
+            'email' => ['required', 'email', 'max:150'],
+            'subject' => ['required', 'string', 'max:150'],
+            'message' => ['required', 'string', 'max:2000'],
         ]);
 
         Message::create($validated);

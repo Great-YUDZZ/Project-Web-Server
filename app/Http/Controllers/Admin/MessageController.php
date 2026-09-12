@@ -26,9 +26,9 @@ class MessageController extends Controller
         if ($search = $request->input('q')) {
             $query->where(function ($q) use ($search) {
                 $q->where('sender_name', 'like', "%{$search}%")
-                  ->orWhere('email', 'like', "%{$search}%")
-                  ->orWhere('subject', 'like', "%{$search}%")
-                  ->orWhere('message', 'like', "%{$search}%");
+                    ->orWhere('email', 'like', "%{$search}%")
+                    ->orWhere('subject', 'like', "%{$search}%")
+                    ->orWhere('message', 'like', "%{$search}%");
             });
         }
 
@@ -43,7 +43,7 @@ class MessageController extends Controller
      */
     public function show(Message $message)
     {
-        if (!$message->is_read) {
+        if (! $message->is_read) {
             $message->update(['is_read' => true]);
         }
 
@@ -55,7 +55,7 @@ class MessageController extends Controller
      */
     public function toggleRead(Message $message)
     {
-        $message->update(['is_read' => !$message->is_read]);
+        $message->update(['is_read' => ! $message->is_read]);
 
         $status = $message->is_read ? 'dibaca' : 'belum dibaca';
 

@@ -20,8 +20,8 @@ class ProjectController extends Controller
         if ($search = $request->input('q')) {
             $query->where(function ($q) use ($search) {
                 $q->where('title', 'like', "%{$search}%")
-                  ->orWhere('category', 'like', "%{$search}%")
-                  ->orWhere('tools_used', 'like', "%{$search}%");
+                    ->orWhere('category', 'like', "%{$search}%")
+                    ->orWhere('tools_used', 'like', "%{$search}%");
             });
         }
 
@@ -44,13 +44,13 @@ class ProjectController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'title'          => ['required', 'string', 'max:255'],
-            'slug'           => ['nullable', 'string', 'max:255', 'unique:projects,slug'],
-            'category'       => ['required', 'string', 'max:100'],
-            'description'    => ['required', 'string'],
-            'tools_used'     => ['nullable', 'string', 'max:255'],
-            'demo_link'      => ['nullable', 'url', 'max:255'],
-            'is_featured'    => ['nullable', 'boolean'],
+            'title' => ['required', 'string', 'max:255'],
+            'slug' => ['nullable', 'string', 'max:255', 'unique:projects,slug'],
+            'category' => ['required', 'string', 'max:100'],
+            'description' => ['required', 'string'],
+            'tools_used' => ['nullable', 'string', 'max:255'],
+            'demo_link' => ['nullable', 'url', 'max:255'],
+            'is_featured' => ['nullable', 'boolean'],
             'topology_image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp,svg', 'max:4096'],
         ]);
 
@@ -59,7 +59,7 @@ class ProjectController extends Controller
             $slug = $baseSlug;
             $count = 1;
             while (Project::where('slug', $slug)->exists()) {
-                $slug = $baseSlug . '-' . $count++;
+                $slug = $baseSlug.'-'.$count++;
             }
             $validated['slug'] = $slug;
         }
@@ -91,13 +91,13 @@ class ProjectController extends Controller
     public function update(Request $request, Project $project)
     {
         $validated = $request->validate([
-            'title'          => ['required', 'string', 'max:255'],
-            'slug'           => ['required', 'string', 'max:255', 'unique:projects,slug,' . $project->id],
-            'category'       => ['required', 'string', 'max:100'],
-            'description'    => ['required', 'string'],
-            'tools_used'     => ['nullable', 'string', 'max:255'],
-            'demo_link'      => ['nullable', 'url', 'max:255'],
-            'is_featured'    => ['nullable', 'boolean'],
+            'title' => ['required', 'string', 'max:255'],
+            'slug' => ['required', 'string', 'max:255', 'unique:projects,slug,'.$project->id],
+            'category' => ['required', 'string', 'max:100'],
+            'description' => ['required', 'string'],
+            'tools_used' => ['nullable', 'string', 'max:255'],
+            'demo_link' => ['nullable', 'url', 'max:255'],
+            'is_featured' => ['nullable', 'boolean'],
             'topology_image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp,svg', 'max:4096'],
         ]);
 
@@ -105,7 +105,7 @@ class ProjectController extends Controller
 
         if ($request->hasFile('topology_image')) {
             // Remove old image if stored in public disk
-            if ($project->topology_image && !Str::startsWith($project->topology_image, ['http://', 'https://', '/images/'])) {
+            if ($project->topology_image && ! Str::startsWith($project->topology_image, ['http://', 'https://', '/images/'])) {
                 Storage::disk('public')->delete($project->topology_image);
             }
 
@@ -124,7 +124,7 @@ class ProjectController extends Controller
      */
     public function destroy(Project $project)
     {
-        if ($project->topology_image && !Str::startsWith($project->topology_image, ['http://', 'https://', '/images/'])) {
+        if ($project->topology_image && ! Str::startsWith($project->topology_image, ['http://', 'https://', '/images/'])) {
             Storage::disk('public')->delete($project->topology_image);
         }
 

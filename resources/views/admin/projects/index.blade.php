@@ -10,24 +10,24 @@
     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
             <h2 class="text-xl font-bold text-white tracking-tight">Daftar Dokumentasi Proyek</h2>
-            <p class="text-xs text-slate-400 font-mono-code mt-0.5">Kelola dokumentasi lab, konfigurasi, dan file topologi jaringan.</p>
+            <p class="text-xs text-zinc-400 font-mono mt-0.5">Kelola dokumentasi lab, konfigurasi perangkat, dan diagram topologi jaringan.</p>
         </div>
 
-        <a href="{{ route('admin.projects.create') }}" class="px-4 py-2.5 rounded-xl bg-cyan-500 text-black font-bold font-mono-code text-xs hover:bg-cyan-400 transition-colors flex items-center gap-2 self-start sm:self-auto">
+        <a href="{{ route('admin.projects.create') }}" class="btn-primary text-xs py-2.5 px-4 flex items-center gap-2 self-start sm:self-auto">
             <span>+ TAMBAH PROYEK</span>
         </a>
     </div>
 
     <!-- Search / Filter -->
-    <div class="p-4 rounded-xl bg-slate-950 border border-slate-800">
+    <div class="p-4 rounded-2xl bg-[#0d0e14]/80 border border-white/[0.08] backdrop-blur-xl">
         <form action="{{ route('admin.projects.index') }}" method="GET" class="flex gap-3">
             <input type="text" name="q" value="{{ request('q') }}" placeholder="Cari judul proyek, kategori, atau tools..."
-                   class="flex-1 px-4 py-2 rounded-lg bg-slate-900 border border-slate-800 text-white placeholder-slate-500 text-xs font-mono-code focus:outline-none focus:border-cyan-500">
-            <button type="submit" class="px-4 py-2 rounded-lg bg-slate-800 text-slate-200 hover:text-white text-xs font-mono-code">
+                   class="flex-1 px-4 py-2 rounded-xl bg-[#070709] border border-white/[0.08] text-white placeholder-zinc-500 text-xs font-mono focus:outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500">
+            <button type="submit" class="px-4 py-2 rounded-xl bg-white/[0.04] border border-white/[0.08] text-zinc-300 hover:text-white hover:bg-white/[0.08] text-xs font-mono transition-colors">
                 Cari
             </button>
             @if(request('q'))
-                <a href="{{ route('admin.projects.index') }}" class="px-3 py-2 rounded-lg bg-slate-900 text-slate-400 hover:text-white text-xs font-mono-code flex items-center justify-center">
+                <a href="{{ route('admin.projects.index') }}" class="px-3 py-2 rounded-xl bg-white/[0.04] border border-white/[0.08] text-zinc-400 hover:text-white text-xs font-mono flex items-center justify-center">
                     ✕
                 </a>
             @endif
@@ -35,61 +35,61 @@
     </div>
 
     <!-- Projects Table -->
-    <div class="rounded-2xl border border-slate-800 bg-slate-950 overflow-hidden">
+    <div class="rounded-3xl border border-white/[0.08] bg-[#0d0e14]/80 backdrop-blur-xl overflow-hidden">
         <div class="overflow-x-auto">
-            <table class="w-full text-left font-mono-code text-xs">
+            <table class="w-full text-left font-mono text-xs">
                 <thead>
-                    <tr class="border-b border-slate-800 text-slate-400 bg-slate-900/50">
-                        <th class="py-3 px-4">TOPOLOGI</th>
-                        <th class="py-3 px-4">JUDUL PROYEK &amp; SLUG</th>
-                        <th class="py-3 px-4">KATEGORI</th>
-                        <th class="py-3 px-4">TOOLS DIGUNAKAN</th>
-                        <th class="py-3 px-4">STATUS</th>
-                        <th class="py-3 px-4 text-right">AKSI</th>
+                    <tr class="border-b border-white/[0.06] text-zinc-400 bg-white/[0.02]">
+                        <th class="py-3.5 px-4">TOPOLOGI</th>
+                        <th class="py-3.5 px-4">JUDUL PROYEK &amp; SLUG</th>
+                        <th class="py-3.5 px-4">KATEGORI</th>
+                        <th class="py-3.5 px-4">TOOLS DIGUNAKAN</th>
+                        <th class="py-3.5 px-4">STATUS</th>
+                        <th class="py-3.5 px-4 text-right">AKSI</th>
                     </tr>
                 </thead>
-                <tbody class="divide-y divide-slate-850">
+                <tbody class="divide-y divide-white/[0.04]">
                     @forelse($projects as $project)
-                        <tr class="hover:bg-slate-900/40 transition-colors">
-                            <td class="py-3 px-4">
-                                <div class="h-12 w-16 rounded bg-slate-900 overflow-hidden border border-slate-800 flex items-center justify-center">
+                        <tr class="hover:bg-white/[0.02] transition-colors">
+                            <td class="py-3.5 px-4">
+                                <div class="h-12 w-16 rounded-xl bg-[#070709] overflow-hidden border border-white/[0.08] flex items-center justify-center">
                                     <img src="{{ $project->image_url }}" alt="" class="h-full w-full object-contain">
                                 </div>
                             </td>
-                            <td class="py-3 px-4">
-                                <div class="font-bold text-white text-sm hover:text-cyan-400">
+                            <td class="py-3.5 px-4">
+                                <div class="font-bold text-white text-sm hover:text-orange-400 transition-colors">
                                     <a href="{{ route('projects.show', $project->slug) }}" target="_blank">
                                         {{ $project->title }}
                                     </a>
                                 </div>
-                                <div class="text-[10px] text-slate-500 mt-0.5">/projects/{{ $project->slug }}</div>
+                                <div class="text-[10px] text-zinc-500 mt-0.5">/projects/{{ $project->slug }}</div>
                             </td>
-                            <td class="py-3 px-4">
-                                <span class="px-2.5 py-1 rounded bg-slate-900 border border-slate-800 text-cyan-400 text-[10px]">
+                            <td class="py-3.5 px-4">
+                                <span class="px-2.5 py-1 rounded-full bg-orange-500/10 border border-orange-500/20 text-orange-400 text-[10px] font-semibold">
                                     {{ $project->category }}
                                 </span>
                             </td>
-                            <td class="py-3 px-4">
-                                <div class="text-slate-300 max-w-xs truncate">{{ $project->tools_used ?? '-' }}</div>
+                            <td class="py-3.5 px-4">
+                                <div class="text-zinc-300 max-w-xs truncate">{{ $project->tools_used ?? '-' }}</div>
                             </td>
-                            <td class="py-3 px-4">
+                            <td class="py-3.5 px-4">
                                 @if($project->is_featured)
-                                    <span class="px-2 py-0.5 rounded bg-amber-500/15 border border-amber-500/30 text-amber-300 text-[10px] font-bold">
+                                    <span class="px-2.5 py-0.5 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-300 text-[10px] font-bold">
                                         ★ UNGGULAN
                                     </span>
                                 @else
-                                    <span class="text-slate-500 text-[10px]">Reguler</span>
+                                    <span class="text-zinc-500 text-[10px]">Reguler</span>
                                 @endif
                             </td>
-                            <td class="py-3 px-4 text-right">
+                            <td class="py-3.5 px-4 text-right">
                                 <div class="flex items-center justify-end gap-2">
-                                    <a href="{{ route('admin.projects.edit', $project->id) }}" class="px-2.5 py-1 rounded bg-slate-900 border border-slate-800 text-slate-300 hover:text-cyan-400 hover:border-cyan-500/50 transition-colors">
+                                    <a href="{{ route('admin.projects.edit', $project->id) }}" class="px-2.5 py-1 rounded-lg bg-white/[0.04] border border-white/[0.08] text-zinc-300 hover:text-orange-400 hover:border-orange-500/30 transition-colors">
                                         Edit
                                     </a>
                                     <form action="{{ route('admin.projects.destroy', $project->id) }}" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin menghapus proyek lab ini?');" class="inline">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="px-2.5 py-1 rounded bg-rose-500/10 border border-rose-500/30 text-rose-400 hover:bg-rose-500 hover:text-white transition-colors">
+                                        <button type="submit" class="px-2.5 py-1 rounded-lg bg-rose-500/10 border border-rose-500/20 text-rose-400 hover:bg-rose-500 hover:text-white transition-colors">
                                             Hapus
                                         </button>
                                     </form>
@@ -98,8 +98,8 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="6" class="text-center py-10 text-slate-500">
-                                Belum ada proyek lab terdaftar.
+                            <td colspan="6" class="text-center py-12 text-zinc-500">
+                                Belum ada proyek lab terdaftar. Klik "+ TAMBAH PROYEK" untuk menambahkan dokumentasi pertama.
                             </td>
                         </tr>
                     @endforelse
@@ -108,7 +108,7 @@
         </div>
 
         @if($projects->hasPages())
-            <div class="p-4 border-t border-slate-800">
+            <div class="p-4 border-t border-white/[0.06]">
                 {{ $projects->links() }}
             </div>
         @endif

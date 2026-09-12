@@ -1,28 +1,28 @@
 @extends('layouts.app')
 
-@section('title', 'Login Portal Admin TKJ - Yuda Pratama')
+@section('title', 'Login Portal Admin TKJ - I Made Yuda Pramana')
 
 @section('content')
 <div class="min-h-[80vh] flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 relative">
     
-    <!-- Ambient Glow -->
-    <div class="absolute w-[400px] h-[400px] bg-cyan-500/10 blur-[120px] rounded-full pointer-events-none"></div>
+    <!-- Ambient Warm Orange Glow -->
+    <div class="absolute w-[450px] h-[450px] bg-orange-500/15 blur-[140px] rounded-full pointer-events-none"></div>
 
     <div class="max-w-md w-full relative z-10">
         
         <!-- Login Card -->
-        <div class="rounded-2xl border border-cyan-500/30 bg-slate-950/80 backdrop-blur-xl p-8 shadow-2xl shadow-cyan-950/50">
+        <div class="rounded-3xl glass-panel p-8 sm:p-10 shadow-2xl shadow-black/90">
             
             <!-- Header -->
             <div class="text-center mb-8">
-                <div class="inline-flex h-12 w-12 rounded-xl bg-cyan-500/20 border border-cyan-500/40 items-center justify-center text-cyan-400 font-mono-code font-black text-xl mb-3">
-                    #_
+                <div class="inline-flex h-16 w-16 items-center justify-center mb-4">
+                    <img src="{{ asset('images/logo.png') }}" alt="Logo" class="w-full h-full object-contain">
                 </div>
-                <h2 class="text-2xl font-black text-white tracking-tight">
+                <h2 class="text-2xl font-bold text-white tracking-tight">
                     PORTAL ADMIN TKJ
                 </h2>
-                <p class="text-xs text-slate-400 font-mono-code mt-1">
-                    // AUTHENTICATION_GATEWAY
+                <p class="text-xs text-zinc-400 font-mono mt-1.5">
+                    Sistem Manajemen Portofolio &bull; I Made Yuda Pramana
                 </p>
             </div>
 
@@ -31,47 +31,37 @@
                 @csrf
 
                 <div>
-                    <label for="email" class="block font-mono-code text-xs text-slate-300 mb-2">
-                        EMAIL ADMIN <span class="text-rose-400">*</span>
+                    <label for="email" class="block font-mono text-xs text-zinc-400 mb-2">
+                        EMAIL ADMIN <span class="text-orange-400">*</span>
                     </label>
-                    <input type="email" name="email" id="email" value="{{ old('email', 'admin@tkj.lan') }}" required autofocus
+                    <input type="email" name="email" id="email" value="{{ old('email') }}" required autofocus
                            placeholder="admin@tkj.lan"
-                           class="w-full px-4 py-3 rounded-xl bg-slate-900 border border-slate-800 text-white placeholder-slate-600 focus:outline-none focus:border-cyan-500 text-sm font-mono-code transition-colors">
+                           class="input-field font-mono text-sm">
                 </div>
 
                 <div>
-                    <label for="password" class="block font-mono-code text-xs text-slate-300 mb-2">
-                        KATA SANDI <span class="text-rose-400">*</span>
+                    <label for="password" class="block font-mono text-xs text-zinc-400 mb-2">
+                        KATA SANDI <span class="text-orange-400">*</span>
                     </label>
                     <input type="password" name="password" id="password" required
                            placeholder="••••••••••••"
-                           class="w-full px-4 py-3 rounded-xl bg-slate-900 border border-slate-800 text-white placeholder-slate-600 focus:outline-none focus:border-cyan-500 text-sm font-mono-code transition-colors">
+                           class="input-field font-mono text-sm">
                 </div>
 
-                <div class="flex items-center justify-between font-mono-code text-xs">
-                    <label class="flex items-center gap-2 text-slate-400 cursor-pointer">
-                        <input type="checkbox" name="remember" class="rounded bg-slate-900 border-slate-800 text-cyan-500 focus:ring-0">
+                <div class="flex items-center justify-between font-mono text-xs">
+                    <label class="flex items-center gap-2 text-zinc-400 cursor-pointer">
+                        <input type="checkbox" name="remember" class="rounded bg-neutral-900 border-white/10 text-orange-500 focus:ring-0">
                         <span>Ingat sesi saya</span>
                     </label>
-                    <span class="text-slate-500 text-[11px]">RATE_LIMITED</span>
                 </div>
 
-                <button type="submit" class="w-full py-3.5 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 text-black font-bold font-mono-code text-sm hover:shadow-lg hover:shadow-cyan-500/25 transition-all">
-                    MASUK_ADMIN_PANEL &rarr;
+                <button type="submit" class="w-full py-3.5 rounded-full bg-gradient-to-r from-orange-500 to-amber-500 text-white font-bold font-mono text-xs tracking-wider uppercase shadow-lg shadow-orange-500/25 hover:shadow-orange-500/40 hover:scale-[1.01] active:scale-[0.99] transition-all">
+                    Masuk Panel Admin &rarr;
                 </button>
             </form>
 
-            <!-- Default Credential Notice for School Evaluation -->
-            <div class="mt-8 pt-6 border-t border-slate-800/80 rounded-xl bg-slate-900/40 p-4 font-mono-code text-xs text-slate-400">
-                <div class="text-cyan-400 font-bold mb-1 flex items-center gap-1.5">
-                    <span>ℹ</span> KREDENSIAL DEFAULT AKUN:
-                </div>
-                <div class="text-slate-300">Email: <span class="text-white font-semibold">admin@tkj.lan</span></div>
-                <div class="text-slate-300">Password: <span class="text-white font-semibold">AdminTKJ2026!</span></div>
-            </div>
-
-            <div class="mt-4 text-center">
-                <a href="{{ route('home') }}" class="font-mono-code text-xs text-slate-500 hover:text-slate-300">
+            <div class="mt-5 text-center">
+                <a href="{{ route('home') }}" class="font-mono text-xs text-zinc-500 hover:text-orange-400 transition-colors">
                     &larr; Kembali ke Beranda Publik
                 </a>
             </div>

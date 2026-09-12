@@ -24,6 +24,7 @@ class Skill extends Model
         if ($category && $category !== 'all') {
             return $query->where('category', $category);
         }
+
         return $query;
     }
 

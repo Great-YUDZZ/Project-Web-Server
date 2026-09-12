@@ -45,9 +45,9 @@ class SkillController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'name'     => ['required', 'string', 'max:255'],
+            'name' => ['required', 'string', 'max:255'],
             'category' => ['required', Rule::in(['networking', 'sysadmin', 'hardware', 'tools'])],
-            'level'    => ['required', 'integer', 'min:1', 'max:100'],
+            'level' => ['required', 'integer', 'min:1', 'max:100'],
         ]);
 
         Skill::create($validated);
@@ -70,9 +70,9 @@ class SkillController extends Controller
     public function update(Request $request, Skill $skill)
     {
         $validated = $request->validate([
-            'name'     => ['required', 'string', 'max:255'],
+            'name' => ['required', 'string', 'max:255'],
             'category' => ['required', Rule::in(['networking', 'sysadmin', 'hardware', 'tools'])],
-            'level'    => ['required', 'integer', 'min:1', 'max:100'],
+            'level' => ['required', 'integer', 'min:1', 'max:100'],
         ]);
 
         $skill->update($validated);

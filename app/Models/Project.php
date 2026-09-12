@@ -35,7 +35,7 @@ class Project extends Model
                 $slug = $baseSlug;
                 $count = 1;
                 while (static::where('slug', $slug)->exists()) {
-                    $slug = $baseSlug . '-' . $count++;
+                    $slug = $baseSlug.'-'.$count++;
                 }
                 $project->slug = $slug;
             }
@@ -54,10 +54,15 @@ class Project extends Model
     public function getImageUrlAttribute(): string
     {
         if ($this->topology_image) {
-            if (Str::startsWith($this->topology_image, ['http://', 'https://', '/images/'])) {
+            if (Str::startsWith($this->topology_image, ['http://', 'https://'])) {
                 return $this->topology_image;
             }
-            return asset('storage/' . $this->topology_image);
+
+            if (Str::startsWith($this->topology_image, ['/images/', 'images/'])) {
+                return asset(ltrim($this->topology_image, '/'));
+            }
+
+            return asset('storage/'.$this->topology_image);
         }
 
         return asset('images/default-topology.svg');
