@@ -1,28 +1,28 @@
 @extends('layouts.app')
 
 @section('content')
-<!-- SECTION 1: HERO SECTION (#home) - Porcelain White -->
-<section id="home" class="w-full bg-[#FFFFFF] pt-6 sm:pt-10 md:pt-16 pb-16 sm:pb-20 md:pb-28 relative">
+<!-- SECTION 1: HERO SECTION (#home) - Technical Slate Dark -->
+<section id="home" class="w-full bg-[#0F172A] pt-6 sm:pt-10 md:pt-16 pb-16 sm:pb-20 md:pb-28 relative border-b border-slate-800">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 grid lg:grid-cols-12 gap-8 lg:gap-8 items-center">
             
             <!-- Left Hero Content -->
             <div class="lg:col-span-7 space-y-6 sm:space-y-7 relative z-10">
                 
                 <!-- Eyebrow Pill Badge -->
-                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-slate-200 bg-emerald-50 text-[11px] sm:text-xs font-mono text-emerald-800 shadow-xs max-w-full">
-                    <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
-                    <span class="tracking-wide text-emerald-700 font-semibold truncate sm:whitespace-normal">TEKNIK KOMPUTER &amp; JARINGAN / SMKN 1 DENPASAR</span>
+                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-emerald-500/30 bg-emerald-950/60 text-[11px] sm:text-xs font-mono text-emerald-400 shadow-xs max-w-full">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                    <span class="tracking-wide text-emerald-300 font-semibold truncate sm:whitespace-normal">TEKNIK KOMPUTER &amp; JARINGAN / SMKN 1 DENPASAR</span>
                 </div>
 
                 <!-- Hero Main Headline -->
-                <h1 class="text-3xl xs:text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-slate-900 leading-[1.1] text-balance">
+                <h1 class="text-3xl xs:text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white leading-[1.1] text-balance">
                     NETWORK &amp; <br class="hidden sm:inline">
-                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-sky-600 to-teal-600">INFRASTRUCTURE</span>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-sky-400 to-teal-300">INFRASTRUCTURE</span>
                 </h1>
 
                 <!-- Hero Description -->
-                <p class="text-sm sm:text-base md:text-lg text-slate-600 max-w-[50ch] leading-relaxed text-balance">
-                    Halo, saya <span class="text-slate-900 font-semibold">I Made Yuda Pramana</span>. Siswa Teknik Komputer &amp; Jaringan yang berfokus pada switching &amp; routing Cisco, administrasi baremetal server Debian LEMP, dan implementasi infrastruktur jaringan terstruktur.
+                <p class="text-sm sm:text-base md:text-lg text-slate-300 max-w-[50ch] leading-relaxed text-balance">
+                    Halo, saya <span class="text-white font-semibold">I Made Yuda Pramana</span>. Siswa Teknik Komputer &amp; Jaringan yang berfokus pada switching &amp; routing Cisco, administrasi baremetal server Debian LEMP, dan implementasi infrastruktur jaringan terstruktur.
                 </p>
 
                 <!-- CTA Actions & Social Cluster -->
@@ -31,28 +31,28 @@
                         <span>Lihat Sertifikasi Resmi</span>
                         <span class="w-6 h-6 rounded-full bg-white/20 flex items-center justify-center text-xs group-hover:translate-x-0.5 transition-transform">&rarr;</span>
                     </a>
-                    <a href="#labs" class="btn-ghost w-full sm:w-auto text-center justify-center">
+                    <a href="#labs" class="inline-flex items-center justify-center min-h-[44px] px-5 py-2.5 rounded-full bg-slate-800/90 border border-slate-700 text-slate-200 hover:text-white hover:bg-slate-700 hover:border-slate-600 text-xs sm:text-sm font-semibold transition-all duration-200 shadow-xs active:scale-[0.98] w-full sm:w-auto text-center">
                         Eksplorasi Lab
                     </a>
 
                     <!-- Social Glass Cluster with Direct Contact Info -->
                     <div class="flex items-center justify-center sm:justify-start gap-2 pt-1 sm:pt-0 sm:pl-2">
                         <!-- GitHub -->
-                        <a href="https://github.com/Great-YUDZZ" target="_blank" rel="noopener noreferrer" class="p-2.5 rounded-full glass-panel-interactive text-slate-500 hover:text-blue-600 hover:border-blue-400 hover:bg-blue-50 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500" aria-label="GitHub Great-YUDZZ" title="GitHub: Great-YUDZZ">
+                        <a href="https://github.com/Great-YUDZZ" target="_blank" rel="noopener noreferrer" class="p-2.5 rounded-full bg-slate-800/80 border border-slate-700 text-slate-400 hover:text-white hover:border-slate-500 hover:bg-slate-700 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500" aria-label="GitHub Great-YUDZZ" title="GitHub: Great-YUDZZ">
                             <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
                                 <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
                             </svg>
                         </a>
 
                         <!-- Email -->
-                        <a href="mailto:yuda2010f@gmail.com" class="p-2.5 rounded-full glass-panel-interactive text-slate-500 hover:text-blue-600 hover:border-blue-400 hover:bg-blue-50 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500" aria-label="Email yuda2010f@gmail.com" title="Email: yuda2010f@gmail.com">
+                        <a href="mailto:yuda2010f@gmail.com" class="p-2.5 rounded-full bg-slate-800/80 border border-slate-700 text-slate-400 hover:text-white hover:border-slate-500 hover:bg-slate-700 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500" aria-label="Email yuda2010f@gmail.com" title="Email: yuda2010f@gmail.com">
                             <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
                             </svg>
                         </a>
 
                         <!-- WhatsApp / Phone -->
-                        <a href="https://wa.me/6285182691268" target="_blank" rel="noopener noreferrer" class="p-2.5 rounded-full glass-panel-interactive text-slate-500 hover:text-teal-600 hover:border-teal-400 hover:bg-teal-50 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-500" aria-label="WhatsApp 085182691268" title="WhatsApp: 085182691268">
+                        <a href="https://wa.me/6285182691268" target="_blank" rel="noopener noreferrer" class="p-2.5 rounded-full bg-slate-800/80 border border-slate-700 text-slate-400 hover:text-teal-300 hover:border-teal-500 hover:bg-slate-700 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal-500" aria-label="WhatsApp 085182691268" title="WhatsApp: 085182691268">
                             <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
                             </svg>
@@ -62,20 +62,20 @@
 
                 <!-- Grounded Engineering Metrics -->
                 <div class="pt-2 sm:pt-4 grid grid-cols-2 gap-3 sm:gap-4 max-w-md">
-                    <div class="p-3.5 sm:p-4 rounded-2xl glass-panel-interactive hover:border-blue-300 transition-all">
+                    <div class="p-3.5 sm:p-4 rounded-2xl bg-slate-900/80 border border-slate-800 hover:border-blue-500/40 transition-all">
                         <div class="flex items-baseline justify-between">
-                            <span class="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-slate-900 font-mono">5</span>
-                            <span class="text-emerald-600 text-xs font-mono font-semibold">Resmi</span>
+                            <span class="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-white font-mono">5</span>
+                            <span class="text-emerald-400 text-xs font-mono font-semibold">Resmi</span>
                         </div>
-                        <div class="text-[11px] sm:text-xs text-slate-500 mt-1 font-medium leading-tight">Sertifikasi Cisco NetAcad &amp; Komdigi</div>
+                        <div class="text-[11px] sm:text-xs text-slate-400 mt-1 font-medium leading-tight">Sertifikasi Cisco NetAcad &amp; Komdigi</div>
                     </div>
 
-                    <div class="p-3.5 sm:p-4 rounded-2xl glass-panel-interactive hover:border-blue-300 transition-all">
+                    <div class="p-3.5 sm:p-4 rounded-2xl bg-slate-900/80 border border-slate-800 hover:border-blue-500/40 transition-all">
                         <div class="flex items-baseline justify-between">
-                            <span class="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-slate-900 font-mono">4+</span>
-                            <span class="text-blue-600 text-xs font-mono font-semibold">Lab</span>
+                            <span class="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-white font-mono">4+</span>
+                            <span class="text-sky-400 text-xs font-mono font-semibold">Lab</span>
                         </div>
-                        <div class="text-[11px] sm:text-xs text-slate-500 mt-1 font-medium leading-tight">Topologi Jaringan Enterprise &amp; LEMP</div>
+                        <div class="text-[11px] sm:text-xs text-slate-400 mt-1 font-medium leading-tight">Topologi Jaringan Enterprise &amp; LEMP</div>
                     </div>
                 </div>
 
@@ -326,54 +326,54 @@
     </section>
 
 
-    <!-- SECTION 3: SERTIFIKASI RESMI & KREDENSIAL KOMDIGI (#certifications) - Porcelain White -->
-    <section id="certifications" class="w-full bg-[#FFFFFF] py-16 sm:py-20 md:py-28 relative">
+    <!-- SECTION 3: SERTIFIKASI RESMI & KREDENSIAL KOMDIGI (#certifications) - Technical Slate Dark -->
+    <section id="certifications" class="w-full bg-[#0F172A] py-16 sm:py-20 md:py-28 relative border-b border-slate-800">
         <div class="max-w-7xl mx-auto px-4 sm:px-6">
             <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8 sm:mb-10">
                 <div class="space-y-3 max-w-2xl">
-                    <div class="inline-flex items-center gap-2 text-xs font-mono text-blue-600 uppercase tracking-wider font-semibold">
-                        <span class="w-1.5 h-1.5 rounded-full bg-blue-600"></span>
+                    <div class="inline-flex items-center gap-2 text-xs font-mono text-sky-400 uppercase tracking-wider font-semibold">
+                        <span class="w-1.5 h-1.5 rounded-full bg-sky-400"></span>
                         <span>Kredensial &amp; Standarisasi Resmi</span>
                     </div>
-                    <h2 class="text-2xl sm:text-4xl lg:text-5xl font-bold text-slate-900 tracking-tight">
+                    <h2 class="text-2xl sm:text-4xl lg:text-5xl font-bold text-white tracking-tight">
                         Sertifikasi Kejuruan &amp; Pelatihan Resmi
                     </h2>
-                    <p class="text-slate-600 text-sm sm:text-base leading-relaxed text-balance">
+                    <p class="text-slate-300 text-sm sm:text-base leading-relaxed text-balance">
                         Kredensial resmi sertifikasi jaringan internasional dari Cisco Networking Academy dan pelatihan kejuruan Komdigi RI. Geser kartu 3D atau gunakan tombol navigasi untuk meninjau berkas asli.
                     </p>
                 </div>
 
-                <div class="shrink-0 flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-700 text-xs font-mono self-start md:self-auto font-semibold">
-                    <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                <div class="shrink-0 flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-950/80 border border-emerald-500/40 text-emerald-400 text-xs font-mono self-start md:self-auto font-semibold">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
                     <span>Kredensial Resmi Terverifikasi</span>
                 </div>
             </div>
 
             <!-- 3D Coverflow Gallery Showcase Component -->
-            <div class="relative glass-panel rounded-3xl p-4 sm:p-7 lg:p-9 shadow-xl overflow-hidden bg-white border border-slate-200">
+            <div class="relative rounded-3xl p-4 sm:p-7 lg:p-9 shadow-2xl overflow-hidden bg-slate-900/90 border border-slate-800">
                 <!-- Background Ambient Glow -->
-                <div class="absolute -top-24 left-1/2 -translate-x-1/2 w-96 h-96 rounded-full bg-gradient-to-b from-blue-600/10 via-teal-500/5 to-transparent blur-3xl pointer-events-none"></div>
+                <div class="absolute -top-24 left-1/2 -translate-x-1/2 w-96 h-96 rounded-full bg-gradient-to-b from-blue-600/20 via-teal-500/10 to-transparent blur-3xl pointer-events-none"></div>
 
                 <!-- Gallery Top Bar: Mode Indicator -->
-                <div class="relative z-10 flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-5 mb-2 border-b border-slate-100">
+                <div class="relative z-10 flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-5 mb-2 border-b border-slate-800">
                     <div class="flex items-center gap-3">
-                        <span class="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-blue-50 border border-blue-200 text-blue-600">
+                        <span class="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-blue-950/80 border border-blue-500/30 text-blue-400">
                             <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
                             </svg>
                         </span>
                         <div>
-                            <div class="text-xs font-mono text-slate-500">
+                            <div class="text-xs font-mono text-slate-400">
                                 Galeri Sertifikat Kompetensi
                             </div>
-                            <div class="text-sm font-semibold text-slate-900">
-                                Sertifikat <span id="cert-current-index" class="text-blue-600 font-bold font-mono">1</span> dari <span id="cert-total-count" class="text-slate-500 font-mono">{{ $certificates->count() }}</span>
+                            <div class="text-sm font-semibold text-white">
+                                Sertifikat <span id="cert-current-index" class="text-sky-400 font-bold font-mono">1</span> dari <span id="cert-total-count" class="text-slate-400 font-mono">{{ $certificates->count() }}</span>
                             </div>
                         </div>
                     </div>
 
-                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full glass-pill text-slate-500 text-xs font-mono self-start sm:self-auto">
-                        <span class="w-1.5 h-1.5 rounded-full bg-blue-600 animate-pulse"></span>
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-800/80 border border-slate-700 text-slate-300 text-xs font-mono self-start sm:self-auto">
+                        <span class="w-1.5 h-1.5 rounded-full bg-blue-400 animate-pulse"></span>
                         <span>Putar Berkelanjutan</span>
                     </div>
                 </div>
@@ -384,14 +384,14 @@
                         <div class="swiper-wrapper">
                             @forelse($certificates as $index => $cert)
                                 <div class="swiper-slide select-none">
-                                    <div class="card-interactive p-5 sm:p-6 lg:p-7 flex flex-col justify-between h-full rounded-2xl relative group bg-white border border-slate-200 shadow-sm">
+                                    <div class="card-interactive p-5 sm:p-6 lg:p-7 flex flex-col justify-between h-full rounded-2xl relative group bg-slate-900 border border-slate-800 shadow-xl hover:border-blue-500/50">
                                         <!-- Top Ambient Reflection -->
-                                        <div class="absolute -top-12 -right-12 w-36 h-36 rounded-full bg-blue-600/5 blur-2xl pointer-events-none group-hover:bg-blue-600/10 transition-all"></div>
+                                        <div class="absolute -top-12 -right-12 w-36 h-36 rounded-full bg-blue-600/10 blur-2xl pointer-events-none group-hover:bg-blue-600/20 transition-all"></div>
 
                                         <div>
                                             <!-- Document Thumbnail with High-Res Lightbox Trigger -->
                                             @if($cert->preview_image_url)
-                                                <div class="aspect-[16/11] bg-slate-900 border border-slate-800 rounded-xl overflow-hidden mb-4 sm:mb-5 relative group/preview cursor-pointer shadow-md shadow-slate-950/20"
+                                                <div class="aspect-[16/11] bg-slate-950 border border-slate-800 rounded-xl overflow-hidden mb-4 sm:mb-5 relative group/preview cursor-pointer shadow-md shadow-slate-950/40"
                                                      onclick="openCertModal('{{ $cert->preview_image_url }}', '{{ addslashes($cert->title) }}', '{{ addslashes($cert->issuer) }}', '{{ addslashes($cert->credential_id) }}', '{{ $cert->file_url }}', '{{ addslashes($cert->verification_status ?? '') }}')"
                                                      role="button" tabindex="0" aria-label="Lihat Pratinjau Sertifikat Asli {{ $cert->title }}">
                                                     <img src="{{ $cert->preview_image_url }}" alt="Dokumen Resmi {{ $cert->title }}" class="w-full h-full object-contain p-2.5 group-hover/preview:scale-[1.03] transition-transform duration-500" loading="lazy">
@@ -418,41 +418,41 @@
 
                                             <!-- Issuer Badge & Issued Date -->
                                             <div class="flex items-center justify-between gap-2 mb-2.5">
-                                                <span class="inline-flex items-center gap-1.5 text-xs font-mono font-bold text-blue-700 bg-blue-50 border border-blue-200 px-2.5 py-0.5 rounded-full">
-                                                    <span class="w-1.5 h-1.5 rounded-full bg-blue-600"></span>
+                                                <span class="inline-flex items-center gap-1.5 text-xs font-mono font-bold text-sky-300 bg-blue-950/80 border border-blue-500/30 px-2.5 py-0.5 rounded-full">
+                                                    <span class="w-1.5 h-1.5 rounded-full bg-sky-400"></span>
                                                     {{ $cert->issuer }}
                                                 </span>
                                                 @if($cert->issued_date)
-                                                    <span class="text-xs text-slate-500 font-mono">
+                                                    <span class="text-xs text-slate-400 font-mono">
                                                         {{ $cert->issued_date }}
                                                     </span>
                                                 @endif
                                             </div>
                                             
                                             <!-- Certificate Title -->
-                                            <h3 class="text-base sm:text-lg font-bold text-slate-900 mb-2 leading-snug group-hover:text-blue-600 transition-colors line-clamp-2">
+                                            <h3 class="text-base sm:text-lg font-bold text-white mb-2 leading-snug group-hover:text-sky-400 transition-colors line-clamp-2">
                                                 {{ $cert->title }}
                                             </h3>
                                             
                                             <!-- Certificate Description -->
                                             @if($cert->description)
-                                                <p class="text-slate-600 text-xs sm:text-sm leading-relaxed mb-4 line-clamp-3">
+                                                <p class="text-slate-300 text-xs sm:text-sm leading-relaxed mb-4 line-clamp-3">
                                                     {{ $cert->description }}
                                                 </p>
                                             @endif
                                         </div>
 
                                         <!-- Card Footer: Credential Meta & Interactive CTAs -->
-                                        <div class="pt-3.5 border-t border-slate-100 flex flex-col gap-2.5 text-[11px] text-slate-500 font-mono">
+                                        <div class="pt-3.5 border-t border-slate-800 flex flex-col gap-2.5 text-[11px] text-slate-400 font-mono">
                                             @if($cert->credential_id)
-                                                <div class="truncate text-slate-500 font-mono">
+                                                <div class="truncate text-slate-400 font-mono">
                                                     ID: {{ $cert->credential_id }}
                                                 </div>
                                             @endif
 
                                             <div class="flex items-center justify-between">
-                                                <div class="text-emerald-600 flex items-center gap-1.5 font-semibold text-xs">
-                                                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                                                <div class="text-emerald-400 flex items-center gap-1.5 font-semibold text-xs">
+                                                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
                                                     <span>{{ $cert->verification_status ?? 'Terverifikasi Resmi' }} {{ $cert->duration_hours ? '• ' . $cert->duration_hours : '' }}</span>
                                                 </div>
                                             </div>
@@ -462,8 +462,8 @@
                                                 @if($cert->preview_image_url)
                                                     <button type="button"
                                                             onclick="openCertModal('{{ $cert->preview_image_url }}', '{{ addslashes($cert->title) }}', '{{ addslashes($cert->issuer) }}', '{{ addslashes($cert->credential_id) }}', '{{ $cert->file_url }}', '{{ addslashes($cert->verification_status ?? '') }}')"
-                                                            class="flex-1 min-h-[44px] py-2 px-3 rounded-full glass-pill hover:bg-slate-50 hover:border-slate-300 text-xs text-slate-700 hover:text-blue-600 font-medium transition-all text-center flex items-center justify-center gap-1.5 cursor-pointer">
-                                                        <svg class="w-3.5 h-3.5 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                            class="flex-1 min-h-[44px] py-2 px-3 rounded-full bg-slate-800/90 hover:bg-slate-700 border border-slate-700 hover:border-slate-600 text-xs text-slate-200 hover:text-white font-medium transition-all text-center flex items-center justify-center gap-1.5 cursor-pointer">
+                                                        <svg class="w-3.5 h-3.5 text-sky-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
                                                         </svg>
@@ -473,7 +473,7 @@
 
                                                 @if($cert->file_path)
                                                     <a href="{{ $cert->file_url }}" target="_blank" rel="noopener noreferrer"
-                                                       class="flex-1 min-h-[44px] py-2 px-3 rounded-full bg-blue-50 hover:bg-blue-600 border border-blue-200 hover:border-blue-600 text-xs text-blue-700 hover:text-white font-semibold transition-all text-center flex items-center justify-center gap-1.5 shadow-xs hover:shadow-md">
+                                                       class="flex-1 min-h-[44px] py-2 px-3 rounded-full bg-blue-600 hover:bg-blue-500 text-white font-semibold transition-all text-center flex items-center justify-center gap-1.5 shadow-md shadow-blue-600/30 hover:shadow-lg hover:shadow-blue-600/40">
                                                         <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                                                         </svg>
@@ -481,7 +481,7 @@
                                                     </a>
                                                 @elseif($cert->credential_url)
                                                     <a href="{{ $cert->credential_url }}" target="_blank" rel="noopener noreferrer"
-                                                       class="flex-1 min-h-[44px] py-2 px-3 rounded-full bg-blue-50 hover:bg-blue-600 border border-blue-200 hover:border-blue-600 text-xs text-blue-700 hover:text-white font-semibold transition-all text-center flex items-center justify-center gap-1.5">
+                                                       class="flex-1 min-h-[44px] py-2 px-3 rounded-full bg-blue-600 hover:bg-blue-500 text-white font-semibold transition-all text-center flex items-center justify-center gap-1.5 shadow-md shadow-blue-600/30">
                                                         <span>Verifikasi &nearr;</span>
                                                     </a>
                                                 @endif
@@ -491,7 +491,7 @@
                                     </div>
                                 </div>
                             @empty
-                                <div class="w-full py-16 text-center text-slate-500 font-mono text-sm border border-slate-200 rounded-3xl bg-slate-50">
+                                <div class="w-full py-16 text-center text-slate-400 font-mono text-sm border border-slate-800 rounded-3xl bg-slate-900">
                                     Belum ada data sertifikasi yang dipublikasikan.
                                 </div>
                             @endforelse
@@ -524,9 +524,9 @@
                 </div>
 
                 <!-- Footer Swipe Hint -->
-                <div class="relative z-10 pt-3 text-center border-t border-slate-100">
-                    <p class="text-[11px] font-mono text-slate-500 flex items-center justify-center gap-2">
-                        <span class="inline-block w-1.5 h-1.5 rounded-full bg-blue-600 animate-ping"></span>
+                <div class="relative z-10 pt-3 text-center border-t border-slate-800">
+                    <p class="text-[11px] font-mono text-slate-400 flex items-center justify-center gap-2">
+                        <span class="inline-block w-1.5 h-1.5 rounded-full bg-sky-400 animate-ping"></span>
                         <span>Geser kartu atau gunakan tombol panah untuk rotasi 3D. Klik kartu untuk membuka dokumen penuh.</span>
                     </p>
                 </div>
@@ -608,44 +608,44 @@
     </section>
 
 
-    <!-- SECTION 5: SKILL MATRIX (#skills) - Porcelain White -->
-    <section id="skills" class="w-full bg-[#FFFFFF] py-16 sm:py-24 md:py-32 relative">
+    <!-- SECTION 5: SKILL MATRIX (#skills) - Technical Slate Dark -->
+    <section id="skills" class="w-full bg-[#0F172A] py-16 sm:py-24 md:py-32 relative border-b border-slate-800">
         <div class="max-w-7xl mx-auto px-4 sm:px-6">
             <div class="text-center max-w-2xl mx-auto mb-10 sm:mb-12 space-y-3 sm:space-y-4">
-                <div class="inline-flex items-center gap-2 text-xs font-mono text-blue-600 uppercase tracking-wider font-semibold">
-                    <span class="w-1.5 h-1.5 rounded-full bg-blue-600"></span>
+                <div class="inline-flex items-center gap-2 text-xs font-mono text-sky-400 uppercase tracking-wider font-semibold">
+                    <span class="w-1.5 h-1.5 rounded-full bg-sky-400"></span>
                     <span>Penguasaan Perangkat &amp; Protokol</span>
                 </div>
-                <h2 class="text-2xl sm:text-4xl lg:text-5xl font-bold text-slate-900 tracking-tight">
+                <h2 class="text-2xl sm:text-4xl lg:text-5xl font-bold text-white tracking-tight">
                     Matriks Kompetensi Kejuruan TKJ
                 </h2>
-                <p class="text-slate-600 text-sm sm:text-base leading-relaxed text-balance">
+                <p class="text-slate-300 text-sm sm:text-base leading-relaxed text-balance">
                     Tingkat penguasaan instrumen jaringan, sistem operasi server, dan perkakas diagnostik kejuruan.
                 </p>
             </div>
 
             <!-- Filter Pills with 44px Touch Targets -->
             <div class="flex flex-wrap justify-center gap-2 mb-8 sm:mb-10" id="skill-filter-tabs">
-                <button type="button" data-filter="all" class="min-h-[44px] px-5 py-2.5 rounded-full bg-blue-600 text-white text-xs font-semibold shadow-md shadow-blue-600/20 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 cursor-pointer flex items-center justify-center">Semua</button>
-                <button type="button" data-filter="networking" class="min-h-[44px] px-5 py-2.5 rounded-full glass-pill text-slate-600 hover:text-slate-900 hover:bg-slate-100 text-xs font-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 cursor-pointer flex items-center justify-center">Networking</button>
-                <button type="button" data-filter="sysadmin" class="min-h-[44px] px-5 py-2.5 rounded-full glass-pill text-slate-600 hover:text-slate-900 hover:bg-slate-100 text-xs font-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 cursor-pointer flex items-center justify-center">Sysadmin</button>
-                <button type="button" data-filter="hardware" class="min-h-[44px] px-5 py-2.5 rounded-full glass-pill text-slate-600 hover:text-slate-900 hover:bg-slate-100 text-xs font-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 cursor-pointer flex items-center justify-center">Hardware</button>
-                <button type="button" data-filter="tools" class="min-h-[44px] px-5 py-2.5 rounded-full glass-pill text-slate-600 hover:text-slate-900 hover:bg-slate-100 text-xs font-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 cursor-pointer flex items-center justify-center">Tools</button>
+                <button type="button" data-filter="all" class="min-h-[44px] px-5 py-2.5 rounded-full bg-blue-600 text-white text-xs font-semibold shadow-md shadow-blue-600/30 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 cursor-pointer flex items-center justify-center">Semua</button>
+                <button type="button" data-filter="networking" class="min-h-[44px] px-5 py-2.5 rounded-full bg-slate-900 border border-slate-700 text-slate-300 hover:text-white hover:bg-slate-800 text-xs font-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 cursor-pointer flex items-center justify-center">Networking</button>
+                <button type="button" data-filter="sysadmin" class="min-h-[44px] px-5 py-2.5 rounded-full bg-slate-900 border border-slate-700 text-slate-300 hover:text-white hover:bg-slate-800 text-xs font-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 cursor-pointer flex items-center justify-center">Sysadmin</button>
+                <button type="button" data-filter="hardware" class="min-h-[44px] px-5 py-2.5 rounded-full bg-slate-900 border border-slate-700 text-slate-300 hover:text-white hover:bg-slate-800 text-xs font-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 cursor-pointer flex items-center justify-center">Hardware</button>
+                <button type="button" data-filter="tools" class="min-h-[44px] px-5 py-2.5 rounded-full bg-slate-900 border border-slate-700 text-slate-300 hover:text-white hover:bg-slate-800 text-xs font-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 cursor-pointer flex items-center justify-center">Tools</button>
             </div>
 
             @if($skills->count() > 0)
                 <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6" id="skills-grid">
                     @foreach($skills as $skill)
-                        <div class="skill-card p-4 sm:p-5 rounded-2xl glass-panel-interactive hover:border-blue-300 transition-all duration-300" data-category="{{ $skill->category }}">
+                        <div class="skill-card p-4 sm:p-5 rounded-2xl bg-slate-900/90 border border-slate-800 hover:border-blue-500/50 transition-all duration-300 shadow-xl" data-category="{{ $skill->category }}">
                             <div class="flex items-baseline justify-between mb-3">
                                 <div class="flex items-center gap-2">
-                                    <span class="w-1.5 h-1.5 rounded-full bg-blue-600"></span>
-                                    <h3 class="text-slate-800 font-semibold text-sm">{{ $skill->name }}</h3>
+                                    <span class="w-1.5 h-1.5 rounded-full bg-sky-400"></span>
+                                    <h3 class="text-white font-semibold text-sm">{{ $skill->name }}</h3>
                                 </div>
-                                <span class="text-xs text-blue-600 font-mono font-bold">{{ $skill->level }}%</span>
+                                <span class="text-xs text-sky-400 font-mono font-bold">{{ $skill->level }}%</span>
                             </div>
-                            <div class="w-full bg-slate-100 rounded-full h-2 overflow-hidden">
-                                <div class="h-full bg-gradient-to-r from-blue-600 to-teal-500 rounded-full transition-all duration-700" style="width: {{ $skill->level }}%"></div>
+                            <div class="w-full bg-slate-800 rounded-full h-2 overflow-hidden">
+                                <div class="h-full bg-gradient-to-r from-blue-500 via-sky-400 to-teal-400 rounded-full transition-all duration-700" style="width: {{ $skill->level }}%"></div>
                             </div>
                             <div class="mt-2 text-[10px] text-slate-400 font-mono uppercase tracking-wider">
                                 {{ $skill->category }}
@@ -654,12 +654,12 @@
                     @endforeach
                 </div>
             @else
-                <div class="py-16 px-6 text-center rounded-3xl glass-panel max-w-xl mx-auto">
-                    <div class="w-12 h-12 mx-auto mb-4 rounded-2xl bg-blue-50 border border-blue-200 flex items-center justify-center text-blue-600 font-mono text-sm font-bold">
+                <div class="py-16 px-6 text-center rounded-3xl bg-slate-900/90 border border-slate-800 shadow-xl max-w-xl mx-auto">
+                    <div class="w-12 h-12 mx-auto mb-4 rounded-2xl bg-blue-950/80 border border-blue-500/30 flex items-center justify-center text-blue-400 font-mono text-sm font-bold">
                         [#]
                     </div>
-                    <div class="text-slate-900 font-bold text-base mb-1.5">Spesialisasi Kompetensi Sedang Dikurasi</div>
-                    <p class="text-slate-500 text-xs leading-relaxed max-w-sm mx-auto">
+                    <div class="text-white font-bold text-base mb-1.5">Spesialisasi Kompetensi Sedang Dikurasi</div>
+                    <p class="text-slate-400 text-xs leading-relaxed max-w-sm mx-auto">
                         Daftar kompetensi kejuruan dan matriks kemampuan teknis sedang diperbarui.
                     </p>
                 </div>
@@ -757,74 +757,74 @@
     </section>
 
 
-    <!-- SECTION 7: CONTACT (#contact) - Porcelain White -->
-    <section id="contact" class="w-full bg-[#FFFFFF] py-16 sm:py-24 md:py-32 relative">
+    <!-- SECTION 7: CONTACT (#contact) - Technical Slate Dark -->
+    <section id="contact" class="w-full bg-[#0F172A] py-16 sm:py-24 md:py-32 relative">
         <div class="max-w-7xl mx-auto px-4 sm:px-6">
             <div class="grid lg:grid-cols-12 gap-10 lg:gap-16 items-start">
                 
                 <!-- Left Info with Direct Contact Data -->
                 <div class="lg:col-span-5 reveal-slide-left space-y-6">
-                    <div class="inline-flex items-center gap-2 text-xs font-mono text-blue-600 uppercase tracking-wider font-semibold">
-                        <span class="w-1.5 h-1.5 rounded-full bg-blue-600"></span>
+                    <div class="inline-flex items-center gap-2 text-xs font-mono text-sky-400 uppercase tracking-wider font-semibold">
+                        <span class="w-1.5 h-1.5 rounded-full bg-sky-400"></span>
                         <span>Hubungi Langsung</span>
                     </div>
-                    <h2 class="text-2xl sm:text-4xl lg:text-5xl font-bold text-slate-900 tracking-tight leading-[1.15]">
-                        Mulai Diskusi <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-sky-600 to-teal-600">Lab Jaringan.</span>
+                    <h2 class="text-2xl sm:text-4xl lg:text-5xl font-bold text-white tracking-tight leading-[1.15]">
+                        Mulai Diskusi <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-sky-400 to-teal-300">Lab Jaringan.</span>
                     </h2>
-                    <p class="text-slate-600 text-sm sm:text-base leading-relaxed text-balance">
+                    <p class="text-slate-300 text-sm sm:text-base leading-relaxed text-balance">
                         Tertarik berdiskusi seputar lab arsitektur jaringan, kolaborasi proyek, pengujian performa server LEMP, atau tawaran magang kejuruan? Hubungi saya secara langsung melalui kontak di bawah ini.
                     </p>
 
                     <!-- User Contact Credentials Cluster -->
                     <div class="pt-2 sm:pt-4 space-y-3 sm:space-y-4 font-mono text-xs">
                         <!-- Status -->
-                        <div class="flex items-center gap-3 text-slate-700">
-                            <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse shrink-0"></span>
+                        <div class="flex items-center gap-3 text-slate-300">
+                            <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse shrink-0"></span>
                             <span>Status: Siap Magang &amp; Kolaborasi Riset</span>
                         </div>
 
                         <!-- Location -->
-                        <div class="flex items-center gap-3 text-slate-700">
-                            <span class="w-2.5 h-2.5 rounded-full bg-blue-600 shrink-0"></span>
+                        <div class="flex items-center gap-3 text-slate-300">
+                            <span class="w-2.5 h-2.5 rounded-full bg-sky-400 shrink-0"></span>
                             <span>Lokasi: Denpasar, Bali, Indonesia</span>
                         </div>
 
                         <!-- Email -->
-                        <a href="mailto:yuda2010f@gmail.com" class="min-h-[52px] flex items-center gap-3 p-3.5 rounded-2xl glass-panel-interactive hover:border-blue-300 text-slate-700 hover:text-slate-900 transition-all group">
-                            <div class="w-9 h-9 rounded-xl bg-blue-50 border border-blue-200 flex items-center justify-center text-blue-600 group-hover:scale-105 transition-transform shrink-0">
+                        <a href="mailto:yuda2010f@gmail.com" class="min-h-[52px] flex items-center gap-3 p-3.5 rounded-2xl bg-slate-900/90 border border-slate-800 hover:border-blue-500/50 text-slate-300 hover:text-white transition-all group">
+                            <div class="w-9 h-9 rounded-xl bg-slate-800 border border-slate-700 flex items-center justify-center text-sky-400 group-hover:scale-105 transition-transform shrink-0">
                                 <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
                                 </svg>
                             </div>
                             <div class="flex flex-col truncate min-w-0">
-                                <span class="text-[10px] text-slate-500 uppercase tracking-wider">Email Utama</span>
-                                <span class="text-xs font-semibold text-blue-600 group-hover:text-blue-700 truncate">yuda2010f@gmail.com</span>
+                                <span class="text-[10px] text-slate-400 uppercase tracking-wider">Email Utama</span>
+                                <span class="text-xs font-semibold text-sky-400 group-hover:text-sky-300 truncate">yuda2010f@gmail.com</span>
                             </div>
                         </a>
 
                         <!-- Phone / WhatsApp -->
-                        <a href="https://wa.me/6285182691268" target="_blank" rel="noopener noreferrer" class="min-h-[52px] flex items-center gap-3 p-3.5 rounded-2xl glass-panel-interactive hover:border-teal-300 text-slate-700 hover:text-slate-900 transition-all group">
-                            <div class="w-9 h-9 rounded-xl bg-teal-50 border border-teal-200 flex items-center justify-center text-teal-600 group-hover:scale-105 transition-transform shrink-0">
+                        <a href="https://wa.me/6285182691268" target="_blank" rel="noopener noreferrer" class="min-h-[52px] flex items-center gap-3 p-3.5 rounded-2xl bg-slate-900/90 border border-slate-800 hover:border-teal-500/50 text-slate-300 hover:text-white transition-all group">
+                            <div class="w-9 h-9 rounded-xl bg-slate-800 border border-slate-700 flex items-center justify-center text-teal-400 group-hover:scale-105 transition-transform shrink-0">
                                 <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
                                 </svg>
                             </div>
                             <div class="flex flex-col truncate min-w-0">
-                                <span class="text-[10px] text-slate-500 uppercase tracking-wider">No. Telepon / WhatsApp</span>
-                                <span class="text-xs font-semibold text-teal-700 group-hover:text-teal-800">085182691268</span>
+                                <span class="text-[10px] text-slate-400 uppercase tracking-wider">No. Telepon / WhatsApp</span>
+                                <span class="text-xs font-semibold text-teal-400 group-hover:text-teal-300">085182691268</span>
                             </div>
                         </a>
 
                         <!-- GitHub -->
-                        <a href="https://github.com/Great-YUDZZ" target="_blank" rel="noopener noreferrer" class="min-h-[52px] flex items-center gap-3 p-3.5 rounded-2xl glass-panel-interactive hover:border-slate-300 text-slate-700 hover:text-slate-900 transition-all group">
-                            <div class="w-9 h-9 rounded-xl bg-slate-100 border border-slate-200 flex items-center justify-center text-slate-600 group-hover:scale-105 transition-transform shrink-0">
+                        <a href="https://github.com/Great-YUDZZ" target="_blank" rel="noopener noreferrer" class="min-h-[52px] flex items-center gap-3 p-3.5 rounded-2xl bg-slate-900/90 border border-slate-800 hover:border-slate-700 text-slate-300 hover:text-white transition-all group">
+                            <div class="w-9 h-9 rounded-xl bg-slate-800 border border-slate-700 flex items-center justify-center text-slate-300 group-hover:scale-105 transition-transform shrink-0">
                                 <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
                                     <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
                                 </svg>
                             </div>
                             <div class="flex flex-col truncate min-w-0">
-                                <span class="text-[10px] text-slate-500 uppercase tracking-wider">GitHub Profile</span>
-                                <span class="text-xs font-semibold text-slate-800 group-hover:text-blue-600">github.com/Great-YUDZZ</span>
+                                <span class="text-[10px] text-slate-400 uppercase tracking-wider">GitHub Profile</span>
+                                <span class="text-xs font-semibold text-slate-200 group-hover:text-blue-400">github.com/Great-YUDZZ</span>
                             </div>
                         </a>
                     </div>
@@ -832,12 +832,12 @@
 
                 <!-- Right Contact Form -->
                 <div class="lg:col-span-7 reveal-slide-right">
-                    <div class="p-5 sm:p-8 md:p-10 rounded-2xl sm:rounded-3xl glass-panel shadow-xl bg-white border border-slate-200 relative">
-                        <div class="absolute -top-10 -right-10 w-40 h-40 rounded-full bg-blue-600/5 blur-3xl pointer-events-none"></div>
+                    <div class="p-5 sm:p-8 md:p-10 rounded-2xl sm:rounded-3xl bg-slate-900/90 border border-slate-800 shadow-2xl relative">
+                        <div class="absolute -top-10 -right-10 w-40 h-40 rounded-full bg-blue-600/10 blur-3xl pointer-events-none"></div>
 
                         @if(session('success'))
-                            <div class="mb-6 p-4 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-700 text-xs font-mono flex items-center gap-2">
-                                <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                            <div class="mb-6 p-4 rounded-xl bg-emerald-950/80 border border-emerald-500/40 text-emerald-400 text-xs font-mono flex items-center gap-2">
+                                <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
                                 <span>{{ session('success') }}</span>
                             </div>
                         @endif
@@ -846,35 +846,35 @@
                             @csrf
                             <div class="grid sm:grid-cols-2 gap-4 sm:gap-6">
                                 <div>
-                                    <label for="sender_name" class="block text-xs font-mono text-slate-700 font-semibold mb-2">Nama Lengkap</label>
+                                    <label for="sender_name" class="block text-xs font-mono text-slate-300 font-semibold mb-2">Nama Lengkap</label>
                                     <input type="text" name="sender_name" id="sender_name" value="{{ old('sender_name') }}" required
                                         placeholder="Nama Lengkap / Instansi"
-                                        class="input-field">
+                                        class="w-full px-4 py-3 rounded-xl bg-slate-950 border border-slate-700 text-white placeholder-slate-500 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 outline-none transition-all">
                                 </div>
                                 <div>
-                                    <label for="email" class="block text-xs font-mono text-slate-700 font-semibold mb-2">Alamat Email</label>
+                                    <label for="email" class="block text-xs font-mono text-slate-300 font-semibold mb-2">Alamat Email</label>
                                     <input type="email" name="email" id="email" value="{{ old('email') }}" required
                                         placeholder="nama@domain.com"
-                                        class="input-field">
+                                        class="w-full px-4 py-3 rounded-xl bg-slate-950 border border-slate-700 text-white placeholder-slate-500 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 outline-none transition-all">
                                 </div>
                             </div>
 
                             <div>
-                                <label for="subject" class="block text-xs font-mono text-slate-700 font-semibold mb-2">Subjek Pesan</label>
+                                <label for="subject" class="block text-xs font-mono text-slate-300 font-semibold mb-2">Subjek Pesan</label>
                                 <input type="text" name="subject" id="subject" value="{{ old('subject') }}" required
                                     placeholder="Topik diskusi lab atau tawaran proyek..."
-                                    class="input-field">
+                                    class="w-full px-4 py-3 rounded-xl bg-slate-950 border border-slate-700 text-white placeholder-slate-500 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 outline-none transition-all">
                             </div>
 
                             <div>
-                                <label for="message" class="block text-xs font-mono text-slate-700 font-semibold mb-2">Isi Pesan</label>
+                                <label for="message" class="block text-xs font-mono text-slate-300 font-semibold mb-2">Isi Pesan</label>
                                 <textarea name="message" id="message" rows="4" required
                                     placeholder="Tuliskan pesan atau pertanyaan Anda di sini..."
-                                    class="input-field resize-none">{{ old('message') }}</textarea>
+                                    class="w-full px-4 py-3 rounded-xl bg-slate-950 border border-slate-700 text-white placeholder-slate-500 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 outline-none transition-all resize-none">{{ old('message') }}</textarea>
                             </div>
 
                             <div class="flex flex-col-reverse sm:flex-row items-stretch sm:items-center justify-between gap-4 pt-2">
-                                <span class="text-[11px] font-mono text-slate-500 text-center sm:text-left">Pesan terkirim ke inbox terenkripsi</span>
+                                <span class="text-[11px] font-mono text-slate-400 text-center sm:text-left">Pesan terkirim ke inbox terenkripsi</span>
                                 <button type="submit" class="btn-primary w-full sm:w-auto min-h-[44px] justify-center">
                                     <span>Kirim Pesan</span>
                                     <span>&rarr;</span>

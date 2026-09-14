@@ -51,11 +51,11 @@ const initSkillFilter = () => {
     filterTabs.forEach((btn) => {
         btn.addEventListener('click', () => {
             filterTabs.forEach((b) => {
-                b.classList.remove('bg-rose-600', 'text-white', 'shadow-md', 'shadow-rose-600/30');
-                b.classList.add('bg-white/[0.04]', 'border', 'border-white/[0.08]', 'text-zinc-400');
+                b.classList.remove('bg-blue-600', 'text-white', 'shadow-md', 'shadow-blue-600/30');
+                b.classList.add('bg-slate-900', 'border', 'border-slate-700', 'text-slate-300');
             });
-            btn.classList.remove('bg-white/[0.04]', 'border', 'border-white/[0.08]', 'text-zinc-400');
-            btn.classList.add('bg-rose-600', 'text-white', 'shadow-md', 'shadow-rose-600/30');
+            btn.classList.remove('bg-slate-900', 'border', 'border-slate-700', 'text-slate-300');
+            btn.classList.add('bg-blue-600', 'text-white', 'shadow-md', 'shadow-blue-600/30');
 
             const filter = btn.dataset.filter;
             skillCards.forEach((card) => {

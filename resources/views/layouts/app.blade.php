@@ -23,7 +23,7 @@
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class="min-h-screen flex flex-col bg-[#FFFFFF] text-slate-700 antialiased selection:bg-blue-600/20 selection:text-blue-900 relative overflow-x-hidden font-sans">
+<body class="min-h-screen flex flex-col bg-[#0F172A] text-slate-700 antialiased selection:bg-blue-600/20 selection:text-blue-900 relative overflow-x-hidden font-sans">
 
     <!-- Interactive Background Canvas (Modern Engineering Clarity Mesh) -->
     <canvas id="interactive-bg" class="fixed inset-0 pointer-events-none z-0" aria-hidden="true"></canvas>
@@ -128,32 +128,32 @@
     </button>
 
     <!-- Footer -->
-    <footer class="pb-10 sm:pb-14 pt-12 sm:pt-16 border-t border-slate-200 text-sm relative z-10 bg-[#F1F5F9] rounded-none">
+    <footer class="pb-10 sm:pb-14 pt-12 sm:pt-16 border-t border-slate-800 text-sm relative z-10 bg-[#0F172A] rounded-none">
         <div class="max-w-7xl mx-auto px-4 sm:px-6">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-end">
                 <div>
                     <div class="flex items-center gap-3 mb-4">
                         <img src="{{ asset('images/logo.png') }}" alt="Logo" class="w-7 h-7 shrink-0 object-contain">
-                        <span class="font-bold text-slate-900 tracking-tight text-base">I Made Yuda Pramana</span>
+                        <span class="font-bold text-white tracking-tight text-base">I Made Yuda Pramana</span>
                     </div>
-                    <p class="text-slate-600 max-w-md leading-relaxed text-xs">
+                    <p class="text-slate-400 max-w-md leading-relaxed text-xs">
                         Arsitektur topologi jaringan berkecepatan tinggi, administrasi server Linux Debian, protokol routing dinamis, dan virtualisasi mandiri. Portofolio resmi kejuruan Teknik Komputer dan Jaringan.
                     </p>
-                    <div class="mt-4 flex flex-wrap items-center gap-4 text-xs font-mono text-slate-500">
-                        <a href="mailto:yuda2010f@gmail.com" class="hover:text-blue-600 transition-colors flex items-center gap-1.5">
-                            <svg class="w-3.5 h-3.5 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <div class="mt-4 flex flex-wrap items-center gap-4 text-xs font-mono text-slate-400">
+                        <a href="mailto:yuda2010f@gmail.com" class="hover:text-sky-400 transition-colors flex items-center gap-1.5">
+                            <svg class="w-3.5 h-3.5 text-sky-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
                             </svg>
                             <span>yuda2010f@gmail.com</span>
                         </a>
-                        <a href="https://wa.me/6285182691268" target="_blank" rel="noopener noreferrer" class="hover:text-teal-600 transition-colors flex items-center gap-1.5">
-                            <svg class="w-3.5 h-3.5 text-teal-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <a href="https://wa.me/6285182691268" target="_blank" rel="noopener noreferrer" class="hover:text-teal-400 transition-colors flex items-center gap-1.5">
+                            <svg class="w-3.5 h-3.5 text-teal-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
                             </svg>
                             <span>085182691268</span>
                         </a>
-                        <a href="https://github.com/Great-YUDZZ" target="_blank" rel="noopener noreferrer" class="hover:text-slate-900 transition-colors flex items-center gap-1.5">
-                            <svg class="w-3.5 h-3.5 text-slate-500" fill="currentColor" viewBox="0 0 24 24">
+                        <a href="https://github.com/Great-YUDZZ" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors flex items-center gap-1.5">
+                            <svg class="w-3.5 h-3.5 text-slate-400" fill="currentColor" viewBox="0 0 24 24">
                                 <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
                             </svg>
                             <span>Great-YUDZZ</span>
@@ -161,22 +161,22 @@
                     </div>
                 </div>
                 
-                <div class="flex flex-wrap md:justify-end gap-8 text-xs font-medium text-slate-500">
-                    <a href="{{ request()->routeIs('home') ? '#home' : route('home') }}" class="py-1 hover:text-slate-900 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500">Home</a>
-                    <a href="{{ request()->routeIs('home') ? '#about' : route('home').'#about' }}" class="py-1 hover:text-slate-900 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500">About</a>
-                    <a href="{{ request()->routeIs('home') ? '#certifications' : route('home').'#certifications' }}" class="py-1 hover:text-slate-900 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500">Sertifikasi</a>
-                    <a href="{{ request()->routeIs('home') ? '#labs' : route('home').'#labs' }}" class="py-1 hover:text-slate-900 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500">Showcase Lab</a>
-                    <a href="{{ request()->routeIs('home') ? '#skills' : route('home').'#skills' }}" class="py-1 hover:text-slate-900 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500">Skill Matrix</a>
-                    <a href="{{ request()->routeIs('home') ? '#architecture' : route('home').'#architecture' }}" class="py-1 hover:text-slate-900 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500">Arsitektur</a>
-                    <a href="{{ route('projects.index') }}" class="py-1 hover:text-slate-900 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500">Katalog Lab</a>
-                    <a href="{{ request()->routeIs('home') ? '#contact' : route('home').'#contact' }}" class="py-1 hover:text-slate-900 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500">Contact</a>
+                <div class="flex flex-wrap md:justify-end gap-8 text-xs font-medium text-slate-400">
+                    <a href="{{ request()->routeIs('home') ? '#home' : route('home') }}" class="py-1 hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500">Home</a>
+                    <a href="{{ request()->routeIs('home') ? '#about' : route('home').'#about' }}" class="py-1 hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500">About</a>
+                    <a href="{{ request()->routeIs('home') ? '#certifications' : route('home').'#certifications' }}" class="py-1 hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500">Sertifikasi</a>
+                    <a href="{{ request()->routeIs('home') ? '#labs' : route('home').'#labs' }}" class="py-1 hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500">Showcase Lab</a>
+                    <a href="{{ request()->routeIs('home') ? '#skills' : route('home').'#skills' }}" class="py-1 hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500">Skill Matrix</a>
+                    <a href="{{ request()->routeIs('home') ? '#architecture' : route('home').'#architecture' }}" class="py-1 hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500">Arsitektur</a>
+                    <a href="{{ route('projects.index') }}" class="py-1 hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500">Katalog Lab</a>
+                    <a href="{{ request()->routeIs('home') ? '#contact' : route('home').'#contact' }}" class="py-1 hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500">Contact</a>
                 </div>
             </div>
 
-            <div class="max-w-7xl mx-auto mt-10 pt-6 border-t border-slate-200 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-slate-500 font-mono">
+            <div class="max-w-7xl mx-auto mt-10 pt-6 border-t border-slate-800 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-slate-400 font-mono">
                 <div>&copy; {{ date('Y') }} I Made Yuda Pramana. All rights reserved.</div>
                 <div class="flex items-center gap-2">
-                    <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                    <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
                     <span>LEMP Stack (Debian 13, Nginx 1.26, MariaDB, PHP 8.4)</span>
                 </div>
             </div>
