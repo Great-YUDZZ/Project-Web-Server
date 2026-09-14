@@ -23,7 +23,7 @@
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class="min-h-screen flex flex-col bg-[#F8FAFC] text-slate-700 antialiased selection:bg-blue-600/20 selection:text-blue-900 relative overflow-x-hidden font-sans">
+<body class="min-h-screen flex flex-col bg-[#FFFFFF] text-slate-700 antialiased selection:bg-blue-600/20 selection:text-blue-900 relative overflow-x-hidden font-sans">
 
     <!-- Interactive Background Canvas (Modern Engineering Clarity Mesh) -->
     <canvas id="interactive-bg" class="fixed inset-0 pointer-events-none z-0" aria-hidden="true"></canvas>
@@ -128,7 +128,7 @@
     </button>
 
     <!-- Footer -->
-    <footer class="mt-20 sm:mt-32 pb-10 sm:pb-14 pt-12 sm:pt-16 border-t border-slate-200 text-sm relative z-10 bg-white/90 rounded-none shadow-xs">
+    <footer class="pb-10 sm:pb-14 pt-12 sm:pt-16 border-t border-slate-200 text-sm relative z-10 bg-[#F1F5F9] rounded-none">
         <div class="max-w-7xl mx-auto px-4 sm:px-6">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-end">
                 <div>

@@ -1,11 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="px-4 sm:px-6 relative">
-    <div class="max-w-7xl mx-auto">
-        
-        <!-- SECTION 1: HERO SECTION (#home) -->
-        <section id="home" class="pt-6 sm:pt-10 md:pt-16 pb-16 sm:pb-20 md:pb-28 grid lg:grid-cols-12 gap-8 lg:gap-8 items-center relative">
+<!-- SECTION 1: HERO SECTION (#home) - Porcelain White -->
+<section id="home" class="w-full bg-[#FFFFFF] pt-6 sm:pt-10 md:pt-16 pb-16 sm:pb-20 md:pb-28 relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 grid lg:grid-cols-12 gap-8 lg:gap-8 items-center">
             
             <!-- Left Hero Content -->
             <div class="lg:col-span-7 space-y-6 sm:space-y-7 relative z-10">
@@ -124,12 +122,13 @@
                 </div>
             </div>
 
-        </section>
+        </div>
+    </section>
 
 
-        <!-- SECTION 2: ABOUT & STATS GRID (#about) -->
-        <section id="about" class="py-16 sm:py-24 md:py-32">
-            
+    <!-- SECTION 2: ABOUT & STATS GRID (#about) - Soft Slate -->
+    <section id="about" class="w-full bg-[#F1F5F9] py-16 sm:py-24 md:py-32 border-y border-slate-200/80 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6">
             <div class="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center mb-12 sm:mb-16">
                 <!-- Left: Technical Identity & Engineering Profile Card -->
                 <div class="lg:col-span-5 reveal-slide-left">
@@ -323,12 +322,13 @@
                 </div>
             </div>
 
-        </section>
+        </div>
+    </section>
 
 
-        <!-- SECTION 3: SERTIFIKASI RESMI & KREDENSIAL KOMDIGI (#certifications) -->
-        <section id="certifications" class="py-16 sm:py-20 md:py-28 border-t border-slate-200">
-            
+    <!-- SECTION 3: SERTIFIKASI RESMI & KREDENSIAL KOMDIGI (#certifications) - Porcelain White -->
+    <section id="certifications" class="w-full bg-[#FFFFFF] py-16 sm:py-20 md:py-28 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6">
             <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8 sm:mb-10">
                 <div class="space-y-3 max-w-2xl">
                     <div class="inline-flex items-center gap-2 text-xs font-mono text-blue-600 uppercase tracking-wider font-semibold">
@@ -532,12 +532,13 @@
                 </div>
             </div>
 
-        </section>
+        </div>
+    </section>
 
 
-        <!-- SECTION 4: SHOWCASE LAB & PROYEK (#labs) -->
-        <section id="labs" class="py-16 sm:py-24 md:py-32 border-t border-slate-200">
-            
+    <!-- SECTION 4: SHOWCASE LAB & PROYEK (#labs) - Soft Slate -->
+    <section id="labs" class="w-full bg-[#F1F5F9] py-16 sm:py-24 md:py-32 border-y border-slate-200/80 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6">
             <div class="text-center max-w-2xl mx-auto mb-10 sm:mb-14 space-y-3 sm:space-y-4">
                 <div class="inline-flex items-center gap-2 text-xs font-mono text-blue-600 uppercase tracking-wider font-semibold">
                     <span class="w-1.5 h-1.5 rounded-full bg-blue-600"></span>
@@ -603,12 +604,13 @@
                 </div>
             @endif
 
-        </section>
+        </div>
+    </section>
 
 
-        <!-- SECTION 5: SKILL MATRIX (#skills) -->
-        <section id="skills" class="py-16 sm:py-24 md:py-32 border-t border-slate-200">
-            
+    <!-- SECTION 5: SKILL MATRIX (#skills) - Porcelain White -->
+    <section id="skills" class="w-full bg-[#FFFFFF] py-16 sm:py-24 md:py-32 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6">
             <div class="text-center max-w-2xl mx-auto mb-10 sm:mb-12 space-y-3 sm:space-y-4">
                 <div class="inline-flex items-center gap-2 text-xs font-mono text-blue-600 uppercase tracking-wider font-semibold">
                     <span class="w-1.5 h-1.5 rounded-full bg-blue-600"></span>
@@ -663,12 +665,13 @@
                 </div>
             @endif
 
-        </section>
+        </div>
+    </section>
 
 
-        <!-- SECTION 6: ARSITEKTUR & TEKNOLOGI PEMBANGUN WEBSITE (#architecture) -->
-        <section id="architecture" class="py-16 sm:py-24 md:py-32 border-t border-slate-200">
-            
+    <!-- SECTION 6: ARSITEKTUR & TEKNOLOGI PEMBANGUN WEBSITE (#architecture) - Soft Slate -->
+    <section id="architecture" class="w-full bg-[#F1F5F9] py-16 sm:py-24 md:py-32 border-y border-slate-200/80 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6">
             <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8 sm:mb-10">
                 <div>
                     <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full glass-pill text-xs font-mono text-blue-600 mb-3 bg-blue-50/60 border-blue-200 font-semibold">
@@ -750,11 +753,13 @@
                 </div>
             </div>
 
-        </section>
+        </div>
+    </section>
 
 
-        <!-- SECTION 7: CONTACT (#contact) -->
-        <section id="contact" class="py-16 sm:py-24 md:py-32 border-t border-slate-200">
+    <!-- SECTION 7: CONTACT (#contact) - Porcelain White -->
+    <section id="contact" class="w-full bg-[#FFFFFF] py-16 sm:py-24 md:py-32 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6">
             <div class="grid lg:grid-cols-12 gap-10 lg:gap-16 items-start">
                 
                 <!-- Left Info with Direct Contact Data -->
@@ -880,10 +885,8 @@
                 </div>
 
             </div>
-        </section>
-
-    </div>
-</div>
+        </div>
+    </section>
 
 <!-- INTERACTIVE CERTIFICATE LIGHTBOX MODAL -->
 <div id="cert-modal" class="fixed inset-0 z-50 bg-slate-900/70 backdrop-blur-md hidden items-center justify-center p-3 sm:p-6" role="dialog" aria-modal="true" aria-labelledby="modal-cert-title">

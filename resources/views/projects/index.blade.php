@@ -3,8 +3,8 @@
 @section('title', 'Katalog Lab & Dokumentasi Proyek | I Made Yuda Pramana')
 
 @section('content')
-<div class="px-4 sm:px-6 py-8 sm:py-12 md:py-20 relative">
-    <div class="max-w-7xl mx-auto">
+<div class="w-full bg-[#F1F5F9] py-8 sm:py-12 md:py-20 relative border-b border-slate-200 min-h-[85vh]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
         
         <!-- Header Title Section -->
         <div class="mb-10 sm:mb-14 md:mb-16 space-y-3 sm:space-y-4">

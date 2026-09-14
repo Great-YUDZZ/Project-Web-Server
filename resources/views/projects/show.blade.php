@@ -3,8 +3,8 @@
 @section('title', $project->title . ' | I Made Yuda Pramana')
 
 @section('content')
-<div class="px-4 sm:px-6 py-8 sm:py-12 md:py-20 relative">
-    <div class="max-w-7xl mx-auto">
+<div class="w-full bg-[#F1F5F9] py-8 sm:py-12 md:py-20 relative border-b border-slate-200 min-h-[85vh]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
         
         <!-- Breadcrumbs -->
         <nav class="flex items-center gap-2 text-xs font-mono text-slate-500 mb-6 sm:mb-8 overflow-x-auto py-1">
