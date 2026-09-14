@@ -26,6 +26,7 @@ export const initOrreryGallery = () => {
             badgeBg: 'rgba(255, 45, 32, 0.14)',
             badgeBorder: 'rgba(255, 45, 32, 0.4)',
             badgeText: '#f87171',
+            orbImg: '/images/orrery/laravel_orb.webp',
             linkUrl: 'https://laravel.com',
             desc: 'Framework PHP modern dengan arsitektur MVC elegan, routing cepat, middleware otentikasi, proteksi rate-limiting, dan integrasi ORM Eloquent.',
             labNote: 'Menjalankan aplikasi web portofolio dengan arsitektur MVC, Eloquent ORM, rate limiter 5 percobaan pada auth login, dan middleware proteksi rute admin.',
@@ -40,6 +41,7 @@ export const initOrreryGallery = () => {
             badgeBg: 'rgba(119, 123, 180, 0.14)',
             badgeBorder: 'rgba(119, 123, 180, 0.4)',
             badgeText: '#a5b4fc',
+            orbImg: '/images/orrery/php_orb.webp',
             linkUrl: 'https://www.php.net',
             desc: 'Mesin eksekusi PHP versi 8.4 berkinerja tinggi terhubung langsung ke Nginx melalui UNIX Domain Socket unix:/run/php/php8.4-fpm.sock untuk latensi terendah.',
             labNote: 'Dijalankan sebagai daemon systemd php8.4-fpm, mendengarkan di socket unix:/run/php/php8.4-fpm.sock untuk performa throughput tinggi.',
@@ -54,6 +56,7 @@ export const initOrreryGallery = () => {
             badgeBg: 'rgba(6, 182, 212, 0.14)',
             badgeBorder: 'rgba(6, 182, 212, 0.4)',
             badgeText: '#38bdf8',
+            orbImg: '/images/orrery/tailwind_orb.webp',
             linkUrl: 'https://tailwindcss.com',
             desc: 'Sistem desain utilitas generasi terbaru (v4) dikompilasi langsung melalui @tailwindcss/vite dengan tema void black, cyber crimson, dan tipografi presisi.',
             labNote: 'Dikompilasi langsung menggunakan @tailwindcss/vite dengan tema gelap void black dan sistem utilitas modern tanpa overhead runtime.',
@@ -68,6 +71,7 @@ export const initOrreryGallery = () => {
             badgeBg: 'rgba(100, 108, 255, 0.14)',
             badgeBorder: 'rgba(100, 108, 255, 0.4)',
             badgeText: '#818cf8',
+            orbImg: '/images/orrery/vite_orb.webp',
             linkUrl: 'https://vite.dev',
             desc: 'Frontend tooling berbasis ESM native dengan kompilasi instan, modul Hot Module Replacement (HMR) super responsif, dan optimasi bundle aset produksi.',
             labNote: 'Bundler modul modern untuk kompilasi berkas app.css dan app.js dengan Hot Module Replacement (HMR) dan minifikasi aset produksi.',
@@ -82,6 +86,7 @@ export const initOrreryGallery = () => {
             badgeBg: 'rgba(0, 150, 57, 0.14)',
             badgeBorder: 'rgba(0, 150, 57, 0.4)',
             badgeText: '#34d399',
+            orbImg: '/images/orrery/nginx_orb.webp',
             linkUrl: 'https://nginx.org',
             desc: 'Web server performa tinggi yang menangani permintaan HTTP/2, caching aset statis 30 hari, penolakan akses dotfiles, dan fastcgi_pass socket aman.',
             labNote: 'Server blok vhost menangani HTTP/2, reverse proxy socket FastCGI PHP-FPM, isolasi dotfiles, serta caching aset statis 30 hari.',
@@ -96,6 +101,7 @@ export const initOrreryGallery = () => {
             badgeBg: 'rgba(192, 138, 77, 0.14)',
             badgeBorder: 'rgba(192, 138, 77, 0.4)',
             badgeText: '#fbbf24',
+            orbImg: '/images/orrery/mariadb_orb.webp',
             linkUrl: 'https://mariadb.org',
             desc: 'Sistem manajemen database relasional SQL dengan storage engine InnoDB untuk persistensi data sertifikat, proyek topologi lab, dan pesan masuk.',
             labNote: 'Database relasional SQL dengan storage engine InnoDB untuk persistensi sertifikat, proyek topologi lab, dan pesan formulir kontak.',
@@ -110,6 +116,7 @@ export const initOrreryGallery = () => {
             badgeBg: 'rgba(247, 223, 30, 0.14)',
             badgeBorder: 'rgba(247, 223, 30, 0.4)',
             badgeText: '#facc15',
+            orbImg: '/images/orrery/javascript_orb.webp',
             linkUrl: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript',
             desc: 'Skrip antarmuka modern ES6+ untuk kalkulasi fisika 3D orbit matematis, efek galeri coverflow sentuh, animasi partikel canvas, dan manipulasi DOM dinamis.',
             labNote: 'Skrip antarmuka native ES6+ untuk kalkulasi trigonometri elips 3D orrery, deteksi gestur sentuh, dan animasi canvas 60 FPS.',
@@ -124,6 +131,7 @@ export const initOrreryGallery = () => {
             badgeBg: 'rgba(215, 10, 83, 0.14)',
             badgeBorder: 'rgba(215, 10, 83, 0.4)',
             badgeText: '#fb7185',
+            orbImg: '/images/orrery/debian_orb.webp',
             linkUrl: 'https://www.debian.org',
             desc: 'Sistem operasi Linux Debian 13 (Trixie) baremetal yang stabil, aman, dan menjadi fondasi infrastruktur seluruh tumpukan LEMP server mandiri ini.',
             labNote: 'Sistem operasi baremetal host Linux 64-bit yang menjadi fondasi infrastruktur seluruh tumpukan LEMP server mandiri ini.',
@@ -197,25 +205,24 @@ export const initOrreryGallery = () => {
     // Clear existing nodes container
     nodesContainer.innerHTML = '';
 
-    // Create DOM nodes for each technology with inline vector SVG
+    // Create DOM nodes for each technology using 3D Blender planetary orbs
     const nodeElements = technologies.map((tech, index) => {
         const btn = document.createElement('button');
         btn.type = 'button';
-        btn.className = 'orrery-node absolute rounded-full cursor-pointer transition-shadow duration-300 focus:outline-none select-none';
+        btn.className = 'orrery-node group absolute rounded-full cursor-pointer transition-transform duration-300 focus:outline-none select-none';
         btn.setAttribute('aria-label', `Fokus teknologi ${tech.name}`);
-        btn.style.width = '64px';
-        btn.style.height = '64px';
+        btn.style.width = '70px';
+        btn.style.height = '70px';
         btn.style.transform = 'translate(-50%, -50%)';
 
         btn.innerHTML = `
-            <div class="orrery-node-inner relative w-full h-full rounded-full flex items-center justify-center p-2.5 border-2 transition-all duration-300 shadow-xl"
-                 style="background: radial-gradient(circle at 35% 35%, ${tech.color}25, #0a0e1c 90%); border-color: ${tech.color}70;">
-                <div class="orrery-node-glow absolute inset-0 rounded-full blur-md opacity-0 transition-opacity duration-300 pointer-events-none"
-                 style="background: ${tech.color};"></div>
-                <div class="relative z-10 w-8 h-8 sm:w-9 sm:h-9 flex items-center justify-center pointer-events-none">
-                    ${tech.svg}
-                </div>
-                <div class="orrery-node-badge absolute -bottom-6 left-1/2 -translate-x-1/2 whitespace-nowrap px-2.5 py-0.5 rounded-full text-[10px] font-mono font-semibold tracking-tight text-white bg-black/90 border border-white/20 pointer-events-none shadow-md transition-opacity duration-300 opacity-80">
+            <div class="orrery-node-inner relative w-full h-full flex items-center justify-center transition-all duration-300">
+                <div class="orrery-node-glow absolute inset-2 rounded-full blur-md opacity-30 group-hover:opacity-90 transition-opacity duration-300 pointer-events-none"
+                     style="background: radial-gradient(circle, ${tech.color}90, transparent 70%);"></div>
+                <img src="${tech.orbImg}" alt="${tech.name}" width="70" height="70"
+                     class="orrery-node-img relative z-10 w-full h-full object-contain pointer-events-none transition-transform duration-300 filter drop-shadow-[0_8px_16px_rgba(15,23,42,0.32)]"
+                     loading="eager" decoding="async">
+                <div class="orrery-node-badge absolute -bottom-6 left-1/2 -translate-x-1/2 whitespace-nowrap px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold tracking-tight text-slate-800 bg-white/95 border border-slate-200 pointer-events-none shadow-md transition-all duration-300 opacity-85 backdrop-blur-sm">
                     ${tech.name}
                 </div>
             </div>
@@ -244,43 +251,61 @@ export const initOrreryGallery = () => {
         const stageHeight = stage.clientHeight || 560;
 
         centerX = stageWidth / 2;
-        centerY = stageHeight * 0.49;
-
         if (stageWidth < 480) {
-            orbitWidth = stageWidth * 0.40;
-            orbitHeight = 90;
+            orbitWidth = stageWidth * 0.44;
+            orbitHeight = 135;
+            centerY = stageHeight * 0.45;
         } else if (stageWidth < 768) {
-            orbitWidth = stageWidth * 0.41;
-            orbitHeight = 110;
+            orbitWidth = stageWidth * 0.42;
+            orbitHeight = 125;
+            centerY = stageHeight * 0.48;
         } else if (stageWidth < 1024) {
             orbitWidth = Math.min(390, stageWidth * 0.38);
-            orbitHeight = 125;
+            orbitHeight = 130;
+            centerY = stageHeight * 0.48;
         } else {
             orbitWidth = Math.min(470, stageWidth * 0.39);
             orbitHeight = 135;
+            centerY = stageHeight * 0.48;
         }
+
+        // Dynamically adjust node element size for mobile vs desktop
+        const isMobile = stageWidth < 640;
+        const nodeSize = isMobile ? 54 : 70;
+        nodeElements.forEach(({ el }) => {
+            el.style.width = `${nodeSize}px`;
+            el.style.height = `${nodeSize}px`;
+        });
 
         // Update SVG orbit ring
         if (orbitRingEl) {
             orbitRingEl.innerHTML = `
+                <!-- Outer subtle guide ring -->
+                <ellipse cx="${centerX}" cy="${centerY}" rx="${orbitWidth}" ry="${orbitHeight}"
+                         fill="none"
+                         stroke="rgba(148, 163, 184, 0.45)"
+                         stroke-width="1"
+                         class="opacity-60" />
+                <!-- Primary astrolabe precision dashed orbit -->
                 <ellipse cx="${centerX}" cy="${centerY}" rx="${orbitWidth}" ry="${orbitHeight}"
                          fill="none"
                          stroke="url(#orrery-ring-gradient)"
-                         stroke-width="1.8"
-                         stroke-dasharray="6 8"
-                         class="opacity-70 animate-pulse" />
+                         stroke-width="2"
+                         stroke-dasharray="5 7"
+                         class="opacity-75 animate-pulse" />
+                <!-- Subtle cyan neon glow underlay -->
                 <ellipse cx="${centerX}" cy="${centerY}" rx="${orbitWidth}" ry="${orbitHeight}"
                          fill="none"
-                         stroke="rgba(255, 42, 85, 0.25)"
-                         stroke-width="1"
-                         class="blur-[1px] opacity-40" />
+                         stroke="rgba(56, 189, 248, 0.2)"
+                         stroke-width="3"
+                         class="blur-[2px] opacity-40" />
                 <defs>
                     <linearGradient id="orrery-ring-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" stop-color="#FF2D20" stop-opacity="0.8" />
-                        <stop offset="25%" stop-color="#06B6D4" stop-opacity="0.8" />
-                        <stop offset="50%" stop-color="#646CFF" stop-opacity="0.9" />
-                        <stop offset="75%" stop-color="#009639" stop-opacity="0.8" />
-                        <stop offset="100%" stop-color="#D70A53" stop-opacity="0.8" />
+                        <stop offset="0%" stop-color="#FF2D20" stop-opacity="0.85" />
+                        <stop offset="25%" stop-color="#0284C7" stop-opacity="0.85" />
+                        <stop offset="50%" stop-color="#6366F1" stop-opacity="0.9" />
+                        <stop offset="75%" stop-color="#009639" stop-opacity="0.85" />
+                        <stop offset="100%" stop-color="#D70A53" stop-opacity="0.85" />
                     </linearGradient>
                 </defs>
             `;
@@ -328,26 +353,25 @@ export const initOrreryGallery = () => {
             centerDisplay.innerHTML = `
                 <div class="orrery-center-core" data-tech-id="${tech.id}" title="Klik 2x untuk melihat deskripsi lengkap ${tech.name}">
                     <!-- Ambient Radiant Glow Aura -->
-                    <div class="orrery-core-glow" style="background: radial-gradient(circle, ${tech.color}55, transparent 70%);"></div>
+                    <div class="orrery-core-glow" style="background: radial-gradient(circle, ${tech.color}45, transparent 70%);"></div>
 
-                    <!-- Focal Central Logo Orb -->
-                    <div class="orrery-core-orb" style="background: radial-gradient(circle at 35% 35%, ${tech.color}35, #070a16 90%); border-color: ${tech.color}; box-shadow: 0 0 32px ${tech.color}55, inset 0 0 12px ${tech.color}35;">
-                        <div class="w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center pointer-events-none">
-                            ${tech.svg}
-                        </div>
+                    <!-- Focal Central 3D Planetary Orb -->
+                    <div class="orrery-core-orb-3d relative z-10 w-20 h-20 sm:w-28 sm:h-28 flex items-center justify-center filter drop-shadow-[0_12px_28px_rgba(15,23,42,0.32)] transition-transform duration-300 hover:scale-105">
+                        <img src="${tech.orbImg}" alt="${tech.name} 3D Planetary Orb" width="112" height="112" class="w-full h-full object-contain pointer-events-none select-none" loading="eager" decoding="async">
                     </div>
 
-                    <!-- Tech Identification & Double-Click Hint -->
-                    <div class="orrery-core-info">
-                        <h4 class="text-sm sm:text-base font-bold text-white tracking-tight flex items-center justify-center gap-1.5">
+                    <!-- Tech Identification & High-Contrast Legible Dark Typography -->
+                    <div class="orrery-core-info mt-1.5 flex flex-col items-center text-center">
+                        <h4 class="text-base sm:text-lg font-extrabold text-slate-950 tracking-tight flex items-center justify-center gap-1.5 drop-shadow-sm">
                             <span>${tech.name}</span>
+                            <span class="inline-block w-2 h-2 rounded-full shadow-sm" style="background: ${tech.color}; box-shadow: 0 0 8px ${tech.color}"></span>
                         </h4>
-                        <div class="text-[10px] sm:text-[11px] font-mono text-zinc-400">
+                        <div class="text-[11px] sm:text-xs font-mono font-medium text-slate-600">
                             ${tech.role}
                         </div>
-                        <button type="button" class="orrery-core-detail-btn inline-flex items-center gap-1 mt-1 px-2.5 py-0.5 rounded-full text-[10px] font-mono font-medium text-zinc-300 hover:text-white bg-white/[0.08] hover:bg-white/[0.16] border border-white/15 transition-all shadow-sm cursor-pointer" title="Buka detail teknologi">
+                        <button type="button" class="orrery-core-detail-btn inline-flex items-center gap-1.5 mt-1 sm:mt-1.5 px-2.5 sm:px-3 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-[11px] font-mono font-semibold text-slate-800 hover:text-slate-950 bg-white/90 hover:bg-white border border-slate-300/80 hover:border-slate-400 shadow-sm transition-all cursor-pointer backdrop-blur-sm" title="Buka detail teknologi">
                             <span class="w-1.5 h-1.5 rounded-full animate-pulse" style="background: ${tech.color}"></span>
-                            <span>Klik 2x untuk detail</span>
+                            <span>Klik 2x / tap detail</span>
                         </button>
                     </div>
                 </div>
@@ -393,42 +417,50 @@ export const initOrreryGallery = () => {
         // Background starry canvas
         if (drawStarsFn) drawStarsFn();
 
-        if (!isDragging) {
-            if (targetAngle !== null) {
-                // Smooth interpolation towards clicked node
-                const diff = targetAngle - rotationAngle;
-                rotationAngle += diff * 0.08;
-                if (Math.abs(diff) < 0.002) {
-                    rotationAngle = targetAngle;
-                    if (!autoSpinResumeTimeout) {
-                        autoSpinResumeTimeout = setTimeout(() => {
-                            targetAngle = null;
-                            autoSpinResumeTimeout = null;
-                        }, 2600);
-                    }
+        // Smooth physics interpolation
+        if (targetAngle !== null) {
+            const diff = targetAngle - rotationAngle;
+            rotationAngle += diff * Math.min(1, 4.5 * dt);
+            if (Math.abs(diff) < 0.0008) {
+                rotationAngle = targetAngle;
+                targetAngle = null;
+                // Schedule auto-spin resumption
+                if (!autoSpinResumeTimeout) {
+                    autoSpinResumeTimeout = setTimeout(() => {
+                        targetAngle = null;
+                        autoSpinResumeTimeout = null;
+                    }, 4000);
                 }
-            } else {
-                // Smoothly restore baseAutoSpeed if user added momentum
-                currentSpeed = currentSpeed * 0.96 + baseAutoSpeed * 0.04;
+            }
+        } else if (!isDragging) {
+            // Apply inertial friction or constant cruise speed
+            if (Math.abs(currentSpeed) > Math.abs(baseAutoSpeed)) {
+                currentSpeed *= Math.pow(0.92, dt * 60);
                 rotationAngle += currentSpeed * dt;
+            } else {
+                rotationAngle += baseAutoSpeed * dt;
             }
         }
 
-        // Calculate degree for HUD (0 to 359)
-        const currentDeg = Math.round(((rotationAngle * (180 / Math.PI)) % 360 + 360) % 360);
+        // Keep angle bounded in [0, 2*PI)
+        const twoPi = 2 * Math.PI;
+        rotationAngle = ((rotationAngle % twoPi) + twoPi) % twoPi;
+
+        // Update HUD degree reading
         if (hudDegree) {
-            hudDegree.textContent = `${currentDeg}°`;
+            const deg = Math.round((rotationAngle * 180) / Math.PI) % 360;
+            hudDegree.textContent = `${String(deg).padStart(3, '0')}°`;
         }
 
-        // Compute 3D positions for each node along the ellipse
+        // Calculate 3D orbital node positions
+        let maxZ = -Infinity;
         let frontNodeIndex = 0;
-        let maxZ = -999;
 
         const calculatedPositions = nodeElements.map(({ el, tech, index }) => {
-            const baseAngle = (index * 2 * Math.PI) / totalNodes;
-            const theta = baseAngle + rotationAngle;
+            const baseTheta = (index * 2 * Math.PI) / totalNodes;
+            const theta = rotationAngle + baseTheta;
 
-            // Parametric 3D Ellipse
+            // Parametric ellipse in stage coordinates
             const x = centerX + orbitWidth * Math.cos(theta);
             const y = centerY + orbitHeight * Math.sin(theta);
             const z = Math.sin(theta); // Front is +1, Back is -1
@@ -438,45 +470,56 @@ export const initOrreryGallery = () => {
                 frontNodeIndex = index;
             }
 
-            // High-visibility depth scaling (0.75 far to 1.15 near, opacity 0.72 to 1.0)
+            // High-visibility depth scaling (responsive for mobile screens)
             const normZ = (z + 1) / 2; // 0 (far) to 1 (near)
-            const scale = 0.75 + 0.40 * normZ;
+            const isMobile = window.innerWidth < 640;
+            const minScale = isMobile ? 0.72 : 0.75;
+            const addScale = isMobile ? 0.28 : 0.40;
+            const scale = minScale + addScale * normZ;
             const opacity = 0.72 + 0.28 * normZ;
             const zIndex = Math.round(15 + normZ * 40);
 
             return { el, tech, index, x, y, scale, opacity, zIndex, z };
         });
 
-        // Apply transforms, opacities, and highlights without heavy blur so logos stay crisp
+        // Apply transforms, opacities, and highlights
         calculatedPositions.forEach(({ el, tech, index, x, y, scale, opacity, zIndex }) => {
             el.style.left = `${x}px`;
             el.style.top = `${y}px`;
             el.style.transform = `translate(-50%, -50%) scale(${scale.toFixed(3)})`;
             el.style.opacity = opacity.toFixed(3);
-            el.style.filter = 'none'; // Keep logos completely sharp and crisp!
+            el.style.filter = 'none';
             el.style.zIndex = zIndex;
 
             const isFrontFocus = (index === frontNodeIndex);
-            const inner = el.querySelector('.orrery-node-inner');
             const glow = el.querySelector('.orrery-node-glow');
             const badge = el.querySelector('.orrery-node-badge');
+            const orbImg = el.querySelector('.orrery-node-img');
 
-            if (inner && glow) {
+            if (glow) {
                 if (isFrontFocus) {
-                    inner.style.borderColor = tech.color;
-                    inner.style.boxShadow = `0 0 28px ${tech.color}95, inset 0 0 10px ${tech.color}50`;
-                    glow.style.opacity = '0.7';
+                    glow.style.opacity = '0.9';
+                    glow.style.transform = 'scale(1.2)';
                     if (badge) {
                         badge.style.opacity = '1';
                         badge.style.borderColor = tech.color;
+                        badge.style.color = '#020617';
+                        badge.style.boxShadow = `0 4px 14px ${tech.color}40`;
+                    }
+                    if (orbImg) {
+                        orbImg.style.filter = `drop-shadow(0 10px 22px ${tech.color}75)`;
                     }
                 } else {
-                    inner.style.borderColor = `${tech.color}70`;
-                    inner.style.boxShadow = 'none';
-                    glow.style.opacity = '0';
+                    glow.style.opacity = '0.25';
+                    glow.style.transform = 'scale(1)';
                     if (badge) {
                         badge.style.opacity = '0.75';
-                        badge.style.borderColor = 'rgba(255, 255, 255, 0.15)';
+                        badge.style.borderColor = '#e2e8f0';
+                        badge.style.color = '#1e293b';
+                        badge.style.boxShadow = '0 2px 6px rgba(0,0,0,0.06)';
+                    }
+                    if (orbImg) {
+                        orbImg.style.filter = 'drop-shadow(0 6px 14px rgba(15,23,42,0.28))';
                     }
                 }
             }

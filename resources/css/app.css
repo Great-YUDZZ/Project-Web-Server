@@ -587,6 +587,21 @@
         transition: background 350ms ease;
     }
 
+    .orrery-core-orb-3d {
+        position: relative;
+        z-index: 10;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: transform 300ms cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .orrery-core-orb-3d img {
+        -webkit-user-drag: none;
+        user-select: none;
+        pointer-events: none;
+    }
+
     .orrery-core-orb {
         position: relative;
         z-index: 10;
