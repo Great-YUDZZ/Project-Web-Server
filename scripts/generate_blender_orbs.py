@@ -135,13 +135,13 @@ def render_orbs():
         bg.inputs['Strength'].default_value = 0.1
         scene.world = world
 
-        # Camera setup: 50mm, distance -6.8m (20%+ safe margin on all sides, ZERO clipping on gyro rings)
+        # Camera setup: 50mm, distance -5.2m (Closer, larger, grander view with safe ~50px margins on all sides)
         cam_data = bpy.data.cameras.new('Camera')
         cam_data.lens = 50
         cam_obj = bpy.data.objects.new('Camera', cam_data)
         scene.collection.objects.link(cam_obj)
         scene.camera = cam_obj
-        cam_obj.location = (0, -6.8, 0.35)
+        cam_obj.location = (0, -5.2, 0.30)
         cam_obj.rotation_euler = (math.radians(87.5), 0, 0)
 
         # 4-Point Studio Lighting for strong, genuine 3D spherical depth, specular curvature & metallic gleam
@@ -201,8 +201,8 @@ def render_orbs():
         g_mat.node_tree.links.new(em.outputs['Emission'], out.inputs['Surface'])
         glow_ring.data.materials.append(g_mat)
 
-        # 3. Front Tech Emblem: BOLD & PROMINENT (Size = 1.05 - fills the sphere face)
-        bpy.ops.mesh.primitive_plane_add(size=1.05, location=(0, -1.006, 0))
+        # 3. Front Tech Emblem: BOLD & PROMINENT (Size = 1.15 - fills the sphere face)
+        bpy.ops.mesh.primitive_plane_add(size=1.15, location=(0, -1.006, 0))
         logo_plane = bpy.context.active_object
         logo_plane.rotation_euler = (math.radians(90), 0, 0)
         logo_plane.visible_shadow = False

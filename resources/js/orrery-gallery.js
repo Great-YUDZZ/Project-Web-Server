@@ -211,8 +211,8 @@ export const initOrreryGallery = () => {
         btn.type = 'button';
         btn.className = 'orrery-node group absolute rounded-full cursor-pointer transition-transform duration-300 focus:outline-none select-none';
         btn.setAttribute('aria-label', `Fokus teknologi ${tech.name}`);
-        btn.style.width = '70px';
-        btn.style.height = '70px';
+        btn.style.width = '88px';
+        btn.style.height = '88px';
         btn.style.transform = 'translate(-50%, -50%)';
 
         btn.innerHTML = `
@@ -254,25 +254,25 @@ export const initOrreryGallery = () => {
         centerX = stageWidth / 2;
         if (stageWidth < 480) {
             orbitWidth = stageWidth * 0.44;
-            orbitHeight = 120;
+            orbitHeight = 125;
             centerY = stageHeight * 0.44;
         } else if (stageWidth < 768) {
             orbitWidth = stageWidth * 0.42;
-            orbitHeight = 135;
+            orbitHeight = 138;
             centerY = stageHeight * 0.44;
         } else if (stageWidth < 1024) {
             orbitWidth = Math.min(390, stageWidth * 0.38);
-            orbitHeight = 145;
+            orbitHeight = 148;
             centerY = stageHeight * 0.44;
         } else {
             orbitWidth = Math.min(460, stageWidth * 0.38);
-            orbitHeight = 155;
+            orbitHeight = 165;
             centerY = stageHeight * 0.44;
         }
 
         // Dynamically adjust node element size for mobile vs desktop
         const isMobile = stageWidth < 640;
-        const nodeSize = isMobile ? 54 : 70;
+        const nodeSize = isMobile ? 66 : 88;
         nodeElements.forEach(({ el }) => {
             el.style.width = `${nodeSize}px`;
             el.style.height = `${nodeSize}px`;
@@ -357,8 +357,8 @@ export const initOrreryGallery = () => {
                     <div class="orrery-core-glow" style="background: radial-gradient(circle, ${tech.color}45, transparent 70%);"></div>
 
                     <!-- Focal Central 3D Planetary Orb -->
-                    <div class="orrery-core-orb-3d relative z-10 w-20 h-20 sm:w-24 sm:h-24 flex items-center justify-center filter drop-shadow-[0_8px_20px_rgba(15,23,42,0.14)] transition-transform duration-300 hover:scale-105">
-                        <img src="${tech.orbImg}" alt="${tech.name} 3D Planetary Orb" width="96" height="96" class="w-full h-full object-contain pointer-events-none select-none" loading="eager" decoding="async" onerror="this.onerror=null; this.src='${tech.orbImg.replace('.webp', '.png')}';">
+                    <div class="orrery-core-orb-3d relative z-10 w-28 h-28 sm:w-36 sm:h-36 flex items-center justify-center filter drop-shadow-[0_8px_24px_rgba(15,23,42,0.16)] transition-transform duration-300 hover:scale-105">
+                        <img src="${tech.orbImg}" alt="${tech.name} 3D Planetary Orb" width="144" height="144" class="w-full h-full object-contain pointer-events-none select-none" loading="eager" decoding="async" onerror="this.onerror=null; this.src='${tech.orbImg.replace('.webp', '.png')}';">
                     </div>
 
                     <!-- Tech Identification & High-Contrast Legible Dark Typography -->
