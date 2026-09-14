@@ -97,15 +97,15 @@ export const initOrreryGallery = () => {
             name: 'MariaDB 11.8',
             role: 'SQL Database',
             category: 'Relational Database Engine',
-            color: '#C08A4D',
-            badgeBg: 'rgba(192, 138, 77, 0.14)',
-            badgeBorder: 'rgba(192, 138, 77, 0.4)',
-            badgeText: '#fbbf24',
+            color: '#00758F',
+            badgeBg: 'rgba(0, 117, 143, 0.14)',
+            badgeBorder: 'rgba(0, 117, 143, 0.4)',
+            badgeText: '#38bdf8',
             orbImg: '/images/orrery/mariadb_orb.webp',
             linkUrl: 'https://mariadb.org',
             desc: 'Sistem manajemen database relasional SQL dengan storage engine InnoDB untuk persistensi data sertifikat, proyek topologi lab, dan pesan masuk.',
             labNote: 'Database relasional SQL dengan storage engine InnoDB untuk persistensi sertifikat, proyek topologi lab, dan pesan formulir kontak.',
-            svg: `<svg class="w-full h-full" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="#C08A4D" d="M23.157 4.412c-.676.284-.79.31-1.673.372-.65.045-.757.057-1.212.209-.75.246-1.395.75-2.02 1.59-.296.398-1.249 1.913-1.249 1.988 0 .057-.65.998-.915 1.32-.574.713-1.08 1.079-2.14 1.59-.77.36-1.224.524-4.102 1.477-1.073.353-2.133.738-2.367.864-.852.449-1.515 1.036-2.203 1.938-1.003 1.32-.972 1.313-3.042.947a12.264 12.264 0 00-.675-.063c-.644-.05-1.023.044-1.332.334L0 17.193l.177.088c.094.05.353.234.561.398.215.17.461.347.55.391.088.044.17.088.183.101.012.013-.089.17-.228.353-.435.581-.593.871-.574 1.048.019.164.032.17.43.17.517-.006.826-.056 1.261-.208.65-.233 2.058-.94 2.784-1.4.776-.5 1.717-.998 1.956-1.042.082-.02.354-.07.594-.114.58-.107 1.464-.095 2.587.05.108.013.373.045.6.064.227.025.43.057.454.076.026.012.474.037.998.056.934.026 1.104.007 1.3-.189.126-.133.385-.631.498-.985.209-.643.417-.921.366-.492-.113.966-.322 1.692-.713 2.411-.259.499-.663 1.092-.934 1.395-.322.347-.315.36.088.315.619-.063 1.471-.397 2.096-.82.827-.562 1.647-1.691 2.19-3.03.107-.27.22-.22.183.083-.013.094-.038.315-.057.498l-.031.328.353-.202c.833-.48 1.414-1.262 2.127-2.884.227-.518.877-2.922 1.073-3.976a9.64 9.64 0 01.271-1.042c.127-.429.196-.555.48-.858.183-.19.625-.555.978-.808.72-.505.953-.75 1.187-1.205.208-.417.284-1.13.132-1.357-.132-.202-.284-.196-.763.006Z"/></svg>`
+            svg: `<svg class="w-full h-full" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="#00758F" d="M23.157 4.412c-.676.284-.79.31-1.673.372-.65.045-.757.057-1.212.209-.75.246-1.395.75-2.02 1.59-.296.398-1.249 1.913-1.249 1.988 0 .057-.65.998-.915 1.32-.574.713-1.08 1.079-2.14 1.59-.77.36-1.224.524-4.102 1.477-1.073.353-2.133.738-2.367.864-.852.449-1.515 1.036-2.203 1.938-1.003 1.32-.972 1.313-3.042.947a12.264 12.264 0 00-.675-.063c-.644-.05-1.023.044-1.332.334L0 17.193l.177.088c.094.05.353.234.561.398.215.17.461.347.55.391.088.044.17.088.183.101.012.013-.089.17-.228.353-.435.581-.593.871-.574 1.048.019.164.032.17.43.17.517-.006.826-.056 1.261-.208.65-.233 2.058-.94 2.784-1.4.776-.5 1.717-.998 1.956-1.042.082-.02.354-.07.594-.114.58-.107 1.464-.095 2.587.05.108.013.373.045.6.064.227.025.43.057.454.076.026.012.474.037.998.056.934.026 1.104.007 1.3-.189.126-.133.385-.631.498-.985.209-.643.417-.921.366-.492-.113.966-.322 1.692-.713 2.411-.259.499-.663 1.092-.934 1.395-.322.347-.315.36.088.315.619-.063 1.471-.397 2.096-.82.827-.562 1.647-1.691 2.19-3.03.107-.27.22-.22.183.083-.013.094-.038.315-.057.498l-.031.328.353-.202c.833-.48 1.414-1.262 2.127-2.884.227-.518.877-2.922 1.073-3.976a9.64 9.64 0 01.271-1.042c.127-.429.196-.555.48-.858.183-.19.625-.555.978-.808.72-.505.953-.75 1.187-1.205.208-.417.284-1.13.132-1.357-.132-.202-.284-.196-.763.006Z"/></svg>`
         },
         {
             id: 'javascript',
@@ -220,8 +220,9 @@ export const initOrreryGallery = () => {
                 <div class="orrery-node-glow absolute inset-2 rounded-full blur-md opacity-30 group-hover:opacity-90 transition-opacity duration-300 pointer-events-none"
                      style="background: radial-gradient(circle, ${tech.color}90, transparent 70%);"></div>
                 <img src="${tech.orbImg}" alt="${tech.name}" width="70" height="70"
-                     class="orrery-node-img relative z-10 w-full h-full object-contain pointer-events-none transition-transform duration-300 filter drop-shadow-[0_8px_16px_rgba(15,23,42,0.32)]"
-                     loading="eager" decoding="async">
+                     class="orrery-node-img relative z-10 w-full h-full object-contain pointer-events-none transition-transform duration-300 filter drop-shadow-[0_4px_12px_rgba(15,23,42,0.12)]"
+                     loading="eager" decoding="async"
+                     onerror="this.onerror=null; this.src='${tech.orbImg.replace('.webp', '.png')}';">
                 <div class="orrery-node-badge absolute -bottom-6 left-1/2 -translate-x-1/2 whitespace-nowrap px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold tracking-tight text-slate-800 bg-white/95 border border-slate-200 pointer-events-none shadow-md transition-all duration-300 opacity-85 backdrop-blur-sm">
                     ${tech.name}
                 </div>
@@ -253,20 +254,20 @@ export const initOrreryGallery = () => {
         centerX = stageWidth / 2;
         if (stageWidth < 480) {
             orbitWidth = stageWidth * 0.44;
-            orbitHeight = 135;
-            centerY = stageHeight * 0.45;
+            orbitHeight = 120;
+            centerY = stageHeight * 0.44;
         } else if (stageWidth < 768) {
             orbitWidth = stageWidth * 0.42;
-            orbitHeight = 125;
-            centerY = stageHeight * 0.48;
+            orbitHeight = 135;
+            centerY = stageHeight * 0.44;
         } else if (stageWidth < 1024) {
             orbitWidth = Math.min(390, stageWidth * 0.38);
-            orbitHeight = 130;
-            centerY = stageHeight * 0.48;
+            orbitHeight = 145;
+            centerY = stageHeight * 0.44;
         } else {
-            orbitWidth = Math.min(470, stageWidth * 0.39);
-            orbitHeight = 135;
-            centerY = stageHeight * 0.48;
+            orbitWidth = Math.min(460, stageWidth * 0.38);
+            orbitHeight = 155;
+            centerY = stageHeight * 0.44;
         }
 
         // Dynamically adjust node element size for mobile vs desktop
@@ -356,8 +357,8 @@ export const initOrreryGallery = () => {
                     <div class="orrery-core-glow" style="background: radial-gradient(circle, ${tech.color}45, transparent 70%);"></div>
 
                     <!-- Focal Central 3D Planetary Orb -->
-                    <div class="orrery-core-orb-3d relative z-10 w-20 h-20 sm:w-28 sm:h-28 flex items-center justify-center filter drop-shadow-[0_12px_28px_rgba(15,23,42,0.32)] transition-transform duration-300 hover:scale-105">
-                        <img src="${tech.orbImg}" alt="${tech.name} 3D Planetary Orb" width="112" height="112" class="w-full h-full object-contain pointer-events-none select-none" loading="eager" decoding="async">
+                    <div class="orrery-core-orb-3d relative z-10 w-20 h-20 sm:w-24 sm:h-24 flex items-center justify-center filter drop-shadow-[0_8px_20px_rgba(15,23,42,0.14)] transition-transform duration-300 hover:scale-105">
+                        <img src="${tech.orbImg}" alt="${tech.name} 3D Planetary Orb" width="96" height="96" class="w-full h-full object-contain pointer-events-none select-none" loading="eager" decoding="async" onerror="this.onerror=null; this.src='${tech.orbImg.replace('.webp', '.png')}';">
                     </div>
 
                     <!-- Tech Identification & High-Contrast Legible Dark Typography -->
