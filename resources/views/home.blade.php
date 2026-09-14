@@ -62,20 +62,20 @@
 
                 <!-- Grounded Engineering Metrics -->
                 <div class="pt-2 sm:pt-4 grid grid-cols-2 gap-3 sm:gap-4 max-w-md">
-                    <div class="p-3.5 sm:p-4 rounded-2xl bg-slate-900/80 border border-slate-800 hover:border-blue-500/40 transition-all">
+                    <div class="p-3.5 sm:p-4 rounded-2xl glass-panel-dark-interactive">
                         <div class="flex items-baseline justify-between">
                             <span class="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-white font-mono">5</span>
                             <span class="text-emerald-400 text-xs font-mono font-semibold">Resmi</span>
                         </div>
-                        <div class="text-[11px] sm:text-xs text-slate-400 mt-1 font-medium leading-tight">Sertifikasi Cisco NetAcad &amp; Komdigi</div>
+                        <div class="text-[11px] sm:text-xs text-slate-300 mt-1 font-medium leading-tight">Sertifikasi Cisco NetAcad &amp; Komdigi</div>
                     </div>
 
-                    <div class="p-3.5 sm:p-4 rounded-2xl bg-slate-900/80 border border-slate-800 hover:border-blue-500/40 transition-all">
+                    <div class="p-3.5 sm:p-4 rounded-2xl glass-panel-dark-interactive">
                         <div class="flex items-baseline justify-between">
                             <span class="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-white font-mono">4+</span>
                             <span class="text-sky-400 text-xs font-mono font-semibold">Lab</span>
                         </div>
-                        <div class="text-[11px] sm:text-xs text-slate-400 mt-1 font-medium leading-tight">Topologi Jaringan Enterprise &amp; LEMP</div>
+                        <div class="text-[11px] sm:text-xs text-slate-300 mt-1 font-medium leading-tight">Topologi Jaringan Enterprise &amp; LEMP</div>
                     </div>
                 </div>
 
@@ -86,9 +86,9 @@
                 <!-- Ambient Glow behind Terminal -->
                 <div class="absolute -inset-2 bg-gradient-to-r from-blue-600/15 via-teal-600/10 to-blue-500/10 rounded-3xl blur-2xl opacity-70 pointer-events-none"></div>
 
-                <div class="w-full max-w-lg mx-auto lg:max-w-none rounded-2xl overflow-hidden border border-slate-800 bg-[#0F172A] shadow-2xl font-mono text-xs sm:text-sm relative z-10">
+                <div class="w-full max-w-lg mx-auto lg:max-w-none rounded-2xl overflow-hidden glass-panel-dark shadow-2xl font-mono text-xs sm:text-sm relative z-10" id="neofetch-console">
                     <!-- Window Header -->
-                    <div class="flex items-center justify-between px-4 py-2.5 bg-slate-900/90 border-b border-slate-800">
+                    <div class="flex items-center justify-between px-4 py-2.5 bg-slate-950/50 backdrop-blur-md border-b border-white/10">
                         <div class="flex items-center space-x-2">
                             <span class="w-3 h-3 rounded-full bg-[#ff5f56] inline-block"></span>
                             <span class="w-3 h-3 rounded-full bg-[#ffbd2e] inline-block"></span>
@@ -350,7 +350,7 @@
             </div>
 
             <!-- 3D Coverflow Gallery Showcase Component -->
-            <div class="relative rounded-3xl p-4 sm:p-7 lg:p-9 shadow-2xl overflow-hidden bg-slate-900/90 border border-slate-800">
+            <div class="relative rounded-3xl p-4 sm:p-7 lg:p-9 shadow-2xl overflow-hidden glass-panel-dark">
                 <!-- Background Ambient Glow -->
                 <div class="absolute -top-24 left-1/2 -translate-x-1/2 w-96 h-96 rounded-full bg-gradient-to-b from-blue-600/20 via-teal-500/10 to-transparent blur-3xl pointer-events-none"></div>
 
@@ -384,7 +384,7 @@
                         <div class="swiper-wrapper">
                             @forelse($certificates as $index => $cert)
                                 <div class="swiper-slide select-none">
-                                    <div class="card-interactive p-5 sm:p-6 lg:p-7 flex flex-col justify-between h-full rounded-2xl relative group bg-slate-900 border border-slate-800 shadow-xl hover:border-blue-500/50">
+                                    <div class="card-interactive p-5 sm:p-6 lg:p-7 flex flex-col justify-between h-full rounded-2xl relative group glass-panel-dark-interactive hover:border-blue-500/50">
                                         <!-- Top Ambient Reflection -->
                                         <div class="absolute -top-12 -right-12 w-36 h-36 rounded-full bg-blue-600/10 blur-2xl pointer-events-none group-hover:bg-blue-600/20 transition-all"></div>
 
@@ -555,7 +555,7 @@
             @if($featuredProjects->count() > 0)
                 <div class="grid sm:grid-cols-2 gap-6 sm:gap-8">
                     @foreach($featuredProjects as $project)
-                        <a href="{{ route('projects.show', $project->slug) }}" class="card-interactive group block p-5 sm:p-7 lg:p-8 bg-white border border-slate-200 shadow-sm hover:border-blue-300">
+                        <a href="{{ route('projects.show', $project->slug) }}" class="card-interactive group block p-5 sm:p-7 lg:p-8 glass-panel-interactive hover:border-blue-300">
                             <div class="aspect-[16/10] bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden mb-5 sm:mb-6 flex items-center justify-center p-4 sm:p-6 relative">
                                 <div class="absolute inset-0 bg-gradient-to-tr from-blue-600/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                                 <img src="{{ $project->image_url }}" alt="{{ $project->title }}" class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500 ease-out">
@@ -626,17 +626,17 @@
 
             <!-- Filter Pills with 44px Touch Targets -->
             <div class="flex flex-wrap justify-center gap-2 mb-8 sm:mb-10" id="skill-filter-tabs">
-                <button type="button" data-filter="all" class="min-h-[44px] px-5 py-2.5 rounded-full bg-blue-600 text-white text-xs font-semibold shadow-md shadow-blue-600/30 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 cursor-pointer flex items-center justify-center">Semua</button>
-                <button type="button" data-filter="networking" class="min-h-[44px] px-5 py-2.5 rounded-full bg-slate-900 border border-slate-700 text-slate-300 hover:text-white hover:bg-slate-800 text-xs font-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 cursor-pointer flex items-center justify-center">Networking</button>
-                <button type="button" data-filter="sysadmin" class="min-h-[44px] px-5 py-2.5 rounded-full bg-slate-900 border border-slate-700 text-slate-300 hover:text-white hover:bg-slate-800 text-xs font-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 cursor-pointer flex items-center justify-center">Sysadmin</button>
-                <button type="button" data-filter="hardware" class="min-h-[44px] px-5 py-2.5 rounded-full bg-slate-900 border border-slate-700 text-slate-300 hover:text-white hover:bg-slate-800 text-xs font-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 cursor-pointer flex items-center justify-center">Hardware</button>
-                <button type="button" data-filter="tools" class="min-h-[44px] px-5 py-2.5 rounded-full bg-slate-900 border border-slate-700 text-slate-300 hover:text-white hover:bg-slate-800 text-xs font-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 cursor-pointer flex items-center justify-center">Tools</button>
+                <button type="button" data-filter="all" class="min-h-[44px] px-5 py-2.5 rounded-full bg-blue-600 text-white text-xs font-semibold shadow-lg shadow-blue-600/30 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 cursor-pointer flex items-center justify-center">Semua</button>
+                <button type="button" data-filter="networking" class="min-h-[44px] px-5 py-2.5 rounded-full bg-slate-900/60 backdrop-blur-md border border-white/10 text-slate-300 hover:text-white hover:bg-slate-800/80 text-xs font-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 cursor-pointer flex items-center justify-center">Networking</button>
+                <button type="button" data-filter="sysadmin" class="min-h-[44px] px-5 py-2.5 rounded-full bg-slate-900/60 backdrop-blur-md border border-white/10 text-slate-300 hover:text-white hover:bg-slate-800/80 text-xs font-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 cursor-pointer flex items-center justify-center">Sysadmin</button>
+                <button type="button" data-filter="hardware" class="min-h-[44px] px-5 py-2.5 rounded-full bg-slate-900/60 backdrop-blur-md border border-white/10 text-slate-300 hover:text-white hover:bg-slate-800/80 text-xs font-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 cursor-pointer flex items-center justify-center">Hardware</button>
+                <button type="button" data-filter="tools" class="min-h-[44px] px-5 py-2.5 rounded-full bg-slate-900/60 backdrop-blur-md border border-white/10 text-slate-300 hover:text-white hover:bg-slate-800/80 text-xs font-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 cursor-pointer flex items-center justify-center">Tools</button>
             </div>
 
             @if($skills->count() > 0)
                 <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6" id="skills-grid">
                     @foreach($skills as $skill)
-                        <div class="skill-card p-4 sm:p-5 rounded-2xl bg-slate-900/90 border border-slate-800 hover:border-blue-500/50 transition-all duration-300 shadow-xl" data-category="{{ $skill->category }}">
+                        <div class="skill-card p-4 sm:p-5 rounded-2xl glass-panel-dark-interactive hover:border-blue-500/50 transition-all duration-300 shadow-xl" data-category="{{ $skill->category }}">
                             <div class="flex items-baseline justify-between mb-3">
                                 <div class="flex items-center gap-2">
                                     <span class="w-1.5 h-1.5 rounded-full bg-sky-400"></span>
@@ -790,8 +790,8 @@
                         </div>
 
                         <!-- Email -->
-                        <a href="mailto:yuda2010f@gmail.com" class="min-h-[52px] flex items-center gap-3 p-3.5 rounded-2xl bg-slate-900/90 border border-slate-800 hover:border-blue-500/50 text-slate-300 hover:text-white transition-all group">
-                            <div class="w-9 h-9 rounded-xl bg-slate-800 border border-slate-700 flex items-center justify-center text-sky-400 group-hover:scale-105 transition-transform shrink-0">
+                        <a href="mailto:yuda2010f@gmail.com" class="glass-panel-dark-interactive min-h-[52px] flex items-center gap-3 p-3.5 rounded-2xl text-slate-300 hover:text-white transition-all group">
+                            <div class="w-9 h-9 rounded-xl bg-slate-800/80 border border-slate-700 flex items-center justify-center text-sky-400 group-hover:scale-105 transition-transform shrink-0">
                                 <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
                                 </svg>
@@ -803,8 +803,8 @@
                         </a>
 
                         <!-- Phone / WhatsApp -->
-                        <a href="https://wa.me/6285182691268" target="_blank" rel="noopener noreferrer" class="min-h-[52px] flex items-center gap-3 p-3.5 rounded-2xl bg-slate-900/90 border border-slate-800 hover:border-teal-500/50 text-slate-300 hover:text-white transition-all group">
-                            <div class="w-9 h-9 rounded-xl bg-slate-800 border border-slate-700 flex items-center justify-center text-teal-400 group-hover:scale-105 transition-transform shrink-0">
+                        <a href="https://wa.me/6285182691268" target="_blank" rel="noopener noreferrer" class="glass-panel-dark-interactive min-h-[52px] flex items-center gap-3 p-3.5 rounded-2xl text-slate-300 hover:text-white transition-all group">
+                            <div class="w-9 h-9 rounded-xl bg-slate-800/80 border border-slate-700 flex items-center justify-center text-teal-400 group-hover:scale-105 transition-transform shrink-0">
                                 <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
                                 </svg>
@@ -816,8 +816,8 @@
                         </a>
 
                         <!-- GitHub -->
-                        <a href="https://github.com/Great-YUDZZ" target="_blank" rel="noopener noreferrer" class="min-h-[52px] flex items-center gap-3 p-3.5 rounded-2xl bg-slate-900/90 border border-slate-800 hover:border-slate-700 text-slate-300 hover:text-white transition-all group">
-                            <div class="w-9 h-9 rounded-xl bg-slate-800 border border-slate-700 flex items-center justify-center text-slate-300 group-hover:scale-105 transition-transform shrink-0">
+                        <a href="https://github.com/Great-YUDZZ" target="_blank" rel="noopener noreferrer" class="glass-panel-dark-interactive min-h-[52px] flex items-center gap-3 p-3.5 rounded-2xl text-slate-300 hover:text-white transition-all group">
+                            <div class="w-9 h-9 rounded-xl bg-slate-800/80 border border-slate-700 flex items-center justify-center text-slate-300 group-hover:scale-105 transition-transform shrink-0">
                                 <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
                                     <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
                                 </svg>
@@ -832,7 +832,7 @@
 
                 <!-- Right Contact Form -->
                 <div class="lg:col-span-7 reveal-slide-right">
-                    <div class="p-5 sm:p-8 md:p-10 rounded-2xl sm:rounded-3xl bg-slate-900/90 border border-slate-800 shadow-2xl relative">
+                    <div class="p-5 sm:p-8 md:p-10 rounded-2xl sm:rounded-3xl glass-panel-dark shadow-2xl relative">
                         <div class="absolute -top-10 -right-10 w-40 h-40 rounded-full bg-blue-600/10 blur-3xl pointer-events-none"></div>
 
                         @if(session('success'))
@@ -849,13 +849,13 @@
                                     <label for="sender_name" class="block text-xs font-mono text-slate-300 font-semibold mb-2">Nama Lengkap</label>
                                     <input type="text" name="sender_name" id="sender_name" value="{{ old('sender_name') }}" required
                                         placeholder="Nama Lengkap / Instansi"
-                                        class="w-full px-4 py-3 rounded-xl bg-slate-950 border border-slate-700 text-white placeholder-slate-500 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 outline-none transition-all">
+                                        class="w-full px-4 py-3 rounded-xl bg-slate-950/60 backdrop-blur-md border border-slate-700/80 text-white placeholder-slate-500 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 outline-none transition-all">
                                 </div>
                                 <div>
                                     <label for="email" class="block text-xs font-mono text-slate-300 font-semibold mb-2">Alamat Email</label>
                                     <input type="email" name="email" id="email" value="{{ old('email') }}" required
                                         placeholder="nama@domain.com"
-                                        class="w-full px-4 py-3 rounded-xl bg-slate-950 border border-slate-700 text-white placeholder-slate-500 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 outline-none transition-all">
+                                        class="w-full px-4 py-3 rounded-xl bg-slate-950/60 backdrop-blur-md border border-slate-700/80 text-white placeholder-slate-500 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 outline-none transition-all">
                                 </div>
                             </div>
 
@@ -863,14 +863,14 @@
                                 <label for="subject" class="block text-xs font-mono text-slate-300 font-semibold mb-2">Subjek Pesan</label>
                                 <input type="text" name="subject" id="subject" value="{{ old('subject') }}" required
                                     placeholder="Topik diskusi lab atau tawaran proyek..."
-                                    class="w-full px-4 py-3 rounded-xl bg-slate-950 border border-slate-700 text-white placeholder-slate-500 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 outline-none transition-all">
+                                    class="w-full px-4 py-3 rounded-xl bg-slate-950/60 backdrop-blur-md border border-slate-700/80 text-white placeholder-slate-500 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 outline-none transition-all">
                             </div>
 
                             <div>
                                 <label for="message" class="block text-xs font-mono text-slate-300 font-semibold mb-2">Isi Pesan</label>
                                 <textarea name="message" id="message" rows="4" required
                                     placeholder="Tuliskan pesan atau pertanyaan Anda di sini..."
-                                    class="w-full px-4 py-3 rounded-xl bg-slate-950 border border-slate-700 text-white placeholder-slate-500 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 outline-none transition-all resize-none">{{ old('message') }}</textarea>
+                                    class="w-full px-4 py-3 rounded-xl bg-slate-950/60 backdrop-blur-md border border-slate-700/80 text-white placeholder-slate-500 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 outline-none transition-all resize-none">{{ old('message') }}</textarea>
                             </div>
 
                             <div class="flex flex-col-reverse sm:flex-row items-stretch sm:items-center justify-between gap-4 pt-2">

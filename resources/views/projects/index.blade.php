@@ -21,17 +21,17 @@
         </div>
 
         <!-- Search and Filter Bar -->
-        <div class="mb-10 sm:mb-14 p-3.5 sm:p-4 rounded-2xl bg-slate-900/90 border border-slate-800 shadow-xl">
+        <div class="mb-10 sm:mb-14 p-3.5 sm:p-4 rounded-2xl glass-panel-dark">
             <form action="{{ route('projects.index') }}" method="GET" class="flex flex-col sm:flex-row gap-3">
                 <div class="flex-1 relative">
                     <label for="q" class="sr-only">Cari judul lab</label>
                     <input type="text" name="q" id="q" value="{{ request('q') }}" placeholder="Cari judul lab, teknologi (mis. OSPF, Nginx, VLAN)..."
-                           class="w-full px-4 py-3 rounded-xl bg-slate-950/80 border border-slate-700 text-white placeholder:text-slate-500 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 text-base sm:text-sm transition-all">
+                           class="w-full px-4 py-3 rounded-xl bg-slate-950/60 backdrop-blur-md border border-slate-700/80 text-white placeholder:text-slate-500 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 text-base sm:text-sm transition-all">
                 </div>
                 
                 <div class="sm:w-64">
                     <label for="category" class="sr-only">Kategori</label>
-                    <select name="category" id="category" class="w-full px-4 py-3 rounded-xl bg-slate-950/80 border border-slate-700 text-white focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 text-base sm:text-sm appearance-none cursor-pointer transition-all">
+                    <select name="category" id="category" class="w-full px-4 py-3 rounded-xl bg-slate-950/60 backdrop-blur-md border border-slate-700/80 text-white focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 text-base sm:text-sm appearance-none cursor-pointer transition-all">
                         <option value="all" class="bg-slate-900 text-white">Semua Kategori</option>
                         @foreach($categories as $cat)
                             <option value="{{ $cat }}" class="bg-slate-900 text-white" {{ request('category') == $cat ? 'selected' : '' }}>
@@ -56,7 +56,7 @@
         @if($projects->count() > 0)
             <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
                 @foreach($projects as $project)
-                    <a href="{{ route('projects.show', $project->slug) }}" class="group block p-5 sm:p-6 rounded-2xl bg-slate-900/90 border border-slate-800 hover:border-blue-500/50 flex flex-col justify-between shadow-xl hover:-translate-y-1 transition-all duration-300">
+                    <a href="{{ route('projects.show', $project->slug) }}" class="group block p-5 sm:p-6 rounded-2xl glass-panel-dark-interactive hover:border-blue-500/50 flex flex-col justify-between shadow-xl hover:-translate-y-1 transition-all duration-300">
                         <div>
                             <div class="aspect-[16/10] bg-slate-950 border border-slate-800 rounded-2xl overflow-hidden mb-6 flex items-center justify-center p-6 relative">
                                 <div class="absolute inset-0 bg-gradient-to-tr from-blue-600/20 via-teal-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
@@ -93,7 +93,7 @@
                 {{ $projects->links() }}
             </div>
         @else
-            <div class="py-24 text-center rounded-3xl bg-slate-900/90 border border-slate-800 shadow-xl backdrop-blur-xl">
+            <div class="py-24 text-center rounded-3xl glass-panel-dark shadow-xl">
                 <div class="w-12 h-12 mx-auto mb-4 rounded-full bg-blue-950 border border-blue-800 flex items-center justify-center text-sky-400">
                     <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />

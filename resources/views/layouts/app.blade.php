@@ -43,39 +43,39 @@
             <a href="{{ route('home') }}" class="flex items-center gap-2.5 sm:gap-3 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded-full shrink-0">
                 <img src="{{ asset('images/logo.png') }}" alt="Logo" class="w-7 h-7 sm:w-8 sm:h-8 shrink-0 object-contain group-hover:scale-105 transition-transform duration-300">
                 <div class="flex flex-col">
-                    <div class="font-bold text-slate-900 text-xs sm:text-base tracking-tight group-hover:text-blue-600 transition-colors flex items-center gap-1.5">
+                    <div class="font-bold text-slate-950 text-xs sm:text-base tracking-tight group-hover:text-blue-600 transition-colors flex items-center gap-1.5">
                         <span class="truncate max-w-[150px] xs:max-w-[200px] sm:max-w-none">I Made Yuda Pramana</span>
                     </div>
-                    <div class="text-[10px] text-slate-500 font-mono hidden sm:flex items-center gap-1">
+                    <div class="text-[10px] text-slate-700 font-mono hidden sm:flex items-center gap-1 font-medium">
                         <span>Teknik Komputer &amp; Jaringan</span>
                     </div>
                 </div>
             </a>
 
             <!-- Desktop Pill Navigation -->
-            <nav class="hidden md:flex items-center gap-1 px-3 py-1 rounded-full bg-slate-100/90 border border-slate-200/80 backdrop-blur-md text-xs font-medium">
-                <a href="{{ request()->routeIs('home') ? '#home' : route('home').'#home' }}" data-nav-section="home" class="px-3.5 py-1.5 rounded-full text-slate-600 hover:text-slate-900 hover:bg-white hover:shadow-xs transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500">
+            <nav class="hidden md:flex items-center gap-1 px-3 py-1 rounded-full bg-slate-200/50 border border-slate-300/60 backdrop-blur-md text-xs font-semibold">
+                <a href="{{ request()->routeIs('home') ? '#home' : route('home').'#home' }}" data-nav-section="home" class="px-3.5 py-1.5 rounded-full text-slate-800 hover:text-slate-950 hover:bg-white/80 hover:shadow-xs transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500">
                     Home
                 </a>
-                <a href="{{ request()->routeIs('home') ? '#about' : route('home').'#about' }}" data-nav-section="about" class="px-3.5 py-1.5 rounded-full text-slate-600 hover:text-slate-900 hover:bg-white hover:shadow-xs transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500">
+                <a href="{{ request()->routeIs('home') ? '#about' : route('home').'#about' }}" data-nav-section="about" class="px-3.5 py-1.5 rounded-full text-slate-800 hover:text-slate-950 hover:bg-white/80 hover:shadow-xs transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500">
                     About
                 </a>
-                <a href="{{ request()->routeIs('home') ? '#certifications' : route('home').'#certifications' }}" data-nav-section="certifications" class="px-3.5 py-1.5 rounded-full text-slate-600 hover:text-slate-900 hover:bg-white hover:shadow-xs transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500">
+                <a href="{{ request()->routeIs('home') ? '#certifications' : route('home').'#certifications' }}" data-nav-section="certifications" class="px-3.5 py-1.5 rounded-full text-slate-800 hover:text-slate-950 hover:bg-white/80 hover:shadow-xs transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500">
                     Sertifikasi
                 </a>
-                <a href="{{ request()->routeIs('home') ? '#labs' : route('home').'#labs' }}" data-nav-section="labs" class="px-3.5 py-1.5 rounded-full text-slate-600 hover:text-slate-900 hover:bg-white hover:shadow-xs transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500">
+                <a href="{{ request()->routeIs('home') ? '#labs' : route('home').'#labs' }}" data-nav-section="labs" class="px-3.5 py-1.5 rounded-full text-slate-800 hover:text-slate-950 hover:bg-white/80 hover:shadow-xs transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500">
                     Showcase Lab
                 </a>
-                <a href="{{ request()->routeIs('home') ? '#skills' : route('home').'#skills' }}" data-nav-section="skills" class="px-3.5 py-1.5 rounded-full text-slate-600 hover:text-slate-900 hover:bg-white hover:shadow-xs transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500">
+                <a href="{{ request()->routeIs('home') ? '#skills' : route('home').'#skills' }}" data-nav-section="skills" class="px-3.5 py-1.5 rounded-full text-slate-800 hover:text-slate-950 hover:bg-white/80 hover:shadow-xs transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500">
                     Skill Matrix
                 </a>
-                <a href="{{ request()->routeIs('home') ? '#architecture' : route('home').'#architecture' }}" data-nav-section="architecture" class="px-3.5 py-1.5 rounded-full text-slate-600 hover:text-slate-900 hover:bg-white hover:shadow-xs transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500">
+                <a href="{{ request()->routeIs('home') ? '#architecture' : route('home').'#architecture' }}" data-nav-section="architecture" class="px-3.5 py-1.5 rounded-full text-slate-800 hover:text-slate-950 hover:bg-white/80 hover:shadow-xs transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500">
                     Arsitektur
                 </a>
-                <a href="{{ route('projects.index') }}" class="px-3.5 py-1.5 rounded-full {{ request()->routeIs('projects.*') ? 'text-blue-600 bg-white shadow-xs font-semibold' : 'text-slate-600 hover:text-slate-900 hover:bg-white hover:shadow-xs' }} transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500">
+                <a href="{{ route('projects.index') }}" class="px-3.5 py-1.5 rounded-full {{ request()->routeIs('projects.*') ? 'text-slate-950 bg-white/95 shadow-xs font-bold border border-slate-200/80' : 'text-slate-800 hover:text-slate-950 hover:bg-white/80 hover:shadow-xs' }} transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500">
                     Katalog
                 </a>
-                <a href="{{ request()->routeIs('home') ? '#contact' : route('home').'#contact' }}" data-nav-section="contact" class="px-3.5 py-1.5 rounded-full text-slate-600 hover:text-slate-900 hover:bg-white hover:shadow-xs transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500">
+                <a href="{{ request()->routeIs('home') ? '#contact' : route('home').'#contact' }}" data-nav-section="contact" class="px-3.5 py-1.5 rounded-full text-slate-800 hover:text-slate-950 hover:bg-white/80 hover:shadow-xs transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500">
                     Contact
                 </a>
             </nav>
@@ -88,7 +88,7 @@
                 </a>
 
                 <!-- Mobile Menu Button (Accessible 44px Tap Target) -->
-                <button id="mobile-menu-btn" type="button" class="md:hidden w-10 h-10 flex items-center justify-center text-slate-700 hover:text-slate-900 bg-white hover:bg-slate-50 border border-slate-200 rounded-full transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 cursor-pointer" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="mobile-menu">
+                <button id="mobile-menu-btn" type="button" class="md:hidden w-10 h-10 flex items-center justify-center text-slate-900 hover:text-blue-600 bg-white/90 hover:bg-white border border-slate-200/80 rounded-full shadow-xs transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 cursor-pointer" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="mobile-menu">
                     <svg id="menu-open-icon" class="w-5 h-5 block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
                     </svg>
@@ -101,15 +101,15 @@
     </div>
 
     <!-- Mobile Navigation Drawer -->
-    <div id="mobile-menu" class="hidden fixed top-18 sm:top-20 inset-x-3 sm:inset-x-4 z-40 md:hidden rounded-2xl sm:rounded-3xl glass-panel p-4 sm:p-5 space-y-1.5 text-sm font-medium shadow-xl shadow-slate-900/10 border border-slate-200 bg-white/95 animate-scale-in" role="region" aria-label="Mobile navigation menu">
-        <a href="{{ request()->routeIs('home') ? '#home' : route('home').'#home' }}" class="min-h-[44px] flex items-center px-4 py-2.5 text-slate-700 hover:text-slate-900 hover:bg-slate-100 rounded-xl transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500">Home</a>
-        <a href="{{ request()->routeIs('home') ? '#about' : route('home').'#about' }}" class="min-h-[44px] flex items-center px-4 py-2.5 text-slate-700 hover:text-slate-900 hover:bg-slate-100 rounded-xl transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500">About</a>
-        <a href="{{ request()->routeIs('home') ? '#certifications' : route('home').'#certifications' }}" class="min-h-[44px] flex items-center px-4 py-2.5 text-slate-700 hover:text-slate-900 hover:bg-slate-100 rounded-xl transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500">Sertifikasi</a>
-        <a href="{{ request()->routeIs('home') ? '#labs' : route('home').'#labs' }}" class="min-h-[44px] flex items-center px-4 py-2.5 text-slate-700 hover:text-slate-900 hover:bg-slate-100 rounded-xl transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500">Showcase Lab</a>
-        <a href="{{ request()->routeIs('home') ? '#skills' : route('home').'#skills' }}" class="min-h-[44px] flex items-center px-4 py-2.5 text-slate-700 hover:text-slate-900 hover:bg-slate-100 rounded-xl transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500">Skill Matrix</a>
-        <a href="{{ request()->routeIs('home') ? '#architecture' : route('home').'#architecture' }}" class="min-h-[44px] flex items-center px-4 py-2.5 text-slate-700 hover:text-slate-900 hover:bg-slate-100 rounded-xl transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500">Arsitektur Stack</a>
-        <a href="{{ route('projects.index') }}" class="min-h-[44px] flex items-center px-4 py-2.5 text-slate-700 hover:text-slate-900 hover:bg-slate-100 rounded-xl transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500">Katalog Lengkap</a>
-        <a href="{{ request()->routeIs('home') ? '#contact' : route('home').'#contact' }}" class="min-h-[44px] flex items-center px-4 py-2.5 text-slate-700 hover:text-slate-900 hover:bg-slate-100 rounded-xl transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500">Contact</a>
+    <div id="mobile-menu" class="hidden fixed top-18 sm:top-20 inset-x-3 sm:inset-x-4 z-40 md:hidden rounded-2xl sm:rounded-3xl glass-panel p-4 sm:p-5 space-y-1.5 text-sm font-semibold shadow-2xl shadow-slate-900/15 border border-white/80 animate-scale-in" role="region" aria-label="Mobile navigation menu">
+        <a href="{{ request()->routeIs('home') ? '#home' : route('home').'#home' }}" class="min-h-[44px] flex items-center px-4 py-2.5 text-slate-900 hover:text-blue-600 hover:bg-slate-100/80 rounded-xl transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500">Home</a>
+        <a href="{{ request()->routeIs('home') ? '#about' : route('home').'#about' }}" class="min-h-[44px] flex items-center px-4 py-2.5 text-slate-900 hover:text-blue-600 hover:bg-slate-100/80 rounded-xl transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500">About</a>
+        <a href="{{ request()->routeIs('home') ? '#certifications' : route('home').'#certifications' }}" class="min-h-[44px] flex items-center px-4 py-2.5 text-slate-900 hover:text-blue-600 hover:bg-slate-100/80 rounded-xl transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500">Sertifikasi</a>
+        <a href="{{ request()->routeIs('home') ? '#labs' : route('home').'#labs' }}" class="min-h-[44px] flex items-center px-4 py-2.5 text-slate-900 hover:text-blue-600 hover:bg-slate-100/80 rounded-xl transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500">Showcase Lab</a>
+        <a href="{{ request()->routeIs('home') ? '#skills' : route('home').'#skills' }}" class="min-h-[44px] flex items-center px-4 py-2.5 text-slate-900 hover:text-blue-600 hover:bg-slate-100/80 rounded-xl transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500">Skill Matrix</a>
+        <a href="{{ request()->routeIs('home') ? '#architecture' : route('home').'#architecture' }}" class="min-h-[44px] flex items-center px-4 py-2.5 text-slate-900 hover:text-blue-600 hover:bg-slate-100/80 rounded-xl transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500">Arsitektur Stack</a>
+        <a href="{{ route('projects.index') }}" class="min-h-[44px] flex items-center px-4 py-2.5 text-slate-900 hover:text-blue-600 hover:bg-slate-100/80 rounded-xl transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500">Katalog Lengkap</a>
+        <a href="{{ request()->routeIs('home') ? '#contact' : route('home').'#contact' }}" class="min-h-[44px] flex items-center px-4 py-2.5 text-slate-900 hover:text-blue-600 hover:bg-slate-100/80 rounded-xl transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500">Contact</a>
         <div class="pt-2">
             <a href="{{ request()->routeIs('home') ? '#contact' : route('home').'#contact' }}" class="min-h-[44px] flex items-center justify-center px-4 py-3 text-center rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold shadow-lg shadow-blue-600/25 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500">Hubungi Saya &rarr;</a>
         </div>

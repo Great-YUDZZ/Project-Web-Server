@@ -36,13 +36,13 @@
                 </div>
 
                 <!-- Topology Preview Frame -->
-                <div class="relative rounded-2xl sm:rounded-3xl overflow-hidden border border-slate-800 bg-slate-950 p-4 sm:p-8 flex items-center justify-center shadow-xl">
+                <div class="relative rounded-2xl sm:rounded-3xl overflow-hidden glass-panel-dark p-4 sm:p-8 flex items-center justify-center shadow-xl">
                     <div class="absolute inset-0 bg-gradient-to-tr from-blue-600/10 via-teal-500/5 to-transparent pointer-events-none"></div>
                     <img src="{{ $project->image_url }}" alt="Topologi {{ $project->title }}" class="w-full h-auto max-h-[520px] object-contain relative z-10">
                 </div>
 
                 <!-- Description & Documentation -->
-                <div class="p-5 sm:p-8 rounded-2xl sm:rounded-3xl bg-slate-900/90 border border-slate-800 shadow-xl space-y-5 sm:space-y-6">
+                <div class="p-5 sm:p-8 rounded-2xl sm:rounded-3xl glass-panel-dark shadow-xl space-y-5 sm:space-y-6">
                     <div class="inline-flex items-center gap-2 text-xs font-mono text-sky-400 uppercase tracking-wider">
                         <span class="w-1.5 h-1.5 rounded-full bg-sky-400"></span>
                         <span>Deskripsi &amp; Metodologi Implementasi</span>
@@ -72,7 +72,7 @@
             <div class="lg:col-span-4 space-y-6">
                 
                 <!-- Lab Specs Card -->
-                <div class="p-5 sm:p-8 rounded-2xl sm:rounded-3xl bg-slate-900/90 border border-slate-800 shadow-xl space-y-5 sm:space-y-6">
+                <div class="p-5 sm:p-8 rounded-2xl sm:rounded-3xl glass-panel-dark shadow-xl space-y-5 sm:space-y-6">
                     <div class="flex items-center justify-between border-b border-slate-800 pb-4">
                         <div class="text-xs font-mono font-bold text-sky-400 uppercase tracking-wider">Spesifikasi Lab</div>
                         <span class="w-2 h-2 rounded-full bg-sky-400"></span>
@@ -119,14 +119,14 @@
 
                 <!-- Related Labs Card -->
                 @if($relatedProjects->count() > 0)
-                    <div class="p-5 sm:p-8 rounded-2xl sm:rounded-3xl bg-slate-900/90 border border-slate-800 shadow-xl space-y-4">
+                    <div class="p-5 sm:p-8 rounded-2xl sm:rounded-3xl glass-panel-dark shadow-xl space-y-4">
                         <div class="text-xs font-mono font-bold text-sky-400 uppercase tracking-wider border-b border-slate-800 pb-3">
                             Lab Terkait
                         </div>
 
                         <div class="space-y-3">
                             @foreach($relatedProjects as $rel)
-                                <a href="{{ route('projects.show', $rel->slug) }}" class="block p-4 rounded-xl bg-slate-950/80 border border-slate-800 hover:border-blue-500/50 transition-all group">
+                                <a href="{{ route('projects.show', $rel->slug) }}" class="block p-4 rounded-xl glass-panel-dark-interactive hover:border-blue-500/50 transition-all group">
                                     <div class="text-[10px] font-mono text-slate-400 mb-1">{{ $rel->category }}</div>
                                     <div class="text-sm font-semibold text-white group-hover:text-sky-400 transition-colors line-clamp-2">
                                         {{ $rel->title }}

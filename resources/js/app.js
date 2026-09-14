@@ -51,11 +51,11 @@ const initSkillFilter = () => {
     filterTabs.forEach((btn) => {
         btn.addEventListener('click', () => {
             filterTabs.forEach((b) => {
-                b.classList.remove('bg-blue-600', 'text-white', 'shadow-md', 'shadow-blue-600/30');
-                b.classList.add('bg-slate-900', 'border', 'border-slate-700', 'text-slate-300');
+                b.classList.remove('bg-blue-600', 'text-white', 'shadow-lg', 'shadow-blue-600/30', 'font-semibold');
+                b.classList.add('bg-slate-900/60', 'backdrop-blur-md', 'border', 'border-white/10', 'text-slate-300', 'hover:text-white', 'hover:bg-slate-800/80', 'font-medium');
             });
-            btn.classList.remove('bg-slate-900', 'border', 'border-slate-700', 'text-slate-300');
-            btn.classList.add('bg-blue-600', 'text-white', 'shadow-md', 'shadow-blue-600/30');
+            btn.classList.remove('bg-slate-900/60', 'backdrop-blur-md', 'border', 'border-white/10', 'text-slate-300', 'hover:text-white', 'hover:bg-slate-800/80', 'font-medium');
+            btn.classList.add('bg-blue-600', 'text-white', 'shadow-lg', 'shadow-blue-600/30', 'font-semibold');
 
             const filter = btn.dataset.filter;
             skillCards.forEach((card) => {
@@ -89,11 +89,11 @@ const initActiveNavTracking = () => {
         navLinks.forEach((link) => {
             const targetSection = link.getAttribute('data-nav-section');
             if (targetSection === currentSectionId) {
-                link.classList.add('text-white', 'bg-white/[0.08]');
-                link.classList.remove('text-zinc-400');
+                link.classList.add('text-slate-950', 'font-bold', 'bg-white/95', 'shadow-xs', 'border', 'border-slate-200/80');
+                link.classList.remove('text-slate-700', 'font-medium', 'text-white', 'text-zinc-400', 'bg-white/[0.08]');
             } else {
-                link.classList.remove('text-white', 'bg-white/[0.08]');
-                link.classList.add('text-zinc-400');
+                link.classList.remove('text-slate-950', 'font-bold', 'bg-white/95', 'shadow-xs', 'border', 'border-slate-200/80', 'text-white', 'bg-white/[0.08]');
+                link.classList.add('text-slate-700', 'font-medium');
             }
         });
     };
