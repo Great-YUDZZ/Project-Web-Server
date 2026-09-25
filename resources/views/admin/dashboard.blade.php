@@ -3,247 +3,272 @@
 @section('page_title', 'Overview & Metrics')
 
 @section('admin_content')
-<div class="space-y-12">
+<div class="space-y-8">
     
-<!-- Top Stats -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
-            
-            <div class="group relative rounded-[2rem] p-1.5 bg-slate-900 border border-white/5 shadow-sm">
-                <div class="h-full bg-slate-950 rounded-[calc(2rem-0.375rem)] p-6 shadow-[inset_0_1px_1px_rgba(255,255,255,0.05)] transition-colors duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:bg-slate-900 flex flex-col justify-between">
-                    <div class="flex justify-between items-start mb-2">
-                        <div class="text-[10px] uppercase tracking-[0.2em] font-medium text-slate-500">Total Lab</div>
-                        <div class="px-2 py-0.5 rounded-lg bg-cyan-500/10 text-cyan-400 text-xs font-bold border border-cyan-500/20">LABS</div>
-                    </div>
-                    <div class="text-4xl font-light text-white">{{ $totalProjects }}</div>
-                    <div class="mt-4 pt-4 border-t border-white/5 flex items-center justify-between text-xs">
-                        <span class="text-cyan-400">Proyek</span>
-                        <a href="{{ route('admin.projects.index') }}" class="text-cyan-400 hover:text-cyan-300 transition-colors">Kelola &rarr;</a>
-                    </div>
-                </div>
-            </div>
-
-        <div class="group relative rounded-[2rem] p-1.5 bg-slate-900 border border-white/5 shadow-sm">
-            <div class="h-full bg-slate-950 rounded-[calc(2rem-0.375rem)] p-6 shadow-[inset_0_1px_1px_rgba(255,255,255,0.05)] transition-colors duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:bg-slate-900 flex flex-col justify-between">
+    <!-- Top Stats (AetherCraft Control Center Metrics) -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 sm:gap-5">
+        
+        <!-- Total Lab -->
+        <div class="card-earth bg-white/95 backdrop-blur-md rounded-2xl border border-stone-300/80 p-5 shadow-sm hover:shadow-md hover:border-[#0C382E]/40 transition-all flex flex-col justify-between group">
+            <div>
                 <div class="flex justify-between items-start mb-2">
-                    <div class="text-[10px] uppercase tracking-[0.2em] font-medium text-slate-500">Total Skill</div>
-                    <div class="px-2 py-0.5 rounded-lg bg-emerald-500/10 text-emerald-400 text-xs font-bold border border-emerald-500/20">MATRIX</div>
+                    <div class="text-[10px] uppercase tracking-wider font-mono font-bold text-stone-500">Total Lab</div>
+                    <span class="badge-earth-green font-mono text-[10px] font-bold">LABS</span>
                 </div>
-                <div class="text-4xl font-light text-white">{{ $totalSkills }}</div>
-                <div class="mt-4 pt-4 border-t border-white/5 flex items-center justify-between text-xs">
-                    <span class="text-emerald-400">Kompetensi</span>
-                    <a href="{{ route('admin.skills.index') }}" class="text-emerald-400 hover:text-emerald-300 transition-colors">Kelola &rarr;</a>
-                </div>
+                <div class="text-3xl sm:text-4xl font-black text-[#0C382E] font-mono mt-2 tracking-tight">{{ $totalProjects }}</div>
+            </div>
+            <div class="mt-4 pt-3 border-t border-stone-200/80 flex items-center justify-between text-xs font-mono">
+                <span class="text-stone-500">Proyek Lab</span>
+                <a href="{{ route('admin.projects.index') }}" class="text-[#0C382E] font-bold hover:underline flex items-center gap-1 group-hover:translate-x-0.5 transition-transform">
+                    <span>Kelola</span>
+                    <span>&rarr;</span>
+                </a>
             </div>
         </div>
 
-        <div class="group relative rounded-[2rem] p-1.5 bg-slate-900 border border-white/5 shadow-sm">
-            <div class="h-full bg-slate-950 rounded-[calc(2rem-0.375rem)] p-6 shadow-[inset_0_1px_1px_rgba(255,255,255,0.05)] transition-colors duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:bg-slate-900 flex flex-col justify-between">
+        <!-- Total Skill -->
+        <div class="card-earth bg-white/95 backdrop-blur-md rounded-2xl border border-stone-300/80 p-5 shadow-sm hover:shadow-md hover:border-[#0C382E]/40 transition-all flex flex-col justify-between group">
+            <div>
                 <div class="flex justify-between items-start mb-2">
-                    <div class="text-[10px] uppercase tracking-[0.2em] font-medium text-slate-500">Sertifikat</div>
-                    <div class="px-2 py-0.5 rounded-lg bg-amber-500/10 text-amber-400 text-xs font-bold border border-amber-500/20">RESMI</div>
+                    <div class="text-[10px] uppercase tracking-wider font-mono font-bold text-stone-500">Total Skill</div>
+                    <span class="badge-earth-brown font-mono text-[10px] font-bold">MATRIX</span>
                 </div>
-                <div class="text-4xl font-light text-white">{{ $totalCertificates }}</div>
-                <div class="mt-4 pt-4 border-t border-white/5 flex items-center justify-between text-xs">
-                    <span class="text-amber-400">Kredensial</span>
-                    <a href="{{ route('admin.certificates.index') }}" class="text-amber-400 hover:text-amber-300 transition-colors">Kelola &rarr;</a>
-                </div>
+                <div class="text-3xl sm:text-4xl font-black text-[#0C382E] font-mono mt-2 tracking-tight">{{ $totalSkills }}</div>
+            </div>
+            <div class="mt-4 pt-3 border-t border-stone-200/80 flex items-center justify-between text-xs font-mono">
+                <span class="text-stone-500">Kompetensi</span>
+                <a href="{{ route('admin.skills.index') }}" class="text-[#0C382E] font-bold hover:underline flex items-center gap-1 group-hover:translate-x-0.5 transition-transform">
+                    <span>Kelola</span>
+                    <span>&rarr;</span>
+                </a>
             </div>
         </div>
 
-        <div class="group relative rounded-[2rem] p-1.5 bg-slate-900 border border-white/5 shadow-sm">
-            <div class="h-full bg-slate-950 rounded-[calc(2rem-0.375rem)] p-6 shadow-[inset_0_1px_1px_rgba(255,255,255,0.05)] transition-colors duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:bg-slate-900 flex flex-col justify-between">
+        <!-- Sertifikat -->
+        <div class="card-earth bg-white/95 backdrop-blur-md rounded-2xl border border-stone-300/80 p-5 shadow-sm hover:shadow-md hover:border-[#0C382E]/40 transition-all flex flex-col justify-between group">
+            <div>
                 <div class="flex justify-between items-start mb-2">
-                    <div class="text-[10px] uppercase tracking-[0.2em] font-medium text-slate-500">Pesan Masuk</div>
-                    <div class="px-2 py-0.5 rounded-lg bg-blue-500/10 text-blue-400 text-xs font-bold border border-blue-500/20">INBOX</div>
+                    <div class="text-[10px] uppercase tracking-wider font-mono font-bold text-stone-500">Sertifikat</div>
+                    <span class="badge-earth-mustard font-mono text-[10px] font-bold">RESMI</span>
                 </div>
-                <div class="text-4xl font-light text-white">{{ $totalMessages }}</div>
-                <div class="mt-4 pt-4 border-t border-white/5 flex items-center justify-between text-xs">
-                    <span class="text-blue-400">Pengunjung</span>
-                    <a href="{{ route('admin.messages.index') }}" class="text-blue-400 hover:text-blue-300 transition-colors">Lihat &rarr;</a>
-                </div>
+                <div class="text-3xl sm:text-4xl font-black text-[#0C382E] font-mono mt-2 tracking-tight">{{ $totalCertificates }}</div>
+            </div>
+            <div class="mt-4 pt-3 border-t border-stone-200/80 flex items-center justify-between text-xs font-mono">
+                <span class="text-stone-500">Kredensial</span>
+                <a href="{{ route('admin.certificates.index') }}" class="text-[#0C382E] font-bold hover:underline flex items-center gap-1 group-hover:translate-x-0.5 transition-transform">
+                    <span>Kelola</span>
+                    <span>&rarr;</span>
+                </a>
             </div>
         </div>
 
-        <div class="group relative rounded-[2rem] p-1.5 bg-slate-900 border border-white/5 shadow-sm">
-            <div class="h-full bg-slate-950 rounded-[calc(2rem-0.375rem)] p-6 shadow-[inset_0_1px_1px_rgba(255,255,255,0.05)] transition-colors duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] group-hover:bg-slate-900 flex flex-col justify-between">
-                <div class="flex justify-between items-center mb-4">
-                    <div class="text-[10px] uppercase tracking-[0.2em] font-medium text-slate-500">Belum Dibaca</div>
+        <!-- Pesan Masuk -->
+        <div class="card-earth bg-white/95 backdrop-blur-md rounded-2xl border border-stone-300/80 p-5 shadow-sm hover:shadow-md hover:border-[#0C382E]/40 transition-all flex flex-col justify-between group">
+            <div>
+                <div class="flex justify-between items-start mb-2">
+                    <div class="text-[10px] uppercase tracking-wider font-mono font-bold text-stone-500">Pesan Masuk</div>
+                    <span class="px-2.5 py-0.5 rounded-full bg-stone-100 text-stone-800 text-[10px] font-bold border border-stone-300 font-mono">INBOX</span>
+                </div>
+                <div class="text-3xl sm:text-4xl font-black text-stone-900 font-mono mt-2 tracking-tight">{{ $totalMessages }}</div>
+            </div>
+            <div class="mt-4 pt-3 border-t border-stone-200/80 flex items-center justify-between text-xs font-mono">
+                <span class="text-stone-500">Pengunjung</span>
+                <a href="{{ route('admin.messages.index') }}" class="text-[#0C382E] font-bold hover:underline flex items-center gap-1 group-hover:translate-x-0.5 transition-transform">
+                    <span>Lihat</span>
+                    <span>&rarr;</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- Belum Dibaca -->
+        <div class="card-earth bg-white/95 backdrop-blur-md rounded-2xl border border-stone-300/80 p-5 shadow-sm hover:shadow-md hover:border-[#0C382E]/40 transition-all flex flex-col justify-between group">
+            <div>
+                <div class="flex justify-between items-center mb-2">
+                    <div class="text-[10px] uppercase tracking-wider font-mono font-bold text-stone-500">Belum Dibaca</div>
                     @if($unreadMessages > 0)
-                        <div class="w-1.5 h-1.5 rounded-full bg-rose-500"></div>
+                        <span class="px-2.5 py-0.5 rounded-full bg-[#B45309]/15 text-[#B45309] text-[10px] font-bold border border-[#B45309]/30 font-mono animate-pulse">BARU</span>
                     @endif
                 </div>
-                <div class="text-4xl font-light {{ $unreadMessages > 0 ? 'text-rose-400' : 'text-white' }}">{{ $unreadMessages }}</div>
-                <div class="mt-4 pt-4 border-t border-white/5 flex items-center justify-between text-xs">
-                    <span class="text-rose-400">Perlu Aksi</span>
-                    <a href="{{ route('admin.messages.index', ['status' => 'unread']) }}" class="text-rose-400 hover:text-rose-300 transition-colors">Buka &rarr;</a>
-                </div>
+                <div class="text-3xl sm:text-4xl font-black {{ $unreadMessages > 0 ? 'text-[#B45309]' : 'text-stone-900' }} font-mono mt-2 tracking-tight">{{ $unreadMessages }}</div>
+            </div>
+            <div class="mt-4 pt-3 border-t border-stone-200/80 flex items-center justify-between text-xs font-mono">
+                <span class="{{ $unreadMessages > 0 ? 'text-[#B45309] font-bold' : 'text-stone-500' }}">Perlu Aksi</span>
+                <a href="{{ route('admin.messages.index', ['status' => 'unread']) }}" class="text-[#0C382E] font-bold hover:underline flex items-center gap-1 group-hover:translate-x-0.5 transition-transform">
+                    <span>Buka</span>
+                    <span>&rarr;</span>
+                </a>
             </div>
         </div>
 
     </div>
 
-    <!-- Server Health -->
-    <div class="rounded-[2rem] p-1.5 bg-slate-900 border border-white/5 shadow-sm">
-        <div class="bg-slate-950 rounded-[calc(2rem-0.375rem)] p-8 shadow-[inset_0_1px_1px_rgba(255,255,255,0.05)]">
-            
-            <div class="flex flex-wrap items-end justify-between gap-6 border-b border-white/5 pb-8 mb-8">
-                <div>
-                    <div class="text-[10px] uppercase tracking-[0.2em] font-medium text-cyan-400 mb-2">Live Telemetry</div>
-                    <h2 class="text-2xl font-bold text-white tracking-tight">Status Server</h2>
-                    <p class="text-sm text-slate-500 mt-2">LEMP Stack utilitas &amp; ketersediaan (3s poll)</p>
+    <!-- Server Health (Engineering Telemetry Center) -->
+    <div class="card-earth bg-white/95 backdrop-blur-md rounded-2xl border border-stone-300/80 p-6 sm:p-7 shadow-sm">
+        <div class="flex flex-wrap items-end justify-between gap-4 border-b border-stone-200/90 pb-5 mb-6">
+            <div>
+                <div class="text-[10px] uppercase tracking-wider font-mono font-bold text-[#0C382E] mb-1 flex items-center gap-1.5">
+                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-600 animate-pulse"></span>
+                    <span>Live Telemetry &bull; Debian 13 Baremetal</span>
                 </div>
-                <div class="flex items-center gap-4 text-xs font-mono">
-                    <span id="metric-last-updated" class="text-slate-500">
-                        Sync: {{ now()->format('H:i:s') }}
-                    </span>
-                    <button id="btn-toggle-live" class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-900 border border-white/5 hover:bg-slate-800 transition-colors ease-[cubic-bezier(0.32,0.72,0,1)] text-cyan-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500">
-                        <span id="toggle-live-dot" class="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>
-                        <span id="toggle-live-text">Live</span>
-                    </button>
-                    <button id="btn-refresh-metrics" class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-900 border border-white/5 hover:bg-slate-800 transition-colors ease-[cubic-bezier(0.32,0.72,0,1)] text-slate-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500">
-                        <svg id="refresh-icon" class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="square" stroke-linejoin="miter" stroke-width="1.5" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
-                        <span>Sync</span>
-                    </button>
-                </div>
+                <h2 class="text-xl sm:text-2xl font-black text-[#1C1917] tracking-tight">Status Mesin &amp; Layanan LEMP</h2>
+                <p class="text-xs text-[#57534E] mt-1 font-mono">Poll interval otomatis setiap 3 detik via soket lokal</p>
             </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- CPU -->
-                <div class="space-y-4">
-                    <div class="flex justify-between items-baseline">
-                        <div class="text-sm font-medium text-white">Beban CPU</div>
-                        <div id="metric-cpu-percent" class="text-2xl font-light text-slate-300 font-mono">{{ $serverMetrics['system']['cpu']['percent'] }}%</div>
-                    </div>
-                    <div class="h-1 w-full bg-slate-900 rounded-full overflow-hidden">
-                        <div id="metric-cpu-bar" class="h-full bg-cyan-400 rounded-full transition-all duration-700 ease-[cubic-bezier(0.32,0.72,0,1)]" style="width: {{ $serverMetrics['system']['cpu']['percent'] }}%"></div>
-                    </div>
-                    <div class="flex justify-between text-xs text-slate-500 font-mono">
-                        <span id="metric-cpu-load">Load: {{ $serverMetrics['system']['cpu']['load_1m'] }}</span>
-                        <span id="metric-cpu-cores">{{ $serverMetrics['system']['cpu']['cores'] }}C</span>
-                    </div>
-                </div>
-
-                <!-- RAM -->
-                <div class="space-y-4">
-                    <div class="flex justify-between items-baseline">
-                        <div class="text-sm font-medium text-white">Memori</div>
-                        <div id="metric-ram-percent" class="text-2xl font-light text-slate-300 font-mono">{{ $serverMetrics['system']['ram']['percent'] }}%</div>
-                    </div>
-                    <div class="h-1 w-full bg-slate-900 rounded-full overflow-hidden">
-                        <div id="metric-ram-bar" class="h-full bg-cyan-400 rounded-full transition-all duration-700 ease-[cubic-bezier(0.32,0.72,0,1)]" style="width: {{ $serverMetrics['system']['ram']['percent'] }}%"></div>
-                    </div>
-                    <div class="flex justify-between text-xs text-slate-500 font-mono">
-                        <span id="metric-ram-details">{{ $serverMetrics['system']['ram']['used_formatted'] }} / {{ $serverMetrics['system']['ram']['total_formatted'] }}</span>
-                        <span id="metric-ram-free">{{ $serverMetrics['system']['ram']['free_formatted'] }} free</span>
-                    </div>
-                </div>
-
-                <!-- Disk -->
-                <div class="space-y-4">
-                    <div class="flex justify-between items-baseline">
-                        <div class="text-sm font-medium text-white">Disk</div>
-                        <div id="metric-disk-percent" class="text-2xl font-light text-slate-300 font-mono">{{ $serverMetrics['system']['disk']['percent'] }}%</div>
-                    </div>
-                    <div class="h-1 w-full bg-slate-900 rounded-full overflow-hidden">
-                        <div id="metric-disk-bar" class="h-full bg-cyan-400 rounded-full transition-all duration-700 ease-[cubic-bezier(0.32,0.72,0,1)]" style="width: {{ $serverMetrics['system']['disk']['percent'] }}%"></div>
-                    </div>
-                    <div class="flex justify-between text-xs text-slate-500 font-mono">
-                        <span id="metric-disk-details">{{ $serverMetrics['system']['disk']['used_formatted'] }} / {{ $serverMetrics['system']['disk']['total_formatted'] }}</span>
-                        <span id="metric-disk-free">{{ $serverMetrics['system']['disk']['free_formatted'] }} free</span>
-                    </div>
-                </div>
+            <div class="flex items-center gap-2.5 text-xs font-mono">
+                <span id="metric-last-updated" class="text-stone-500 text-[11px]">
+                    Sync: {{ now()->format('H:i:s') }}
+                </span>
+                <button id="btn-toggle-live" class="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-stone-100 hover:bg-stone-200 border border-stone-300 text-stone-800 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0C382E] cursor-pointer">
+                    <span id="toggle-live-dot" class="w-2 h-2 rounded-full bg-emerald-600 animate-pulse"></span>
+                    <span id="toggle-live-text" class="font-bold">Live</span>
+                </button>
+                <button id="btn-refresh-metrics" class="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-stone-100 hover:bg-stone-200 border border-stone-300 text-stone-800 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0C382E] cursor-pointer" title="Perbarui metrik manual">
+                    <svg id="refresh-icon" class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+                    <span class="font-bold">Sync</span>
+                </button>
             </div>
-
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-12 pt-8 border-t border-white/5">
-                <div>
-                    <div class="flex items-center gap-2 mb-2">
-                        <div class="w-1.5 h-1.5 rounded-full {{ $serverMetrics['services']['database']['status'] === 'online' ? 'bg-cyan-400' : 'bg-rose-500' }}"></div>
-                        <div class="text-sm font-medium text-white">MariaDB</div>
-                    </div>
-                    <div class="text-xs text-slate-500 font-mono" id="metric-db-latency">{{ $serverMetrics['services']['database']['latency_ms'] ?? '-' }}ms latency</div>
-                </div>
-                <div>
-                    <div class="flex items-center gap-2 mb-2">
-                        <div class="w-1.5 h-1.5 rounded-full {{ $serverMetrics['services']['web_server']['status'] === 'online' ? 'bg-cyan-400' : 'bg-rose-500' }}"></div>
-                        <div class="text-sm font-medium text-white">Nginx</div>
-                    </div>
-                    <div class="text-xs text-slate-500 font-mono truncate">{{ $serverMetrics['services']['web_server']['software'] }}</div>
-                </div>
-                <div>
-                    <div class="flex items-center gap-2 mb-2">
-                        <div class="w-1.5 h-1.5 rounded-full {{ $serverMetrics['services']['php_fpm']['status'] === 'online' ? 'bg-cyan-400' : 'bg-rose-500' }}"></div>
-                        <div class="text-sm font-medium text-white">PHP 8.4</div>
-                    </div>
-                    <div class="text-xs text-slate-500 font-mono">FPM Socket</div>
-                </div>
-                <div>
-                    <div class="flex items-center gap-2 mb-2">
-                        <div class="w-1.5 h-1.5 rounded-full bg-cyan-400"></div>
-                        <div class="text-sm font-medium text-white">{{ $serverMetrics['host']['os'] }}</div>
-                    </div>
-                    <div class="text-xs text-slate-500 font-mono" id="metric-host-uptime">Up {{ $serverMetrics['system']['uptime']['formatted'] }}</div>
-                </div>
-            </div>
-
         </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
+            <!-- CPU -->
+            <div class="space-y-3 p-4 rounded-xl bg-stone-50/80 border border-stone-200/80">
+                <div class="flex justify-between items-baseline">
+                    <div class="text-xs font-mono font-bold text-stone-700 uppercase tracking-wider">Beban CPU</div>
+                    <div id="metric-cpu-percent" class="text-2xl font-black text-[#0C382E] font-mono">{{ $serverMetrics['system']['cpu']['percent'] }}%</div>
+                </div>
+                <div class="h-2.5 w-full bg-stone-200/80 rounded-full overflow-hidden">
+                    <div id="metric-cpu-bar" class="h-full rounded-full bg-gradient-to-r from-[#0C382E] to-[#165B4C] transition-all duration-700" style="width: {{ $serverMetrics['system']['cpu']['percent'] }}%;"></div>
+                </div>
+                <div class="flex justify-between text-[11px] text-stone-500 font-mono">
+                    <span id="metric-cpu-load">Load: {{ $serverMetrics['system']['cpu']['load_1m'] }}</span>
+                    <span id="metric-cpu-cores">{{ $serverMetrics['system']['cpu']['cores'] }} Cores</span>
+                </div>
+            </div>
+
+            <!-- RAM -->
+            <div class="space-y-3 p-4 rounded-xl bg-stone-50/80 border border-stone-200/80">
+                <div class="flex justify-between items-baseline">
+                    <div class="text-xs font-mono font-bold text-stone-700 uppercase tracking-wider">Memori RAM</div>
+                    <div id="metric-ram-percent" class="text-2xl font-black text-[#0C382E] font-mono">{{ $serverMetrics['system']['ram']['percent'] }}%</div>
+                </div>
+                <div class="h-2.5 w-full bg-stone-200/80 rounded-full overflow-hidden">
+                    <div id="metric-ram-bar" class="h-full rounded-full bg-gradient-to-r from-[#0C382E] to-[#165B4C] transition-all duration-700" style="width: {{ $serverMetrics['system']['ram']['percent'] }}%;"></div>
+                </div>
+                <div class="flex justify-between text-[11px] text-stone-500 font-mono">
+                    <span id="metric-ram-details">{{ $serverMetrics['system']['ram']['used_formatted'] }} / {{ $serverMetrics['system']['ram']['total_formatted'] }}</span>
+                    <span id="metric-ram-free">{{ $serverMetrics['system']['ram']['free_formatted'] }} free</span>
+                </div>
+            </div>
+
+            <!-- Disk -->
+            <div class="space-y-3 p-4 rounded-xl bg-stone-50/80 border border-stone-200/80">
+                <div class="flex justify-between items-baseline">
+                    <div class="text-xs font-mono font-bold text-stone-700 uppercase tracking-wider">Penyimpanan NVMe</div>
+                    <div id="metric-disk-percent" class="text-2xl font-black text-[#0C382E] font-mono">{{ $serverMetrics['system']['disk']['percent'] }}%</div>
+                </div>
+                <div class="h-2.5 w-full bg-stone-200/80 rounded-full overflow-hidden">
+                    <div id="metric-disk-bar" class="h-full rounded-full bg-gradient-to-r from-[#0C382E] to-[#165B4C] transition-all duration-700" style="width: {{ $serverMetrics['system']['disk']['percent'] }}%;"></div>
+                </div>
+                <div class="flex justify-between text-[11px] text-stone-500 font-mono">
+                    <span id="metric-disk-details">{{ $serverMetrics['system']['disk']['used_formatted'] }} / {{ $serverMetrics['system']['disk']['total_formatted'] }}</span>
+                    <span id="metric-disk-free">{{ $serverMetrics['system']['disk']['free_formatted'] }} free</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mt-6 pt-5 border-t border-stone-200/90">
+            <div class="p-3 rounded-xl bg-stone-50/60 border border-stone-200/70">
+                <div class="flex items-center gap-2 mb-1">
+                    <div class="w-2 h-2 rounded-full {{ $serverMetrics['services']['database']['status'] === 'online' ? 'bg-emerald-600' : 'bg-rose-500' }} animate-pulse"></div>
+                    <div class="text-xs font-bold text-stone-900 font-mono">MariaDB Database</div>
+                </div>
+                <div class="text-[11px] text-stone-500 font-mono" id="metric-db-latency">{{ $serverMetrics['services']['database']['latency_ms'] ?? '-' }}ms query latency</div>
+            </div>
+            <div class="p-3 rounded-xl bg-stone-50/60 border border-stone-200/70">
+                <div class="flex items-center gap-2 mb-1">
+                    <div class="w-2 h-2 rounded-full {{ $serverMetrics['services']['web_server']['status'] === 'online' ? 'bg-emerald-600' : 'bg-rose-500' }} animate-pulse"></div>
+                    <div class="text-xs font-bold text-stone-900 font-mono">Nginx Web Server</div>
+                </div>
+                <div class="text-[11px] text-stone-500 font-mono truncate">{{ $serverMetrics['services']['web_server']['software'] }}</div>
+            </div>
+            <div class="p-3 rounded-xl bg-stone-50/60 border border-stone-200/70">
+                <div class="flex items-center gap-2 mb-1">
+                    <div class="w-2 h-2 rounded-full {{ $serverMetrics['services']['php_fpm']['status'] === 'online' ? 'bg-emerald-600' : 'bg-rose-500' }} animate-pulse"></div>
+                    <div class="text-xs font-bold text-stone-900 font-mono">PHP Engine</div>
+                </div>
+                <div class="text-[11px] text-stone-500 font-mono">PHP 8.4-FPM Socket</div>
+            </div>
+            <div class="p-3 rounded-xl bg-stone-50/60 border border-stone-200/70">
+                <div class="flex items-center gap-2 mb-1">
+                    <div class="w-2 h-2 rounded-full bg-emerald-600 animate-pulse"></div>
+                    <div class="text-xs font-bold text-stone-900 font-mono">{{ $serverMetrics['host']['os'] }}</div>
+                </div>
+                <div class="text-[11px] text-stone-500 font-mono" id="metric-host-uptime">Up {{ $serverMetrics['system']['uptime']['formatted'] }}</div>
+            </div>
+        </div>
+
     </div>
 
-    <!-- Main Grid -->
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+    <!-- Main Grid: Recent Projects & Recent Messages -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8">
         
         <!-- Recent Projects -->
-        <div class="lg:col-span-7 rounded-[2rem] p-1.5 bg-slate-900 border border-white/5 shadow-sm">
-            <div class="h-full bg-slate-950 rounded-[calc(2rem-0.375rem)] p-8 shadow-[inset_0_1px_1px_rgba(255,255,255,0.05)]">
-                <div class="flex justify-between items-end border-b border-white/5 pb-6 mb-6">
-                    <h3 class="text-lg font-bold text-white tracking-tight">Dokumentasi Terbaru</h3>
-                    <a href="{{ route('admin.projects.index') }}" class="text-sm text-cyan-400 hover:text-cyan-300 transition-colors">Lihat Semua</a>
+        <div class="lg:col-span-7 card-earth bg-white/95 backdrop-blur-md rounded-2xl border border-stone-300/80 p-6 shadow-sm">
+            <div class="flex justify-between items-center border-b border-stone-200/90 pb-4 mb-5">
+                <div class="flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-[#0C382E]"></span>
+                    <h3 class="text-base font-bold text-[#1C1917] tracking-tight">Dokumentasi Lab Terbaru</h3>
                 </div>
+                <a href="{{ route('admin.projects.index') }}" class="text-xs font-mono text-[#0C382E] hover:underline font-bold">Lihat Semua &rarr;</a>
+            </div>
 
-                <div class="space-y-4">
-                    @forelse($recentProjects as $p)
-                        <div class="flex items-center justify-between p-4 rounded-xl hover:bg-white/5 transition-colors duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] group">
-                            <div>
-                                <div class="font-medium text-white mb-1 group-hover:text-cyan-400 transition-colors">{{ $p->title }}</div>
-                                <div class="text-xs text-slate-500 font-mono">{{ $p->category }} &bull; {{ $p->created_at->format('d M Y') }}</div>
-                            </div>
-                            <div class="flex items-center gap-4">
-                                <a href="{{ route('admin.projects.edit', $p->id) }}" class="text-sm text-slate-400 hover:text-white transition-colors">Edit</a>
-                                <a href="{{ route('projects.show', $p->slug) }}" target="_blank" class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center text-slate-400 hover:bg-white/10 hover:text-white transition-colors">
-                                    <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="square" stroke-linejoin="miter" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
-                                </a>
+            <div class="space-y-3">
+                @forelse($recentProjects as $p)
+                    <div class="flex items-center justify-between p-3.5 rounded-xl border border-stone-200/70 hover:border-[#0C382E]/40 hover:bg-stone-50/80 transition-all group">
+                        <div class="min-w-0 pr-4">
+                            <div class="font-bold text-stone-900 text-sm mb-0.5 group-hover:text-[#0C382E] transition-colors truncate">{{ $p->title }}</div>
+                            <div class="text-xs text-stone-500 font-mono flex items-center gap-2">
+                                <span class="badge-earth-green text-[9px] px-2 py-0.5">{{ $p->category }}</span>
+                                <span>{{ $p->created_at->format('d M Y') }}</span>
                             </div>
                         </div>
-                    @empty
-                        <div class="py-8 text-center text-slate-500 text-sm">Belum ada proyek.</div>
-                    @endforelse
-                </div>
+                        <div class="flex items-center gap-2.5 shrink-0">
+                            <a href="{{ route('admin.projects.edit', $p->id) }}" class="text-xs font-mono font-semibold text-stone-700 hover:text-stone-950 px-2.5 py-1 rounded-lg bg-stone-100 hover:bg-stone-200 border border-stone-200 transition-colors">Edit</a>
+                            <a href="{{ route('projects.show', $p->slug) }}" target="_blank" class="w-7 h-7 rounded-lg bg-stone-100 hover:bg-[#0C382E] hover:text-white flex items-center justify-center text-stone-700 transition-colors border border-stone-200" title="Buka spesifikasi di web publik">
+                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
+                            </a>
+                        </div>
+                    </div>
+                @empty
+                    <div class="py-8 text-center text-stone-500 text-xs font-mono">Belum ada proyek terdokumentasi.</div>
+                @endforelse
             </div>
         </div>
 
         <!-- Recent Messages -->
-        <div class="lg:col-span-5 rounded-[2rem] p-1.5 bg-slate-900 border border-white/5 shadow-sm">
-            <div class="h-full bg-slate-950 rounded-[calc(2rem-0.375rem)] p-8 shadow-[inset_0_1px_1px_rgba(255,255,255,0.05)]">
-                <div class="flex justify-between items-end border-b border-white/5 pb-6 mb-6">
-                    <h3 class="text-lg font-bold text-white tracking-tight">Pesan Masuk</h3>
-                    <a href="{{ route('admin.messages.index') }}" class="text-sm text-cyan-400 hover:text-cyan-300 transition-colors">Inbox</a>
+        <div class="lg:col-span-5 card-earth bg-white/95 backdrop-blur-md rounded-2xl border border-stone-300/80 p-6 shadow-sm">
+            <div class="flex justify-between items-center border-b border-stone-200/90 pb-4 mb-5">
+                <div class="flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-[#B45309]"></span>
+                    <h3 class="text-base font-bold text-[#1C1917] tracking-tight">Pesan Pengunjung</h3>
                 </div>
+                <a href="{{ route('admin.messages.index') }}" class="text-xs font-mono text-[#0C382E] hover:underline font-bold">Inbox &rarr;</a>
+            </div>
 
-                <div class="space-y-4">
-                    @forelse($recentMessages as $msg)
-                        <a href="{{ route('admin.messages.show', $msg->id) }}" class="block p-5 rounded-xl border {{ $msg->is_read ? 'border-white/5 bg-transparent hover:bg-white/5' : 'border-cyan-500/30 bg-cyan-500/5 hover:bg-cyan-500/10' }} transition-colors duration-300 ease-[cubic-bezier(0.32,0.72,0,1)]">
-                            <div class="flex justify-between items-start mb-2">
-                                <span class="font-medium text-white truncate max-w-[150px]">{{ $msg->sender_name }}</span>
-                                <span class="text-xs text-slate-500 font-mono">{{ $msg->created_at->diffForHumans() }}</span>
-                            </div>
-                            <div class="text-sm text-slate-300 truncate">{{ $msg->subject }}</div>
-                            @if(!$msg->is_read)
-                                <div class="mt-3 text-[10px] uppercase tracking-[0.2em] font-bold text-cyan-400">Baru</div>
-                            @endif
-                        </a>
-                    @empty
-                        <div class="py-8 text-center text-slate-500 text-sm">Inbox kosong.</div>
-                    @endforelse
-                </div>
+            <div class="space-y-3">
+                @forelse($recentMessages as $msg)
+                    <a href="{{ route('admin.messages.show', $msg->id) }}" class="block p-3.5 rounded-xl border {{ $msg->is_read ? 'border-stone-200/70 bg-stone-50/50 hover:bg-stone-100/70' : 'border-[#B45309]/40 bg-[#B45309]/06 hover:bg-[#B45309]/10' }} transition-colors">
+                        <div class="flex justify-between items-start mb-1">
+                            <span class="font-bold text-stone-900 truncate max-w-[170px] text-xs">{{ $msg->sender_name }}</span>
+                            <span class="text-[11px] text-stone-500 font-mono">{{ $msg->created_at->diffForHumans() }}</span>
+                        </div>
+                        <div class="text-xs text-stone-600 truncate font-mono">{{ $msg->subject }}</div>
+                        @if(!$msg->is_read)
+                            <div class="mt-2 inline-block px-2 py-0.5 rounded-full text-[9px] uppercase font-bold text-white bg-[#B45309] shadow-xs font-mono">Belum Dibaca</div>
+                        @endif
+                    </a>
+                @empty
+                    <div class="py-8 text-center text-stone-500 text-xs font-mono">Inbox kosong.</div>
+                @endforelse
             </div>
         </div>
 
@@ -294,7 +319,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (document.getElementById('metric-cpu-bar')) {
                 const bar = document.getElementById('metric-cpu-bar');
                 bar.style.width = `${cpu.percent}%`;
-                bar.className = `h-full rounded-full transition-all duration-700 ease-[cubic-bezier(0.32,0.72,0,1)] ${cpu.percent >= 85 ? 'bg-rose-500' : 'bg-cyan-400'}`;
+                bar.style.backgroundColor = cpu.percent >= 85 ? '#E11D48' : '#0C382E';
             }
             if (document.getElementById('metric-cpu-load')) document.getElementById('metric-cpu-load').textContent = `Load: ${cpu.load_1m}`;
             
@@ -304,7 +329,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (document.getElementById('metric-ram-bar')) {
                 const bar = document.getElementById('metric-ram-bar');
                 bar.style.width = `${ram.percent}%`;
-                bar.className = `h-full rounded-full transition-all duration-700 ease-[cubic-bezier(0.32,0.72,0,1)] ${ram.percent >= 85 ? 'bg-rose-500' : 'bg-cyan-400'}`;
+                bar.style.backgroundColor = ram.percent >= 85 ? '#E11D48' : '#0C382E';
             }
             if (document.getElementById('metric-ram-details')) document.getElementById('metric-ram-details').textContent = `${ram.used_formatted} / ${ram.total_formatted}`;
             if (document.getElementById('metric-ram-free')) document.getElementById('metric-ram-free').textContent = `${ram.free_formatted} free`;
@@ -315,7 +340,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (document.getElementById('metric-disk-bar')) {
                 const bar = document.getElementById('metric-disk-bar');
                 bar.style.width = `${disk.percent}%`;
-                bar.className = `h-full rounded-full transition-all duration-700 ease-[cubic-bezier(0.32,0.72,0,1)] ${disk.percent >= 85 ? 'bg-rose-500' : 'bg-cyan-400'}`;
+                bar.style.backgroundColor = disk.percent >= 85 ? '#E11D48' : '#0C382E';
             }
             if (document.getElementById('metric-disk-details')) document.getElementById('metric-disk-details').textContent = `${disk.used_formatted} / ${disk.total_formatted}`;
 
@@ -349,17 +374,17 @@ document.addEventListener('DOMContentLoaded', () => {
         toggleLiveBtn.addEventListener('click', () => {
             isLive = !isLive;
             if (isLive) {
-                if (toggleLiveDot) toggleLiveDot.className = 'w-1.5 h-1.5 rounded-full bg-cyan-400';
+                if (toggleLiveDot) {
+                    toggleLiveDot.className = 'w-2 h-2 rounded-full bg-emerald-500 animate-pulse';
+                }
                 if (toggleLiveText) toggleLiveText.textContent = 'Live';
-                if (toggleLiveBtn) toggleLiveBtn.classList.add('text-cyan-400');
-                if (toggleLiveBtn) toggleLiveBtn.classList.remove('text-slate-500');
                 fetchMetrics(true);
                 startPolling();
             } else {
-                if (toggleLiveDot) toggleLiveDot.className = 'w-1.5 h-1.5 rounded-full bg-slate-600';
+                if (toggleLiveDot) {
+                    toggleLiveDot.className = 'w-2 h-2 rounded-full bg-stone-400';
+                }
                 if (toggleLiveText) toggleLiveText.textContent = 'Paused';
-                if (toggleLiveBtn) toggleLiveBtn.classList.remove('text-cyan-400');
-                if (toggleLiveBtn) toggleLiveBtn.classList.add('text-slate-500');
                 if (pollTimer) clearInterval(pollTimer);
             }
         });
@@ -383,4 +408,3 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 </script>
 @endpush
-

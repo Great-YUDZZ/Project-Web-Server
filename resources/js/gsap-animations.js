@@ -18,88 +18,41 @@ const initHeroTimeline = () => {
     if (!heroSection) return;
 
     const tl = gsap.timeline({
-        defaults: { ease: 'power3.out' },
-        delay: 0.05
+        defaults: { ease: 'power2.out' },
+        delay: 0
     });
 
     // Floating header navbar
     const headerNav = document.querySelector('header');
     if (headerNav) {
-        tl.fromTo(headerNav, 
-            { y: -25, opacity: 0 },
-            { y: 0, opacity: 1, duration: 0.6, clearProps: 'opacity,transform' }
+        tl.from(headerNav, 
+            { y: -15, opacity: 0.7, duration: 0.4, clearProps: 'all' }
         );
     }
 
-    // Hero eyebrow badge
-    const heroBadge = heroSection.querySelector('.glass-pill');
-    if (heroBadge) {
-        tl.fromTo(heroBadge,
-            { scale: 0.9, opacity: 0 },
-            { scale: 1, opacity: 1, duration: 0.5, ease: 'back.out(1.5)', clearProps: 'opacity,transform' },
-            '-=0.4'
-        );
-    }
-
-    // Hero headline
+    // Hero headline and description (LCP optimized: never zero out text completely)
     const heroHeading = heroSection.querySelector('h1');
     if (heroHeading) {
-        tl.fromTo(heroHeading,
-            { y: 30, opacity: 0 },
-            { y: 0, opacity: 1, duration: 0.65, clearProps: 'opacity,transform' },
-            '-=0.35'
+        tl.from(heroHeading,
+            { y: 15, opacity: 0.6, duration: 0.4, clearProps: 'all' },
+            '-=0.2'
         );
     }
 
-    // Hero description
     const heroDesc = heroSection.querySelector('p');
     if (heroDesc) {
-        tl.fromTo(heroDesc,
-            { y: 20, opacity: 0 },
-            { y: 0, opacity: 1, duration: 0.55, clearProps: 'opacity,transform' },
-            '-=0.45'
+        tl.from(heroDesc,
+            { y: 10, opacity: 0.7, duration: 0.35, clearProps: 'all' },
+            '-=0.2'
         );
     }
 
-    // Hero action buttons & social links
-    const heroButtons = heroSection.querySelectorAll('.btn-primary, .btn-ghost, a.glass-panel-interactive');
-    if (heroButtons.length) {
-        tl.fromTo(heroButtons,
-            { y: 18, opacity: 0 },
-            {
-                y: 0,
-                opacity: 1,
-                duration: 0.5,
-                stagger: 0.05,
-                clearProps: 'opacity,transform'
-            },
-            '-=0.35'
-        );
-    }
-
-    // Floating SLA/Metric mini cards
-    const metricCards = heroSection.querySelectorAll('.grid-cols-2 > div');
-    if (metricCards.length) {
-        tl.fromTo(metricCards,
-            { y: 22, opacity: 0 },
-            {
-                y: 0,
-                opacity: 1,
-                duration: 0.55,
-                stagger: 0.08,
-                clearProps: 'opacity,transform'
-            },
-            '-=0.3'
-        );
-    }
-
-    // Right Neofetch terminal window
-    const terminalWindow = heroSection.querySelector('.lg\\:col-span-5');
-    if (terminalWindow) {
-        tl.fromTo(terminalWindow,
-            { scale: 0.94, y: 25, opacity: 0 },
-            { scale: 1, y: 0, opacity: 1, duration: 0.8, ease: 'power3.out', clearProps: 'opacity,transform' },
-            '-=0.9'
+    // Hero action buttons & earth cards
+    const heroInteractive = heroSection.querySelectorAll('.btn-earth-green, .btn-earth-outline, .card-earth');
+    if (heroInteractive.length) {
+        tl.from(heroInteractive,
+            { y: 12, opacity: 0.7, duration: 0.35, stagger: 0.04, clearProps: 'all' },
+            '-=0.2'
         );
     }
 };
@@ -370,20 +323,25 @@ const initGsapSkillBars = () => {
 };
 
 /**
- * 5. Interactive 3D Parallax & Magnetic Tilt on Glass Cards
+ * 5. High-Performance 3D Perspective Tilt via GSAP quickTo
+ * Follows GreenSock official skill recommendations for zero-churn 60 FPS mouse tracking.
  */
 const initInteractiveTilt = () => {
     if (prefersReducedMotion()) return;
     if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
 
-    const tiltCards = document.querySelectorAll('.card-interactive, .glass-panel-interactive');
+    const tiltCards = document.querySelectorAll('.card-interactive, .glass-panel-interactive, .discord-card, .skill-card');
     tiltCards.forEach((card) => {
         let bounds = null;
 
+        const rotateXTo = gsap.quickTo(card, 'rotateX', { duration: 0.25, ease: 'power2.out' });
+        const rotateYTo = gsap.quickTo(card, 'rotateY', { duration: 0.25, ease: 'power2.out' });
+        const scaleTo = gsap.quickTo(card, 'scale', { duration: 0.28, ease: 'power2.out' });
+
         const onMouseEnter = () => {
             bounds = card.getBoundingClientRect();
-            // Temporarily disable CSS transition during mouse tracking for fluid 60fps response
-            card.style.transition = 'background-color 300ms ease, border-color 300ms ease, box-shadow 300ms ease';
+            card.style.transformPerspective = '1000px';
+            scaleTo(1.014);
         };
 
         const onMouseMove = (e) => {
@@ -393,38 +351,64 @@ const initInteractiveTilt = () => {
             const xPct = (mouseX / bounds.width) - 0.5;
             const yPct = (mouseY / bounds.height) - 0.5;
 
-            const rotateX = -yPct * 6.5;
-            const rotateY = xPct * 6.5;
+            // Update CSS custom properties for dynamic light sheen
+            card.style.setProperty('--mouse-x', `${(mouseX / bounds.width * 100).toFixed(1)}%`);
+            card.style.setProperty('--mouse-y', `${(mouseY / bounds.height * 100).toFixed(1)}%`);
 
-            gsap.to(card, {
-                rotateX: rotateX,
-                rotateY: rotateY,
-                transformPerspective: 1000,
-                scale: 1.012,
-                duration: 0.3,
-                ease: 'power1.out',
-                overwrite: 'auto'
-            });
+            rotateXTo(-yPct * 6.5);
+            rotateYTo(xPct * 6.5);
         };
 
         const onMouseLeave = () => {
             bounds = null;
-            gsap.to(card, {
-                rotateX: 0,
-                rotateY: 0,
-                scale: 1,
-                duration: 0.6,
-                ease: 'power2.out',
-                overwrite: 'auto',
-                onComplete: () => {
-                    card.style.transition = '';
-                }
-            });
+            rotateXTo(0);
+            rotateYTo(0);
+            scaleTo(1);
         };
 
         card.addEventListener('mouseenter', onMouseEnter);
-        card.addEventListener('mousemove', onMouseMove);
+        card.addEventListener('mousemove', onMouseMove, { passive: true });
         card.addEventListener('mouseleave', onMouseLeave);
+    });
+};
+
+/**
+ * 6. Magnetic Buttons & Micro-Interactions via GSAP quickTo
+ * Delivers tactile physical responsiveness to primary interactive elements.
+ */
+const initMagneticButtons = () => {
+    if (prefersReducedMotion()) return;
+    if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+
+    const magneticElements = document.querySelectorAll('.btn-discord-white, .btn-discord-blurple, #back-to-top, .btn-primary');
+    magneticElements.forEach((el) => {
+        const xTo = gsap.quickTo(el, 'x', { duration: 0.35, ease: 'power2.out' });
+        const yTo = gsap.quickTo(el, 'y', { duration: 0.35, ease: 'power2.out' });
+
+        const onMouseMove = (e) => {
+            const rect = el.getBoundingClientRect();
+            const relX = e.clientX - (rect.left + rect.width / 2);
+            const relY = e.clientY - (rect.top + rect.height / 2);
+
+            const pullX = Math.max(-10, Math.min(10, relX * 0.28));
+            const pullY = Math.max(-8, Math.min(8, relY * 0.28));
+
+            xTo(pullX);
+            yTo(pullY);
+        };
+
+        const onMouseLeave = () => {
+            gsap.to(el, {
+                x: 0,
+                y: 0,
+                duration: 0.55,
+                ease: 'elastic.out(1, 0.4)',
+                overwrite: 'auto'
+            });
+        };
+
+        el.addEventListener('mousemove', onMouseMove, { passive: true });
+        el.addEventListener('mouseleave', onMouseLeave);
     });
 };
 
@@ -494,6 +478,167 @@ export const animateModalClose = (modalEl, cardEl, onComplete) => {
 };
 
 /**
+ * 7. Discord-Style 3D Hardware Assets & Scrollytelling Animations
+ */
+const initDiscord3DAnimations = () => {
+    const laptopShowcase = document.getElementById('laptop-showcase');
+    const laptopImg = document.getElementById('laptop-3d-img');
+    const laptopSource = document.getElementById('laptop-3d-source');
+
+    if (laptopShowcase && laptopImg) {
+        const frameCount = 12;
+        const framesDir = laptopImg.getAttribute('data-frames-dir') || '/images/discord_assets/laptop_frames';
+        const frames = [];
+
+        // Preload WebP sequence frames for zero-lag scrub
+        for (let i = 0; i < frameCount; i++) {
+            const pad = String(i).padStart(2, '0');
+            const preImg = new Image();
+            preImg.src = `${framesDir}/laptop_frame_${pad}.webp`;
+            frames.push(preImg);
+        }
+
+        let currentFrameIndex = -1;
+        const renderFrame = (frameNum) => {
+            const clamped = Math.max(0, Math.min(frameCount - 1, Math.round(frameNum)));
+            if (clamped !== currentFrameIndex) {
+                currentFrameIndex = clamped;
+                const pad = String(clamped).padStart(2, '0');
+                const frameSrc = `${framesDir}/laptop_frame_${pad}.webp`;
+                if (laptopSource) {
+                    laptopSource.srcset = frameSrc;
+                }
+                laptopImg.src = frameSrc;
+            }
+        };
+
+        const laptopMotionWrapper = document.getElementById('laptop-motion-wrapper') || laptopShowcase;
+
+        if (prefersReducedMotion()) {
+            gsap.set(laptopMotionWrapper, { x: 0, y: 0, opacity: 1 });
+            renderFrame(11);
+        } else {
+            // Smooth corner float-in and parallax for the 3D Debian Laptop in the bottom-right corner
+            gsap.fromTo(laptopMotionWrapper,
+                { x: 40, y: 40, rotation: 2, opacity: 0.85 },
+                {
+                    x: 0,
+                    y: -15,
+                    rotation: -1,
+                    opacity: 1,
+                    ease: 'power1.out',
+                    scrollTrigger: {
+                        trigger: laptopShowcase,
+                        start: 'top bottom',
+                        end: 'bottom top',
+                        scrub: 1.0
+                    }
+                }
+            );
+
+            // Laptop Open / Hold / Close Scrollytelling Sequence
+            // Opens as laptopShowcase actually enters into the viewport from the bottom
+            // Holds open throughout the showcase lab section
+            // Closes promptly and snappily as user scrolls past into skills
+            const laptopSeq = { frame: 0 };
+            const laptopTimeline = gsap.timeline({
+                scrollTrigger: {
+                    trigger: laptopShowcase,
+                    start: 'top 95%',
+                    end: 'bottom 40%',
+                    scrub: 0.35
+                }
+            });
+
+            laptopTimeline
+                .to(laptopSeq, {
+                    frame: 11,
+                    ease: 'power1.out',
+                    duration: 1.0,
+                    onUpdate: () => renderFrame(laptopSeq.frame)
+                })
+                .to(laptopSeq, {
+                    frame: 11,
+                    duration: 2.2,
+                    onUpdate: () => renderFrame(laptopSeq.frame)
+                })
+                .to(laptopSeq, {
+                    frame: 0,
+                    ease: 'power2.in',
+                    duration: 0.5,
+                    onUpdate: () => renderFrame(laptopSeq.frame)
+                });
+
+            // Subtle mouse parallax tilt on hover across the labs section
+            const labsSection = document.getElementById('labs');
+            if (labsSection) {
+                labsSection.addEventListener('mousemove', (e) => {
+                    const rect = labsSection.getBoundingClientRect();
+                    const xPercent = (e.clientX - rect.left) / rect.width - 0.5;
+                    const yPercent = (e.clientY - rect.top) / rect.height - 0.5;
+
+                    gsap.to(laptopMotionWrapper, {
+                        x: xPercent * 16,
+                        y: yPercent * 12 - 15,
+                        rotation: xPercent * 2.5,
+                        duration: 0.8,
+                        ease: 'power2.out',
+                        overwrite: 'auto'
+                    });
+                });
+
+                labsSection.addEventListener('mouseleave', () => {
+                    gsap.to(laptopMotionWrapper, {
+                        x: 0,
+                        y: -15,
+                        rotation: 0,
+                        duration: 1.2,
+                        ease: 'power2.out',
+                        overwrite: 'auto'
+                    });
+                });
+            }
+        }
+    }
+
+    // Slide-out Animation for Corner LAN Cable (Emerging from top-left corner into #skills)
+    const lanCable = document.getElementById('floating-lan-cable');
+    if (lanCable && !prefersReducedMotion()) {
+        gsap.fromTo(lanCable,
+            { x: -60, y: -60, rotation: -4 },
+            {
+                x: 8,
+                y: 8,
+                rotation: 0,
+                ease: 'power1.out',
+                scrollTrigger: {
+                    trigger: '#skills',
+                    start: 'top bottom',
+                    end: 'top 25%',
+                    scrub: 1.2
+                }
+            }
+        );
+    }
+
+    // Parallax Scroll for Floating Enterprise Server Unit
+    const serverRack = document.getElementById('floating-server-rack');
+    if (serverRack && !prefersReducedMotion()) {
+        gsap.to(serverRack, {
+            y: -70,
+            rotation: 4,
+            ease: 'none',
+            scrollTrigger: {
+                trigger: '#about',
+                start: 'top bottom',
+                end: 'bottom top',
+                scrub: 1.5
+            }
+        });
+    }
+};
+
+/**
  * Master Initialization
  */
 export const initGsapAnimations = () => {
@@ -508,6 +653,8 @@ export const initGsapAnimations = () => {
     initGsapCounters();
     initGsapSkillBars();
     initInteractiveTilt();
+    initMagneticButtons();
+    initDiscord3DAnimations();
 
     // Refresh ScrollTrigger after fonts and layout settle
     window.addEventListener('load', () => {

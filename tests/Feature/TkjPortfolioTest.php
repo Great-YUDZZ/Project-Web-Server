@@ -159,7 +159,7 @@ class TkjPortfolioTest extends TestCase
 
         $response->assertStatus(200);
         $response->assertSee('Live Telemetry', false);
-        $response->assertSee('Status Server', false);
+        $response->assertSee('Status Mesin', false);
         $response->assertSee('Beban CPU');
         $response->assertSee('Memori');
         $response->assertSee('Disk');
@@ -291,5 +291,30 @@ class TkjPortfolioTest extends TestCase
 
         $response->assertStatus(200);
         $response->assertSee($certificate->title);
+    }
+
+    public function test_admin_can_toggle_project_hero_and_featured(): void
+    {
+        $admin = User::first();
+        $project = Project::first();
+        $this->assertNotNull($project);
+
+        $initialHero = $project->is_hero;
+        $response = $this->actingAs($admin)->patch('/admin/projects/'.$project->id.'/toggle-hero');
+        $response->assertRedirect();
+        $this->assertEquals(! $initialHero, $project->fresh()->is_hero);
+
+        $initialFeatured = $project->is_featured;
+        $response = $this->actingAs($admin)->patch('/admin/projects/'.$project->id.'/toggle-featured');
+        $response->assertRedirect();
+        $this->assertEquals(! $initialFeatured, $project->fresh()->is_featured);
+    }
+
+    public function test_hero_section_renders_it_toolbox_and_visualstyle_studio(): void
+    {
+        $response = $this->get('/');
+        $response->assertStatus(200);
+        $response->assertSee('IT Toolbox', false);
+        $response->assertSee('VisualStyle Studio', false);
     }
 }

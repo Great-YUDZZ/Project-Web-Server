@@ -17,13 +17,18 @@ class PublicController extends Controller
     {
         $skills = Skill::orderBy('category')->orderByDesc('level')->get();
 
-        $featuredProjects = Project::where('is_featured', true)
-            ->latest()
-            ->take(4)
-            ->get();
+        $heroProjects = Project::hero()->take(2)->get();
+        if ($heroProjects->count() < 2) {
+            $fallback = Project::featured()
+                ->whereNotIn('id', $heroProjects->pluck('id'))
+                ->take(2 - $heroProjects->count())
+                ->get();
+            $heroProjects = $heroProjects->concat($fallback);
+        }
 
+        $featuredProjects = Project::featured()->get();
         if ($featuredProjects->isEmpty()) {
-            $featuredProjects = Project::latest()->take(4)->get();
+            $featuredProjects = Project::orderBy('order')->latest()->take(6)->get();
         }
 
         $certificates = Certificate::featured()
@@ -50,7 +55,7 @@ class PublicController extends Controller
             'server_labs' => Project::where('category', 'like', '%Sysadmin%')->orWhere('category', 'like', '%Virtual%')->count(),
         ];
 
-        return view('home', compact('skills', 'featuredProjects', 'categories', 'stats', 'certificates'));
+        return view('home', compact('skills', 'heroProjects', 'featuredProjects', 'categories', 'stats', 'certificates'));
     }
 
     /**
@@ -109,6 +114,10 @@ class PublicController extends Controller
             'subject' => ['required', 'string', 'max:150'],
             'message' => ['required', 'string', 'max:2000'],
         ]);
+
+        $validated['sender_name'] = strip_tags(trim($validated['sender_name']));
+        $validated['subject'] = strip_tags(trim($validated['subject']));
+        $validated['message'] = strip_tags(trim($validated['message']));
 
         Message::create($validated);
 

@@ -25,7 +25,7 @@ class ProjectController extends Controller
             });
         }
 
-        $projects = $query->latest()->paginate(10)->withQueryString();
+        $projects = $query->orderBy('order')->latest()->paginate(15)->withQueryString();
 
         return view('admin.projects.index', compact('projects'));
     }
@@ -51,6 +51,8 @@ class ProjectController extends Controller
             'tools_used' => ['nullable', 'string', 'max:255'],
             'demo_link' => ['nullable', 'url', 'max:255'],
             'is_featured' => ['nullable', 'boolean'],
+            'is_hero' => ['nullable', 'boolean'],
+            'order' => ['nullable', 'integer', 'min:0'],
             'topology_image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp,svg', 'max:4096'],
         ]);
 
@@ -65,6 +67,8 @@ class ProjectController extends Controller
         }
 
         $validated['is_featured'] = $request->boolean('is_featured');
+        $validated['is_hero'] = $request->boolean('is_hero');
+        $validated['order'] = (int) $request->input('order', 0);
 
         if ($request->hasFile('topology_image')) {
             $path = $request->file('topology_image')->store('topologies', 'public');
@@ -98,10 +102,14 @@ class ProjectController extends Controller
             'tools_used' => ['nullable', 'string', 'max:255'],
             'demo_link' => ['nullable', 'url', 'max:255'],
             'is_featured' => ['nullable', 'boolean'],
+            'is_hero' => ['nullable', 'boolean'],
+            'order' => ['nullable', 'integer', 'min:0'],
             'topology_image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp,svg', 'max:4096'],
         ]);
 
         $validated['is_featured'] = $request->boolean('is_featured');
+        $validated['is_hero'] = $request->boolean('is_hero');
+        $validated['order'] = (int) $request->input('order', 0);
 
         if ($request->hasFile('topology_image')) {
             // Remove old image if stored in public disk
@@ -117,6 +125,28 @@ class ProjectController extends Controller
 
         return redirect()->route('admin.projects.index')
             ->with('success', 'Data proyek/lab berhasil diperbarui.');
+    }
+
+    /**
+     * Toggle Hero status.
+     */
+    public function toggleHero(Project $project)
+    {
+        $project->update(['is_hero' => ! $project->is_hero]);
+        $status = $project->is_hero ? 'dipin ke Hero Header Beranda' : 'dilepas dari Hero Header';
+
+        return back()->with('success', "Proyek {$project->title} berhasil {$status}.");
+    }
+
+    /**
+     * Toggle Featured status.
+     */
+    public function toggleFeatured(Project $project)
+    {
+        $project->update(['is_featured' => ! $project->is_featured]);
+        $status = $project->is_featured ? 'dijadikan Proyek Unggulan' : 'dihapus dari Proyek Unggulan';
+
+        return back()->with('success', "Proyek {$project->title} berhasil {$status}.");
     }
 
     /**

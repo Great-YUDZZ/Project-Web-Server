@@ -17,22 +17,23 @@
     --font-sans: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
     --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
 
-    /* Google Stitch Modern Engineering Clarity Tokens */
-    --color-primary: #2563eb;
-    --color-primary-hover: #1d4ed8;
-    --color-secondary: #0d9488;
-    --color-secondary-hover: #0f766e;
-    --color-tertiary: #f59e0b;
-    --color-accent: #2563eb;
-    --color-accent-hover: #1d4ed8;
-    --color-accent-electric: #0284c7;
-    --color-background: #f8fafc;
-    --color-surface: #ffffff;
-    --color-surface-subtle: #f1f5f9;
-    --color-border: #e2e8f0;
-    --color-border-strong: #cbd5e1;
-    --color-text: #0f172a;
-    --color-muted: #475569;
+    /* AetherCraft Protocol - Warm Earth-Tone & Technical Precision Tokens */
+    --color-primary: #0C382E;
+    --color-primary-hover: #144D3F;
+    --color-primary-dark: #071E18;
+    --color-secondary: #B45309;
+    --color-secondary-hover: #92400E;
+    --color-tertiary: #165B4C;
+    --color-accent: #0C382E;
+    --color-accent-hover: #144D3F;
+    --color-accent-warm: #B45309;
+    --color-background: #F8F5EE;
+    --color-surface: #FFFFFF;
+    --color-surface-subtle: #F2EFE9;
+    --color-border: #E7E5E4;
+    --color-border-strong: #D6D3D1;
+    --color-text: #1C1917;
+    --color-muted: #57534E;
 
     --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
     --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -43,35 +44,55 @@
 
 @layer utilities {
     .bg-clarity-glow {
-        background: radial-gradient(ellipse 90% 55% at 50% -10%, rgba(37, 99, 235, 0.12), rgba(13, 148, 136, 0.05), transparent 75%);
+        background: radial-gradient(ellipse 90% 55% at 50% -10%, rgba(12, 56, 46, 0.08), rgba(180, 83, 9, 0.04), transparent 75%);
     }
 
     .bg-kensei-glow {
-        background: radial-gradient(ellipse 90% 55% at 50% -10%, rgba(37, 99, 235, 0.12), rgba(13, 148, 136, 0.05), transparent 75%);
+        background: radial-gradient(ellipse 90% 55% at 50% -10%, rgba(12, 56, 46, 0.08), rgba(180, 83, 9, 0.04), transparent 75%);
+    }
+
+    /* Ambient Warm Earth Gradients */
+    .bg-discord-hero {
+        background: radial-gradient(circle 900px at 50% -120px, rgba(12, 56, 46, 0.12), rgba(180, 83, 9, 0.06) 35%, transparent 70%),
+                    #F8F5EE;
+    }
+
+    .bg-discord-dark-section {
+        background: radial-gradient(ellipse 85% 65% at 50% 0%, rgba(22, 91, 76, 0.22), rgba(7, 30, 24, 0) 70%),
+                    #071E18;
+    }
+
+    .bg-discord-light-section {
+        background: radial-gradient(ellipse 85% 55% at 50% 0%, rgba(12, 56, 46, 0.06), transparent 65%),
+                    #F8F5EE;
+    }
+
+    .bg-discord-glow {
+        background: radial-gradient(circle at 74% 48%, rgba(12, 56, 46, 0.18) 0%, rgba(180, 83, 9, 0.08) 50%, transparent 75%);
     }
 
     /* Modern Engineering Clarity Light Panels */
     .glass-panel {
         position: relative;
-        background: rgba(255, 255, 255, 0.75);
+        background: rgba(255, 255, 255, 0.85);
         backdrop-filter: blur(20px);
         -webkit-backdrop-filter: blur(20px);
-        border: 1px solid rgba(255, 255, 255, 0.85);
+        border: 1px solid rgba(231, 229, 228, 0.85);
         box-shadow: 
-            0 8px 32px 0 rgba(15, 23, 42, 0.06),
-            0 1px 3px 0 rgba(15, 23, 42, 0.04),
+            0 8px 32px 0 rgba(28, 25, 23, 0.04),
+            0 1px 3px 0 rgba(28, 25, 23, 0.02),
             inset 0 1px 0 rgba(255, 255, 255, 0.95);
     }
 
     .glass-panel-interactive {
         position: relative;
-        background: rgba(255, 255, 255, 0.78);
+        background: rgba(255, 255, 255, 0.88);
         backdrop-filter: blur(16px);
         -webkit-backdrop-filter: blur(16px);
-        border: 1px solid rgba(255, 255, 255, 0.85);
+        border: 1px solid rgba(231, 229, 228, 0.9);
         box-shadow: 
-            0 4px 20px 0 rgba(15, 23, 42, 0.05),
-            0 1px 2px 0 rgba(15, 23, 42, 0.03),
+            0 4px 20px 0 rgba(28, 25, 23, 0.04),
+            0 1px 2px 0 rgba(28, 25, 23, 0.02),
             inset 0 1px 0 rgba(255, 255, 255, 0.9);
         transition: 
             transform 300ms cubic-bezier(0.16, 1, 0.3, 1),
@@ -81,12 +102,12 @@
     }
 
     .glass-panel-interactive:hover {
-        background: rgba(255, 255, 255, 0.92);
-        border-color: rgba(37, 99, 235, 0.4);
+        background: rgba(255, 255, 255, 0.98);
+        border-color: rgba(12, 56, 46, 0.35);
         transform: translateY(-2px);
         box-shadow: 
-            0 14px 32px -4px rgba(37, 99, 235, 0.12),
-            0 8px 12px -4px rgba(15, 23, 42, 0.05),
+            0 14px 32px -4px rgba(12, 56, 46, 0.10),
+            0 8px 12px -4px rgba(28, 25, 23, 0.04),
             inset 0 1px 0 rgba(255, 255, 255, 1);
     }
 
@@ -141,6 +162,34 @@
         background: rgba(255, 255, 255, 0.95);
         border-color: #cbd5e1;
         color: #0f172a;
+    }
+
+    /* Clean Minimalist High-Contrast Navbar Links */
+    .nav-link {
+        color: #1C1917 !important;
+        font-weight: 600 !important;
+        text-shadow: none !important;
+        transition: all 180ms cubic-bezier(0.16, 1, 0.3, 1);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 9999px;
+    }
+
+    .nav-link:hover {
+        color: #0C382E !important;
+        background-color: rgba(12, 56, 46, 0.12) !important;
+        text-shadow: none !important;
+    }
+
+    .nav-link.nav-link-active,
+    .nav-link-active {
+        color: #0C382E !important;
+        background-color: #FFFFFF !important;
+        font-weight: 700 !important;
+        box-shadow: 0 2px 10px -1px rgba(12, 56, 46, 0.22), 0 1px 3px 0 rgba(0, 0, 0, 0.08) !important;
+        border: 1px solid rgba(12, 56, 46, 0.18) !important;
+        text-shadow: none !important;
     }
 
     .glass-input {
@@ -484,19 +533,19 @@
         pointer-events: none;
     }
 
-    /* 3D Orrery / Orbital Focus Component */
+    /* 3D Orrery / Orbital Focus Component (Discord Dark Cosmic Glass) */
     .orrery-wrapper {
         position: relative;
         width: 100%;
-        background: rgba(255, 255, 255, 0.78);
-        backdrop-filter: blur(20px);
-        -webkit-backdrop-filter: blur(20px);
-        border: 1px solid rgba(255, 255, 255, 0.85);
-        border-radius: 1.5rem;
+        background: radial-gradient(ellipse at 50% 30%, rgba(44, 50, 130, 0.45) 0%, rgba(11, 14, 43, 0.92) 100%);
+        backdrop-filter: blur(24px);
+        -webkit-backdrop-filter: blur(24px);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 2rem;
         box-shadow: 
-            0 8px 32px 0 rgba(15, 23, 42, 0.06),
-            0 1px 3px 0 rgba(15, 23, 42, 0.04),
-            inset 0 1px 0 rgba(255, 255, 255, 0.95);
+            0 24px 60px 0 rgba(5, 7, 24, 0.6),
+            0 1px 3px 0 rgba(0, 0, 0, 0.3),
+            inset 0 1px 0 rgba(255, 255, 255, 0.12);
         overflow: hidden;
         user-select: none;
         -webkit-user-select: none;
@@ -540,8 +589,22 @@
         transform: scale(1.1);
     }
 
+    .orrery-node-badge {
+        color: #FFFFFF !important;
+        background: rgba(10, 14, 46, 0.94) !important;
+        border: 1px solid rgba(255, 255, 255, 0.35) !important;
+        text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9);
+        letter-spacing: 0.03em;
+        font-weight: 700 !important;
+        box-shadow: 0 4px 14px rgba(0, 0, 0, 0.6) !important;
+    }
+
     .orrery-node:hover .orrery-node-badge {
         opacity: 1 !important;
+        color: #FFFFFF !important;
+        background: rgba(14, 18, 56, 0.98) !important;
+        border-color: #5865F2 !important;
+        box-shadow: 0 0 16px rgba(88, 101, 242, 0.6), 0 4px 12px rgba(0, 0, 0, 0.7) !important;
     }
 
     /* Orrery Center Focus Core Display */
@@ -611,9 +674,9 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        border: 2px solid #e2e8f0;
-        background: #ffffff;
-        box-shadow: 0 4px 14px rgba(15, 23, 42, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        background: rgba(8, 10, 31, 0.85);
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
         transition: all 300ms ease;
     }
 
@@ -632,5 +695,350 @@
         flex-direction: column;
         align-items: center;
         text-align: center;
+    }
+
+    /* ========================================================
+       DISCORD 3D ASSET & SCROLLYTELLING UTILITIES
+       ======================================================== */
+    .perspective-1200 {
+        perspective: 1200px;
+    }
+
+    .perspective-1500 {
+        perspective: 1500px;
+    }
+
+    .preserve-3d {
+        transform-style: preserve-3d;
+        -webkit-transform-style: preserve-3d;
+    }
+
+    .backface-hidden {
+        backface-visibility: hidden;
+        -webkit-backface-visibility: hidden;
+    }
+
+
+    .discord-glow-orb {
+        background: radial-gradient(circle at center, rgba(88, 101, 242, 0.25) 0%, rgba(0, 240, 255, 0.15) 45%, rgba(87, 242, 135, 0.05) 70%, transparent 85%);
+        filter: blur(100px);
+        pointer-events: none;
+    }
+
+    @keyframes floatBobbing {
+        0%, 100% {
+            transform: translateY(0px) rotate(0deg);
+        }
+        50% {
+            transform: translateY(-12px) rotate(1.5deg);
+        }
+    }
+
+    @keyframes floatBobbingSlow {
+        0%, 100% {
+            transform: translateY(0px) rotate(0deg);
+        }
+        50% {
+            transform: translateY(-16px) rotate(-1.5deg);
+        }
+    }
+
+    .float-bobbing {
+        animation: floatBobbing 4s ease-in-out infinite;
+    }
+
+    .float-bobbing-delayed {
+        animation: floatBobbing 4.5s ease-in-out infinite;
+        animation-delay: -2s;
+    }
+
+    .float-bobbing-slow {
+        animation: floatBobbingSlow 6s ease-in-out infinite;
+        animation-delay: -1.5s;
+    }
+
+    /* Warm Minimalist Earth-Tone Theme (Solid Cream, Deep Forest Green, Terracotta) */
+    .bg-discord-main {
+        background-color: #F8F5EE;
+        background-image: none;
+        color: #1C1917;
+    }
+
+    .bg-earth-footer {
+        background-color: #0C382E;
+        color: #F8F5EE;
+    }
+
+    /* Harmonized Technical Appliance Card (Dark Forest Obsidian on Cream) */
+    .discord-card {
+        position: relative;
+        border-radius: 2rem;
+        background: #0B1914;
+        border: 1px solid rgba(22, 91, 76, 0.45);
+        color: #E2E8F0;
+        backdrop-filter: blur(28px);
+        -webkit-backdrop-filter: blur(28px);
+        box-shadow: 
+            0 24px 60px -12px rgba(12, 56, 46, 0.25),
+            inset 0 1px 1px 0 rgba(255, 255, 255, 0.15),
+            inset 0 0 24px 0 rgba(22, 91, 76, 0.12);
+        transition: border-color 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+                    box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+                    background-color 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        transform-style: preserve-3d;
+        will-change: transform;
+    }
+
+    .discord-card::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+        background: radial-gradient(420px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(22, 91, 76, 0.28), transparent 70%);
+        pointer-events: none;
+        opacity: 0;
+        transition: opacity 0.35s ease;
+        z-index: 1;
+    }
+
+    .discord-card:hover {
+        border-color: rgba(22, 91, 76, 0.85);
+        background: #0F241E;
+        box-shadow: 
+            0 30px 70px -15px rgba(12, 56, 46, 0.4),
+            0 0 35px -5px rgba(22, 91, 76, 0.35),
+            inset 0 1px 1px 0 rgba(255, 255, 255, 0.25);
+    }
+
+    .discord-card:hover::before {
+        opacity: 1;
+    }
+
+    @media (min-width: 640px) {
+        .discord-card {
+            border-radius: 2.5rem;
+        }
+    }
+
+    .discord-card-inner {
+        border-radius: 1.5rem;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18);
+    }
+
+    @media (min-width: 640px) {
+        .discord-card-inner {
+            border-radius: 1.75rem;
+        }
+    }
+
+    /* Minimalist Earth Card Component */
+    .card-earth {
+        position: relative;
+        background-color: #FFFFFF;
+        border-radius: 1.5rem;
+        border: 1px solid rgba(28, 25, 23, 0.09);
+        box-shadow: 
+            0 4px 20px -4px rgba(28, 25, 23, 0.04),
+            0 1px 3px 0 rgba(28, 25, 23, 0.02);
+        transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+                    box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+                    border-color 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        overflow: hidden;
+    }
+
+    .card-earth:hover {
+        transform: translateY(-4px);
+        box-shadow: 
+            0 20px 40px -10px rgba(12, 56, 46, 0.12),
+            0 1px 3px 0 rgba(12, 56, 46, 0.05);
+        border-color: rgba(12, 56, 46, 0.28);
+    }
+
+    /* Earth-Tone Action Buttons */
+    .btn-earth-green {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        padding: 0.85rem 1.85rem;
+        border-radius: 9999px;
+        background-color: #0C382E;
+        color: #F8F5EE;
+        font-weight: 700;
+        font-size: 0.95rem;
+        line-height: 1.5;
+        box-shadow: 0 4px 14px 0 rgba(12, 56, 46, 0.22);
+        transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    .btn-earth-green:hover {
+        background-color: #144D3F;
+        color: #FFFFFF;
+        box-shadow: 0 8px 24px 0 rgba(12, 56, 46, 0.32);
+        transform: translateY(-2px);
+    }
+
+    .btn-earth-green:active {
+        transform: scale(0.97);
+    }
+
+    .btn-earth-outline {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        padding: 0.8rem 1.75rem;
+        border-radius: 9999px;
+        background-color: transparent;
+        color: #0C382E;
+        border: 2px solid #0C382E;
+        font-weight: 700;
+        font-size: 0.95rem;
+        line-height: 1.5;
+        transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    .btn-earth-outline:hover {
+        background-color: #0C382E;
+        color: #F8F5EE;
+        transform: translateY(-2px);
+    }
+
+    .btn-earth-outline:active {
+        transform: scale(0.97);
+    }
+
+    .btn-earth-brown {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        padding: 0.85rem 1.85rem;
+        border-radius: 9999px;
+        background-color: #9C6644;
+        color: #FFFFFF;
+        font-weight: 700;
+        font-size: 0.95rem;
+        line-height: 1.5;
+        box-shadow: 0 4px 14px 0 rgba(156, 102, 68, 0.25);
+        transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    .btn-earth-brown:hover {
+        background-color: #845234;
+        transform: translateY(-2px);
+    }
+
+    /* Backward compatibility aliases */
+    .btn-discord-white {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        padding: 0.85rem 1.85rem;
+        border-radius: 9999px;
+        background-color: #0C382E;
+        color: #F8F5EE;
+        font-weight: 700;
+        font-size: 0.95rem;
+        line-height: 1.5;
+        box-shadow: 0 4px 14px 0 rgba(12, 56, 46, 0.22);
+        transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    .btn-discord-white:hover {
+        background-color: #144D3F;
+        color: #FFFFFF;
+        box-shadow: 0 8px 25px 0 rgba(12, 56, 46, 0.32);
+        transform: translateY(-2px);
+    }
+
+    .btn-discord-white:active {
+        transform: scale(0.96);
+    }
+
+    .btn-discord-blurple {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        padding: 0.8rem 1.75rem;
+        border-radius: 9999px;
+        background-color: transparent;
+        color: #0C382E;
+        border: 2px solid #0C382E;
+        font-weight: 700;
+        font-size: 0.95rem;
+        line-height: 1.5;
+        box-shadow: none;
+        transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    .btn-discord-blurple:hover {
+        background-color: #0C382E;
+        color: #F8F5EE;
+        box-shadow: 0 8px 25px 0 rgba(12, 56, 46, 0.25);
+        transform: translateY(-2px);
+    }
+
+    .btn-discord-blurple:active {
+        transform: scale(0.96);
+    }
+
+    /* Earth-Tone Pill Badges */
+    .badge-earth-green {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.375rem;
+        padding: 0.3rem 0.85rem;
+        border-radius: 9999px;
+        background-color: #E7EFEA;
+        color: #0C382E;
+        border: 1px solid rgba(12, 56, 46, 0.18);
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 0.025em;
+    }
+
+    .badge-earth-brown {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.375rem;
+        padding: 0.3rem 0.85rem;
+        border-radius: 9999px;
+        background-color: #F5EAE1;
+        color: #7D4726;
+        border: 1px solid rgba(125, 71, 38, 0.28);
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 0.025em;
+    }
+
+    .badge-earth-mustard {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.375rem;
+        padding: 0.3rem 0.85rem;
+        border-radius: 9999px;
+        background-color: #FDE68A;
+        color: #78350F;
+        border: 1px solid rgba(120, 53, 15, 0.28);
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 0.025em;
     }
 }

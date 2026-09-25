@@ -19,11 +19,25 @@ class Project extends Model
         'tools_used',
         'demo_link',
         'is_featured',
+        'is_hero',
+        'order',
     ];
 
     protected $casts = [
         'is_featured' => 'boolean',
+        'is_hero' => 'boolean',
+        'order' => 'integer',
     ];
+
+    public function scopeHero($query)
+    {
+        return $query->where('is_hero', true)->orderBy('order');
+    }
+
+    public function scopeFeatured($query)
+    {
+        return $query->where('is_featured', true)->orderBy('order');
+    }
 
     protected static function boot()
     {

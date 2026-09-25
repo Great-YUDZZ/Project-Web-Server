@@ -56,15 +56,21 @@ if [ ! -f "${HOSTS_FILE}.bak" ]; then
     echo "Backup ${HOSTS_FILE} dibuat di ${HOSTS_FILE}.bak"
 fi
 
-# Bersihkan entri lama agar rapi (hilangkan yudz.local dan variannya)
+# Bersihkan entri lama agar rapi (hilangkan yudz.local, systemorbital, tatasurya, musik, dan variannya)
 sed -i '/# Portofolio TKJ Yuda/d' "${HOSTS_FILE}"
+sed -i '/# Interactive Solar System Engine/d' "${HOSTS_FILE}"
+sed -i '/# Local DNS Mapping/d' "${HOSTS_FILE}"
 sed -i '/yudz\.local/d' "${HOSTS_FILE}"
 sed -i '/yudz\./d' "${HOSTS_FILE}"
 sed -i '/yudzz\./d' "${HOSTS_FILE}"
 sed -i '/yuda\.local/d' "${HOSTS_FILE}"
 sed -i '/portofolio\./d' "${HOSTS_FILE}"
+sed -i '/systemorbital/d' "${HOSTS_FILE}"
+sed -i '/tatasurya/d' "${HOSTS_FILE}"
+sed -i '/musik\./d' "${HOSTS_FILE}"
+sed -i '/musik\.local/d' "${HOSTS_FILE}"
 
-# Tambahkan entri yuda.local
+# Tambahkan entri yuda.local HANYA untuk web portofolio ini
 cat <<EOF >> "${HOSTS_FILE}"
 # Portofolio TKJ Yuda
 127.0.0.1   yuda.local
@@ -74,22 +80,28 @@ EOF
 echo "Domain berhasil dipetakan di ${HOSTS_FILE}:"
 grep -A 2 "# Portofolio TKJ Yuda" "${HOSTS_FILE}"
 
+# Hapus dispatcher lama dari proyek tata surya agar tidak mengotori DNS lagi
+rm -f /etc/NetworkManager/dispatcher.d/99-sync-dns-ip.sh
+
 # Konfigurasi BIND9 DNS Server jika terpasang di sistem
 if [ -d "/etc/bind" ]; then
     echo ""
     echo "=== Mengonfigurasi BIND9 DNS Server (${LOCAL_IP}) ==="
 
-    # Bersihkan zona yudz.local lama jika ada
+    # Bersihkan semua zona DNS lama (hanya sisakan yuda.local)
     if [ -f "/etc/bind/named.conf.local" ]; then
         sed -i '/zone "yudz.local"/,/};/d' /etc/bind/named.conf.local
-        rm -f /etc/bind/db.yudz.local
+        sed -i '/zone "systemorbital.local"/,/};/d' /etc/bind/named.conf.local
+        sed -i '/zone "tatasurya.local"/,/};/d' /etc/bind/named.conf.local
+        sed -i '/zone "musik.id"/,/};/d' /etc/bind/named.conf.local
+        rm -f /etc/bind/db.yudz.local /etc/bind/db.systemorbital.local /etc/bind/db.tatasurya.local /etc/bind/db.musik.id
     fi
 
-    # Buat file database zona yuda.local
+    # Buat file database zona yuda.local MURNI
     cat <<EOF > /etc/bind/db.yuda.local
 \$TTL    604800
 @   IN  SOA yuda.local. root.yuda.local. (
-                  1         ; Serial
+                  $(date +%s) ; Serial
              604800         ; Refresh
               86400         ; Retry
             2419200         ; Expire
@@ -115,19 +127,25 @@ EOF
         cat <<EOF > /etc/bind/named.conf.options
 options {
 	directory "/var/cache/bind";
+	listen-on port 53 { any; };
+	listen-on-v6 port 53 { any; };
+	allow-query { any; };
+	allow-query-cache { any; };
+	recursion yes;
+	allow-recursion { any; };
 	forwarders {
 		8.8.8.8;
 		1.1.1.1;
 	};
-	allow-query { any; };
 	dnssec-validation no;
+	auth-nxdomain no;
 };
 EOF
     fi
 
     named-checkconf /etc/bind/named.conf || true
     systemctl restart named || true
-    echo "BIND9 DNS server berhasil aktif untuk domain yuda.local"
+    echo "BIND9 DNS server berhasil aktif (HANYA untuk domain yuda.local)"
 fi
 
 # Konfigurasi Avahi Daemon (mDNS / Bonjour untuk iPhone, Mac, dan Linux)
@@ -142,6 +160,9 @@ if [ -d "/etc/avahi" ]; then
     fi
     if [ -f "/etc/avahi/hosts" ]; then
         sed -i '/yudz\.local/d' /etc/avahi/hosts
+        sed -i '/systemorbital/d' /etc/avahi/hosts
+        sed -i '/tatasurya/d' /etc/avahi/hosts
+        sed -i '/musik/d' /etc/avahi/hosts
         sed -i '/yuda\.local/d' /etc/avahi/hosts
         echo "${LOCAL_IP} yuda.local" >> /etc/avahi/hosts
     fi
@@ -149,10 +170,26 @@ if [ -d "/etc/avahi" ]; then
     echo "Avahi mDNS berhasil aktif untuk domain yuda.local"
 fi
 
+# Mengaktifkan Sistem Otomatisasi DNS Dinamis (Multi-Network)
+if [ -f "${PROJECT_DIR}/scripts/install-auto-dns.sh" ]; then
+    echo ""
+    echo "=== Mengaktifkan Sistem Otomatisasi DNS Dinamis (Multi-Network) ==="
+    bash "${PROJECT_DIR}/scripts/install-auto-dns.sh" || true
+fi
+
+# Update IP pada client helper scripts
+if [ -f "${PROJECT_DIR}/public/dns.sh" ]; then
+    sed -i "s/^SERVER_IP=.*/SERVER_IP=\"${LOCAL_IP}\"/" "${PROJECT_DIR}/public/dns.sh"
+fi
+if [ -f "${PROJECT_DIR}/public/dns.ps1" ]; then
+    sed -i "s/^\$ServerIP =.*/\$ServerIP = \"${LOCAL_IP}\"/" "${PROJECT_DIR}/public/dns.ps1"
+fi
+
 echo ""
 echo "=== [3/4] Menerapkan Konfigurasi Virtual Host Nginx ==="
 rm -f /etc/nginx/sites-enabled/default
 rm -f /etc/nginx/sites-enabled/portfolio
+rm -f /etc/nginx/sites-enabled/web_tata_surya
 
 cp "${NGINX_CONF_SRC}" "${NGINX_CONF_DEST}"
 ln -sf "${NGINX_CONF_DEST}" "${NGINX_CONF_ENABLED}"

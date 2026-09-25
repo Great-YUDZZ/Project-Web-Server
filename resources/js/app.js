@@ -1,4 +1,3 @@
-import { initInteractiveBackground } from './interactive-bg.js';
 import { initOrreryGallery } from './orrery-gallery.js';
 import { initGsapAnimations } from './gsap-animations.js';
 import Swiper from 'swiper';
@@ -86,14 +85,16 @@ const initActiveNavTracking = () => {
             }
         });
 
+        if (!currentSectionId && window.scrollY < 350) {
+            currentSectionId = 'home';
+        }
+
         navLinks.forEach((link) => {
             const targetSection = link.getAttribute('data-nav-section');
             if (targetSection === currentSectionId) {
-                link.classList.add('text-slate-950', 'font-bold', 'bg-white/95', 'shadow-xs', 'border', 'border-slate-200/80');
-                link.classList.remove('text-slate-700', 'font-medium', 'text-white', 'text-zinc-400', 'bg-white/[0.08]');
+                link.classList.add('nav-link-active');
             } else {
-                link.classList.remove('text-slate-950', 'font-bold', 'bg-white/95', 'shadow-xs', 'border', 'border-slate-200/80', 'text-white', 'bg-white/[0.08]');
-                link.classList.add('text-slate-700', 'font-medium');
+                link.classList.remove('nav-link-active');
             }
         });
     };
@@ -255,7 +256,6 @@ const initCertificateCoverflow = () => {
 };
 
 document.addEventListener('DOMContentLoaded', () => {
-    initInteractiveBackground();
     initGsapAnimations();
     initPortfolioTabs();
     initSkillFilter();

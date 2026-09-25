@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\MessageController;
 use App\Http\Controllers\Admin\ProjectController;
 use App\Http\Controllers\Admin\SkillController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ChatbotController;
 use App\Http\Controllers\PublicController;
 use Illuminate\Support\Facades\Route;
 
@@ -17,7 +18,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [PublicController::class, 'index'])->name('home');
 Route::get('/projects', [PublicController::class, 'projects'])->name('projects.index');
 Route::get('/projects/{slug}', [PublicController::class, 'projectDetail'])->name('projects.show');
-Route::post('/contact', [PublicController::class, 'contactSubmit'])->name('contact.submit');
+Route::get('/ai', [ChatbotController::class, 'index'])->name('ai.index');
+Route::post('/contact', [PublicController::class, 'contactSubmit'])->middleware('throttle:10,1')->name('contact.submit');
+Route::post('/chatbot/message', [ChatbotController::class, 'handle'])->middleware('throttle:30,1')->name('chatbot.message');
 
 /*
 |--------------------------------------------------------------------------
@@ -39,6 +42,8 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     Route::get('/dashboard/server-metrics', [DashboardController::class, 'serverMetrics'])->name('dashboard.server-metrics');
 
     // CRUD Projects
+    Route::patch('/projects/{project}/toggle-hero', [ProjectController::class, 'toggleHero'])->name('projects.toggle-hero');
+    Route::patch('/projects/{project}/toggle-featured', [ProjectController::class, 'toggleFeatured'])->name('projects.toggle-featured');
     Route::resource('projects', ProjectController::class);
 
     // CRUD Skills

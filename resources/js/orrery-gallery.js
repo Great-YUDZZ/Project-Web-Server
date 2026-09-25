@@ -1,3 +1,5 @@
+import * as THREE from 'three';
+
 // Interactive 3D Orrery / Orbital Focus Gallery
 // Mathematical 3D Elliptical Orbit Engine with Continuous Self-Rotation, Momentum, Drag, and Depth Sorting
 
@@ -160,9 +162,99 @@ export const initOrreryGallery = () => {
     let centerX = 0;
     let centerY = 0;
 
-    // Subtle background stars canvas
-    const initStars = () => {
+    // Three.js 3D Holographic Core & Cosmic Starfield Canvas
+    const initOrreryThreeScene = () => {
         if (!canvasStars) return null;
+
+        // Attempt Three.js WebGL initialization
+        try {
+            const renderer = new THREE.WebGLRenderer({
+                canvas: canvasStars,
+                alpha: true,
+                antialias: true
+            });
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+
+            const scene = new THREE.Scene();
+            const w = container.clientWidth || 800;
+            const h = container.clientHeight || 500;
+            const camera = new THREE.PerspectiveCamera(45, w / h, 1, 1200);
+            camera.position.z = 480;
+
+            // 3D Starfield Points
+            const starCount = 200;
+            const starGeo = new THREE.BufferGeometry();
+            const starPositions = new Float32Array(starCount * 3);
+            for (let i = 0; i < starCount; i++) {
+                starPositions[i * 3] = (Math.random() - 0.5) * 850;
+                starPositions[i * 3 + 1] = (Math.random() - 0.5) * 500;
+                starPositions[i * 3 + 2] = (Math.random() - 0.5) * 350 - 50;
+            }
+            starGeo.setAttribute('position', new THREE.BufferAttribute(starPositions, 3));
+            const starMat = new THREE.PointsMaterial({
+                size: 2.8,
+                color: 0x0C382E,
+                transparent: true,
+                opacity: 0.35,
+                blending: THREE.NormalBlending
+            });
+            const stars = new THREE.Points(starGeo, starMat);
+            scene.add(stars);
+
+            // Central 3D Cyber Core: Wireframe Icosahedron and Nested Orbital Rings (Harmonized Brass & Forest Green)
+            const coreGroup = new THREE.Group();
+            scene.add(coreGroup);
+
+            const icoGeo = new THREE.IcosahedronGeometry(46, 1);
+            const icoMat = new THREE.MeshBasicMaterial({
+                color: 0x0C382E,
+                wireframe: true,
+                transparent: true,
+                opacity: 0.35
+            });
+            const icoMesh = new THREE.Mesh(icoGeo, icoMat);
+            coreGroup.add(icoMesh);
+
+            const ringGeo = new THREE.TorusGeometry(72, 0.7, 8, 48);
+            const ringMat = new THREE.MeshBasicMaterial({
+                color: 0xB45309,
+                transparent: true,
+                opacity: 0.45,
+                blending: THREE.NormalBlending
+            });
+            const ring1 = new THREE.Mesh(ringGeo, ringMat);
+            ring1.rotation.x = Math.PI / 3;
+            coreGroup.add(ring1);
+
+            const ring2 = new THREE.Mesh(ringGeo, ringMat);
+            ring2.rotation.x = -Math.PI / 3;
+            ring2.rotation.y = Math.PI / 4;
+            coreGroup.add(ring2);
+
+            const onResize = () => {
+                if (!container) return;
+                const width = container.clientWidth;
+                const height = container.clientHeight;
+                camera.aspect = width / height;
+                camera.updateProjectionMatrix();
+                renderer.setSize(width, height, false);
+            };
+
+            onResize();
+            window.addEventListener('resize', onResize, { passive: true });
+
+            return (angle, dt) => {
+                stars.rotation.y += dt * 0.03;
+                coreGroup.rotation.y = -angle;
+                coreGroup.rotation.x = Math.sin(angle * 0.5) * 0.22;
+                icoMesh.rotation.z += dt * 0.25;
+                renderer.render(scene, camera);
+            };
+        } catch (err) {
+            console.warn('Orrery Three.js background unavailable, fallback to 2D:', err);
+        }
+
+        // 2D Canvas Fallback
         const ctx = canvasStars.getContext('2d');
         if (!ctx) return null;
 
@@ -194,13 +286,13 @@ export const initOrreryGallery = () => {
                 const safeAlpha = Math.max(0.1, Math.min(0.7, s.alpha));
                 ctx.beginPath();
                 ctx.arc(s.x, s.y, s.radius, 0, Math.PI * 2);
-                ctx.fillStyle = `rgba(226, 232, 240, ${safeAlpha})`;
+                ctx.fillStyle = `rgba(199, 210, 254, ${safeAlpha})`;
                 ctx.fill();
             }
         };
     };
 
-    const drawStarsFn = initStars();
+    const drawStarsFn = initOrreryThreeScene();
 
     // Clear existing nodes container
     nodesContainer.innerHTML = '';
@@ -223,7 +315,7 @@ export const initOrreryGallery = () => {
                      class="orrery-node-img relative z-10 w-full h-full object-contain pointer-events-none transition-transform duration-300 filter drop-shadow-[0_4px_12px_rgba(15,23,42,0.12)]"
                      loading="eager" decoding="async"
                      onerror="this.onerror=null; this.src='${tech.orbImg.replace('.webp', '.png')}';">
-                <div class="orrery-node-badge absolute -bottom-6 left-1/2 -translate-x-1/2 whitespace-nowrap px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold tracking-tight text-slate-800 bg-white/95 border border-slate-200 pointer-events-none shadow-md transition-all duration-300 opacity-85 backdrop-blur-sm">
+                <div class="orrery-node-badge absolute -bottom-7 left-1/2 -translate-x-1/2 whitespace-nowrap px-3 py-1 rounded-full text-[11px] font-mono font-black tracking-wide text-white bg-[#0A0E2E]/95 border border-white/30 pointer-events-none shadow-xl transition-all duration-300 opacity-100 backdrop-blur-md">
                     ${tech.name}
                 </div>
             </div>
@@ -361,18 +453,18 @@ export const initOrreryGallery = () => {
                         <img src="${tech.orbImg}" alt="${tech.name} 3D Planetary Orb" width="144" height="144" class="w-full h-full object-contain pointer-events-none select-none" loading="eager" decoding="async" onerror="this.onerror=null; this.src='${tech.orbImg.replace('.webp', '.png')}';">
                     </div>
 
-                    <!-- Tech Identification & High-Contrast Legible Dark Typography -->
-                    <div class="orrery-core-info mt-1.5 flex flex-col items-center text-center">
-                        <h4 class="text-base sm:text-lg font-extrabold text-slate-950 tracking-tight flex items-center justify-center gap-1.5 drop-shadow-sm">
+                    <!-- Tech Identification & High-Contrast Discord White Typography -->
+                    <div class="orrery-core-info mt-2 flex flex-col items-center text-center">
+                        <h4 class="text-base sm:text-xl font-black uppercase text-white tracking-tight flex items-center justify-center gap-2 drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)]">
                             <span>${tech.name}</span>
-                            <span class="inline-block w-2 h-2 rounded-full shadow-sm" style="background: ${tech.color}; box-shadow: 0 0 8px ${tech.color}"></span>
+                            <span class="inline-block w-2.5 h-2.5 rounded-full shadow-sm" style="background: ${tech.color}; box-shadow: 0 0 12px ${tech.color}"></span>
                         </h4>
-                        <div class="text-[11px] sm:text-xs font-mono font-medium text-slate-600">
+                        <div class="text-xs sm:text-sm font-mono font-extrabold text-sky-300 mt-0.5 drop-shadow-[0_1px_3px_rgba(0,0,0,0.8)]">
                             ${tech.role}
                         </div>
-                        <button type="button" class="orrery-core-detail-btn inline-flex items-center gap-1.5 mt-1 sm:mt-1.5 px-2.5 sm:px-3 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-[11px] font-mono font-semibold text-slate-800 hover:text-slate-950 bg-white/90 hover:bg-white border border-slate-300/80 hover:border-slate-400 shadow-sm transition-all cursor-pointer backdrop-blur-sm" title="Buka detail teknologi">
-                            <span class="w-1.5 h-1.5 rounded-full animate-pulse" style="background: ${tech.color}"></span>
-                            <span>Klik 2x / tap detail</span>
+                        <button type="button" class="orrery-core-detail-btn inline-flex items-center gap-2 mt-2 px-4 py-1.5 rounded-full text-xs font-mono font-extrabold uppercase tracking-wider text-white bg-[#5865F2]/40 hover:bg-[#5865F2]/70 border border-[#5865F2]/80 shadow-lg shadow-[#5865F2]/25 transition-all cursor-pointer backdrop-blur-md" title="Buka detail teknologi">
+                            <span class="w-2 h-2 rounded-full animate-pulse" style="background: ${tech.color}"></span>
+                            <span class="text-white font-black">KLIK 2X / TAP DETAIL &rarr;</span>
                         </button>
                     </div>
                 </div>
@@ -415,8 +507,8 @@ export const initOrreryGallery = () => {
         const dt = Math.min((now - lastTime) / 1000, 0.1);
         lastTime = now;
 
-        // Background starry canvas
-        if (drawStarsFn) drawStarsFn();
+        // Background starry canvas & Three.js 3D holographic core
+        if (drawStarsFn) drawStarsFn(rotationAngle, dt);
 
         // Smooth physics interpolation
         if (targetAngle !== null) {
@@ -503,9 +595,11 @@ export const initOrreryGallery = () => {
                     glow.style.transform = 'scale(1.2)';
                     if (badge) {
                         badge.style.opacity = '1';
+                        badge.style.backgroundColor = 'rgba(10, 14, 46, 0.96)';
                         badge.style.borderColor = tech.color;
-                        badge.style.color = '#020617';
-                        badge.style.boxShadow = `0 4px 14px ${tech.color}40`;
+                        badge.style.color = '#FFFFFF';
+                        badge.style.fontWeight = '800';
+                        badge.style.boxShadow = `0 0 16px ${tech.color}90, 0 4px 12px rgba(0,0,0,0.7)`;
                     }
                     if (orbImg) {
                         orbImg.style.filter = `drop-shadow(0 10px 22px ${tech.color}75)`;
@@ -514,10 +608,12 @@ export const initOrreryGallery = () => {
                     glow.style.opacity = '0.25';
                     glow.style.transform = 'scale(1)';
                     if (badge) {
-                        badge.style.opacity = '0.75';
-                        badge.style.borderColor = '#e2e8f0';
-                        badge.style.color = '#1e293b';
-                        badge.style.boxShadow = '0 2px 6px rgba(0,0,0,0.06)';
+                        badge.style.opacity = '1';
+                        badge.style.backgroundColor = 'rgba(8, 11, 36, 0.92)';
+                        badge.style.borderColor = 'rgba(255, 255, 255, 0.35)';
+                        badge.style.color = '#F8FAFC';
+                        badge.style.fontWeight = '700';
+                        badge.style.boxShadow = '0 4px 12px rgba(0,0,0,0.6)';
                     }
                     if (orbImg) {
                         orbImg.style.filter = 'drop-shadow(0 6px 14px rgba(15,23,42,0.28))';

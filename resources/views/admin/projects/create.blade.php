@@ -8,106 +8,134 @@
     
     <div class="mb-6 flex items-center justify-between">
         <div>
-            <h2 class="text-xl font-bold text-white tracking-tight">Formulir Dokumentasi Proyek Baru</h2>
-            <p class="text-xs text-zinc-400 font-mono mt-0.5">Isi seluruh data teknis lab dan unggah diagram topologi jaringan.</p>
+            <h2 class="text-xl font-bold text-stone-900 tracking-tight">Formulir Dokumentasi Proyek Baru</h2>
+            <p class="text-xs text-stone-500 font-mono mt-0.5">Isi seluruh data teknis lab dan unggah diagram topologi jaringan.</p>
         </div>
-        <a href="{{ route('admin.projects.index') }}" class="font-mono text-xs text-zinc-400 hover:text-orange-400 transition-colors">
+        <a href="{{ route('admin.projects.index') }}" class="font-mono text-xs text-stone-500 hover:text-[#0C382E] transition-colors">
             &larr; Batal &amp; Kembali
         </a>
     </div>
 
-    <div class="rounded-3xl border border-white/[0.08] bg-[#0d0e14]/80 backdrop-blur-xl p-6 sm:p-8">
+    <div class="rounded-2xl border border-stone-200 bg-white p-6 sm:p-8 shadow-xs">
         <form action="{{ route('admin.projects.store') }}" method="POST" enctype="multipart/form-data" class="space-y-6 font-mono text-xs">
             @csrf
 
             <!-- Title -->
             <div>
-                <label for="title" class="block text-zinc-300 font-bold mb-2">
-                    JUDUL PROYEK / LAB <span class="text-rose-400">*</span>
+                <label for="title" class="block text-stone-800 font-bold mb-2">
+                    JUDUL PROYEK / LAB <span class="text-rose-600">*</span>
                 </label>
                 <input type="text" name="title" id="title" value="{{ old('title') }}" required
                        placeholder="Misal: Implementasi Routing OSPF Area 0 Multi-Vendor"
-                       class="w-full px-4 py-2.5 rounded-xl bg-[#070709] border border-white/[0.08] text-white placeholder-zinc-600 focus:outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500 text-sm">
+                       class="w-full px-4 py-2.5 rounded-xl bg-[#FAF8F5] border border-stone-300 text-stone-900 placeholder-stone-400 focus:bg-white focus:outline-none focus:border-[#0C382E] focus:ring-1 focus:ring-[#0C382E] text-sm">
             </div>
 
             <!-- Slug & Category Grid -->
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div>
-                    <label for="slug" class="block text-zinc-300 font-bold mb-2">
+                    <label for="slug" class="block text-stone-800 font-bold mb-2">
                         SLUG URL (OPSIONAL)
                     </label>
                     <input type="text" name="slug" id="slug" value="{{ old('slug') }}"
                            placeholder="kosongkan untuk generate otomatis dari judul"
-                           class="w-full px-4 py-2.5 rounded-xl bg-[#070709] border border-white/[0.08] text-white placeholder-zinc-600 focus:outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500 text-sm">
+                           class="w-full px-4 py-2.5 rounded-xl bg-[#FAF8F5] border border-stone-300 text-stone-900 placeholder-stone-400 focus:bg-white focus:outline-none focus:border-[#0C382E] focus:ring-1 focus:ring-[#0C382E] text-sm">
                 </div>
 
                 <div>
-                    <label for="category" class="block text-zinc-300 font-bold mb-2">
-                        KATEGORI LAB <span class="text-rose-400">*</span>
+                    <label for="category" class="block text-stone-800 font-bold mb-2">
+                        KATEGORI LAB <span class="text-rose-600">*</span>
                     </label>
                     <input type="text" name="category" id="category" value="{{ old('category', 'Networking') }}" required
                            placeholder="Networking / Sysadmin / Security / Virtualization"
-                           class="w-full px-4 py-2.5 rounded-xl bg-[#070709] border border-white/[0.08] text-white placeholder-zinc-600 focus:outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500 text-sm">
+                           class="w-full px-4 py-2.5 rounded-xl bg-[#FAF8F5] border border-stone-300 text-stone-900 placeholder-stone-400 focus:bg-white focus:outline-none focus:border-[#0C382E] focus:ring-1 focus:ring-[#0C382E] text-sm">
                 </div>
             </div>
 
             <!-- Tools Used & Demo Link -->
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div>
-                    <label for="tools_used" class="block text-zinc-300 font-bold mb-2">
+                    <label for="tools_used" class="block text-stone-800 font-bold mb-2">
                         TOOLS &amp; HARDWARE (PISAHKAN KOMA)
                     </label>
                     <input type="text" name="tools_used" id="tools_used" value="{{ old('tools_used') }}"
                            placeholder="Cisco Packet Tracer, Cisco 2960, Linux Debian, Wireshark"
-                           class="w-full px-4 py-2.5 rounded-xl bg-[#070709] border border-white/[0.08] text-white placeholder-zinc-600 focus:outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500 text-sm">
+                           class="w-full px-4 py-2.5 rounded-xl bg-[#FAF8F5] border border-stone-300 text-stone-900 placeholder-stone-400 focus:bg-white focus:outline-none focus:border-[#0C382E] focus:ring-1 focus:ring-[#0C382E] text-sm">
                 </div>
 
                 <div>
-                    <label for="demo_link" class="block text-zinc-300 font-bold mb-2">
+                    <label for="demo_link" class="block text-stone-800 font-bold mb-2">
                         LINK DEMO / REPOSITORI GITHUB (OPSIONAL)
                     </label>
                     <input type="url" name="demo_link" id="demo_link" value="{{ old('demo_link') }}"
                            placeholder="https://github.com/username/project-repo"
-                           class="w-full px-4 py-2.5 rounded-xl bg-[#070709] border border-white/[0.08] text-white placeholder-zinc-600 focus:outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500 text-sm">
+                           class="w-full px-4 py-2.5 rounded-xl bg-[#FAF8F5] border border-stone-300 text-stone-900 placeholder-stone-400 focus:bg-white focus:outline-none focus:border-[#0C382E] focus:ring-1 focus:ring-[#0C382E] text-sm">
                 </div>
             </div>
 
             <!-- Upload Topology Image -->
             <div>
-                <label for="topology_image" class="block text-zinc-300 font-bold mb-2">
+                <label for="topology_image" class="block text-stone-800 font-bold mb-2">
                     FILE GAMBAR TOPOLOGI JARINGAN (PNG, JPG, WEBP, SVG - MAKS 4MB)
                 </label>
-                <div class="p-4 rounded-2xl bg-[#070709] border border-dashed border-white/[0.12] hover:border-orange-500/50 transition-colors">
+                <div class="p-4 rounded-2xl bg-[#FAF8F5] border-2 border-dashed border-stone-300 hover:border-[#0C382E] transition-colors">
                     <input type="file" name="topology_image" id="topology_image" accept="image/*"
-                           class="w-full text-zinc-400 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-mono file:bg-white/[0.08] file:text-white hover:file:bg-orange-500 hover:file:text-black file:cursor-pointer file:transition-colors">
+                           class="w-full text-stone-600 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-mono file:bg-stone-200 file:text-stone-800 hover:file:bg-[#0C382E] hover:file:text-white file:cursor-pointer file:transition-colors">
                 </div>
             </div>
 
-            <!-- Featured Checkbox -->
-            <div class="p-4 rounded-2xl bg-white/[0.02] border border-white/[0.06] flex items-center gap-3">
-                <input type="checkbox" name="is_featured" id="is_featured" value="1" {{ old('is_featured') ? 'checked' : '' }}
-                       class="h-4 w-4 rounded bg-[#070709] border-white/20 text-orange-500 focus:ring-orange-500">
-                <label for="is_featured" class="text-zinc-300 font-bold cursor-pointer select-none">
-                    Jadikan sebagai <span class="text-amber-400">Proyek Unggulan</span> di halaman beranda
-                </label>
+            <!-- Visibility, Hero Pin & Order Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                <!-- Hero Pin Checkbox -->
+                <div class="p-4 rounded-2xl bg-[#0C382E]/5 border border-[#0C382E]/30 flex items-start gap-3">
+                    <input type="checkbox" name="is_hero" id="is_hero" value="1" {{ old('is_hero') ? 'checked' : '' }}
+                           class="h-4 w-4 rounded border-stone-300 text-[#0C382E] focus:ring-[#0C382E] mt-0.5">
+                    <div>
+                        <label for="is_hero" class="text-stone-900 font-bold cursor-pointer select-none block">
+                            ★ Pin ke Hero Header
+                        </label>
+                        <p class="text-[10px] text-stone-500 font-mono mt-0.5">Tampilkan di kartu utama header beranda (Maksimal 2 proyek).</p>
+                    </div>
+                </div>
+
+                <!-- Featured Checkbox -->
+                <div class="p-4 rounded-2xl bg-amber-50/70 border border-amber-200/80 flex items-start gap-3">
+                    <input type="checkbox" name="is_featured" id="is_featured" value="1" {{ old('is_featured', true) ? 'checked' : '' }}
+                           class="h-4 w-4 rounded border-stone-300 text-amber-600 focus:ring-amber-500 mt-0.5">
+                    <div>
+                        <label for="is_featured" class="text-stone-900 font-bold cursor-pointer select-none block">
+                            Proyek Unggulan
+                        </label>
+                        <p class="text-[10px] text-stone-500 font-mono mt-0.5">Tampilkan di section Showcase Lab &amp; Proyek Unggulan.</p>
+                    </div>
+                </div>
+
+                <!-- Order Input -->
+                <div class="p-4 rounded-2xl bg-[#FAF8F5] border border-stone-200 flex flex-col justify-between">
+                    <label for="order" class="text-stone-800 font-bold block mb-1">
+                        NOMOR URUTAN TAMPIL
+                    </label>
+                    <input type="number" name="order" id="order" value="{{ old('order', 0) }}" min="0"
+                           class="w-full px-3 py-1.5 rounded-xl bg-white border border-stone-300 text-stone-900 focus:outline-none focus:border-[#0C382E] text-xs font-mono font-bold">
+                    <span class="text-[10px] text-stone-400 font-mono mt-1">Semakin kecil (1, 2, 3) semakin di depan.</span>
+                </div>
             </div>
 
             <!-- Description -->
             <div>
-                <label for="description" class="block text-zinc-300 font-bold mb-2">
-                    DOKUMENTASI LANGKAH &amp; DESKRIPSI TEKNIS <span class="text-rose-400">*</span>
+                <label for="description" class="block text-stone-800 font-bold mb-2">
+                    DOKUMENTASI LANGKAH &amp; DESKRIPSI TEKNIS <span class="text-rose-600">*</span>
                 </label>
                 <textarea name="description" id="description" rows="10" required
                           placeholder="Jelaskan tujuan lab, segmentasi IP, langkah-langkah konfigurasi CLI, troubleshooting, serta hasil uji coba..."
-                          class="w-full px-4 py-3 rounded-xl bg-[#070709] border border-white/[0.08] text-white placeholder-zinc-600 focus:outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500 text-sm leading-relaxed">{{ old('description') }}</textarea>
+                          class="w-full px-4 py-3 rounded-xl bg-[#FAF8F5] border border-stone-300 text-stone-900 placeholder-stone-400 focus:bg-white focus:outline-none focus:border-[#0C382E] focus:ring-1 focus:ring-[#0C382E] text-sm leading-relaxed">{{ old('description') }}</textarea>
             </div>
 
             <!-- Submit Button -->
-            <div class="flex items-center justify-end gap-3 pt-4 border-t border-white/[0.06]">
-                <a href="{{ route('admin.projects.index') }}" class="px-5 py-2.5 rounded-xl bg-white/[0.04] border border-white/[0.08] text-zinc-300 hover:text-white transition-colors">
+            <div class="flex items-center justify-end gap-3 pt-4 border-t border-stone-200">
+                <a href="{{ route('admin.projects.index') }}" class="px-5 py-2.5 rounded-xl bg-stone-100 border border-stone-200 text-stone-700 hover:bg-stone-200 transition-colors font-medium">
                     Batal
                 </a>
-                <button type="submit" class="btn-primary text-xs py-2.5 px-6">
+                <button type="submit" class="btn-earth-green text-xs py-2.5 px-6 font-mono font-bold">
                     Simpan Dokumentasi &rarr;
                 </button>
             </div>
