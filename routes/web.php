@@ -16,11 +16,14 @@ use Illuminate\Support\Facades\Route;
 |--------------------------------------------------------------------------
 */
 Route::get('/', [PublicController::class, 'index'])->name('home');
+Route::get('/dark-preview', [PublicController::class, 'index'])->name('dark.preview');
+Route::get('/archive/classic', [PublicController::class, 'classicArchive'])->name('archive.classic');
 Route::get('/projects', [PublicController::class, 'projects'])->name('projects.index');
 Route::get('/projects/{slug}', [PublicController::class, 'projectDetail'])->name('projects.show');
 Route::get('/ai', [ChatbotController::class, 'index'])->name('ai.index');
 Route::post('/contact', [PublicController::class, 'contactSubmit'])->middleware('throttle:10,1')->name('contact.submit');
 Route::post('/chatbot/message', [ChatbotController::class, 'handle'])->middleware('throttle:30,1')->name('chatbot.message');
+Route::get('/api/telemetry', [PublicController::class, 'telemetry'])->middleware('throttle:60,1')->name('api.telemetry');
 
 /*
 |--------------------------------------------------------------------------

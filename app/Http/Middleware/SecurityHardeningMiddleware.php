@@ -33,13 +33,15 @@ class SecurityHardeningMiddleware
         $response->headers->set('Referrer-Policy', 'strict-origin-when-cross-origin');
         $response->headers->set('Permissions-Policy', 'camera=(), microphone=(), geolocation=(), payment=()');
 
-        // Content Security Policy (Allows internal assets, Google Fonts, and secure API connections)
+        // Content Security Policy (Allows internal assets, Google Fonts, Mux HLS, and secure API connections)
         $csp = "default-src 'self'; "
              . "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://fonts.googleapis.com; "
              . "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; "
              . "font-src 'self' https://fonts.gstatic.com data:; "
              . "img-src 'self' data: https: blob:; "
-             . "connect-src 'self' https://generativelanguage.googleapis.com; "
+             . "media-src 'self' https://stream.mux.com blob:; "
+             . "worker-src 'self' blob:; "
+             . "connect-src 'self' https://generativelanguage.googleapis.com https://stream.mux.com; "
              . "frame-ancestors 'self';";
 
         $response->headers->set('Content-Security-Policy', $csp);

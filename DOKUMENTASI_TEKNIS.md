@@ -511,4 +511,37 @@ sudo systemctl status mariadb
 ```
 
 ---
+
+## 9. MANAJEMEN ARSIP DESAIN & PROSEDUR ROLLBACK
+
+### 9.1 Arsitektur Dual-Theme & Arsip
+Sistem portofolio menerapkan arsitektur *Zero-Destruction Decoupling* untuk menjaga keberlangsungan desain lama dan baru:
+1. **Desain Utama Aktif (Dark Monochrome 2026)**:
+   - Rute: `/` (`home`)
+   - View: `resources/views/home.blade.php` & `resources/views/layouts/app.blade.php`
+   - Gaya: Obsidian dark (`#0a0a0a`), aksen putih murni (`#FFFFFF`), latar belakang interaktif partikel 3D, zero em-dashes, zero `//`.
+2. **Desain Arsip Klasik (Earth-Tone 2024-2025)**:
+   - Rute: `/archive/classic` (`archive.classic`)
+   - View: `resources/views/archive/classic/home.blade.php` & `resources/views/archive/classic/layout.blade.php`
+   - Dilengkapi bilah notifikasi arsip di bagian atas dengan tautan instan kembali ke desain utama.
+
+### 9.2 Prosedur Cepat Rollback ke Desain Klasik
+Jika sewaktu-waktu ingin mengembalikan desain klasik sebagai halaman utama pengunjung (`/`):
+1. Buka file `app/Http/Controllers/PublicController.php`.
+2. Pada method `index(ServerMonitorService $monitor)`, ubah baris return view:
+   ```php
+   // Mengembalikan desain klasik menjadi rute utama:
+   return view('archive.classic.home', compact('skills', 'heroProjects', 'featuredProjects', 'categories', 'stats', 'certificates', 'serverMetrics'));
+   ```
+3. Bersihkan cache view dan route:
+   ```bash
+   php artisan optimize:clear
+   ```
+4. Verifikasi dengan menjalankan tes otomatis:
+   ```bash
+   php artisan test
+   ```
+
+---
 *Dokumentasi ini disusun secara terpadu untuk menjamin keandalan pemeliharaan, audit arsitektur, dan kemudahan skalabilitas sistem web portofolio.*
+

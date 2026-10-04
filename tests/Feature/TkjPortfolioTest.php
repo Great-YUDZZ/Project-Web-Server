@@ -25,6 +25,15 @@ class TkjPortfolioTest extends TestCase
         $response->assertSee('Showcase Lab');
     }
 
+    public function test_classic_archive_page_is_accessible(): void
+    {
+        $response = $this->get('/archive/classic');
+
+        $response->assertStatus(200);
+        $response->assertSee('Arsip Desain Portofolio');
+        $response->assertSee('I Made Yuda Pramana');
+    }
+
     public function test_projects_archive_page_is_accessible(): void
     {
         $response = $this->get('/projects');

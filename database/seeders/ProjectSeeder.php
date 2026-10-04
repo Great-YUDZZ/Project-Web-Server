@@ -55,9 +55,10 @@ class ProjectSeeder extends Seeder
                 'tools_used' => 'Flutter, Dart 3.x, SQLite, Neumorphism UI, MVVM Architecture, SHA-256 Crypto, Android APK, Windows Portable, Linux Desktop',
                 'demo_link' => 'https://github.com/Great-YUDZZ/SakuKu',
                 'is_featured' => true,
-                'is_hero' => false,
+                'is_hero' => true,
                 'order' => 3,
             ]
         );
     }
 }
+

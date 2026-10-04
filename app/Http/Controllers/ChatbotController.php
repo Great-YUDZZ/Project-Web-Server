@@ -254,7 +254,7 @@ TEXT;
             curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($payload));
             curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 5);
             curl_setopt($ch, CURLOPT_TIMEOUT, 12);
-            // CRITICAL: Force IPv4 — server's IPv6 route to Google times out
+            // CRITICAL: Force IPv4: server's IPv6 route to Google times out
             curl_setopt($ch, CURLOPT_IPRESOLVE, CURL_IPRESOLVE_V4);
             curl_setopt($ch, CURLOPT_RESOLVE, ["generativelanguage.googleapis.com:443:{$ipv4}"]);
 
@@ -399,7 +399,7 @@ PROFIL PENGEMBANG:
 - Kontak Email: yuda2010f@gmail.com
 - WhatsApp: 085182691268
 - GitHub: https://github.com/Great-YUDZZ
-- Domain Portofolio: yuda.local (IP: 192.168.1.18)
+- Domain Portofolio: https://great-yuda.my.id (Domain Publik Cloudflare Tunnel) & yuda.local (Akses Jaringan Lokal)
 
 TEKNOLOGI PEMBANGUN WEB INI:
 - Backend Framework: Laravel 11 (PHP 8.4-FPM)

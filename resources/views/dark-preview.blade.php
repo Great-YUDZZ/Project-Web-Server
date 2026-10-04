@@ -185,7 +185,6 @@
                         </div>
                         <h2 class="text-3xl md:text-5xl font-sans text-[#f5f5f5] tracking-tight">
                             Proyek <span class="font-display italic text-[#f5f5f5]">Unggulan</span>
-                            <span class="sr-only">Showcase Lab</span>
                         </h2>
                         <p class="text-sm md:text-base text-[#878787] mt-2 max-w-md font-light">
                             Koleksi proyek perangkat lunak dan utilitas yang saya rancang dan kembangkan, mulai dari perancangan arsitektur hingga deployment produksi.
@@ -466,7 +465,6 @@
                     </div>
                     <h2 class="text-3xl sm:text-4xl lg:text-5xl font-sans font-black uppercase text-[#f5f5f5] tracking-tight">
                         Matriks Kompetensi Kejuruan TKJ
-                        <span class="sr-only">Skill Matrix</span>
                     </h2>
                     <p class="text-[#878787] text-sm sm:text-base leading-relaxed text-balance">
                         Tingkat penguasaan instrumen jaringan, sistem operasi server, dan perkakas diagnostik kejuruan dari basis data riil.
@@ -1113,7 +1111,7 @@
                     <div class="flex items-center gap-6 font-mono text-xs">
                         <a href="https://github.com/Great-YUDZZ" target="_blank" rel="noopener noreferrer" class="hover:text-[#f5f5f5] transition-colors">GitHub</a>
                         <a href="mailto:yuda2010f@gmail.com" class="hover:text-[#f5f5f5] transition-colors">Email</a>
-                        <a href="{{ route('archive.classic') }}" class="hover:text-white transition-colors">Arsip Klasik</a>
+                        <a href="{{ route('home') }}" class="hover:text-white transition-colors">Mode Klasik</a>
                         <a href="{{ route('ai.index') }}" class="hover:text-white transition-colors">Yuna AI</a>
                     </div>
 

@@ -1,5 +1,8 @@
 import { initOrreryGallery } from './orrery-gallery.js';
 import { initGsapAnimations } from './gsap-animations.js';
+import { initLabsRotator } from './labs-rotator.js';
+import { initDarkPortfolio } from './dark-portfolio.js';
+import { initInteractiveBackground } from './interactive-bg.js';
 import Swiper from 'swiper';
 import { EffectCoverflow, Pagination, Navigation, Keyboard, A11y } from 'swiper/modules';
 
@@ -40,21 +43,35 @@ const initPortfolioTabs = () => {
     });
 };
 
-// Skill filter buttons inside Tech Stack tab
+// Modul Penyaring Kategori Matriks Kompetensi (#skills)
 const initSkillFilter = () => {
     const filterTabs = document.querySelectorAll('#skill-filter-tabs button');
     const skillCards = document.querySelectorAll('.skill-card');
 
     if (!filterTabs.length) return;
 
+    const isDark = () => document.documentElement.classList.contains('dark') || document.getElementById('dark-portfolio-root');
+
     filterTabs.forEach((btn) => {
         btn.addEventListener('click', () => {
+            const dark = isDark();
             filterTabs.forEach((b) => {
-                b.classList.remove('bg-blue-600', 'text-white', 'shadow-lg', 'shadow-blue-600/30', 'font-semibold');
-                b.classList.add('bg-slate-900/60', 'backdrop-blur-md', 'border', 'border-white/10', 'text-slate-300', 'hover:text-white', 'hover:bg-slate-800/80', 'font-medium');
+                if (dark) {
+                    b.classList.remove('bg-white', 'text-black', 'border-white', 'font-bold', 'shadow-md');
+                    b.classList.add('bg-white/[0.05]', 'border-white/10', 'text-neutral-400', 'hover:text-white', 'hover:bg-white/[0.1]', 'font-semibold');
+                } else {
+                    b.classList.remove('bg-[#0F172A]', 'text-white', 'border-[#0F172A]', 'shadow-xs', 'font-bold');
+                    b.classList.add('bg-white/90', 'border-stone-300', 'text-[#334155]', 'hover:text-[#4E85BF]', 'hover:border-[#4E85BF]/50', 'hover:bg-stone-100', 'font-semibold');
+                }
             });
-            btn.classList.remove('bg-slate-900/60', 'backdrop-blur-md', 'border', 'border-white/10', 'text-slate-300', 'hover:text-white', 'hover:bg-slate-800/80', 'font-medium');
-            btn.classList.add('bg-blue-600', 'text-white', 'shadow-lg', 'shadow-blue-600/30', 'font-semibold');
+
+            if (dark) {
+                btn.classList.remove('bg-white/[0.05]', 'border-white/10', 'text-neutral-400', 'hover:text-white', 'hover:bg-white/[0.1]', 'font-semibold');
+                btn.classList.add('bg-white', 'text-black', 'border-white', 'font-bold', 'shadow-md');
+            } else {
+                btn.classList.remove('bg-white/90', 'border-stone-300', 'text-[#334155]', 'hover:text-[#4E85BF]', 'hover:border-[#4E85BF]/50', 'hover:bg-stone-100', 'font-semibold');
+                btn.classList.add('bg-[#0F172A]', 'text-white', 'border-[#0F172A]', 'shadow-xs', 'font-bold');
+            }
 
             const filter = btn.dataset.filter;
             skillCards.forEach((card) => {
@@ -66,32 +83,103 @@ const initSkillFilter = () => {
     });
 };
 
-// Active Section Tracking for Floating Navbar
+// Global Certificate Lightbox Modal Controller
+window.openCertModal = (imageSrc, title, issuer, credentialId, pdfUrl, status) => {
+    const modal = document.getElementById('cert-modal');
+    const modalImg = document.getElementById('modal-cert-image');
+    const modalTitle = document.getElementById('modal-cert-title');
+    const modalIssuer = document.getElementById('modal-cert-issuer');
+    const modalId = document.getElementById('modal-cert-id');
+    const modalStatus = document.getElementById('modal-cert-status');
+    const pdfLink = document.getElementById('modal-cert-pdf-link');
+    const pdfLinkMobile = document.getElementById('modal-cert-pdf-link-mobile');
+
+    if (!modal) return;
+
+    if (modalImg) modalImg.src = imageSrc || '';
+    if (modalTitle) modalTitle.textContent = title || '';
+    if (modalIssuer) modalIssuer.textContent = issuer || '';
+    if (modalId) modalId.textContent = credentialId ? 'ID: ' + credentialId : '';
+    if (modalStatus) modalStatus.textContent = status || 'Terverifikasi Resmi';
+
+    if (pdfUrl) {
+        if (pdfLink) {
+            pdfLink.href = pdfUrl;
+            pdfLink.classList.remove('hidden');
+        }
+        if (pdfLinkMobile) {
+            pdfLinkMobile.href = pdfUrl;
+            pdfLinkMobile.classList.remove('hidden');
+        }
+    } else {
+        if (pdfLink) pdfLink.classList.add('hidden');
+        if (pdfLinkMobile) pdfLinkMobile.classList.add('hidden');
+    }
+
+    const card = modal.querySelector('.cert-modal-card, .glass-panel');
+    if (typeof window.animateModalOpen === 'function') {
+        window.animateModalOpen(modal, card);
+    } else {
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+        document.body.style.overflow = 'hidden';
+    }
+};
+
+window.closeCertModal = () => {
+    const modal = document.getElementById('cert-modal');
+    if (!modal) return;
+
+    const card = modal.querySelector('.cert-modal-card, .glass-panel');
+    if (typeof window.animateModalClose === 'function') {
+        window.animateModalClose(modal, card);
+    } else {
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+        document.body.style.overflow = '';
+    }
+};
+
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+        window.closeCertModal();
+    }
+});
+
+// Active Section Tracking for Floating Navbar (4 Kategori Inti)
 const initActiveNavTracking = () => {
     const navLinks = document.querySelectorAll('nav [data-nav-section]');
     const sections = document.querySelectorAll('section[id]');
 
     if (!navLinks.length || !sections.length) return;
 
+    // Pemetaan ID section ke grup navigasi induk
+    const sectionMap = {
+        'about': 'about',
+        'certifications': 'about',
+        'featured-projects': 'featured-projects',
+        'labs': 'featured-projects',
+        'skills': 'skills',
+        'architecture': 'architecture'
+    };
+
     const onScroll = () => {
-        const scrollPosition = window.scrollY + 200;
-        let currentSectionId = '';
+        const scrollPosition = window.scrollY + 240;
+        let activeSectionId = '';
 
         sections.forEach((section) => {
             const top = section.offsetTop;
             const height = section.offsetHeight;
             if (scrollPosition >= top && scrollPosition < top + height) {
-                currentSectionId = section.getAttribute('id');
+                activeSectionId = section.getAttribute('id');
             }
         });
 
-        if (!currentSectionId && window.scrollY < 350) {
-            currentSectionId = 'home';
-        }
+        const activeGroup = sectionMap[activeSectionId] || '';
 
         navLinks.forEach((link) => {
-            const targetSection = link.getAttribute('data-nav-section');
-            if (targetSection === currentSectionId) {
+            const targetGroup = link.getAttribute('data-nav-section');
+            if (targetGroup && targetGroup === activeGroup) {
                 link.classList.add('nav-link-active');
             } else {
                 link.classList.remove('nav-link-active');
@@ -255,6 +343,122 @@ const initCertificateCoverflow = () => {
     return swiper;
 };
 
+// Interactive Technical Telemetry Console (WAI-ARIA Tab switching with keyboard support)
+const initTelemetryConsole = () => {
+    const tabs = [
+        { btnId: 'tab-system-btn', panelId: 'panel-system' },
+        { btnId: 'tab-network-btn', panelId: 'panel-network' },
+        { btnId: 'tab-services-btn', panelId: 'panel-services' }
+    ];
+
+    const tabButtons = tabs.map(t => document.getElementById(t.btnId)).filter(Boolean);
+    if (tabButtons.length !== 3) return;
+
+    const selectTab = (index, shouldFocus = false) => {
+        tabs.forEach((tab, i) => {
+            const btn = document.getElementById(tab.btnId);
+            const panel = document.getElementById(tab.panelId);
+            if (!btn || !panel) return;
+
+            const isSelected = (i === index);
+            btn.setAttribute('aria-selected', isSelected ? 'true' : 'false');
+            if (isSelected) {
+                btn.classList.add('bg-[#165B4C]', 'text-white', 'font-bold');
+                btn.classList.remove('text-stone-300', 'font-medium');
+                panel.classList.remove('hidden');
+                if (shouldFocus) btn.focus();
+            } else {
+                btn.classList.remove('bg-[#165B4C]', 'text-white', 'font-bold');
+                btn.classList.add('text-stone-300', 'font-medium');
+                panel.classList.add('hidden');
+            }
+        });
+    };
+
+    tabs.forEach((tab, index) => {
+        const btn = document.getElementById(tab.btnId);
+        if (!btn) return;
+
+        btn.addEventListener('click', () => selectTab(index, false));
+
+        btn.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight') {
+                e.preventDefault();
+                const next = (index + 1) % tabs.length;
+                selectTab(next, true);
+            } else if (e.key === 'ArrowLeft') {
+                e.preventDefault();
+                const prev = (index - 1 + tabs.length) % tabs.length;
+                selectTab(prev, true);
+            } else if (e.key === 'Home') {
+                e.preventDefault();
+                selectTab(0, true);
+            } else if (e.key === 'End') {
+                e.preventDefault();
+                selectTab(tabs.length - 1, true);
+            }
+        });
+    });
+};
+
+// Live Server Telemetry AJAX Updater
+const initLiveTelemetry = () => {
+    const refreshBtn = document.getElementById('telemetry-refresh-btn');
+    const refreshIcon = document.getElementById('telemetry-refresh-icon');
+    if (!refreshBtn) return;
+
+    let isFetching = false;
+
+    const fetchTelemetry = async () => {
+        if (isFetching) return;
+        isFetching = true;
+        if (refreshIcon) refreshIcon.classList.add('animate-spin');
+
+        try {
+            const res = await fetch('/api/telemetry');
+            if (!res.ok) throw new Error('Network response not ok');
+            const data = await res.json();
+
+            if (data?.system?.cpu) {
+                const loadEl = document.getElementById('telemetry-load');
+                const load5El = document.getElementById('telemetry-load5');
+                const load15El = document.getElementById('telemetry-load15');
+                if (loadEl) loadEl.textContent = data.system.cpu.load_1m;
+                if (load5El) load5El.textContent = data.system.cpu.load_5m;
+                if (load15El) load15El.textContent = data.system.cpu.load_15m;
+            }
+
+            if (data?.system?.ram) {
+                const ramEl = document.getElementById('telemetry-ram');
+                const ramPctEl = document.getElementById('telemetry-ram-pct');
+                if (ramEl) ramEl.textContent = data.system.ram.used_formatted;
+                if (ramPctEl) ramPctEl.textContent = `${data.system.ram.percent}%`;
+            }
+
+            if (data?.system?.uptime) {
+                const uptimeEl = document.getElementById('telemetry-uptime');
+                if (uptimeEl) uptimeEl.textContent = data.system.uptime.formatted;
+            }
+
+            if (data?.services?.database) {
+                const latencyEl = document.getElementById('telemetry-latency');
+                if (latencyEl && data.services.database.latency_ms !== null) {
+                    latencyEl.textContent = `${data.services.database.latency_ms} ms`;
+                }
+            }
+        } catch (err) {
+            console.error('Failed to update live telemetry:', err);
+        } finally {
+            isFetching = false;
+            if (refreshIcon) {
+                setTimeout(() => refreshIcon.classList.remove('animate-spin'), 300);
+            }
+        }
+    };
+
+    refreshBtn.addEventListener('click', fetchTelemetry);
+};
+
 document.addEventListener('DOMContentLoaded', () => {
     initGsapAnimations();
     initPortfolioTabs();
@@ -264,6 +468,18 @@ document.addEventListener('DOMContentLoaded', () => {
     initMobileMenu();
     initCertificateCoverflow();
     initOrreryGallery();
+    initLabsRotator();
+    initTelemetryConsole();
+    initLiveTelemetry();
+
+    if (document.getElementById('dark-portfolio-root')) {
+        initDarkPortfolio();
+    }
+
+    // Initialize interactive white starfield canvas if present
+    if (document.getElementById('interactive-bg')) {
+        initInteractiveBackground();
+    }
 
     // Trigger ScrollTrigger refresh after initial DOM setup
     if (window.ScrollTrigger) {

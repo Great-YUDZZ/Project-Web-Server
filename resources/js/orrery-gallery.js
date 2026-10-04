@@ -143,7 +143,7 @@ export const initOrreryGallery = () => {
 
     const totalNodes = technologies.length;
     let rotationAngle = 0; // Current angle in radians
-    let targetAngle = null; // Target angle when a specific orb is clicked
+    let targetNodeIndex = null; // Index of node being actively targeted on click
     
     // Continuous self-rotation: constant angular speed (radians per second)
     // 0.12 rad/sec corresponds to ~6.9 deg/sec (~52 seconds per full revolution)
@@ -193,7 +193,7 @@ export const initOrreryGallery = () => {
             starGeo.setAttribute('position', new THREE.BufferAttribute(starPositions, 3));
             const starMat = new THREE.PointsMaterial({
                 size: 2.8,
-                color: 0x0C382E,
+                color: 0x89AACC,
                 transparent: true,
                 opacity: 0.35,
                 blending: THREE.NormalBlending
@@ -201,23 +201,23 @@ export const initOrreryGallery = () => {
             const stars = new THREE.Points(starGeo, starMat);
             scene.add(stars);
 
-            // Central 3D Cyber Core: Wireframe Icosahedron and Nested Orbital Rings (Harmonized Brass & Forest Green)
+            // Central 3D Cyber Core: Wireframe Icosahedron and Nested Orbital Rings (Precision Steel Blue & Luminous Cyan)
             const coreGroup = new THREE.Group();
             scene.add(coreGroup);
 
             const icoGeo = new THREE.IcosahedronGeometry(46, 1);
             const icoMat = new THREE.MeshBasicMaterial({
-                color: 0x0C382E,
+                color: 0x4E85BF,
                 wireframe: true,
                 transparent: true,
-                opacity: 0.35
+                opacity: 0.45
             });
             const icoMesh = new THREE.Mesh(icoGeo, icoMat);
             coreGroup.add(icoMesh);
 
             const ringGeo = new THREE.TorusGeometry(72, 0.7, 8, 48);
             const ringMat = new THREE.MeshBasicMaterial({
-                color: 0xB45309,
+                color: 0x38BDF8,
                 transparent: true,
                 opacity: 0.45,
                 blending: THREE.NormalBlending
@@ -345,12 +345,12 @@ export const initOrreryGallery = () => {
 
         centerX = stageWidth / 2;
         if (stageWidth < 480) {
-            orbitWidth = stageWidth * 0.44;
-            orbitHeight = 125;
+            orbitWidth = Math.min(stageWidth * 0.38, 140);
+            orbitHeight = 115;
             centerY = stageHeight * 0.44;
         } else if (stageWidth < 768) {
-            orbitWidth = stageWidth * 0.42;
-            orbitHeight = 138;
+            orbitWidth = stageWidth * 0.40;
+            orbitHeight = 135;
             centerY = stageHeight * 0.44;
         } else if (stageWidth < 1024) {
             orbitWidth = Math.min(390, stageWidth * 0.38);
@@ -364,7 +364,7 @@ export const initOrreryGallery = () => {
 
         // Dynamically adjust node element size for mobile vs desktop
         const isMobile = stageWidth < 640;
-        const nodeSize = isMobile ? 66 : 88;
+        const nodeSize = isMobile ? (stageWidth < 420 ? 56 : 64) : 88;
         nodeElements.forEach(({ el }) => {
             el.style.width = `${nodeSize}px`;
             el.style.height = `${nodeSize}px`;
@@ -385,7 +385,7 @@ export const initOrreryGallery = () => {
                          stroke="url(#orrery-ring-gradient)"
                          stroke-width="2"
                          stroke-dasharray="5 7"
-                         class="opacity-75 animate-pulse" />
+                         class="opacity-75" />
                 <!-- Subtle cyan neon glow underlay -->
                 <ellipse cx="${centerX}" cy="${centerY}" rx="${orbitWidth}" ry="${orbitHeight}"
                          fill="none"
@@ -408,24 +408,25 @@ export const initOrreryGallery = () => {
     updateDimensions();
     window.addEventListener('resize', updateDimensions);
 
-    // Rotate orbit to land clicked node at the front (theta = PI / 2)
+    // Helper to calculate shortest signed angular distance from angle A to angle B in [-PI, PI]
+    const getShortestAngleDiff = (from, to) => {
+        const twoPi = 2 * Math.PI;
+        let diff = ((to - from) % twoPi + twoPi) % twoPi;
+        if (diff > Math.PI) diff -= twoPi;
+        return diff;
+    };
+
+    // Rotate orbit smoothly to land clicked node at the front (theta = PI / 2)
     const rotateToNode = (index) => {
+        if (index < 0 || index >= totalNodes) return;
+
         if (autoSpinResumeTimeout) {
             clearTimeout(autoSpinResumeTimeout);
             autoSpinResumeTimeout = null;
         }
 
-        const baseAngle = (index * 2 * Math.PI) / totalNodes;
-        let desiredAngle = (Math.PI / 2) - baseAngle;
-
-        const twoPi = 2 * Math.PI;
-        desiredAngle = ((desiredAngle % twoPi) + twoPi) % twoPi;
-        let currentNorm = ((rotationAngle % twoPi) + twoPi) % twoPi;
-        let diff = desiredAngle - currentNorm;
-        if (diff > Math.PI) diff -= twoPi;
-        if (diff < -Math.PI) diff += twoPi;
-
-        targetAngle = rotationAngle + diff;
+        targetNodeIndex = index;
+        currentSpeed = 0; // Clear any residual drag momentum
     };
 
     // Update center focal logo core display
@@ -463,7 +464,7 @@ export const initOrreryGallery = () => {
                             ${tech.role}
                         </div>
                         <button type="button" class="orrery-core-detail-btn inline-flex items-center gap-2 mt-2 px-4 py-1.5 rounded-full text-xs font-mono font-extrabold uppercase tracking-wider text-white bg-[#5865F2]/40 hover:bg-[#5865F2]/70 border border-[#5865F2]/80 shadow-lg shadow-[#5865F2]/25 transition-all cursor-pointer backdrop-blur-md" title="Buka detail teknologi">
-                            <span class="w-2 h-2 rounded-full animate-pulse" style="background: ${tech.color}"></span>
+                            <span class="w-2 h-2 rounded-full" style="background: ${tech.color}"></span>
                             <span class="text-white font-black">KLIK 2X / TAP DETAIL &rarr;</span>
                         </button>
                     </div>
@@ -510,20 +511,27 @@ export const initOrreryGallery = () => {
         // Background starry canvas & Three.js 3D holographic core
         if (drawStarsFn) drawStarsFn(rotationAngle, dt);
 
-        // Smooth physics interpolation
-        if (targetAngle !== null) {
-            const diff = targetAngle - rotationAngle;
-            rotationAngle += diff * Math.min(1, 4.5 * dt);
-            if (Math.abs(diff) < 0.0008) {
-                rotationAngle = targetAngle;
-                targetAngle = null;
-                // Schedule auto-spin resumption
+        // Smooth physics interpolation towards targeted node (shortest arc, zero boundary wrap bug)
+        if (targetNodeIndex !== null) {
+            const baseAngle = (targetNodeIndex * 2 * Math.PI) / totalNodes;
+            const desiredAngle = (Math.PI / 2) - baseAngle;
+            const diff = getShortestAngleDiff(rotationAngle, desiredAngle);
+
+            if (Math.abs(diff) < 0.001) {
+                rotationAngle = desiredAngle;
+                targetNodeIndex = null;
+                currentSpeed = 0;
+                // Schedule auto-spin resumption after 4 seconds of stillness
                 if (!autoSpinResumeTimeout) {
                     autoSpinResumeTimeout = setTimeout(() => {
-                        targetAngle = null;
+                        targetNodeIndex = null;
                         autoSpinResumeTimeout = null;
                     }, 4000);
                 }
+            } else {
+                // Smooth critically damped approach towards target
+                const step = diff * Math.min(1, 5.5 * dt);
+                rotationAngle += step;
             }
         } else if (!isDragging) {
             // Apply inertial friction or constant cruise speed
@@ -632,7 +640,7 @@ export const initOrreryGallery = () => {
     // User Interaction Handlers: Drag / Swipe
     const onPointerDown = (clientX) => {
         isDragging = true;
-        targetAngle = null;
+        targetNodeIndex = null;
         if (autoSpinResumeTimeout) {
             clearTimeout(autoSpinResumeTimeout);
             autoSpinResumeTimeout = null;
@@ -647,7 +655,7 @@ export const initOrreryGallery = () => {
 
         const dragSensitivity = 0.005;
         rotationAngle += deltaX * dragSensitivity;
-        currentSpeed = deltaX * 0.12;
+        currentSpeed = Math.max(-1.2, Math.min(1.2, deltaX * 0.04));
     };
 
     const onPointerUp = () => {
@@ -672,6 +680,7 @@ export const initOrreryGallery = () => {
     // Touch Events for Mobile / Tablet
     stage.addEventListener('touchstart', (e) => {
         if (e.touches.length === 1) {
+            if (e.target.closest('button') || e.target.closest('a')) return;
             onPointerDown(e.touches[0].clientX);
         }
     }, { passive: true });
@@ -688,7 +697,7 @@ export const initOrreryGallery = () => {
 
     // Passive wheel listener for momentum without hijacking page scrolling
     stage.addEventListener('wheel', (e) => {
-        targetAngle = null;
+        targetNodeIndex = null;
         if (autoSpinResumeTimeout) {
             clearTimeout(autoSpinResumeTimeout);
             autoSpinResumeTimeout = null;

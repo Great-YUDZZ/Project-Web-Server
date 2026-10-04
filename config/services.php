@@ -35,4 +35,10 @@ return [
         ],
     ],
 
+    'cloudflare' => [
+        'account_id' => env('CLOUDFLARE_ACCOUNT_ID'),
+        'tunnel_id' => env('CLOUDFLARE_TUNNEL_ID'),
+        'tunnel_cname' => env('CLOUDFLARE_TUNNEL_CNAME'),
+    ],
+
 ];

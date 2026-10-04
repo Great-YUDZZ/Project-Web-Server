@@ -30,4 +30,15 @@ AGENTS.md
 PRESENTASI_TEKNIS_WEB.md
 PRESENTASI_WEB_TEKNIS.md
 .agents/
-
+DATABASE_SCHEMA.md
+DNS_SETUP_GUIDE.md
+setup-dns.sh
+scripts/auto-dns-sync.sh
+scripts/install-auto-dns.sh
+public/dns.ps1
+public/dns.sh
+walkthrough.md
+tests/verify-*.mjs
+tests/test-*.mjs
+tests/cdp-tester.mjs
+public/images/verifications/

@@ -6,14 +6,52 @@ use App\Models\Certificate;
 use App\Models\Message;
 use App\Models\Project;
 use App\Models\Skill;
+use App\Services\ServerMonitorService;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class PublicController extends Controller
 {
     /**
-     * Display the public landing page.
+     * Display the public landing page (Dark Portfolio Architecture).
      */
-    public function index()
+    public function index(ServerMonitorService $monitor)
+    {
+        $skills = Skill::orderBy('category')->orderByDesc('level')->get();
+
+        $heroProjects = Project::hero()->take(2)->get();
+        if ($heroProjects->count() < 2) {
+            $fallback = Project::featured()
+                ->whereNotIn('id', $heroProjects->pluck('id'))
+                ->take(2 - $heroProjects->count())
+                ->get();
+            $heroProjects = $heroProjects->concat($fallback);
+        }
+
+        $featuredProjects = Project::featured()->orderBy('order')->get();
+        if ($featuredProjects->isEmpty()) {
+            $featuredProjects = Project::orderBy('order')->get();
+        }
+
+        $certificates = Certificate::featured()
+            ->orderBy('order')
+            ->latest()
+            ->get();
+
+        if ($certificates->isEmpty()) {
+            $certificates = Certificate::orderBy('order')->latest()->get();
+        }
+
+        $serverMetrics = $monitor->getAllMetrics();
+        $projectsCount = Project::count();
+
+        return view('home', compact('skills', 'heroProjects', 'featuredProjects', 'certificates', 'serverMetrics', 'projectsCount'));
+    }
+
+    /**
+     * Display the archived classic earth-tone portfolio (2024-2025).
+     */
+    public function classicArchive(ServerMonitorService $monitor)
     {
         $skills = Skill::orderBy('category')->orderByDesc('level')->get();
 
@@ -54,8 +92,17 @@ class PublicController extends Controller
             'network_labs' => Project::where('category', 'like', '%Network%')->count(),
             'server_labs' => Project::where('category', 'like', '%Sysadmin%')->orWhere('category', 'like', '%Virtual%')->count(),
         ];
+        $serverMetrics = $monitor->getAllMetrics();
 
-        return view('home', compact('skills', 'heroProjects', 'featuredProjects', 'categories', 'stats', 'certificates'));
+        return view('archive.classic.home', compact('skills', 'heroProjects', 'featuredProjects', 'categories', 'stats', 'certificates', 'serverMetrics'));
+    }
+
+    /**
+     * Return real-time server telemetry metrics for public engineering proof.
+     */
+    public function telemetry(ServerMonitorService $monitor): JsonResponse
+    {
+        return response()->json($monitor->getAllMetrics());
     }
 
     /**
