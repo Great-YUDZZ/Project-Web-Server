@@ -57,7 +57,7 @@ Selain itu, terdapat integrasi asisten virtual interaktif **Yuna AI** yang dilen
 
 | Lapisan | Komponen / Versi | Peran Teknis |
 |---|---|---|
-| **Sistem Operasi** | Debian 12 / Ubuntu Server | Host bare metal atau mesin virtual |
+| **Sistem Operasi** | Debian 13 | Host bare metal atau mesin virtual |
 | **Web Server** | Nginx 1.26 | Reverse proxy, penanganan SSL/TLS, static file delivery |
 | **Bahasa Pemrograman** | PHP 8.4 | Pemrosesan logika server-side berkecepatan tinggi |
 | **Framework Backend** | Laravel 12 | Arsitektur MVC, ORM Eloquent, middleware keamanan |

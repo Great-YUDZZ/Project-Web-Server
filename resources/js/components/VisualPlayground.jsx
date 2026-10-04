@@ -74,7 +74,7 @@ const TECHNOLOGIES = {
   },
   debian: {
     id: 'debian',
-    name: 'Debian 12',
+    name: 'Debian 13',
     role: 'Baremetal Host',
     category: 'Operating System',
     color: '#D70A53',

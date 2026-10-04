@@ -26,7 +26,7 @@
             'svg'   => 'images/tech/vite.svg',
         ],
         'debian'   => [
-            'name'  => 'Debian 12',
+            'name'  => 'Debian 13',
             'role'  => 'Baremetal Host',
             'color' => '#D70A53',
             'rgb'   => '215,10,83',

@@ -391,7 +391,7 @@ export const initDarkPortfolio = () => {
                 ]
             },
             debian: {
-                title: "Debian 12 (Bookworm)",
+                title: "Debian 13 (Trixie)",
                 badge: "[BAREMETAL HOST OS]",
                 subhead: "Rock-Solid GNU/Linux Production Host with Tuned Kernel",
                 color: "#D70A53",
@@ -400,7 +400,7 @@ export const initDarkPortfolio = () => {
                 explanation: "Debian adalah sistem operasi bebas berbasis Linux yang terkenal dengan kestabilan operasional tanpa kompromi, manajemen paket APT yang terverifikasi aman, serta arsitektur UNIX yang bersih dan minim bloatware.",
                 rationale: "Portofolio ini di-host secara mandiri (self-hosted) langsung di atas server fisik Debian baremetal. Menggunakan konfigurasi sysctl kernel tingkat lanjut seperti algoritma Google BBR TCP congestion control untuk transmisi paket data berlatensi rendah dan uptime 100%.",
                 specs: [
-                    { label: "DISTRO", value: "Debian 12 Bookworm" },
+                    { label: "DISTRO", value: "Debian 13 Trixie" },
                     { label: "TCP ENGINE", value: "Google BBR Algorithm" },
                     { label: "UPTIME SLA", value: "100% Production SLA" },
                     { label: "SECURITY", value: "Hardened Systemd Slices" }

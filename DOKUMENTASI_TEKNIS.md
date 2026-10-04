@@ -27,7 +27,7 @@ Aplikasi ini adalah platform portofolio teknik dan showcase lab mandiri berstand
 
 | Komponen | Spesifikasi / Paket | Deskripsi Peran |
 |---|---|---|
-| **Sistem Operasi** | Linux Debian 12 / Ubuntu Server | Host sistem bare metal atau VM portofolio |
+| **Sistem Operasi** | Linux Debian 13 | Host sistem bare metal atau VM portofolio |
 | **Web Server** | Nginx 1.22+ (Reverse Proxy & FastCGI) | Web server berkinerja tinggi penangan HTTP/HTTPS |
 | **PHP Runtime** | PHP 8.4-FPM (`php8.4-fpm.sock`) | Engine pemroses logika server-side Laravel |
 | **Framework Backend** | Laravel Framework 12 (PHP ^8.3) | Framework MVC, routing, ORM Eloquent, middleware |
