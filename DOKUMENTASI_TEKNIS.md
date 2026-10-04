@@ -77,11 +77,10 @@ Struktur hierarki proyek dianalisis dari direktori root `/var/www/project_tkj_yu
 │   ├── index.php               # Front controller pintu masuk request Nginx
 │   ├── build/                  # Asset CSS, JS, dan Font hasil kompilasi Vite
 │   ├── certificates/           # Berkas PDF asli dan gambar sertifikasi
-│   ├── images/                 # Seluruh aset visual (maskot, logo, diagram)
-│   │   ├── discord_assets/     # Objek render 3D (laptop, kabel LAN, switch)
-│   │   ├── discord_mascots/    # Karakter maskot (Clyde, Wumpus, Cyber Drone)
-│   │   ├── orrery/             # Orb 3D planet stack teknologi
-│   │   ├── tech_logos/         # Ikon vektor perangkat lunak
+│   ├── images/                 # Seluruh aset visual (logo, orb, diagram)
+│   │   ├── orrery/             # Orb 3D planet stack teknologi (WebP)
+│   │   ├── tech/               # Ikon SVG teknologi
+│   │   ├── tech_logos/         # Logo PNG teknologi
 │   │   └── topologies/         # Diagram topologi jaringan dan arsitektur
 │   └── robots.txt & favicon    # Berkas utilitas browser dan SEO
 ├── resources/                  # Berkas sumber daya mentah frontend
