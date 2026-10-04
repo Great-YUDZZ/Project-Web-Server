@@ -102,9 +102,6 @@ Struktur hierarki proyek dianalisis dari direktori root `/var/www/project_tkj_yu
 ├── routes/                     # Definisi rute URL aplikasi
 │   ├── web.php                 # Rute web publik, login, dan panel admin
 │   └── console.php             # Rute penjadwalan dan command line artisan
-├── scripts/                    # Skrip bantu Python & Node.js
-│   ├── generate_hardware_assets.py # Generator aset grafis 3D hardware
-│   └── verify_robot_wander.js  # Penguji otomatis visual gerak maskot
 ├── storage/                    # Penyimpanan internal, log, dan sesi framework
 │   ├── app/                    # Berkas file storage aplikasi
 │   ├── framework/              # Cache view, cache data, dan sessions
