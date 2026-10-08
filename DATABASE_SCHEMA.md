@@ -23,7 +23,37 @@ Dokumentasi arsitektur basis data, kamus data relasional, dan panduan migrasi un
 
 ---
 
-## 2. Diagram Relasi Entitas (Entity Relationship Diagram)
+## 2. Ringkasan & Fungsi Seluruh Tabel Database (14 Tabel)
+
+Saat menjalankan perintah `SHOW TABLES;` pada MariaDB `project_tkj_yuda2`, terdapat total **14 tabel** yang terbagi menjadi dua kategori utama:
+
+### 2.1 Tabel Konten & Fitur Portofolio (Data Utama Aplikasi)
+
+| Nama Tabel | Data yang Disimpan | Contoh Isi Data Nyata Saat Ini |
+| :--- | :--- | :--- |
+| **`projects`** | Dokumentasi karya lab, aplikasi rekayasa perangkat lunak, uraian teknis, peralatan dan hardware yang digunakan, tautan demo/GitHub, gambar topologi, serta status pin hero beranda. | *IT Toolbox v1.5.0* (Go/Fyne/Cisco), *SakuKu* (Flutter), *VisualStyle Studio* (Electron). |
+| **`posts`** | Artikel teknis jurnal rekayasa dan blog pribadi (`/blog`), memuat judul, slug URL ramah SEO, ringkasan kartu, konten lengkap (Markdown/HTML), kategori topik, tags, estimasi menit baca, status publikasi online, serta akumulasi jumlah pembaca. | *Optimasi Kernel Linux & TCP BBR*, *Implementasi RPKI & Validasi ROA BGP*, *Arsitektur LEMP Baremetal*. |
+| **`skills`** | Matriks keahlian dan kompetensi teknik komputer dan jaringan, memuat nama keahlian, kategori (`networking`, `sysadmin`, `hardware`, `tools`), serta persentase penguasaan kompetensi (rentang 1 sampai 100%). | *Cisco Routing & Switching* (90%), *Linux Administration Debian* (88%), *Fiber Optic Splicing* (85%). |
+| **`certificates`** | Bukti sertifikasi resmi kompetensi, memuat nama sertifikat, lembaga penerbit, ID kredensial, tanggal/tahun terbit, total jam pelatihan, status verifikasi tanda tangan elektronik, serta tautan berkas dokumen PDF. | *Cisco Networking Basics*, *Cisco Networking Devices*, *Pelatihan Fiber Optik Komdigi*. |
+| **`messages`** | Kotak masuk (*inbox*) pesan yang dikirimkan pengunjung melalui formulir kontak di beranda web, memuat nama pengirim, alamat email, perihal, isi pesan, serta status penanda apakah pesan sudah dibaca admin (`is_read`). | Pesan formulir konsultasi, tawaran proyek lab, atau pertanyaan teknis dari pengunjung publik. |
+| **`users`** | Akun administrator untuk autentikasi login ke panel admin (`/admin`), menyimpan nama admin, alamat email unik (`admin@tkj.lan`), password hash terenkripsi algoritma Bcrypt, dan token sesi login. | Akun kredensial utama pengelola portofolio. |
+
+### 2.2 Tabel Infrastruktur & Kinerja (Bawaan Framework Laravel)
+
+| Nama Tabel | Fungsi & Data yang Disimpan |
+| :--- | :--- |
+| **`sessions`** | Menyimpan data sesi aktif pengguna dan admin saat membuka web (ID sesi, alamat IP pengunjung, informasi user-agent peramban, data login aktif, dan stempel waktu aktivitas terakhir). |
+| **`cache`** | Menyimpan data hasil kueri sementara di memori/database agar halaman web dapat dimuat dengan sangat cepat tanpa perlu membaca kueri database berulang-ulang. |
+| **`cache_locks`** | Mekanisme penguncian konkurensi data untuk mencegah terjadinya tabrakan proses (*race condition*) ketika beberapa kueri bersamaan mengakses data yang sama. |
+| **`jobs`** | Antrean tugas yang dieksekusi di latar belakang (*background queues*), misalnya pengiriman email asinkronus agar pengunjung tidak mengalami jeda saat mengirimkan pesan. |
+| **`failed_jobs`** | Catatan log tugas latar belakang yang mengalami kegagalan eksekusi beserta rincian *error stack trace* untuk kebutuhan audit dan *troubleshooting* administrator. |
+| **`job_batches`** | Mengelompokkan sekumpulan antrean tugas (*batch processing*) ketika beberapa tugas komputasi dijalankan secara paralel. |
+| **`password_reset_tokens`** | Menyimpan token verifikasi berbatas waktu ketika pengguna mengajukan permintaan pemulihan atau pergantian kata sandi akun. |
+| **`migrations`** | Log riwayat migrasi skema database, mencatat nomor berkas migrasi mana saja yang sudah berhasil dieksekusi ke database MariaDB. |
+
+---
+
+## 3. Diagram Relasi Entitas (Entity Relationship Diagram)
 
 Berikut visualisasi hubungan logis antartabel di dalam sistem database:
 
@@ -111,9 +141,9 @@ erDiagram
 
 ---
 
-## 3. Kamus Data & Rincian Struktur Tabel
+## 4. Kamus Data & Rincian Struktur Tabel
 
-### 3.1 Tabel `users` (Otentikasi & Akun Administrator)
+### 4.1 Tabel `users` (Otentikasi & Akun Administrator)
 Menyimpan kredensial akun pengelola portofolio untuk mengakses panel admin.
 
 | Kolom | Tipe Data | Null | Default | Atribut / Kunci | Keterangan |
@@ -129,7 +159,7 @@ Menyimpan kredensial akun pengelola portofolio untuk mengakses panel admin.
 
 ---
 
-### 3.2 Tabel `skills` (Matriks Keahlian & Standar Kompetensi)
+### 4.2 Tabel `skills` (Matriks Keahlian & Standar Kompetensi)
 Menyimpan daftar kemampuan teknis siswa TKJ yang ditampilkan pada beranda website.
 
 | Kolom | Tipe Data | Null | Default | Atribut / Kunci | Keterangan |
@@ -141,14 +171,9 @@ Menyimpan daftar kemampuan teknis siswa TKJ yang ditampilkan pada beranda websit
 | `created_at` | `TIMESTAMP` | Ya | `NULL` | - | Waktu data disimpan |
 | `updated_at` | `TIMESTAMP` | Ya | `NULL` | - | Waktu data diperbarui |
 
-**Contoh Rekaman Data:**
-- `id: 1` | `name: Cisco Routing & Switching (CCNA)` | `category: networking` | `level: 90`
-- `id: 2` | `name: Linux Server Administration (Debian)` | `category: sysadmin` | `level: 88`
-- `id: 3` | `name: Fiber Optik & Fusion Splicing` | `category: hardware` | `level: 85`
-
 ---
 
-### 3.3 Tabel `projects` (Dokumentasi Lab & Proyek Rekayasa)
+### 4.3 Tabel `projects` (Dokumentasi Lab & Proyek Rekayasa)
 Menyimpan data pameran karya lab, topologi jaringan, dan perangkat lunak yang dibangun.
 
 | Kolom | Tipe Data | Null | Default | Atribut / Kunci | Keterangan |
@@ -166,14 +191,9 @@ Menyimpan data pameran karya lab, topologi jaringan, dan perangkat lunak yang di
 | `created_at` | `TIMESTAMP` | Ya | `NULL` | - | Waktu proyek didokumentasikan |
 | `updated_at` | `TIMESTAMP` | Ya | `NULL` | - | Waktu dokumentasi disunting |
 
-**Contoh Rekaman Data:**
-- `IT Toolbox v1.5.0` (`it-toolbox`): Go, Fyne v2.8, SQLite, Cisco CLI
-- `SakuKu Financial Tech` (`sakuku`): Flutter, Dart, SQLite, Neumorphic UI
-- `VisualStyle Studio CSS Workbench` (`visualstyle-studio`): Electron, JS ES6+, CSS3 Keyframes
-
 ---
 
-### 3.4 Tabel `posts` (Jurnal Rekayasa & Artikel Blog Pribadi)
+### 4.4 Tabel `posts` (Jurnal Rekayasa & Artikel Blog Pribadi)
 Menyimpan tulisan teknis, RFC konfigurasi server Debian, dan artikel eksplorasi jaringan.
 
 | Kolom | Tipe Data | Null | Default | Atribut / Kunci | Keterangan |
@@ -192,14 +212,9 @@ Menyimpan tulisan teknis, RFC konfigurasi server Debian, dan artikel eksplorasi 
 | `created_at` | `TIMESTAMP` | Ya | `NULL` | - | Waktu draf artikel dibuat |
 | `updated_at` | `TIMESTAMP` | Ya | `NULL` | - | Waktu artikel disunting |
 
-**Contoh Rekaman Data:**
-- `Optimasi Kernel Linux & TCP BBR`: Tuning sysctl socket TCP baremetal Debian 13
-- `Implementasi RPKI & Validasi ROA`: Kriptografi route validation pada BGP border router
-- `Arsitektur LEMP Baremetal`: Optimalisasi Nginx unix domain socket dan PHP-FPM worker pool
-
 ---
 
-### 3.5 Tabel `certificates` (Sertifikasi Kompetensi Resmi)
+### 4.5 Tabel `certificates` (Sertifikasi Kompetensi Resmi)
 Menyimpan bukti sertifikat resmi berstandar industri internasional dan nasional.
 
 | Kolom | Tipe Data | Null | Default | Atribut / Kunci | Keterangan |
@@ -221,7 +236,7 @@ Menyimpan bukti sertifikat resmi berstandar industri internasional dan nasional.
 
 ---
 
-### 3.6 Tabel `messages` (Inbox Pesan Kontak Pengunjung)
+### 4.6 Tabel `messages` (Inbox Pesan Kontak Pengunjung)
 Menampung pengiriman pesan dari formulir kontak publik ke administrator.
 
 | Kolom | Tipe Data | Null | Default | Atribut / Kunci | Keterangan |
@@ -237,16 +252,7 @@ Menampung pengiriman pesan dari formulir kontak publik ke administrator.
 
 ---
 
-### 3.7 Tabel Internal Infrastruktur Framework Laravel
-Tabel penunjang bawaan framework Laravel 11 untuk mendukung manajemen sesi web, cache, dan antrean latar belakang:
-
-1. **`sessions`:** Mengelola sesi pengguna aktif (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`).
-2. **`cache` & `cache_locks`:** Penyimpanan kueri berkecepatan tinggi dan pencegahan *race conditions* data.
-3. **`jobs` & `failed_jobs`:** Manajemen antrean tugas asinkronus (misal pengiriman notifikasi email).
-
----
-
-## 4. Panduan Siklus Hidup Migrasi & Data Seeder
+## 5. Panduan Siklus Hidup Migrasi & Data Seeder
 
 ### Pemetaan Tipe Kolom Blueprint ke Tipe Kolom MariaDB
 
@@ -264,7 +270,7 @@ Tabel penunjang bawaan framework Laravel 11 untuk mendukung manajemen sesi web, 
 
 ---
 
-## 5. Lembar Sontekan Perintah Artisan Database
+## 6. Lembar Sontekan Perintah Artisan Database
 
 Jalankan perintah berikut di direktori root proyek (`/var/www/project_tkj_yuda2`):
 
