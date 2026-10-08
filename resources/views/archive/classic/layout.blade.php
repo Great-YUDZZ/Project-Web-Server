@@ -78,8 +78,10 @@
                     Katalog
                 </a>
                 <a href="{{ route('ai.index') }}" class="nav-link px-2.5 xl:px-3 py-1.5 rounded-full {{ request()->routeIs('ai.*') ? 'nav-link-active' : '' }} flex items-center gap-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0C382E]">
-                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
-                    <span class="font-bold text-[#0C382E]">Yuna AI</span>
+                    @if(request()->routeIs('ai.*'))
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                    @endif
+                    <span>Yuna AI</span>
                 </a>
                 <a href="{{ request()->routeIs('home') ? '#contact' : route('home').'#contact' }}" data-nav-section="contact" class="nav-link px-2.5 xl:px-3 py-1.5 rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0C382E]">
                     Contact
@@ -200,10 +202,17 @@
                     <a href="{{ request()->routeIs('home') ? '#labs' : route('home').'#labs' }}" class="py-1 hover:text-white transition-colors">Showcase Lab</a>
                     <a href="{{ request()->routeIs('home') ? '#skills' : route('home').'#skills' }}" class="py-1 hover:text-white transition-colors">Skill Matrix</a>
                     <a href="{{ request()->routeIs('home') ? '#architecture' : route('home').'#architecture' }}" class="py-1 hover:text-white transition-colors">Arsitektur</a>
-                    <a href="{{ route('projects.index') }}" class="py-1 hover:text-white transition-colors">Katalog Lab</a>
-                    <a href="{{ route('ai.index') }}" class="py-1 text-emerald-400 font-bold hover:text-emerald-300 transition-colors flex items-center gap-1.5">
-                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+                    <a href="{{ route('projects.index') }}" class="py-1 {{ request()->routeIs('projects.*') ? 'text-emerald-400 font-bold flex items-center gap-1.5' : 'hover:text-white' }} transition-colors">
+                        @if(request()->routeIs('projects.*'))<span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>@endif
+                        <span>Katalog Lab</span>
+                    </a>
+                    <a href="{{ route('ai.index') }}" class="py-1 {{ request()->routeIs('ai.*') ? 'text-emerald-400 font-bold flex items-center gap-1.5' : 'hover:text-white' }} transition-colors">
+                        @if(request()->routeIs('ai.*'))<span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>@endif
                         <span>Yuna AI</span>
+                    </a>
+                    <a href="{{ route('blog.index') }}" class="py-1 {{ request()->routeIs('blog.*') ? 'text-emerald-400 font-bold flex items-center gap-1.5' : 'hover:text-white' }} transition-colors">
+                        @if(request()->routeIs('blog.*'))<span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>@endif
+                        <span>Blog Pribadi</span>
                     </a>
                     <a href="{{ request()->routeIs('home') ? '#contact' : route('home').'#contact' }}" class="py-1 hover:text-white transition-colors">Contact</a>
                 </div>

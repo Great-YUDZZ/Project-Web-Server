@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\CertificateController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\MessageController;
+use App\Http\Controllers\Admin\PostController as AdminPostController;
 use App\Http\Controllers\Admin\ProjectController;
 use App\Http\Controllers\Admin\SkillController;
 use App\Http\Controllers\AuthController;
@@ -20,6 +21,8 @@ Route::get('/dark-preview', [PublicController::class, 'index'])->name('dark.prev
 Route::get('/archive/classic', [PublicController::class, 'classicArchive'])->name('archive.classic');
 Route::get('/projects', [PublicController::class, 'projects'])->name('projects.index');
 Route::get('/projects/{slug}', [PublicController::class, 'projectDetail'])->name('projects.show');
+Route::get('/blog', [PublicController::class, 'blog'])->name('blog.index');
+Route::get('/blog/{slug}', [PublicController::class, 'blogDetail'])->name('blog.show');
 Route::get('/ai', [ChatbotController::class, 'index'])->name('ai.index');
 Route::post('/contact', [PublicController::class, 'contactSubmit'])->middleware('throttle:10,1')->name('contact.submit');
 Route::post('/chatbot/message', [ChatbotController::class, 'handle'])->middleware('throttle:30,1')->name('chatbot.message');
@@ -54,6 +57,10 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
 
     // CRUD Certificates
     Route::resource('certificates', CertificateController::class);
+
+    // CRUD Posts (Blog)
+    Route::patch('/posts/{post}/toggle-publish', [AdminPostController::class, 'togglePublish'])->name('posts.toggle-publish');
+    Route::resource('posts', AdminPostController::class);
 
     // Messages Inbox
     Route::get('/messages', [MessageController::class, 'index'])->name('messages.index');

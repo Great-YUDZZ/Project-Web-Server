@@ -63,8 +63,10 @@
                     Katalog Lab
                 </a>
                 <a href="{{ route('ai.index') }}" class="px-2.5 xl:px-3 py-1.5 rounded-full {{ request()->routeIs('ai.*') ? 'text-white font-semibold bg-white/15 shadow-sm' : 'text-[#878787] hover:text-[#f5f5f5] hover:bg-white/10' }} flex items-center gap-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white transition-colors">
-                    <span class="w-1.5 h-1.5 rounded-full bg-white"></span>
-                    <span class="font-semibold text-[#f5f5f5]">Yuna AI</span>
+                    @if(request()->routeIs('ai.*'))
+                        <span class="w-1.5 h-1.5 rounded-full bg-white"></span>
+                    @endif
+                    <span>Yuna AI</span>
                 </a>
                 <a href="{{ route('home') }}#contact" class="px-2.5 xl:px-3 py-1.5 rounded-full text-[#878787] hover:text-[#f5f5f5] hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white transition-colors">
                     Kontak
@@ -93,13 +95,15 @@
 
     <!-- Mobile Navigation Drawer -->
     <div id="mobile-menu" class="hidden fixed top-18 sm:top-20 inset-x-3 sm:inset-x-4 z-40 lg:hidden rounded-3xl glass-hud p-4 sm:p-5 space-y-1.5 text-sm font-semibold shadow-2xl text-[#f5f5f5] animate-scale-in max-h-[calc(100dvh-5.5rem)] overflow-y-auto" role="region" aria-label="Mobile navigation menu">
-        <a href="{{ route('home') }}" class="min-h-[44px] flex items-center px-4 py-2.5 text-[#f5f5f5] hover:bg-white/10 rounded-xl transition-colors font-semibold">Beranda</a>
+        <a href="{{ route('home') }}" class="min-h-[44px] flex items-center px-4 py-2.5 {{ request()->routeIs('home') ? 'text-white bg-white/15 shadow-sm font-semibold' : 'text-[#a3a3a3] hover:text-[#f5f5f5] hover:bg-white/10' }} rounded-xl transition-colors">Beranda</a>
         <a href="{{ route('home') }}#works" class="min-h-[44px] flex items-center px-4 py-2.5 text-[#a3a3a3] hover:text-[#f5f5f5] hover:bg-white/10 rounded-xl transition-colors font-semibold">Karya Pilihan</a>
         <a href="{{ route('home') }}#skills" class="min-h-[44px] flex items-center px-4 py-2.5 text-[#a3a3a3] hover:text-[#f5f5f5] hover:bg-white/10 rounded-xl transition-colors font-semibold">Matriks Keahlian</a>
-        <a href="{{ route('projects.index') }}" class="min-h-[44px] flex items-center px-4 py-2.5 text-[#a3a3a3] hover:text-[#f5f5f5] hover:bg-white/10 rounded-xl transition-colors font-semibold">Katalog Lengkap</a>
-        <a href="{{ route('ai.index') }}" class="min-h-[44px] flex items-center justify-between px-4 py-2.5 text-white bg-white/10 hover:bg-white/15 rounded-xl transition-colors font-bold">
+        <a href="{{ route('projects.index') }}" class="min-h-[44px] flex items-center px-4 py-2.5 {{ request()->routeIs('projects.*') ? 'text-white bg-white/15 shadow-sm font-semibold' : 'text-[#a3a3a3] hover:text-[#f5f5f5] hover:bg-white/10' }} rounded-xl transition-colors">Katalog Lengkap</a>
+        <a href="{{ route('ai.index') }}" class="min-h-[44px] flex items-center justify-between px-4 py-2.5 {{ request()->routeIs('ai.*') ? 'text-white bg-white/15 shadow-sm' : 'text-[#a3a3a3] hover:text-[#f5f5f5] hover:bg-white/10' }} rounded-xl transition-colors font-semibold">
             <span class="flex items-center gap-2">
-                <span class="w-2 h-2 rounded-full bg-white"></span>
+                @if(request()->routeIs('ai.*'))
+                    <span class="w-2 h-2 rounded-full bg-white"></span>
+                @endif
                 <span>Yuna AI Console</span>
             </span>
             <span class="text-xs font-mono font-bold text-black bg-white px-2 py-0.5 rounded-full">AI</span>
@@ -163,15 +167,28 @@
                 </div>
                 
                 <div class="flex flex-wrap md:justify-end gap-6 text-xs font-medium text-[#878787]">
-                    <a href="{{ route('home') }}" class="py-1 hover:text-white transition-colors">Beranda</a>
+                    <a href="{{ route('home') }}" class="py-1 {{ request()->routeIs('home') ? 'text-white font-semibold flex items-center gap-1.5' : 'hover:text-white' }} transition-colors">
+                        @if(request()->routeIs('home'))<span class="w-1.5 h-1.5 rounded-full bg-white"></span>@endif
+                        <span>Beranda</span>
+                    </a>
                     <a href="{{ route('home') }}#works" class="py-1 hover:text-white transition-colors">Karya</a>
                     <a href="{{ route('home') }}#skills" class="py-1 hover:text-white transition-colors">Keahlian</a>
-                    <a href="{{ route('projects.index') }}" class="py-1 hover:text-white transition-colors">Katalog Lab</a>
-                    <a href="{{ route('ai.index') }}" class="py-1 text-white font-bold hover:text-neutral-300 transition-colors flex items-center gap-1.5">
-                        <span class="w-1.5 h-1.5 rounded-full bg-white"></span>
+                    <a href="{{ route('projects.index') }}" class="py-1 {{ request()->routeIs('projects.*') ? 'text-white font-semibold flex items-center gap-1.5' : 'hover:text-white' }} transition-colors">
+                        @if(request()->routeIs('projects.*'))<span class="w-1.5 h-1.5 rounded-full bg-white"></span>@endif
+                        <span>Katalog Lab</span>
+                    </a>
+                    <a href="{{ route('ai.index') }}" class="py-1 {{ request()->routeIs('ai.*') ? 'text-white font-semibold flex items-center gap-1.5' : 'hover:text-white' }} transition-colors">
+                        @if(request()->routeIs('ai.*'))<span class="w-1.5 h-1.5 rounded-full bg-white"></span>@endif
                         <span>Yuna AI</span>
                     </a>
-                    <a href="{{ route('archive.classic') }}" class="py-1 hover:text-white transition-colors">Arsip Klasik</a>
+                    <a href="{{ route('archive.classic') }}" class="py-1 {{ request()->routeIs('archive.classic') ? 'text-white font-semibold flex items-center gap-1.5' : 'hover:text-white' }} transition-colors">
+                        @if(request()->routeIs('archive.classic'))<span class="w-1.5 h-1.5 rounded-full bg-white"></span>@endif
+                        <span>Arsip Klasik</span>
+                    </a>
+                    <a href="{{ route('blog.index') }}" class="py-1 {{ request()->routeIs('blog.*') ? 'text-white font-semibold flex items-center gap-1.5' : 'hover:text-white' }} transition-colors">
+                        @if(request()->routeIs('blog.*'))<span class="w-1.5 h-1.5 rounded-full bg-white"></span>@endif
+                        <span>Blog Pribadi</span>
+                    </a>
                     <a href="{{ route('home') }}#contact" class="py-1 hover:text-white transition-colors">Kontak</a>
                 </div>
             </div>

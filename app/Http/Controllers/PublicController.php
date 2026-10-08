@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Certificate;
 use App\Models\Message;
+use App\Models\Post;
 use App\Models\Project;
 use App\Models\Skill;
 use App\Services\ServerMonitorService;
@@ -148,6 +149,71 @@ class PublicController extends Controller
         }
 
         return view('projects.show', compact('project', 'relatedProjects'));
+    }
+
+    /**
+     * Display personal blog catalog.
+     */
+    public function blog(Request $request)
+    {
+        $query = Post::published();
+
+        if ($search = $request->input('q')) {
+            $query->where(function ($q) use ($search) {
+                $q->where('title', 'like', "%{$search}%")
+                    ->orWhere('excerpt', 'like', "%{$search}%")
+                    ->orWhere('content', 'like', "%{$search}%")
+                    ->orWhere('tags', 'like', "%{$search}%");
+            });
+        }
+
+        if ($category = $request->input('category')) {
+            if ($category !== 'all') {
+                $query->where('category', $category);
+            }
+        }
+
+        $featuredPost = null;
+        if (!$request->filled('q') && (!$request->filled('category') || $request->input('category') === 'all')) {
+            $featuredPost = (clone $query)->latest('published_at')->first();
+        }
+
+        if ($featuredPost) {
+            $posts = $query->where('id', '!=', $featuredPost->id)->latest('published_at')->paginate(6)->withQueryString();
+        } else {
+            $posts = $query->latest('published_at')->paginate(6)->withQueryString();
+        }
+
+        $categories = Post::published()->select('category')->distinct()->pluck('category');
+        $totalPostsCount = Post::published()->count();
+
+        return view('blog.index', compact('posts', 'featuredPost', 'categories', 'totalPostsCount'));
+    }
+
+    /**
+     * Display personal blog article reader.
+     */
+    public function blogDetail(string $slug)
+    {
+        $post = Post::published()->where('slug', $slug)->firstOrFail();
+        $post->increment('views_count');
+
+        $relatedPosts = Post::published()
+            ->where('id', '!=', $post->id)
+            ->where('category', $post->category)
+            ->latest('published_at')
+            ->take(3)
+            ->get();
+
+        if ($relatedPosts->isEmpty()) {
+            $relatedPosts = Post::published()
+                ->where('id', '!=', $post->id)
+                ->latest('published_at')
+                ->take(3)
+                ->get();
+        }
+
+        return view('blog.show', compact('post', 'relatedPosts'));
     }
 
     /**
