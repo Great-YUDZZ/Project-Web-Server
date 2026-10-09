@@ -1,223 +1,179 @@
 # Portfolio Web Server & Lab Infrastruktur TKJ
 **I Made Yuda Pramana | SMKN 1 Denpasar**
 
-Repository ini memuat kode sumber lengkap untuk aplikasi web portofolio profesional dan dokumentasi lab teknik komputer dan jaringan (TKJ). Sistem ini dibangun dengan arsitektur LEMP stack (Linux, Nginx, MariaDB, PHP 8.4) dan Laravel 12, mengedepankan performa tinggi, desain editorial modern, telemetri server langsung, serta panel manajemen data berbasis otentikasi aman.
+Repository ini memuat seluruh kode sumber untuk web portfolio sekaligus showcase lab Teknik Komputer dan Jaringan (TKJ) yang kubangun sendiri, tujuannya buat nunjukin kompetensi yang ku kuasai mulai dari administrasi server Linux, konfigurasi jaringan, sampai perancangan aplikasi web modern. Project ini di-deploy langsung di atas mesin fisik baremetal menggunakan Debian 13 (Trixie), bukan sekadar shared hosting biasa, sehingga seluruh pembacaan telemetri server berjalan secara riil dari kernel sistem operasi.
 
 ---
 
-## Daftar Isi
-1. [Ikhtisar Proyek](#ikhtisar-proyek)
-2. [Fitur Utama](#fitur-utama)
-3. [Arsitektur Teknologi](#arsitektur-teknologi)
-4. [Tipografi dan Desain Visual](#tipografi-dan-desain-visual)
-5. [Struktur Direktori](#struktur-direktori)
-6. [Instalasi dan Konfigurasi Lokal](#instalasi-dan-konfigurasi-lokal)
-7. [Pengujian Otomatis](#pengujian-otomatis)
-8. [Keamanan Sistem](#keamanan-sistem)
+## Akses Website & Live Production
+
+Pengunjung dan reviewer dapat mengakses web ini secara langsung melalui beberapa endpoint berikut:
+
+- **Web Utama (Live Production)**: [https://great-yuda.my.id](https://great-yuda.my.id)
+- **Akses Jaringan Lokal (Home Lab)**: [http://yuda.local](http://yuda.local) (dapat diakses saat terhubung ke jaringan Wi-Fi lab yang sama)
+- **Konsol Asisten AI Yuna**: [https://great-yuda.my.id/ai](https://great-yuda.my.id/ai)
+- **Katalog Blog & Jurnal Teknis**: [https://great-yuda.my.id/blog](https://great-yuda.my.id/blog)
+- **Arsip Portofolio Klasik (2024-2025)**: [https://great-yuda.my.id/archive/classic](https://great-yuda.my.id/archive/classic)
+- **Repositori GitHub**: [https://github.com/Great-YUDZZ/Project-Web-Server](https://github.com/Great-YUDZZ/Project-Web-Server)
+
+Seluruh metrik dan telemetri perangkat keras yang tampil di halaman utama diambil secara berkala langsung dari pembacaan kernel Linux `/proc`, jadi data beban CPU, penggunaan memori RAM, dan status penyimpanan yang kalian lihat adalah data aktual server fisik.
 
 ---
 
-## Ikhtisar Proyek
+## Gambaran Umum Project
 
-Aplikasi ini berfungsi sebagai representasi keahlian teknis di bidang infrastruktur jaringan, administrasi server Linux, keamanan siber, dan rekayasa perangkat lunak modern. Portofolio menampilkan karya nyata seperti:
-- **IT-Toolbox v1.5.0**: Rangkaian utilitas jaringan dan diagnostik sistem berbasis terminal dan web.
-- **VisualStyle Studio**: Editor token desain visual dan utilitas antarmuka berkinerja tinggi.
-- **SakuKu Financial Engine**: Sistem pencatatan analitik keuangan lokal berbasis transaksi ACID.
+Aplikasi ini kurancang sebagai bukti implementasi nyata di bidang infrastruktur jaringan komputer, pengelolaan server mandiri, dan software engineering modern. Selain menampilkan profil serta dokumentasi keahlian, website ini mengintegrasikan beberapa sub-sistem utama yang kubuat:
 
-Selain itu, terdapat integrasi asisten virtual interaktif **Yuna AI** yang dilengkapi arsitektur multi provider (Google Gemini Flash dengan failover cadangan ke OpenRouter / Ollama) untuk membantu pengunjung mengeksplorasi dokumentasi teknis secara interaktif.
+- **IT-Toolbox v1.5.0**: utilitas diagnostik jaringan dan inspeksi sistem berbasis web serta antarmuka command line.
+- **VisualStyle Studio**: editor token desain visual dan utilitas antarmuka berkinerja tinggi.
+- **SakuKu Financial Engine**: sistem pencatatan analitik keuangan lokal dengan integritas transaksi database ACID.
+- **Yuna AI Assistant**: asisten interaktif berbasis multi-key Google Gemini Flash dengan failover lokal untuk konsultasi materi jaringan, Linux, MikroTik, dan arsitektur server.
+
+---
+
+## Tech Stack & Infrastruktur
+
+Untuk menjaga efisiensi sumber daya dan performa tinggi di lingkungan server baremetal, stack teknologi yang kupilih disusun seringan mungkin tanpa dependensi berlebih:
+
+| Layer | Teknologi | Peran & Implementasi |
+|---|---|---|
+| **Sistem Operasi** | Debian 13 (Trixie) | Host baremetal fisik dengan optimasi TCP BBR kernel |
+| **Web Server** | Nginx 1.22+ | Reverse proxy, terminasi SSL/TLS, static cache, dan FastCGI pass |
+| **Backend Runtime** | PHP 8.4-FPM | Eksekusi engine via Unix socket `unix:/run/php/php8.4-fpm.sock` |
+| **Framework Backend** | Laravel 12 | Arsitektur MVC, route handling, validasi ketat, dan Eloquent ORM |
+| **Basis Data** | MariaDB 11.8 / MySQL 8.0 | Manajemen basis data relasional dengan storage engine InnoDB |
+| **Styling & CSS** | Tailwind CSS v4 | Konfigurasi sistem token monokrom via directive `@theme` di app.css |
+| **Bundler Frontend** | Vite 5 | Kompilasi kilat aset JavaScript dan CSS dengan Hot Module Replacement |
+| **Engine Animasi** | GSAP 3 + ScrollTrigger | Transisi teks hero, floating scroll-spy HUD, dan marquee teknologi 60 FPS |
+| **Kanvas Grafis 3D** | Three.js WebGL | Latar belakang partikel bintang 3D interaktif yang merespons kursor mouse |
+
+---
+
+## Sistem Desain & Tipografi Monokrom
+
+Dari segi visual, antarmuka sengaja tidak menggunakan gradien warna-warni yang mencolok, konsepnya ku arahkan ke gaya **Dark Engineering Terminal** yang berfokus pada palet hitam murni (`#000000`), abu-abu presisi, dan putih kontras tinggi untuk menjaga ergonomi pembacaan teknis:
+
+- **Outfit**: font geometric sans-serif untuk hierarki judul utama, branding, dan angka metrik agar tampak kokoh serta presisi.
+- **Inter**: font netral untuk teks isi dan artikel jurnal agar nyaman dibaca dalam durasi panjang di layar mobile maupun desktop.
+- **JetBrains Mono**: font monospace berjarak tetap untuk perintah terminal Bash, alamat IP, penomoran port, dan cuplikan log telemetri.
 
 ---
 
 ## Fitur Utama
 
-### 1. Halaman Publik (Dark Portfolio)
-- **Hero Interaktif**: Latar belakang video Mux HLS berkecepatan tinggi, efek glassmorphism, dan tipografi dinamis.
-- **Bento Grid Karya Unggulan**: Kartu proyek terstruktur dengan visual topologi jaringan, terminal prompt langsung, dan rincian teknologi.
-- **Konveyor Alur Teknologi**: Showcase teknologi pembuatan web berbasis GSAP ScrollTrigger berurutan dengan kartu interaktif dan dialog rincian teknis.
-- **Orrery Planet 3D**: Galeri interaktif 3D berbahan dasar Three.js untuk visualisasi ekosistem komputasi.
-- **Formulir Kontak Terenkripsi**: Pengiriman pesan langsung ke basis data dengan sanitasi input, validasi ketat, pembatasan laju request (rate limiting), dan status umpan balik instan.
-- **Widget Chatbot AI Yuna**: Asisten pintar yang dapat menjawab pertanyaan seputar keahlian, riwayat proyek, dan konfigurasi server.
+1. **Dark Engineering Portfolio**:
+   - Hero section interaktif dengan animasi bertingkat tanpa loading screen buatan yang menghambat akses awal pengguna.
+   - Floating HUD Navbar yang sinkron secara presisi dengan posisi viewport pengunjung (scroll-spy aktif) menggunakan `requestAnimationFrame`.
+   - Widget telemetri real-time yang memantau beban CPU, alokasi RAM, kapasitas penyimpanan SSD, durasi uptime, dan ketersediaan database.
+   - Tech flow columns yang memutar kartu komponen teknologi secara vertikal lengkap dengan modal detail arsitektur.
+   - Formulir kontak terproteksi dengan sanitasi input anti-XSS, rate limiting ketat, dan validasi token CSRF.
 
-### 2. Dashboard Administrasi (Admin Panel)
-- **Otentikasi Aman**: Dilengkapi proteksi brute force, sesi terenkripsi, dan middleware otorisasi.
-- **Telemetri Server Langsung (Live Telemetry)**: Pemantauan metrik perangkat keras waktu nyata meliputi beban CPU, kapasitas RAM, penggunaan penyimpanan NVMe, status Nginx, basis data MariaDB, soket PHP-FPM, dan uptime server.
-- **Manajemen Konten (CRUD)**:
-  - Manajemen Proyek Lab (tambah, edit, hapus, unggah foto topologi, toggle unggulan).
-  - Manajemen Matriks Keahlian (pengelompokan kategori sysadmin, networking, security, tools).
-  - Manajemen Sertifikat dan Kredensial Resmi.
-  - Pengelola Kotak Masuk Pesan dengan penanda status baca.
-- **Navigasi Responsif**: Dilengkapi laci samping (slide-in drawer) pada perangkat ponsel cerdas tanpa pergeseran tata letak horizontal.
+2. **Modul Publikasi & Jurnal Teknis**:
+   - Ruang dokumentasi artikel panduan jaringan, administrasi sistem, dan konfigurasi server.
+   - Dilengkapi modul pencarian kata kunci, filter kategori teknologi, estimasi waktu baca otomatis, dan rekomendasi artikel terkait.
 
-### 3. Arsip Desain Klasik
-- Struktur arsip terisolasi (`resources/views/archive/classic/`) yang menyimpan tata letak antarmuka versi terdahulu sebagai catatan evolusi desain portofolio.
+3. **Dashboard Manajemen Terproteksi**:
+   - Autentikasi administrator dengan proteksi anti brute-force maksimal 5 percobaan per IP dan email.
+   - Manajemen CRUD penuh untuk proyek portofolio, arsip sertifikasi kompetensi (Cisco/MikroTik), artikel jurnal, dan pesan kontak masuk.
 
 ---
 
-## Arsitektur Teknologi
+## Struktur Direktori Project
 
-| Lapisan | Komponen / Versi | Peran Teknis |
-|---|---|---|
-| **Sistem Operasi** | Debian 13 | Host bare metal atau mesin virtual |
-| **Web Server** | Nginx 1.26 | Reverse proxy, penanganan SSL/TLS, static file delivery |
-| **Bahasa Pemrograman** | PHP 8.4 | Pemrosesan logika server-side berkecepatan tinggi |
-| **Framework Backend** | Laravel 12 | Arsitektur MVC, ORM Eloquent, middleware keamanan |
-| **Basis Data** | MariaDB 11.8 / MySQL 8.4 | Penyimpanan relasional persisten berstandar ACID |
-| **Bundler Aset** | Vite 8 | Kompilasi aset frontend secara instan |
-| **Framework CSS** | Tailwind CSS v4 | Utilitas desain sistem modular berbasis token |
-| **Mesin Animasi** | GSAP 3.15 + ScrollTrigger | Manajemen animasi 60 FPS dan transisi scroll |
-| **Grafis 3D** | Three.js | Pemodelan objek interaktif berbasis WebGL |
-| **Mesin Carousel** | Swiper 14 | Slider responsif ramah sentuhan |
+Berikut adalah struktur direktori utama pada project ini untuk memudahkan pemetaan kode sumber:
 
----
-
-## Tipografi dan Desain Visual
-
-Desain aplikasi mengadopsi standar tipografi editorial teknis:
-- **Inter** (`font-body` dan `--font-sans`): Digunakan untuk teks umum, elemen antarmuka, label navigasi, tabel data, dan formulir input demi kenyamanan membaca tingkat tinggi.
-- **Outfit** (`font-display` dan `--font-geometric`): Tipografi geometric sans-serif modern yang digunakan pada judul utama, display headlines, serta angka metrik statistik besar untuk menciptakan tampilan teknis, presisi, dan kokoh.
-- **JetBrains Mono** (`font-mono`): Dikhususkan untuk data mesin, telemetri perangkat keras, parameter port jaringan, alamat IP, dan potongan kode perintah.
-
-Palet warna mengusung tema obsidian dark mode dengan skema monokrom murni: hitam, abu-abu, dan putih.
-
----
-
-## Struktur Direktori
-
-```
+```text
 project_tkj_yuda2/
 ├── app/
-│   ├── Http/
-│   │   ├── Controllers/
-│   │   │   ├── Admin/             # Controller CRUD panel admin
-│   │   │   ├── AuthController.php # Autentikasi sesi admin
-│   │   │   ├── ChatbotController.php # Integrasi asisten AI
-│   │   │   └── PublicController.php  # Rute publik dan form kontak
-│   │   └── Middleware/            # Pengerasan keamanan HTTP
-│   ├── Models/                    # Model Eloquent (User, Project, Skill, Message, Certificate)
-│   └── Services/                  # Telemetri server (ServerMonitorService)
-├── bootstrap/                     # Konfigurasi booting dan registrasi aplikasi
-├── config/                        # Pengaturan aplikasi, database, dan layanan AI
+│   ├── Http/Controllers/       # Controller publik, autentikasi, AI Yuna, dan admin CRUD
+│   ├── Models/                 # Model Eloquent (Project, Post, Certificate, Skill, Message, User)
+│   └── Services/               # ServerMonitorService untuk parsing data telemetri Linux
+├── bootstrap/app.php           # Inisialisasi framework, konfigurasi routing, dan middleware
+├── config/                     # Berkas konfigurasi sistem (database, auth, session, app)
 ├── database/
-│   ├── migrations/                # Skema migrasi tabel basis data
-│   └── seeders/                   # Pengisi data awal proyek dan sertifikat
-├── nginx/                         # Berkas konfigurasi web server Nginx
-├── public/
-│   ├── images/                    # Asset gambar proyek, logo teknologi, dan ilustrasi
-│   └── index.php                  # Titik masuk utama HTTP
+│   ├── migrations/             # 9 berkas skema migrasi tabel basis data
+│   └── seeders/                # Seeder data bawaan proyek, keahlian, dan sertifikasi
+├── docs/knowledge-base/        # Dokumentasi playbook arsitektur teknis dan panduan file
+├── nginx/                      # Template konfigurasi reverse proxy Nginx server
+├── public/                     # Dokumen root web publik, aset statis, dan upload berkas
 ├── resources/
-│   ├── css/                       # Definisi tema dan token Tailwind v4
-│   ├── js/                        # Modul animasi GSAP, 3D, rotator lab, dan chatbot
-│   └── views/
-│       ├── admin/                 # Tampilan blade panel administrasi
-│       ├── archive/               # Tampilan blade arsip desain klasik
-│       ├── auth/                  # Formulir login sesi admin
-│       ├── layouts/               # Template kerangka utama dan admin
-│       ├── partials/              # Potongan komponen antarmuka modular
-│       └── home.blade.php         # Halaman utama portofolio
-├── routes/
-│   ├── console.php                # Perintah artisan kustom
-│   └── web.php                    # Definisi seluruh rute HTTP aplikasi
-└── tests/
-    └── Feature/                   # Pengujian otomatis fitur portofolio dan admin
+│   ├── css/app.css             # Konfigurasi tema monokrom Tailwind CSS v4
+│   ├── js/                     # dark-portfolio.js, interactive-bg.js, dan app.js
+│   └── views/                  # Template tampilan Blade (home, layouts, blog, projects, admin)
+└── routes/web.php              # Definisi rute URL publik, API telemetri, dan rute admin
 ```
 
 ---
 
-## Instalasi dan Konfigurasi Lokal
+## Panduan Instalasi & Menjalankan di Lingkungan Lokal
 
-### Kebutuhan Sistem
-- PHP 8.3 atau 8.4 (ekstensi: `pdo`, `pdo_mysql`, `mbstring`, `xml`, `curl`, `bcmath`)
-- Composer 2.7+
-- Node.js 20+ dan npm
-- MariaDB 10.11+ atau MySQL 8.0+
-- Web server Nginx atau Apache
+Untuk menjalankan project ini pada lingkungan pengembangan lokal, ikuti langkah-langkah terstruktur berikut:
 
-### Langkah Instalasi
-1. Gandakan repositori ini ke komputer lokal:
+1. Kloning repositori dari GitHub:
    ```bash
    git clone https://github.com/Great-YUDZZ/Project-Web-Server.git
    cd Project-Web-Server
    ```
 
-2. Pasang dependensi pustaka PHP:
+2. Pasang dependensi PHP menggunakan Composer:
    ```bash
    composer install
    ```
 
-3. Pasang paket pustaka JavaScript:
+3. Pasang paket dependensi JavaScript menggunakan NPM:
    ```bash
    npm install
    ```
 
-4. Buat salinan berkas konfigurasi lingkungan:
+4. Buat berkas environment lokal dari template `.env.example`:
    ```bash
    cp .env.example .env
-   ```
-
-5. Hasilkan kunci enkripsi aplikasi:
-   ```bash
    php artisan key:generate
    ```
 
-6. Sesuaikan konfigurasi basis data pada berkas `.env`:
-   ```env
-   DB_CONNECTION=mysql
-   DB_HOST=127.0.0.1
-   DB_PORT=3306
-   DB_DATABASE=project_tkj_yuda2
-   DB_USERNAME=root
-   DB_PASSWORD=rahasia
-   ```
-
-7. Jalankan migrasi tabel beserta pengisi data contoh:
+5. Sesuaikan kredensial basis data pada berkas `.env`, kemudian jalankan migrasi tabel beserta data awal:
    ```bash
    php artisan migrate --seed
    ```
 
-8. Buat tautan simbolik direktori penyimpanan publik:
+6. Buat tautan simbolik direktori penyimpanan publik:
    ```bash
    php artisan storage:link
    ```
 
-9. Kompilasi berkas aset frontend untuk produksi:
+7. Bangun aset frontend menggunakan Vite:
    ```bash
    npm run build
    ```
 
-10. Jalankan server lokal:
-    ```bash
-    php artisan serve
-    ```
-    Aplikasi dapat diakses melalui peramban di `http://127.0.0.1:8000`.
+8. Jalankan server lokal Laravel:
+   ```bash
+   php artisan serve
+   ```
+   Aplikasi dapat diakses melalui browser pada alamat `http://127.0.0.1:8000`.
 
 ---
 
-## Pengujian Otomatis
+## Pengujian Otomatis (Automated Testing)
 
-Aplikasi ini dilengkapi pengujian fitur menyeluruh menggunakan PHPUnit untuk memastikan reliabilitas logika bisnis dan proteksi akses:
+Untuk menjamin keandalan sistem dan memastikan tidak ada regresi fungsionalitas saat pembaruan kode, project ini telah dilengkapi dengan 29 automated test (Feature dan Unit test):
 
 ```bash
 php artisan test
 ```
 
-Cakupan pengujian mencakup:
-- Akses halaman publik, landing page dark mode, dan arsip desain klasik.
-- Proteksi otorisasi rute admin bagi pengguna tanpa autentikasi.
-- Alur login dan logout administrator.
-- Validasi CRUD proyek, kompetensi teknis, dan sertifikasi.
-- API telemetri metrik server Linux.
-- Validasi pengiriman pesan kontak dan proteksi rate limiting.
+Pengujian mencakup seluruh rute publik, validasi alur autentikasi admin, proteksi token CSRF, pembatasan rate limiting kontak, hingga integritas query database dengan hasil 100% lulus (29 passed, 185 assertions).
 
 ---
 
-## Keamanan Sistem
+## Knowledge Base & Dokumentasi Obsidian
 
-- **Cross-Site Scripting (XSS)**: Sanitasi otomatis seluruh masukan form kontak sebelum penyimpanan data.
-- **Cross-Site Request Forgery (CSRF)**: Perlindungan token aktif pada semua metode request mutasi state (POST, PUT, PATCH, DELETE).
-- **Proteksi Brute Force**: Throttling otomatis pada endpoint login admin dan pengiriman formulir publik.
-- **Kebijakan Header Keamanan**: Dilengkapi konfigurasi header perlindungan konten (Content Security Policy, X-Frame-Options, X-Content-Type-Options) pada level middleware dan web server Nginx.
-- **Pemisahan Kredensial**: Tidak ada rahasia produksi atau berkas lingkungan sensitif yang disertakan dalam riwayat commit Git.
+Seluruh dokumentasi teknis mendalam mengenai arsitektur kode, pemetaan relasi antar berkas, panduan modifikasi baris spesifik, dan alasan teknis implementasi fitur telah terdokumentasi secara terstruktur di folder `docs/knowledge-base/` (serta tersimpan pada vault Obsidian lokal di `/home/yudz/Documents/project_tkj_yuda2/`).
+
+Kalian dapat membuka direktori tersebut menggunakan Obsidian untuk melihat keterhubungan modular antar komponen sistem melalui fitur Graph View.
 
 ---
 
-Hak Cipta (c) 2026 I Made Yuda Pramana. Semua hak dilindungi.
+## Catatan Penutup
+
+Project web ini kubangun bukan sekadar portofolio visual semata, melainkan sarana implementasi praktis bagaimana mengelola server fisik Linux secara mandiri, mengonfigurasi jalur jaringan, serta merancang kode web yang efisien dan aman. Semakin dalam ku eksplorasi optimasi server baremetal ini ya semakin paham juga tantangan stabilitas dan mitigasi keamanannya, tapi ya semakin luas cakupan fiturnya tentu menuntut ketelitian perawatan berkala yang sepadan, intinya semoga repositori ini bisa memberi gambaran nyata bagi siapa pun yang mendalami administrasi sistem, jaringan komputer, maupun web development modern.
