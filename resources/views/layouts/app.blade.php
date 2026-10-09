@@ -19,7 +19,7 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
@@ -35,7 +35,7 @@
             <!-- Brand Identity Cluster -->
             <a href="{{ route('home') }}" class="flex items-center gap-2.5 sm:gap-3 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white rounded-xl mr-2 lg:mr-3 xl:mr-8 shrink-0" aria-label="I Made Yuda Pramana Home">
                 <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white/5 border border-white/15 flex items-center justify-center shadow-md group-hover:scale-105 group-hover:border-white/50 transition-all">
-                    <span class="font-display italic text-sm text-[#f5f5f5]">YP</span>
+                    <span class="font-display font-black text-sm text-[#f5f5f5]">YP</span>
                 </div>
                 <div class="flex flex-col">
                     <div class="font-bold text-[#f5f5f5] text-xs sm:text-sm lg:text-[14px] xl:text-[15px] tracking-tight group-hover:text-white transition-colors flex items-center gap-1.5 whitespace-nowrap">
@@ -137,7 +137,7 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-end">
                 <div>
                     <div class="flex items-center gap-3 mb-4">
-                        <span class="font-display italic text-xl text-[#f5f5f5]">I Made Yuda Pramana</span>
+                        <span class="font-display font-bold text-xl text-[#f5f5f5] tracking-tight">I Made Yuda Pramana</span>
                         <span class="text-[#4D4D4D] font-mono">/</span>
                         <span class="font-mono text-xs text-[#a3a3a3]">SMKN 1 Denpasar</span>
                     </div>

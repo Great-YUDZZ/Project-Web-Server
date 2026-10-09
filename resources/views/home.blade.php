@@ -16,10 +16,10 @@
     <link rel="icon" type="image/png" href="{{ asset('images/logo.png') }}">
     <link rel="shortcut icon" href="{{ asset('favicon.ico') }}">
 
-    <!-- Google Fonts: Inter & Instrument Serif -->
+    <!-- Google Fonts: Inter, JetBrains Mono & Outfit (Geometric Sans) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
@@ -55,39 +55,12 @@
             <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_35%,rgba(10,10,10,0.65)_100%)]"></div>
         </div>
 
-        <!-- ========================================== -->
-        <!-- SECTION 1: LOADING SCREEN                  -->
-        <!-- ========================================== -->
-        <div id="dark-loading-screen" class="fixed inset-0 z-[9999] bg-[#0a0a0a] flex flex-col justify-between p-6 sm:p-12 transition-opacity">
-            <!-- Top-Left Label -->
-            <div class="flex items-center gap-2">
-                <span class="w-2 h-2 rounded-full accent-gradient"></span>
-                <span class="text-xs text-[#878787] uppercase tracking-[0.3em] font-mono">PORTFOLIO '26</span>
-            </div>
-
-            <!-- Center Rotating Words -->
-            <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
-                <span id="loading-word" class="text-4xl md:text-6xl lg:text-7xl font-display italic text-[#f5f5f5]/85 tracking-tight">Create</span>
-            </div>
-
-            <!-- Bottom Row: Counter & Progress Bar -->
-            <div class="w-full flex flex-col gap-4">
-                <div class="flex justify-between items-end">
-                    <span class="text-xs text-[#878787] font-mono tracking-wider">SYSTEM INITIALIZING</span>
-                    <span id="loading-counter" class="text-6xl md:text-8xl lg:text-9xl font-display text-[#f5f5f5] tabular-nums leading-none">000</span>
-                </div>
-                <div class="w-full h-[3px] bg-[#1f1f1f] rounded-full overflow-hidden">
-                    <div id="loading-bar-fill" class="h-full w-full accent-gradient origin-left scale-x-0 shadow-[0_0_12px_rgba(255,255,255,0.6)]"></div>
-                </div>
-            </div>
-        </div>
-
         <!-- FIXED FLOATING NAVBAR (Glassmorphism HUD) -->
         <header class="fixed top-0 left-0 right-0 z-50 flex justify-center pt-3 sm:pt-4 md:pt-6 px-3 sm:px-4 pointer-events-none">
             <div id="dark-nav-pill" class="pointer-events-auto inline-flex items-center rounded-full glass-hud px-2 sm:px-4 py-1.5 sm:py-2 transition-all duration-300 gap-1 sm:gap-2 max-w-[calc(100vw-1.5rem)]">
                 <!-- Logo: circle with frosted glass badge -->
                 <a href="#hero" class="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-white/5 border border-white/15 p-[1px] group hover:scale-110 hover:border-white/50 transition-all flex items-center justify-center shrink-0 shadow-sm" aria-label="Beranda">
-                    <div class="w-full h-full bg-[#0a0a0a]/60 backdrop-blur-sm rounded-full flex items-center justify-center text-xs sm:text-[13px] font-display italic text-[#f5f5f5] group-hover:text-white transition-colors">
+                    <div class="w-full h-full bg-[#0a0a0a]/60 backdrop-blur-sm rounded-full flex items-center justify-center text-xs sm:text-[13px] font-display font-black text-[#f5f5f5] group-hover:text-white transition-colors">
                         YP
                     </div>
                 </a>
@@ -96,12 +69,12 @@
                 <div class="w-px h-4 sm:h-5 bg-white/10 mx-0.5 sm:mx-1"></div>
 
                 <!-- Nav Links with Glass Hover Treatments -->
-                <nav class="flex items-center gap-0.5 sm:gap-1 text-xs sm:text-sm font-medium">
-                    <a href="#hero" class="px-2.5 sm:px-3.5 py-1 sm:py-1.5 rounded-full text-white font-semibold bg-white/15 shadow-sm transition-all">Beranda</a>
-                    <a href="#works" class="px-2.5 sm:px-3.5 py-1 sm:py-1.5 rounded-full text-[#878787] hover:text-[#f5f5f5] hover:bg-white/10 transition-all">Karya</a>
-                    <a href="#skills" class="hidden sm:inline-block px-3.5 py-1.5 rounded-full text-[#878787] hover:text-[#f5f5f5] hover:bg-white/10 transition-all">Keahlian</a>
-                    <a href="#technologies" class="hidden md:inline-block px-3.5 py-1.5 rounded-full text-[#878787] hover:text-[#f5f5f5] hover:bg-white/10 transition-all">Tech Stack</a>
-                    <a href="#contact" class="px-2.5 sm:px-3.5 py-1 sm:py-1.5 rounded-full text-[#878787] hover:text-[#f5f5f5] hover:bg-white/10 transition-all">Kontak</a>
+                <nav id="dark-nav-menu" class="flex items-center gap-0.5 sm:gap-1 text-xs sm:text-sm font-medium">
+                    <a href="#hero" data-nav-target="hero" class="nav-item px-2.5 sm:px-3.5 py-1 sm:py-1.5 rounded-full text-white font-semibold bg-white/15 shadow-sm transition-all">Beranda</a>
+                    <a href="#works" data-nav-target="works" class="nav-item px-2.5 sm:px-3.5 py-1 sm:py-1.5 rounded-full text-[#878787] hover:text-[#f5f5f5] hover:bg-white/10 transition-all">Karya</a>
+                    <a href="#skills" data-nav-target="skills" class="nav-item hidden sm:inline-block px-3.5 py-1.5 rounded-full text-[#878787] hover:text-[#f5f5f5] hover:bg-white/10 transition-all">Keahlian</a>
+                    <a href="#technologies" data-nav-target="technologies" class="nav-item hidden md:inline-block px-3.5 py-1.5 rounded-full text-[#878787] hover:text-[#f5f5f5] hover:bg-white/10 transition-all">Tech Stack</a>
+                    <a href="#contact" data-nav-target="contact" class="nav-item px-2.5 sm:px-3.5 py-1 sm:py-1.5 rounded-full text-[#878787] hover:text-[#f5f5f5] hover:bg-white/10 transition-all">Kontak</a>
                 </nav>
 
                 <!-- Hairline Divider -->
@@ -132,14 +105,14 @@
 
             <!-- Hero Centered Content -->
             <div class="relative z-10 text-center max-w-4xl px-6 pt-28 pb-20 flex flex-col items-center">
-                <!-- Display Name in Instrument Serif Italic -->
-                <h1 class="name-reveal text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-display italic leading-[0.9] tracking-tight text-[#f5f5f5] mb-6">
+                <!-- Display Name in Outfit Geometric Sans -->
+                <h1 class="name-reveal text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-display font-extrabold leading-[0.9] tracking-tight text-[#f5f5f5] mb-6">
                     I Made Yuda Pramana
                 </h1>
 
                 <!-- Cycling Role Subhead -->
                 <div class="blur-in text-lg sm:text-xl md:text-2xl text-[#878787] mb-6 font-normal">
-                    Seorang <span id="hero-rotating-role" class="font-display italic text-[#f5f5f5] animate-role-fade-in inline-block border-b border-white/40 pb-0.5">Network Engineer</span> berbasis di Denpasar.
+                    Seorang <span id="hero-rotating-role" class="font-display font-bold text-[#f5f5f5] animate-role-fade-in inline-block border-b border-white/40 pb-0.5">Network Engineer</span> berbasis di Denpasar.
                 </div>
 
                 <!-- Description -->
@@ -184,7 +157,7 @@
                             <span class="text-xs text-[#878787] uppercase tracking-[0.3em] font-mono">KARYA PILIHAN</span>
                         </div>
                         <h2 class="text-3xl md:text-5xl font-sans text-[#f5f5f5] tracking-tight">
-                            Proyek <span class="font-display italic text-[#f5f5f5]">Unggulan</span>
+                            Proyek <span class="font-display font-bold text-[#f5f5f5]">Unggulan</span>
                             <span class="sr-only">Showcase Lab</span>
                         </h2>
                         <p class="text-sm md:text-base text-[#878787] mt-2 max-w-md font-light">
@@ -264,7 +237,7 @@
                         <!-- Hover Overlay with Direct Project Detail Redirection -->
                         <div class="absolute inset-0 bg-[#0a0a0a]/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 backdrop-blur-md flex items-center justify-center p-6 z-20">
                             <a href="{{ route('projects.show', ['slug' => 'it-toolbox', 'ref' => 'dark']) }}" class="px-6 py-3 rounded-full bg-[#f5f5f5] text-[#0a0a0a] text-xs font-semibold inline-flex items-center gap-2 transform translate-y-3 group-hover:translate-y-0 transition-all shadow-xl hover:scale-105">
-                                <span>Buka Detail &amp; Dokumentasi: <span class="font-display italic">IT Toolbox</span></span>
+                                <span>Buka Detail &amp; Dokumentasi: <span class="font-display font-bold">IT Toolbox</span></span>
                                 <span>→</span>
                             </a>
                         </div>
@@ -306,7 +279,7 @@
                                 <div class="p-2.5 rounded-xl bg-[#141414] border border-[#1f1f1f] flex flex-col justify-between">
                                     <span class="text-[10px] text-[#878787] uppercase tracking-wider">ANIMASI</span>
                                     <span class="text-xs font-semibold text-[#f5f5f5] mt-1">CSS3 Keyframes</span>
-                                    <span class="text-[9px] text-purple-400 font-sans mt-0.5">Cubic-Bezier 60 FPS</span>
+                                    <span class="text-[9px] text-zinc-400 font-sans mt-0.5">Cubic-Bezier 60 FPS</span>
                                 </div>
                                 <div class="p-2.5 rounded-xl bg-[#141414] border border-[#1f1f1f] flex flex-col justify-between">
                                     <span class="text-[10px] text-[#878787] uppercase tracking-wider">COLOR SYSTEM</span>
@@ -330,7 +303,7 @@
                         <!-- Hover Overlay with Direct Project Detail Redirection -->
                         <div class="absolute inset-0 bg-[#0a0a0a]/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 backdrop-blur-md flex items-center justify-center p-6 z-20">
                             <a href="{{ route('projects.show', ['slug' => 'visualstyle-studio', 'ref' => 'dark']) }}" class="px-6 py-3 rounded-full bg-[#f5f5f5] text-[#0a0a0a] text-xs font-semibold inline-flex items-center gap-2 transform translate-y-3 group-hover:translate-y-0 transition-all shadow-xl hover:scale-105">
-                                <span>Buka Detail &amp; Dokumentasi: <span class="font-display italic">VisualStyle</span></span>
+                                <span>Buka Detail &amp; Dokumentasi: <span class="font-display font-bold">VisualStyle</span></span>
                                 <span>→</span>
                             </a>
                         </div>
@@ -409,7 +382,7 @@
                         <!-- Hover Overlay with Direct Project Detail Redirection -->
                         <div class="absolute inset-0 bg-[#0a0a0a]/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 backdrop-blur-md flex items-center justify-center p-6 z-20">
                             <a href="{{ route('projects.show', ['slug' => 'sakuku', 'ref' => 'dark']) }}" class="px-6 py-3 rounded-full bg-[#f5f5f5] text-[#0a0a0a] text-xs font-semibold inline-flex items-center gap-2 transform translate-y-3 group-hover:translate-y-0 transition-all shadow-xl hover:scale-105">
-                                <span>Buka Detail &amp; Dokumentasi: <span class="font-display italic">SakuKu</span></span>
+                                <span>Buka Detail &amp; Dokumentasi: <span class="font-display font-bold">SakuKu</span></span>
                                 <span>→</span>
                             </a>
                         </div>
@@ -752,7 +725,7 @@
 
                 <!-- Main Headline: TEKNOLOGI Pembuatan Web -->
                 <h2 class="text-4xl sm:text-5xl md:text-6xl font-sans font-extrabold text-[#f5f5f5] tracking-tight leading-[1.1] mb-5">
-                    TEKNOLOGI <span class="font-display italic font-normal text-[#f5f5f5]">Pembuatan Web</span>
+                    TEKNOLOGI <span class="font-display font-bold text-[#f5f5f5]">Pembuatan Web</span>
                 </h2>
 
                 <!-- Short Description -->
@@ -762,9 +735,9 @@
 
                 <!-- Action Links -->
                 <div class="flex flex-wrap items-center justify-center gap-3">
-                    <a href="https://dribbble.com" target="_blank" rel="noopener noreferrer" class="group relative inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#141414] border border-[#1f1f1f] hover:border-[#EA4C89]/60 text-xs font-mono text-[#f5f5f5] transition-all duration-300 shadow-xl hover:shadow-[0_0_25px_rgba(234,76,137,0.25)] hover:scale-105">
+                    <a href="https://dribbble.com" target="_blank" rel="noopener noreferrer" class="group relative inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#141414] border border-[#1f1f1f] hover:border-white/50 text-xs font-mono text-[#f5f5f5] transition-all duration-300 shadow-xl hover:shadow-[0_0_25px_rgba(255,255,255,0.1)] hover:scale-105">
                         <span>Lihat di Dribbble</span>
-                        <span class="text-[#EA4C89] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-200">↗</span>
+                        <span class="text-white group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-200">↗</span>
                     </a>
                     
                     <a href="#skills" class="group inline-flex items-center gap-2 px-4 py-2.5 rounded-full text-xs font-mono text-[#878787] hover:text-[#f5f5f5] transition-colors">
@@ -897,7 +870,7 @@
                     <div class="p-8 rounded-3xl bg-[#141414] border border-[#1f1f1f] flex flex-col justify-between">
                         <span class="text-xs font-mono text-[#878787] uppercase tracking-wider">PENGAKUAN RESMI</span>
                         <div class="my-6">
-                            <span class="font-display italic text-6xl md:text-8xl text-[#f5f5f5] leading-none">5+</span>
+                            <span class="font-display font-black text-6xl md:text-8xl text-[#f5f5f5] leading-none">5+</span>
                         </div>
                         <div>
                             <h4 class="text-base font-sans font-semibold text-[#f5f5f5]">Sertifikasi Cisco &amp; Komdigi</h4>
@@ -909,7 +882,7 @@
                     <div class="p-8 rounded-3xl bg-[#141414] border border-[#1f1f1f] flex flex-col justify-between">
                         <span class="text-xs font-mono text-[#878787] uppercase tracking-wider">PORTOFOLIO SOFTWARE</span>
                         <div class="my-6">
-                            <span class="font-display italic text-6xl md:text-8xl text-[#f5f5f5] leading-none">{{ $projectsCount ?? \App\Models\Project::count() }}</span>
+                            <span class="font-display font-black text-6xl md:text-8xl text-[#f5f5f5] leading-none">{{ $projectsCount ?? \App\Models\Project::count() }}</span>
                         </div>
                         <div>
                             <h4 class="text-base font-sans font-semibold text-[#f5f5f5]">Proyek Software Mandiri</h4>
@@ -921,7 +894,7 @@
                     <div class="p-8 rounded-3xl bg-[#141414] border border-[#1f1f1f] flex flex-col justify-between">
                         <span class="text-xs font-mono text-[#878787] uppercase tracking-wider">UPTIME BAREMETAL</span>
                         <div class="my-6">
-                            <span class="font-display italic text-6xl md:text-8xl text-[#f5f5f5] leading-none">100%</span>
+                            <span class="font-display font-black text-6xl md:text-8xl text-[#f5f5f5] leading-none">100%</span>
                         </div>
                         <div>
                             <h4 class="text-base font-sans font-semibold text-[#f5f5f5]">SLA Server Mandiri</h4>
@@ -973,7 +946,7 @@
                         <div class="pt-2 sm:pt-4 space-y-3 sm:space-y-4 font-mono text-xs">
                             <!-- Status -->
                             <div class="flex items-center gap-3 text-[#878787]">
-                                <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 shrink-0 shadow-[0_0_8px_rgba(16,185,129,0.5)]"></span>
+                                <span class="w-2.5 h-2.5 rounded-full bg-white shrink-0 shadow-[0_0_8px_rgba(255,255,255,0.6)]"></span>
                                 <span>Status: Siap Magang &amp; Kolaborasi Riset</span>
                             </div>
 
@@ -998,14 +971,14 @@
 
                             <!-- Phone / WhatsApp -->
                             <a href="https://wa.me/6285182691268" target="_blank" rel="noopener noreferrer" class="min-h-[52px] flex items-center gap-3.5 p-4 rounded-2xl bg-[#141414]/90 border border-[#1f1f1f] text-[#f5f5f5] hover:border-white hover:bg-[#1a1a1a] transition-all group shadow-sm">
-                                <div class="w-10 h-10 rounded-xl bg-[#1a1a1a] border border-[#2a2a2a] flex items-center justify-center text-emerald-400 group-hover:scale-105 transition-all shrink-0">
+                                <div class="w-10 h-10 rounded-xl bg-[#1a1a1a] border border-[#2a2a2a] flex items-center justify-center text-white group-hover:scale-105 transition-all shrink-0">
                                     <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
                                     </svg>
                                 </div>
                                 <div class="flex flex-col truncate min-w-0">
                                     <span class="text-[10px] text-[#878787] uppercase tracking-wider font-bold font-mono">No. Telepon / WhatsApp</span>
-                                    <span class="text-xs font-bold text-emerald-400 group-hover:text-emerald-300 truncate font-mono">085182691268</span>
+                                    <span class="text-xs font-bold text-white group-hover:text-stone-300 truncate font-mono">085182691268</span>
                                 </div>
                             </a>
 
@@ -1030,19 +1003,19 @@
                             <div class="absolute -top-10 -right-10 w-44 h-44 rounded-full bg-white/05 blur-3xl pointer-events-none"></div>
 
                             @if(session('success'))
-                                <div class="mb-6 p-4 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-mono flex items-center gap-2.5">
-                                    <span class="w-2 h-2 rounded-full bg-emerald-400 shrink-0 animate-pulse"></span>
+                                <div class="mb-6 p-4 rounded-2xl bg-white/10 border border-white/20 text-white text-xs font-mono flex items-center gap-2.5">
+                                    <span class="w-2 h-2 rounded-full bg-white shrink-0 animate-pulse"></span>
                                     <span>{{ session('success') }}</span>
                                 </div>
                             @endif
 
                             @if($errors->any())
-                                <div class="mb-6 p-4 rounded-2xl bg-rose-500/10 border border-rose-500/30 text-rose-300 text-xs font-mono space-y-1">
-                                    <div class="flex items-center gap-2 font-bold text-rose-400">
-                                        <span class="w-2 h-2 rounded-full bg-rose-400"></span>
+                                <div class="mb-6 p-4 rounded-2xl bg-stone-900 border border-stone-700 text-stone-200 text-xs font-mono space-y-1">
+                                    <div class="flex items-center gap-2 font-bold text-white">
+                                        <span class="w-2 h-2 rounded-full bg-white"></span>
                                         <span>Terdapat kendala pada isian formulir:</span>
                                     </div>
-                                    <ul class="list-disc list-inside pl-4 text-[11px] text-rose-300/90 space-y-0.5">
+                                    <ul class="list-disc list-inside pl-4 text-[11px] text-stone-300 space-y-0.5">
                                         @foreach($errors->all() as $error)
                                             <li>{{ $error }}</li>
                                         @endforeach
@@ -1104,7 +1077,7 @@
                 <div class="flex flex-col md:flex-row items-center justify-between gap-6 pt-8 border-t border-[#1f1f1f]/50 text-xs text-[#878787]">
                     <!-- Left: Identity -->
                     <div class="flex items-center gap-3">
-                        <span class="font-display italic text-lg text-[#f5f5f5]">I Made Yuda Pramana</span>
+                        <span class="font-display font-bold text-lg text-[#f5f5f5] tracking-tight">I Made Yuda Pramana</span>
                         <span class="text-[#4D4D4D] font-mono">/</span>
                         <span class="font-mono text-[11px]">SMKN 1 Denpasar</span>
                     </div>

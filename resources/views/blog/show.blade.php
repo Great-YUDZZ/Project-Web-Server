@@ -53,7 +53,7 @@
 
             <!-- Author Bio Card -->
             <div class="flex items-center gap-4 pt-4 border-t border-[#1f1f1f]">
-                <div class="w-11 h-11 rounded-full bg-white/10 border border-white/20 flex items-center justify-center font-display italic text-white text-base shadow-inner">
+                <div class="w-11 h-11 rounded-full bg-white/10 border border-white/20 flex items-center justify-center font-display font-black text-white text-base shadow-inner">
                     YP
                 </div>
                 <div>

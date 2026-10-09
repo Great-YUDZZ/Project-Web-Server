@@ -8,7 +8,7 @@
     
     <div class="mb-6 flex items-center justify-between">
         <div>
-            <h2 class="text-xl font-bold font-body text-white tracking-tight">Edit Kompetensi <span class="font-display italic font-normal text-stone-300">Skill Matrix</span></h2>
+            <h2 class="text-xl font-bold font-body text-white tracking-tight">Edit Kompetensi <span class="font-display font-semibold text-stone-300">Skill Matrix</span></h2>
             <p class="text-xs text-stone-400 font-body mt-0.5">Perbarui nama, kategori, atau persentase penguasaan kompetensi.</p>
         </div>
         <a href="{{ route('admin.skills.index') }}" class="font-body text-xs text-stone-400 hover:text-white transition-colors">

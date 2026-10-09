@@ -19,7 +19,8 @@ class DarkPortfolioTest extends TestCase
         $response->assertSee('I Made Yuda Pramana');
         $response->assertDontSee("KOLEKSI '26", false);
         $response->assertSee('dark-portfolio-root');
-        $response->assertSee('dark-loading-screen');
+        $response->assertDontSee('dark-loading-screen');
+        $response->assertSee('PHP 8.4');
         $response->assertSee('hero-hls-video');
         $response->assertSee('footer-hls-video');
         $response->assertSee('Unggulan');
@@ -35,7 +36,6 @@ class DarkPortfolioTest extends TestCase
         $response->assertSee('Debian');
         $response->assertSee('MySQL');
         $response->assertSee('Three.js');
-        $response->assertSee("PORTFOLIO '26", false);
         $response->assertSee('skills');
         $response->assertSee('TECH STACK PEMBUATAN');
         $response->assertSee('Go 1.25+');

@@ -8,7 +8,7 @@
     
     <div class="mb-6 flex items-center justify-between">
         <div>
-            <h2 class="text-xl font-bold font-body text-white tracking-tight">Perbarui Kredensial &amp; <span class="font-display italic font-normal text-stone-300">Sertifikat</span></h2>
+            <h2 class="text-xl font-bold font-body text-white tracking-tight">Perbarui Kredensial &amp; <span class="font-display font-semibold text-stone-300">Sertifikat</span></h2>
             <p class="text-xs text-stone-400 font-body mt-0.5">Perbarui nomor registrasi, status validasi, materi, atau berkas sertifikat.</p>
         </div>
         <a href="{{ route('admin.certificates.index') }}" class="font-body text-xs text-stone-400 hover:text-white transition-colors">

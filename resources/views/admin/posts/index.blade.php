@@ -9,7 +9,7 @@
     <!-- Top Action Bar -->
     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-            <h2 class="text-xl font-bold font-body text-white tracking-tight">Daftar Artikel <span class="font-display italic font-normal text-stone-300">Blog &amp; Jurnal Teknis</span></h2>
+            <h2 class="text-xl font-bold font-body text-white tracking-tight">Daftar Artikel <span class="font-display font-semibold text-stone-300">Blog &amp; Jurnal Teknis</span></h2>
             <p class="text-xs text-stone-400 font-body mt-0.5">Kelola tulisan ilmiah, catatan konfigurasi Debian, RFC jaringan, dan artikel lab.</p>
         </div>
 

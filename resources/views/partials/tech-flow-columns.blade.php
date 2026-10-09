@@ -1,6 +1,14 @@
 @php
     // Single source of truth for the flowing tech cards using official authentic brand logos.
     $flowTech = [
+        'php'      => [
+            'name'  => 'PHP 8.4',
+            'role'  => 'FastCGI Runtime',
+            'color' => '#777BB4',
+            'rgb'   => '119,123,180',
+            'logo'  => 'images/tech_logos/php.png',
+            'svg'   => 'images/tech/php.svg',
+        ],
         'laravel'  => [
             'name'  => 'Laravel 11',
             'role'  => 'Core SSR API',
@@ -70,10 +78,10 @@
     // Columns: outer = always visible (primary, focusable); inner = xl only (decorative duplicates).
     // speed = px/second upward, depth = mouse parallax strength, offset = initial phase (0..1).
     $flowColumns = [
-        ['id' => 'left-outer',  'pos' => 'left-[3%] lg:left-[2%]',       'vis' => 'flex',           'speed' => 34, 'depth' => 26,  'offset' => 0.00, 'primary' => true,  'items' => ['laravel', 'gsap', 'debian', 'mysql']],
-        ['id' => 'left-inner',  'pos' => 'left-[17%]',                    'vis' => 'hidden xl:flex', 'speed' => 22, 'depth' => 14,  'offset' => 0.55, 'primary' => false, 'items' => ['vite', 'threejs', 'tailwind', 'nginx']],
-        ['id' => 'right-inner', 'pos' => 'right-[17%]',                   'vis' => 'hidden xl:flex', 'speed' => 27, 'depth' => -16, 'offset' => 0.30, 'primary' => false, 'items' => ['mysql', 'laravel', 'gsap', 'debian']],
-        ['id' => 'right-outer', 'pos' => 'right-[3%] lg:right-[2%]',     'vis' => 'flex',           'speed' => 40, 'depth' => -28, 'offset' => 0.78, 'primary' => true,  'items' => ['tailwind', 'vite', 'nginx', 'threejs']],
+        ['id' => 'left-outer',  'pos' => 'left-[3%] lg:left-[2%]',       'vis' => 'flex',           'speed' => 34, 'depth' => 26,  'offset' => 0.00, 'primary' => true,  'items' => ['php', 'laravel', 'gsap', 'debian', 'mysql']],
+        ['id' => 'left-inner',  'pos' => 'left-[17%]',                    'vis' => 'hidden xl:flex', 'speed' => 22, 'depth' => 14,  'offset' => 0.55, 'primary' => false, 'items' => ['vite', 'threejs', 'tailwind', 'nginx', 'php']],
+        ['id' => 'right-inner', 'pos' => 'right-[17%]',                   'vis' => 'hidden xl:flex', 'speed' => 27, 'depth' => -16, 'offset' => 0.30, 'primary' => false, 'items' => ['mysql', 'php', 'laravel', 'gsap', 'debian']],
+        ['id' => 'right-outer', 'pos' => 'right-[3%] lg:right-[2%]',     'vis' => 'flex',           'speed' => 40, 'depth' => -28, 'offset' => 0.78, 'primary' => true,  'items' => ['tailwind', 'php', 'vite', 'nginx', 'threejs']],
     ];
 @endphp
 

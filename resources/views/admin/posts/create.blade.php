@@ -8,7 +8,7 @@
 
     <div class="mb-6 flex items-center justify-between">
         <div>
-            <h2 class="text-xl font-bold font-body text-white tracking-tight">Formulir Penulisan <span class="font-display italic font-normal text-stone-300">Artikel Baru</span></h2>
+            <h2 class="text-xl font-bold font-body text-white tracking-tight">Formulir Penulisan <span class="font-display font-semibold text-stone-300">Artikel Baru</span></h2>
             <p class="text-xs text-stone-400 font-body mt-0.5">Tulis artikel teknis, catatan administrasi Linux, atau RFC jaringan.</p>
         </div>
         <a href="{{ route('admin.posts.index') }}" class="font-body text-xs text-stone-400 hover:text-white transition-colors">

@@ -21,68 +21,13 @@ export const initDarkPortfolio = () => {
         });
     }
 
-    // 1. Loading Screen (requestAnimationFrame 000 -> 100 over 2700ms)
+    // 1. Loading Screen (Instantaneous Start - Zero Delay)
     const initLoadingScreen = () => {
         const screen = document.getElementById('dark-loading-screen');
-        const counterEl = document.getElementById('loading-counter');
-        const wordEl = document.getElementById('loading-word');
-        const barEl = document.getElementById('loading-bar-fill');
-
-        if (!screen || !counterEl || !barEl) {
-            initHeroEntrance();
-            return;
+        if (screen) {
+            screen.remove();
         }
-
-        const words = ['Design', 'Create', 'Inspire'];
-        let wordIndex = 0;
-        let wordTimer = null;
-
-        if (wordEl) {
-            wordTimer = setInterval(() => {
-                wordIndex = (wordIndex + 1) % words.length;
-                gsap.to(wordEl, {
-                    y: -15,
-                    opacity: 0,
-                    duration: 0.25,
-                    onComplete: () => {
-                        wordEl.textContent = words[wordIndex];
-                        gsap.fromTo(wordEl, { y: 15, opacity: 0 }, { y: 0, opacity: 0.85, duration: 0.35, ease: 'power2.out' });
-                    }
-                });
-            }, 900);
-        }
-
-        const duration = 2700;
-        const startTime = performance.now();
-
-        const updateProgress = (currentTime) => {
-            const elapsed = currentTime - startTime;
-            const progress = Math.min(1, elapsed / duration);
-            const count = Math.floor(progress * 100);
-
-            counterEl.textContent = String(count).padStart(3, '0');
-            barEl.style.transform = `scaleX(${progress})`;
-
-            if (progress < 1) {
-                requestAnimationFrame(updateProgress);
-            } else {
-                if (wordTimer) clearInterval(wordTimer);
-                // 400ms delay on 100% completion before dismissal
-                setTimeout(() => {
-                    gsap.to(screen, {
-                        opacity: 0,
-                        duration: 0.6,
-                        ease: 'power2.inOut',
-                        onComplete: () => {
-                            screen.style.display = 'none';
-                            initHeroEntrance();
-                        }
-                    });
-                }, 400);
-            }
-        };
-
-        requestAnimationFrame(updateProgress);
+        initHeroEntrance();
     };
 
     // 2. Hero GSAP Entrance Animation
@@ -160,18 +105,100 @@ export const initDarkPortfolio = () => {
         }, 2200);
     };
 
-    // 5. Floating Navbar Elevation on Scroll (Preserve Glassmorphism Refraction)
+    // 5. Floating Navbar Elevation & Scroll-Spy Section Highlight
     const initNavbar = () => {
         const navPill = document.getElementById('dark-nav-pill');
         if (!navPill) return;
 
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 60) {
+        const navLinks = navPill.querySelectorAll('nav a[href^="#"]');
+        if (!navLinks.length) return;
+
+        const sectionIds = ['hero', 'works', 'skills', 'technologies', 'contact'];
+        const sections = sectionIds
+            .map(id => ({ id, el: document.getElementById(id) }))
+            .filter(item => item.el !== null);
+
+        const setActiveLink = (targetId) => {
+            navLinks.forEach(link => {
+                const href = link.getAttribute('href');
+                const isTarget = href === '#' + targetId;
+                if (isTarget) {
+                    link.classList.add('text-white', 'font-semibold', 'bg-white/15', 'shadow-sm');
+                    link.classList.remove('text-[#878787]');
+                } else {
+                    link.classList.remove('text-white', 'font-semibold', 'bg-white/15', 'shadow-sm');
+                    link.classList.add('text-[#878787]');
+                }
+            });
+        };
+
+        const updateActiveSection = () => {
+            const scrollY = window.scrollY;
+            const windowHeight = window.innerHeight;
+            const docHeight = document.documentElement.scrollHeight;
+
+            if (scrollY > 60) {
                 navPill.classList.add('shadow-2xl', 'border-white/25');
             } else {
                 navPill.classList.remove('shadow-2xl', 'border-white/25');
             }
+
+            if (scrollY + windowHeight >= docHeight - 120) {
+                setActiveLink('contact');
+                return;
+            }
+
+            if (scrollY < 180) {
+                setActiveLink('hero');
+                return;
+            }
+
+            const triggerPoint = scrollY + (windowHeight * 0.35);
+            let currentSectionId = sections[0].id;
+
+            for (let i = 0; i < sections.length; i++) {
+                const sec = sections[i];
+                const secTop = sec.el.offsetTop;
+                const secHeight = sec.el.offsetHeight;
+
+                if (triggerPoint >= secTop && triggerPoint < secTop + secHeight) {
+                    currentSectionId = sec.id;
+                    break;
+                } else if (triggerPoint >= secTop) {
+                    currentSectionId = sec.id;
+                }
+            }
+
+            setActiveLink(currentSectionId);
+        };
+
+        let ticking = false;
+        window.addEventListener('scroll', () => {
+            if (!ticking) {
+                window.requestAnimationFrame(() => {
+                    updateActiveSection();
+                    ticking = false;
+                });
+                ticking = true;
+            }
         }, { passive: true });
+
+        navLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                const href = link.getAttribute('href');
+                if (href && href.startsWith('#')) {
+                    const targetEl = document.querySelector(href);
+                    if (targetEl) {
+                        e.preventDefault();
+                        targetEl.scrollIntoView({ behavior: 'smooth' });
+                        setActiveLink(href.substring(1));
+                    }
+                }
+            });
+        });
+
+        updateActiveSection();
+        window.addEventListener('resize', updateActiveSection, { passive: true });
     };
 
     // 6. Section 5: Visual Playground (Teknologi Pembuatan Web) - Mouse Follow, Inertia, Idle Float & Telemetry Modal
@@ -310,17 +337,33 @@ export const initDarkPortfolio = () => {
 
         // B. Database of Web Technologies
         const techDatabase = {
+            php: {
+                title: "PHP 8.4",
+                badge: "[FASTCGI RUNTIME]",
+                subhead: "Server-Side Execution Engine with JIT Compiler & UNIX Socket",
+                color: "#777BB4",
+                logo: "/images/tech_logos/php.png",
+                svg: `<img src="/images/tech_logos/php.png" alt="PHP" class="w-8 h-8 object-contain" />`,
+                explanation: "PHP 8.4 adalah bahasa pemrograman server-side tingkat enterprise yang menjalankan inti logika backend website ini. Dilengkapi dengan compiler Just-In-Time (JIT) dan penanganan request berlatensi sangat rendah.",
+                rationale: "Menjadi bahasa fondasi utama di balik framework Laravel untuk memproses routing, validasi formulir kontak, templating Blade, enkripsi data, dan interaksi database MariaDB secara native melalui soket FastCGI unix:/run/php/php8.4-fpm.sock.",
+                specs: [
+                    { label: "ENGINE", value: "Zend Engine v4.4" },
+                    { label: "JIT COMPILER", value: "Active (Function/Tracing)" },
+                    { label: "INTERFACE", value: "PHP-FPM UNIX Socket" },
+                    { label: "OPCACHE", value: "Zend OPcache Enabled" }
+                ]
+            },
             laravel: {
                 title: "Laravel 11.x",
                 badge: "[BACKEND CORE · SSR]",
-                subhead: "PHP 8.3 Enterprise MVC Framework & Service Layer",
+                subhead: "PHP 8.4 Enterprise MVC Framework & Service Layer",
                 color: "#FF2D20",
                 logo: "/images/tech_logos/laravel.png",
                 svg: `<img src="/images/tech_logos/laravel.png" alt="Laravel" class="w-8 h-8 object-contain" />`,
                 explanation: "Laravel adalah framework web berbasis PHP modern terkemuka yang menyediakan arsitektur Model-View-Controller (MVC) yang ekspresif, sistem routing tangguh, templating engine Blade terisolasi, serta pipeline middleware keamanan berstandar industri.",
                 rationale: "Dipilih sebagai fondasi backend utama untuk memproses request secara deterministik, menangani routing halaman portofolio dan konsol AI Yuna, serta mengelola endpoint data terstruktur dengan performa stabil dan arsitektur modular yang mudah diuji tanpa dependensi rapuh.",
                 specs: [
-                    { label: "RUNTIME", value: "PHP 8.3 (JIT Active)" },
+                    { label: "RUNTIME", value: "PHP 8.4 (JIT Active)" },
                     { label: "ROUTING LATENCY", value: "< 8.5ms (p99)" },
                     { label: "ARCHITECTURE", value: "Clean MVC + Service Layer" },
                     { label: "SECURITY", value: "CSRF & Strict XSS Guard" }

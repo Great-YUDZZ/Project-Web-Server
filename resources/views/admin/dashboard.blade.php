@@ -15,7 +15,7 @@
                     <div class="text-[11px] uppercase tracking-wider font-body font-semibold text-stone-400">Total Lab</div>
                     <span class="bg-white/10 text-white border border-white/15 px-2.5 py-0.5 rounded-full font-mono text-[10px] font-bold">LABS</span>
                 </div>
-                <div class="text-4xl sm:text-5xl font-display italic text-white mt-1.5 leading-none">{{ $totalProjects }}</div>
+                <div class="text-4xl sm:text-5xl font-display font-black text-white mt-1.5 leading-none">{{ $totalProjects }}</div>
             </div>
             <div class="mt-4 pt-3 border-t border-white/10 flex items-center justify-between text-xs font-body">
                 <span class="text-stone-400">Proyek Lab</span>
@@ -33,7 +33,7 @@
                     <div class="text-[11px] uppercase tracking-wider font-body font-semibold text-stone-400">Total Skill</div>
                     <span class="bg-white/10 text-white border border-white/15 px-2.5 py-0.5 rounded-full font-mono text-[10px] font-bold">MATRIX</span>
                 </div>
-                <div class="text-4xl sm:text-5xl font-display italic text-white mt-1.5 leading-none">{{ $totalSkills }}</div>
+                <div class="text-4xl sm:text-5xl font-display font-black text-white mt-1.5 leading-none">{{ $totalSkills }}</div>
             </div>
             <div class="mt-4 pt-3 border-t border-white/10 flex items-center justify-between text-xs font-body">
                 <span class="text-stone-400">Kompetensi</span>
@@ -51,7 +51,7 @@
                     <div class="text-[11px] uppercase tracking-wider font-body font-semibold text-stone-400">Sertifikat</div>
                     <span class="bg-white/10 text-white border border-white/15 px-2.5 py-0.5 rounded-full font-mono text-[10px] font-bold">RESMI</span>
                 </div>
-                <div class="text-4xl sm:text-5xl font-display italic text-white mt-1.5 leading-none">{{ $totalCertificates }}</div>
+                <div class="text-4xl sm:text-5xl font-display font-black text-white mt-1.5 leading-none">{{ $totalCertificates }}</div>
             </div>
             <div class="mt-4 pt-3 border-t border-white/10 flex items-center justify-between text-xs font-body">
                 <span class="text-stone-400">Kredensial</span>
@@ -69,7 +69,7 @@
                     <div class="text-[11px] uppercase tracking-wider font-body font-semibold text-stone-400">Pesan Masuk</div>
                     <span class="bg-white/10 text-white border border-white/15 px-2.5 py-0.5 rounded-full font-mono text-[10px] font-bold">INBOX</span>
                 </div>
-                <div class="text-4xl sm:text-5xl font-display italic text-white mt-1.5 leading-none">{{ $totalMessages }}</div>
+                <div class="text-4xl sm:text-5xl font-display font-black text-white mt-1.5 leading-none">{{ $totalMessages }}</div>
             </div>
             <div class="mt-4 pt-3 border-t border-white/10 flex items-center justify-between text-xs font-body">
                 <span class="text-stone-400">Pengunjung</span>
@@ -89,7 +89,7 @@
                         <span class="px-2.5 py-0.5 rounded-full bg-white text-black text-[10px] font-bold font-mono">BARU</span>
                     @endif
                 </div>
-                <div class="text-4xl sm:text-5xl font-display italic text-white mt-1.5 leading-none">{{ $unreadMessages }}</div>
+                <div class="text-4xl sm:text-5xl font-display font-black text-white mt-1.5 leading-none">{{ $unreadMessages }}</div>
             </div>
             <div class="mt-4 pt-3 border-t border-white/10 flex items-center justify-between text-xs font-body">
                 <span class="{{ $unreadMessages > 0 ? 'text-white font-semibold' : 'text-stone-400' }}">Perlu Aksi</span>
@@ -107,10 +107,10 @@
         <div class="flex flex-wrap items-end justify-between gap-4 border-b border-white/10 pb-5 mb-6">
             <div>
                 <div class="text-[11px] uppercase tracking-wider font-mono font-medium text-stone-300 mb-1 flex items-center gap-2">
-                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.8)]"></span>
+                    <span class="w-1.5 h-1.5 rounded-full bg-white shadow-[0_0_8px_rgba(255,255,255,0.8)]"></span>
                     <span>Live Telemetry &bull; Debian 13 Baremetal</span>
                 </div>
-                <h2 class="text-xl sm:text-2xl font-bold font-body text-white tracking-tight">Status Mesin &amp; <span class="font-display italic font-normal text-stone-300">Layanan LEMP</span></h2>
+                <h2 class="text-xl sm:text-2xl font-bold font-body text-white tracking-tight">Status Mesin &amp; <span class="font-display font-bold text-stone-300">Layanan LEMP</span></h2>
                 <p class="text-xs text-stone-400 mt-1 font-body">Poll interval otomatis setiap 3 detik via soket lokal</p>
             </div>
             <div class="flex items-center gap-2.5 text-xs font-body">
@@ -118,7 +118,7 @@
                     Sync: {{ now()->format('H:i:s') }}
                 </span>
                 <button id="btn-toggle-live" class="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/5 hover:bg-white/10 border border-white/15 text-stone-200 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/20 cursor-pointer">
-                    <span id="toggle-live-dot" class="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_6px_rgba(52,211,153,0.8)]"></span>
+                    <span id="toggle-live-dot" class="w-2 h-2 rounded-full bg-white shadow-[0_0_6px_rgba(255,255,255,0.8)]"></span>
                     <span id="toggle-live-text" class="font-semibold text-xs">Live</span>
                 </button>
                 <button id="btn-refresh-metrics" class="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white/5 hover:bg-white/10 border border-white/15 text-stone-200 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/20 cursor-pointer" title="Perbarui metrik manual">
@@ -216,7 +216,7 @@
             <div class="flex justify-between items-center border-b border-white/10 pb-4 mb-5">
                 <div class="flex items-center gap-2">
                     <span class="w-2 h-2 rounded-full bg-white shadow-[0_0_6px_rgba(255,255,255,0.8)]"></span>
-                    <h3 class="text-base font-bold font-body text-white tracking-tight">Dokumentasi <span class="font-display italic font-normal text-stone-300">Lab Terbaru</span></h3>
+                    <h3 class="text-base font-bold font-body text-white tracking-tight">Dokumentasi <span class="font-display font-bold text-stone-300">Lab Terbaru</span></h3>
                 </div>
                 <a href="{{ route('admin.projects.index') }}" class="text-xs font-body text-stone-300 hover:text-white hover:underline font-semibold">Lihat Semua &rarr;</a>
             </div>
@@ -249,7 +249,7 @@
             <div class="flex justify-between items-center border-b border-white/10 pb-4 mb-5">
                 <div class="flex items-center gap-2">
                     <span class="w-2 h-2 rounded-full bg-white shadow-[0_0_6px_rgba(255,255,255,0.8)]"></span>
-                    <h3 class="text-base font-bold font-body text-white tracking-tight">Pesan &amp; <span class="font-display italic font-normal text-stone-300">Inquiry Pengunjung</span></h3>
+                    <h3 class="text-base font-bold font-body text-white tracking-tight">Pesan &amp; <span class="font-display font-bold text-stone-300">Inquiry Pengunjung</span></h3>
                 </div>
                 <a href="{{ route('admin.messages.index') }}" class="text-xs font-body text-stone-300 hover:text-white hover:underline font-semibold">Inbox &rarr;</a>
             </div>

@@ -13,7 +13,7 @@
                 <span>Jurnal Teknis &bull; Arsitektur &bull; Catatan Lab</span>
             </div>
             <h1 class="text-3xl sm:text-5xl lg:text-6xl font-black uppercase text-[#f5f5f5] tracking-tight leading-[1.1] text-balance">
-                Catatan rekayasa dan pemikiran <span class="font-display italic text-white font-normal">sistem.</span>
+                Catatan rekayasa dan pemikiran <span class="font-display font-black text-white">sistem.</span>
             </h1>
             <p class="text-sm sm:text-base lg:text-lg text-[#878787] max-w-[62ch] text-balance leading-relaxed font-light">
                 Dokumentasi eksplorasi mendalam seputar administrasi server Linux Debian, protokol jaringan deterministik, containerization, dan keandalan infrastruktur server.

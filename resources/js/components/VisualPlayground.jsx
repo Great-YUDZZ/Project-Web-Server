@@ -18,6 +18,24 @@ import { motion, useMotionValue, useSpring, useTransform, AnimatePresence } from
 
 // 1. Curated Web Technologies Data with Official Brand Logos
 const TECHNOLOGIES = {
+  php: {
+    id: 'php',
+    name: 'PHP 8.4',
+    role: 'FastCGI Runtime',
+    category: 'Backend Architecture',
+    color: '#777BB4',
+    rgb: '119,123,180',
+    logo: '/images/tech_logos/php.png',
+    svg: '/images/tech/php.svg',
+    explanation: 'Bahasa pemrograman server-side tingkat enterprise yang menjalankan inti logika backend website ini melalui soket FastCGI berlatensi ultra-rendah.',
+    rationale: 'Fondasi utama di balik framework Laravel untuk eksekusi routing, validasi data, templating Blade, dan query database MariaDB.',
+    specs: [
+      { label: 'ENGINE', value: 'Zend Engine v4.4' },
+      { label: 'JIT COMPILER', value: 'Active Function' },
+      { label: 'INTERFACE', value: 'PHP-FPM Socket' },
+      { label: 'OPCACHE', value: 'Zend OPcache' }
+    ]
+  },
   laravel: {
     id: 'laravel',
     name: 'Laravel 11',
@@ -30,7 +48,7 @@ const TECHNOLOGIES = {
     explanation: 'Framework backend berbasis PHP modern dengan arsitektur Model-View-Controller (MVC) terisolasi, routing deterministik, dan middleware keamanan tingkat enterprise.',
     rationale: 'Menjamin pemrosesan request berkecepatan tinggi dengan pipeline data terstruktur dan proteksi CSRF/XSS bawaan.',
     specs: [
-      { label: 'RUNTIME', value: 'PHP 8.3 JIT' },
+      { label: 'RUNTIME', value: 'PHP 8.4 JIT' },
       { label: 'LATENCY', value: '< 8.5ms p99' },
       { label: 'PATTERN', value: 'Clean MVC' },
       { label: 'SECURITY', value: 'Strict Guard' }
@@ -183,10 +201,10 @@ const TECHNOLOGIES = {
 
 // 2. Definisi 4 Kolom Vertikal Aliran Bebas (Staggered Speeds)
 const FLOW_COLUMNS = [
-  { id: 'left-outer',  position: 'left-[3%] lg:left-[2%]',       visibility: 'flex',          speed: 34, depth: 26,  offset: 0.00, items: ['laravel', 'gsap', 'debian', 'mysql'] },
-  { id: 'left-inner',  position: 'left-[17%]',                    visibility: 'hidden xl:flex', speed: 22, depth: 14,  offset: 0.55, items: ['vite', 'threejs', 'tailwind', 'nginx'] },
-  { id: 'right-inner', position: 'right-[17%]',                   visibility: 'hidden xl:flex', speed: 27, depth: -16, offset: 0.30, items: ['mysql', 'laravel', 'gsap', 'debian'] },
-  { id: 'right-outer', position: 'right-[3%] lg:right-[2%]',     visibility: 'flex',          speed: 40, depth: -28, offset: 0.78, items: ['tailwind', 'vite', 'nginx', 'threejs'] },
+  { id: 'left-outer',  position: 'left-[3%] lg:left-[2%]',       visibility: 'flex',          speed: 34, depth: 26,  offset: 0.00, items: ['php', 'laravel', 'gsap', 'debian', 'mysql'] },
+  { id: 'left-inner',  position: 'left-[17%]',                    visibility: 'hidden xl:flex', speed: 22, depth: 14,  offset: 0.55, items: ['vite', 'threejs', 'tailwind', 'nginx', 'php'] },
+  { id: 'right-inner', position: 'right-[17%]',                   visibility: 'hidden xl:flex', speed: 27, depth: -16, offset: 0.30, items: ['mysql', 'php', 'laravel', 'gsap', 'debian'] },
+  { id: 'right-outer', position: 'right-[3%] lg:right-[2%]',     visibility: 'flex',          speed: 40, depth: -28, offset: 0.78, items: ['tailwind', 'php', 'vite', 'nginx', 'threejs'] },
 ];
 
 // 3. Sub-Komponen Kolom Vertikal Mengalir

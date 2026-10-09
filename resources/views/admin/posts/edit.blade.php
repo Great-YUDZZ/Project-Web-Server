@@ -8,7 +8,7 @@
 
     <div class="mb-6 flex items-center justify-between">
         <div>
-            <h2 class="text-xl font-bold font-body text-white tracking-tight">Sunting Dokumen <span class="font-display italic font-normal text-stone-300">Artikel Blog</span></h2>
+            <h2 class="text-xl font-bold font-body text-white tracking-tight">Sunting Dokumen <span class="font-display font-semibold text-stone-300">Artikel Blog</span></h2>
             <p class="text-xs text-stone-400 font-body mt-0.5">Perbarui isi konten, metadata, kategori, atau status publikasi artikel.</p>
         </div>
         <div class="flex items-center gap-3">

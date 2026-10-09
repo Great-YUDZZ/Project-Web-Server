@@ -13,10 +13,10 @@
     <link rel="shortcut icon" href="{{ asset('favicon.ico') }}">
     <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('apple-touch-icon.png') }}">
 
-    <!-- Google Fonts: Inter, Instrument Serif, JetBrains Mono (Matches Main Web Page) -->
+    <!-- Google Fonts: Inter, Outfit, JetBrains Mono (Matches Main Web Page) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
@@ -34,9 +34,9 @@
                     <img src="{{ asset('images/logo.png') }}" alt="Logo" class="w-5 h-5 object-contain filter invert brightness-200">
                 </div>
                 <div class="flex flex-col">
-                    <div class="font-bold text-sm tracking-tight text-white group-hover:text-stone-300 transition-colors font-body">Admin <span class="font-display italic font-normal text-stone-300 text-base">Panel</span></div>
+                    <div class="font-bold text-sm tracking-tight text-white group-hover:text-stone-300 transition-colors font-body">Admin <span class="font-display font-semibold text-stone-300 text-base">Panel</span></div>
                     <div class="text-[10px] text-stone-400 font-mono font-medium flex items-center gap-1.5">
-                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-[0_0_6px_rgba(52,211,153,0.8)]"></span>
+                        <span class="w-1.5 h-1.5 rounded-full bg-white shadow-[0_0_6px_rgba(255,255,255,0.6)]"></span>
                         <span>TKJ Infrastructure</span>
                     </div>
                 </div>

@@ -9,13 +9,13 @@
     <!-- Header -->
     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-            <h2 class="text-xl font-bold font-body text-white tracking-tight">Inbox <span class="font-display italic font-normal text-stone-300">Pesan Masuk</span></h2>
+            <h2 class="text-xl font-bold font-body text-white tracking-tight">Inbox <span class="font-display font-semibold text-stone-300">Pesan Masuk</span></h2>
             <p class="text-xs text-stone-400 font-body mt-0.5">Pesan dan transmisi kontak dari pengunjung portofolio.</p>
         </div>
 
         @if($unreadCount > 0)
             <div class="px-3.5 py-1.5 rounded-full bg-white text-black font-mono text-xs font-bold self-start sm:self-auto flex items-center gap-2 shadow-xs">
-                <span class="h-2 w-2 rounded-full bg-emerald-500"></span>
+                <span class="h-2 w-2 rounded-full bg-white shadow-[0_0_6px_rgba(0,0,0,0.5)]"></span>
                 <span>{{ $unreadCount }} PESAN BELUM DIBACA</span>
             </div>
         @endif

@@ -74,10 +74,10 @@ Selain itu, terdapat integrasi asisten virtual interaktif **Yuna AI** yang dilen
 
 Desain aplikasi mengadopsi standar tipografi editorial teknis:
 - **Inter** (`font-body` dan `--font-sans`): Digunakan untuk teks umum, elemen antarmuka, label navigasi, tabel data, dan formulir input demi kenyamanan membaca tingkat tinggi.
-- **Instrument Serif** (`font-display`): Digunakan pada judul utama, subhead editorial, serta angka metrik statistik besar untuk memberikan karakter visual berkelas.
+- **Outfit** (`font-display` dan `--font-geometric`): Tipografi geometric sans-serif modern yang digunakan pada judul utama, display headlines, serta angka metrik statistik besar untuk menciptakan tampilan teknis, presisi, dan kokoh.
 - **JetBrains Mono** (`font-mono`): Dikhususkan untuk data mesin, telemetri perangkat keras, parameter port jaringan, alamat IP, dan potongan kode perintah.
 
-Palet warna mengusung tema obsidian dark mode dengan aksen monokrom kontras tinggi dan pencahayaan lembut tanpa gradien sembarangan.
+Palet warna mengusung tema obsidian dark mode dengan skema monokrom murni: hitam, abu-abu, dan putih.
 
 ---
 

@@ -15,6 +15,7 @@ Dokumen ini merupakan panduan arsitektur dan referensi teknis komprehensif untuk
 6. [Layanan Khusus & Telemetri Server Linux](#6-layanan-khusus--telemetri-server-linux)
 7. [Spesifikasi Web Server & Deployment LEMP Stack](#7-spesifikasi-web-server--deployment-lemp-stack)
 8. [Panduan Operasional & Cheatsheet CLI](#8-panduan-operasional--cheatsheet-cli)
+9. [Visualisasi Workflow Interaktif (Mermaid)](WORKFLOW_PREVIEW.md)
 
 ---
 
