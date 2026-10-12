@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Post;
+use App\Models\PostMedia;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -77,7 +78,14 @@ class PostController extends Controller
             $validated['published_at'] = now();
         }
 
-        Post::create($validated);
+        $post = Post::create($validated);
+
+        if ($tempToken = $request->input('temp_token')) {
+            PostMedia::where('temp_token', $tempToken)->update([
+                'post_id' => $post->id,
+                'temp_token' => null,
+            ]);
+        }
 
         return redirect()->route('admin.posts.index')->with('success', 'Artikel blog berhasil dipublikasikan!');
     }
@@ -87,6 +95,7 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
+        $post->load('media');
         return view('admin.posts.edit', compact('post'));
     }
 

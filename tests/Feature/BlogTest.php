@@ -133,4 +133,82 @@ class BlogTest extends TestCase
         $deleteResponse->assertRedirect('/admin/posts');
         $this->assertNull(Post::find($createdPost->id));
     }
+
+    public function test_admin_can_upload_media_and_associate_with_post(): void
+    {
+        \Illuminate\Support\Facades\Storage::fake('public');
+
+        $admin = User::first() ?? User::factory()->create();
+        $tempToken = (string) \Illuminate\Support\Str::uuid();
+
+        // 1. Upload Gambar dengan Temp Token
+        $fakeImage = \Illuminate\Http\UploadedFile::fake()->image('topologi-ospf.png', 800, 600);
+        $responseImg = $this->actingAs($admin)->postJson('/admin/posts/media/upload', [
+            'temp_token' => $tempToken,
+            'caption' => 'Diagram Topologi Jaringan OSPF',
+            'file' => $fakeImage,
+        ]);
+
+        $responseImg->assertStatus(200);
+        $responseImg->assertJsonPath('success', true);
+        $this->assertDatabaseHas('post_media', [
+            'temp_token' => $tempToken,
+            'media_type' => 'image',
+            'caption' => 'Diagram Topologi Jaringan OSPF',
+        ]);
+
+        // 2. Tambah Embed YouTube dengan Temp Token
+        $responseEmbed = $this->actingAs($admin)->postJson('/admin/posts/media/upload', [
+            'temp_token' => $tempToken,
+            'media_type' => 'embed',
+            'embed_url' => 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+            'caption' => 'Video Panduan Routing',
+        ]);
+
+        $responseEmbed->assertStatus(200);
+        $responseEmbed->assertJsonPath('success', true);
+        $this->assertDatabaseHas('post_media', [
+            'temp_token' => $tempToken,
+            'media_type' => 'embed',
+            'file_path' => 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+        ]);
+
+        // 3. Simpan Post Baru dengan menyertakan temp_token
+        $storePost = $this->actingAs($admin)->post('/admin/posts', [
+            'title' => 'Implementasi Jaringan Skala Menengah',
+            'category' => 'Networking',
+            'content' => "## Konfigurasi Utama\n\n![Diagram Topologi Jaringan OSPF](/storage/posts/media/topologi-ospf.png)\n\n[video: https://www.youtube.com/watch?v=dQw4w9WgXcQ | Video Panduan Routing]",
+            'temp_token' => $tempToken,
+            'is_published' => 1,
+        ]);
+
+        $storePost->assertRedirect('/admin/posts');
+
+        $newPost = Post::where('title', 'Implementasi Jaringan Skala Menengah')->first();
+        $this->assertNotNull($newPost);
+
+        // Verifikasi media kini terasosiasi ke post_id
+        $this->assertCount(2, $newPost->media);
+        $this->assertEquals(0, \App\Models\PostMedia::where('temp_token', $tempToken)->count());
+
+        // 4. Update Caption Media
+        $firstMedia = $newPost->media->first();
+        $updateCaption = $this->actingAs($admin)->patchJson('/admin/posts/media/' . $firstMedia->id, [
+            'caption' => 'Diagram Topologi OSPF Revisi',
+        ]);
+        $updateCaption->assertStatus(200);
+        $this->assertEquals('Diagram Topologi OSPF Revisi', $firstMedia->fresh()->caption);
+
+        // 5. Verifikasi Render Publik
+        $publicView = $this->get('/blog/' . $newPost->slug);
+        $publicView->assertStatus(200);
+        $publicView->assertSee('blog-lightbox-trigger', false);
+        $publicView->assertSee('data-lightbox-src', false);
+        $publicView->assertSee('youtube-nocookie.com/embed/dQw4w9WgXcQ', false);
+
+        // 6. Hapus Media
+        $delMedia = $this->actingAs($admin)->deleteJson('/admin/posts/media/' . $firstMedia->id);
+        $delMedia->assertStatus(200);
+        $this->assertNull(\App\Models\PostMedia::find($firstMedia->id));
+    }
 }

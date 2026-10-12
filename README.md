@@ -105,64 +105,15 @@ project_tkj_yuda2/
 
 ---
 
-## Panduan Instalasi & Menjalankan di Lingkungan Lokal
-
-Untuk menjalankan project ini pada lingkungan pengembangan lokal, ikuti langkah-langkah terstruktur berikut:
-
-1. Kloning repositori dari GitHub:
-   ```bash
-   git clone https://github.com/Great-YUDZZ/Project-Web-Server.git
-   cd Project-Web-Server
-   ```
-
-2. Pasang dependensi PHP menggunakan Composer:
-   ```bash
-   composer install
-   ```
-
-3. Pasang paket dependensi JavaScript menggunakan NPM:
-   ```bash
-   npm install
-   ```
-
-4. Buat berkas environment lokal dari template `.env.example`:
-   ```bash
-   cp .env.example .env
-   php artisan key:generate
-   ```
-
-5. Sesuaikan kredensial basis data pada berkas `.env`, kemudian jalankan migrasi tabel beserta data awal:
-   ```bash
-   php artisan migrate --seed
-   ```
-
-6. Buat tautan simbolik direktori penyimpanan publik:
-   ```bash
-   php artisan storage:link
-   ```
-
-7. Bangun aset frontend menggunakan Vite:
-   ```bash
-   npm run build
-   ```
-
-8. Jalankan server lokal Laravel:
-   ```bash
-   php artisan serve
-   ```
-   Aplikasi dapat diakses melalui browser pada alamat `http://127.0.0.1:8000`.
-
----
-
 ## Pengujian Otomatis (Automated Testing)
 
-Untuk menjamin keandalan sistem dan memastikan tidak ada regresi fungsionalitas saat pembaruan kode, project ini telah dilengkapi dengan 29 automated test (Feature dan Unit test):
+Untuk menjamin keandalan sistem dan memastikan tidak ada regresi fungsionalitas saat pembaruan kode, project ini telah dilengkapi dengan 30 automated test (Feature dan Unit test):
 
 ```bash
 php artisan test
 ```
 
-Pengujian mencakup seluruh rute publik, validasi alur autentikasi admin, proteksi token CSRF, pembatasan rate limiting kontak, hingga integritas query database dengan hasil 100% lulus (29 passed, 185 assertions).
+Pengujian mencakup seluruh rute publik, validasi alur autentikasi admin, upload multi-media blog, proteksi token CSRF, pembatasan rate limiting kontak, hingga integritas query database dengan hasil 100% lulus (30 passed, 204 assertions).
 
 ---
 

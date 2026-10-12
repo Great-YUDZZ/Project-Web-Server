@@ -33,6 +33,26 @@ class Post extends Model
     ];
 
     /**
+     * Relasi ke berkas foto dan video post.
+     */
+    public function media(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(PostMedia::class)->orderBy('order', 'asc')->orderBy('id', 'asc');
+    }
+
+    /**
+     * Accessor untuk array tag.
+     */
+    public function getTagsListAttribute(): array
+    {
+        if (empty($this->tags)) {
+            return [];
+        }
+
+        return array_values(array_filter(array_map('trim', explode(',', $this->tags))));
+    }
+
+    /**
      * Scope query to only published posts.
      */
     public function scopePublished(Builder $query): Builder
@@ -61,6 +81,12 @@ class Post extends Model
             if (empty($post->reading_time) && !empty($post->content)) {
                 $words = str_word_count(strip_tags($post->content));
                 $post->reading_time = max(1, (int) ceil($words / 200));
+            }
+        });
+
+        static::deleting(function ($post) {
+            foreach ($post->media as $item) {
+                $item->delete();
             }
         });
     }

@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\CertificateController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\MessageController;
 use App\Http\Controllers\Admin\PostController as AdminPostController;
+use App\Http\Controllers\Admin\PostMediaController;
 use App\Http\Controllers\Admin\ProjectController;
 use App\Http\Controllers\Admin\SkillController;
 use App\Http\Controllers\AuthController;
@@ -61,6 +62,12 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     // CRUD Posts (Blog)
     Route::patch('/posts/{post}/toggle-publish', [AdminPostController::class, 'togglePublish'])->name('posts.toggle-publish');
     Route::resource('posts', AdminPostController::class);
+
+    // CRUD Post Media (Foto & Video)
+    Route::post('/posts/media/upload', [PostMediaController::class, 'store'])->name('posts.media.upload');
+    Route::patch('/posts/media/{media}', [PostMediaController::class, 'update'])->name('posts.media.update');
+    Route::delete('/posts/media/{media}', [PostMediaController::class, 'destroy'])->name('posts.media.destroy');
+    Route::post('/posts/media/reorder', [PostMediaController::class, 'reorder'])->name('posts.media.reorder');
 
     // Messages Inbox
     Route::get('/messages', [MessageController::class, 'index'])->name('messages.index');

@@ -81,13 +81,16 @@
                           class="w-full px-4 py-2.5 rounded-xl bg-[#0a0a0a] border border-white/15 text-white placeholder-stone-600 focus:bg-black focus:outline-none focus:border-white focus:ring-1 focus:ring-white/20 text-sm transition-all">{{ old('excerpt', $post->excerpt) }}</textarea>
             </div>
 
+            <!-- Manajer Berkas Media (Foto & Video) -->
+            @include('admin.posts.partials.media-manager')
+
             <!-- Content -->
             <div>
                 <label for="content" class="block text-stone-300 font-bold mb-2">
-                    KONTEN ARTIKEL (MENDUKUNG MARKDOWN HEADING ##, KODE ```, DAFTAR -) <span class="text-rose-400">*</span>
+                    KONTEN ARTIKEL (MENDUKUNG MARKDOWN HEADING ##, KODE ```, DAFTAR -, DAN TAG MEDIA) <span class="text-rose-400">*</span>
                 </label>
-                <textarea name="content" id="content" rows="14" required
-                          placeholder="Tulis artikel teknis Anda di sini... Gunakan ## untuk Sub-judul, ```bash untuk blok kode terminal, dan - untuk daftar poin."
+                <textarea name="content" id="content" rows="16" required
+                          placeholder="Tulis artikel teknis Anda di sini... Gunakan ## untuk Sub-judul, ```bash untuk blok kode terminal, dan - untuk daftar poin. Anda dapat menyisipkan foto atau video di baris manapun menggunakan tombol 'Sisipkan ke Teks' pada panel Manajer Berkas Media di atas."
                           class="w-full px-4 py-3 rounded-xl bg-[#0a0a0a] border border-white/15 text-white placeholder-stone-600 font-mono focus:bg-black focus:outline-none focus:border-white focus:ring-1 focus:ring-white/20 text-xs sm:text-sm leading-relaxed transition-all">{{ old('content', $post->content) }}</textarea>
             </div>
 

@@ -66,7 +66,7 @@
         <!-- Article Main Content Body -->
         <div class="p-6 sm:p-10 rounded-[32px] bg-[#141414] border border-[#1f1f1f] shadow-2xl space-y-6">
             <article class="article-prose font-body">
-                {!! Str::markdown($post->content) !!}
+                {!! \App\Services\BlogContentRenderer::render($post->content) !!}
             </article>
 
             <!-- Tags Section -->
@@ -139,6 +139,22 @@
             </div>
         @endif
 
+    </div>
+</div>
+
+<!-- Modal Lightbox Zoom untuk Gambar Artikel -->
+<div id="blog-lightbox-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 sm:p-6 bg-black/90 backdrop-blur-md transition-opacity duration-200" role="dialog" aria-modal="true" aria-label="Pratinjau Foto">
+    <!-- Tombol Tutup -->
+    <button type="button" id="lightbox-close-btn" class="absolute top-4 right-4 sm:top-6 sm:right-6 w-11 h-11 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 text-white flex items-center justify-center transition-colors cursor-pointer z-10" aria-label="Tutup Pratinjau">
+        <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+        </svg>
+    </button>
+
+    <!-- Kontainer Gambar dan Caption -->
+    <div class="relative max-w-5xl max-h-[90vh] w-full flex flex-col items-center justify-center p-2">
+        <img id="lightbox-img" src="" alt="Zoom Preview" class="max-w-full max-h-[82vh] object-contain rounded-2xl border border-white/15 shadow-2xl transition-transform duration-200">
+        <p id="lightbox-caption" class="mt-3 px-4 py-1.5 rounded-full bg-[#141414] border border-white/10 text-xs sm:text-sm text-stone-300 font-mono text-center max-w-2xl truncate"></p>
     </div>
 </div>
 
@@ -236,6 +252,7 @@
 @push('scripts')
 <script>
 document.addEventListener('DOMContentLoaded', () => {
+    // Copy Article Link
     const copyBtn = document.getElementById('copy-article-link-btn');
     const copyText = document.getElementById('copy-btn-text');
     if (copyBtn && copyText) {
@@ -252,6 +269,48 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     }
+
+    // Lightbox Zoom Interactivity
+    const lightboxModal = document.getElementById('blog-lightbox-modal');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const lightboxCaption = document.getElementById('lightbox-caption');
+    const lightboxClose = document.getElementById('lightbox-close-btn');
+
+    document.querySelectorAll('.blog-lightbox-trigger').forEach(trigger => {
+        trigger.addEventListener('click', () => {
+            const src = trigger.dataset.lightboxSrc;
+            const caption = trigger.dataset.lightboxCaption || '';
+            if (src && lightboxModal && lightboxImg) {
+                lightboxImg.src = src;
+                if (caption && caption.toLowerCase() !== 'image' && caption.toLowerCase() !== 'gambar') {
+                    lightboxCaption.textContent = caption;
+                    lightboxCaption.style.display = 'block';
+                } else {
+                    lightboxCaption.style.display = 'none';
+                }
+                lightboxModal.classList.remove('hidden');
+                document.body.classList.add('overflow-hidden');
+            }
+        });
+    });
+
+    function closeLightbox() {
+        if (lightboxModal) {
+            lightboxModal.classList.add('hidden');
+            document.body.classList.remove('overflow-hidden');
+            if (lightboxImg) lightboxImg.src = '';
+        }
+    }
+
+    lightboxClose?.addEventListener('click', closeLightbox);
+    lightboxModal?.addEventListener('click', (e) => {
+        if (e.target === lightboxModal) closeLightbox();
+    });
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && lightboxModal && !lightboxModal.classList.contains('hidden')) {
+            closeLightbox();
+        }
+    });
 });
 </script>
 @endpush
