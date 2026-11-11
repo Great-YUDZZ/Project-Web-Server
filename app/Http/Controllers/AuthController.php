@@ -32,6 +32,14 @@ class AuthController extends Controller
             'password' => ['required', 'string'],
         ]);
 
+        $ipThrottleKey = 'login-ip|'.$request->ip();
+        if (RateLimiter::tooManyAttempts($ipThrottleKey, 15)) {
+            $seconds = RateLimiter::availableIn($ipThrottleKey);
+            throw ValidationException::withMessages([
+                'email' => "Terlalu banyak percobaan login dari alamat IP Anda. Silakan coba lagi dalam {$seconds} detik.",
+            ]);
+        }
+
         $throttleKey = Str::transliterate(Str::lower($request->input('email')).'|'.$request->ip());
 
         if (RateLimiter::tooManyAttempts($throttleKey, 5)) {
@@ -49,6 +57,7 @@ class AuthController extends Controller
 
         if (Auth::attempt($credentials, $remember)) {
             RateLimiter::clear($throttleKey);
+            RateLimiter::clear($ipThrottleKey);
             $request->session()->regenerate();
 
             return redirect()->intended(route('admin.dashboard'))
@@ -56,6 +65,7 @@ class AuthController extends Controller
         }
 
         RateLimiter::hit($throttleKey);
+        RateLimiter::hit($ipThrottleKey, 900);
 
         return back()->withErrors([
             'email' => 'Kredensial yang diberikan tidak cocok dengan data kami.',

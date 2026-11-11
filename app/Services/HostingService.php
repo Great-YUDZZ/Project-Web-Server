@@ -437,6 +437,10 @@ class HostingService
             throw new RuntimeException('Aksi tidak valid. Gunakan suspend atau unsuspend.', 422);
         }
 
+        if (! preg_match('/^[a-zA-Z0-9.\-]+$/', $target) || strlen($target) > 253) {
+            throw new RuntimeException('Format target domain atau vhost tidak valid.', 422);
+        }
+
         if ($this->isProtectedVhost($target)) {
             throw new RuntimeException('Domain ' . $target . ' adalah domain sistem yang dilindungi dan tidak boleh dimatikan.', 422);
         }
@@ -579,6 +583,22 @@ class HostingService
             throw new RuntimeException('Konten mengandung pola berbahaya.', 422);
         }
 
+        // Pertahanan Mendalam: Larang direktif eskalasi hak akses & arbitrary file write/read
+        $forbiddenDirectives = [
+            '/\b(fastcgi_param\s+PHP_VALUE|fastcgi_param\s+PHP_ADMIN_VALUE)\b/i' => 'Direktif manipulasi runtime PHP (PHP_VALUE) dilarang.',
+            '/\bautoindex\s+on\b/i' => 'Direktif autoindex on dilarang.',
+            '/\b(root|alias)\s+(?!\/var\/www\/)/i' => 'Root/alias harus berada di dalam direktori /var/www/.',
+            '/\b(access_log|error_log)\s+(?!\/var\/log\/nginx\/|\b(off|syslog:)\b)/i' => 'Log file hanya boleh di /var/log/nginx/ atau off.',
+            '/\binclude\s+(?!\/etc\/nginx\/)/i' => 'Include hanya diizinkan untuk file konfigurasi di /etc/nginx/.',
+            '/\b(lua_|perl_|js_|load_module)\b/i' => 'Eksekusi embedded script module di dalam Nginx dilarang.',
+        ];
+
+        foreach ($forbiddenDirectives as $pattern => $msg) {
+            if (preg_match($pattern, $content)) {
+                throw new RuntimeException('Konfigurasi ditolak: ' . $msg, 422);
+            }
+        }
+
         $tmp = storage_path('app/private/hosting/nginx-'.uniqid().'.conf');
         @mkdir(dirname($tmp), 0755, true);
         file_put_contents($tmp, $content);
@@ -690,16 +710,39 @@ class HostingService
     }
 
 
-    private const CRON_ALLOWLIST = '/^(php artisan [a-z0-9:_\-]+|curl -s https?:\/\/[a-zA-Z0-9.\-]\S*|wget -qO- https?:\/\/\S+|php \/var\/www\/project_tkj_yuda2\/\S+|sleep \d+)$/';
+    private const CRON_ALLOWLIST = '/^(php artisan [a-z0-9:_\-]+|curl -s https?:\/\/[a-zA-Z0-9.\-]+\S*|sleep \d+)$/';
+
+    private function assertSafeCronCommand(string $command): void
+    {
+        if (! preg_match(self::CRON_ALLOWLIST, $command)) {
+            throw new RuntimeException('Command cron tidak ada di allowlist. Hanya php artisan, sleep, atau curl publik yang diizinkan.', 422);
+        }
+
+        // Mitigasi SSRF: Jika perintah menggunakan curl, pastikan tidak menembak IP loopback / internal private
+        if (str_starts_with($command, 'curl')) {
+            $parts = explode(' ', $command);
+            $url = end($parts);
+            $host = parse_url($url, PHP_URL_HOST);
+            if (! $host) {
+                throw new RuntimeException('URL cron tidak valid.', 422);
+            }
+            $hostLower = strtolower($host);
+            if (in_array($hostLower, ['localhost', '127.0.0.1', '0.0.0.0', '::1'], true) || str_ends_with($hostLower, '.local')) {
+                throw new RuntimeException('Cron job dilarang mengakses alamat loopback atau internal server.', 422);
+            }
+            $resolvedIp = gethostbyname($host);
+            if (filter_var($resolvedIp, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE) === false) {
+                throw new RuntimeException('Cron job dilarang mengakses rentang IP privat atau lokal.', 422);
+            }
+        }
+    }
 
     public function createCronJob(string $name, string $schedule, string $command, string $description, ?int $userId, ?string $requestIp): HostingCronJob
     {
         if (! preg_match('/^(\*|(\d+|\*\/\d+|\d+-\d+)(,(\d+|\*\/\d+|\d+-\d+))?)\s+(\*|(\d+|\*\/\d+|\d+-\d+)(,(\d+|\*\/\d+|\d+-\d+))?)\s+(\*|(\d+|\*\/\d+|\d+-\d+)(,(\d+|\*\/\d+|\d+-\d+))?)\s+(\*|(\d+|\*\/\d+|\d+-\d+)(,(\d+|\*\/\d+|\d+-\d+))?)\s+(\*|(\d+|\*\/\d+|\d+-\d+)(,(\d+|\*\/\d+|\d+-\d+))?)$/', $schedule)) {
             throw new RuntimeException('Ekspresi cron 5-field tidak valid.', 422);
         }
-        if (! preg_match(self::CRON_ALLOWLIST, $command)) {
-            throw new RuntimeException('Command cron tidak ada di allowlist. Hanya php artisan, curl localhost, wget, atau php di root project yang diizinkan.', 422);
-        }
+        $this->assertSafeCronCommand($command);
 
         $job = HostingCronJob::create(compact('name', 'schedule', 'command', 'description'));
         $this->audit('cron.add', (string) $job->id, compact('name', 'schedule'), 'ok', $requestIp, $userId);
@@ -714,9 +757,7 @@ class HostingService
         if (! $job) {
             throw new RuntimeException('Cron job tidak ditemukan.', 404);
         }
-        if (! preg_match(self::CRON_ALLOWLIST, (string) $job->command)) {
-            throw new RuntimeException('Command cron tidak lagi ada di allowlist.', 422);
-        }
+        $this->assertSafeCronCommand((string) $job->command);
 
         $parts = explode(' ', (string) $job->command);
         $result = $this->runFixed($parts, 15);

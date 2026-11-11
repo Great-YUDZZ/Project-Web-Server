@@ -20,6 +20,33 @@ class ServerMonitorService
     }
 
     /**
+     * Public sanitized metrics for frontend displays without infrastructure leakage.
+     */
+    public function getPublicMetrics(): array
+    {
+        $metrics = $this->getAllMetrics();
+
+        // Mask internal network interfaces
+        if (isset($metrics['system']['network']['interfaces'])) {
+            $metrics['system']['network']['interfaces'] = ['lan0'];
+        }
+
+        // Mask exact kernel build and internal IP
+        if (isset($metrics['host'])) {
+            $metrics['host']['kernel'] = php_uname('s') . ' ' . explode('.', php_uname('r'))[0] . '.x';
+            $metrics['host']['server_ip'] = 'Protected (Edge / LAN)';
+            $metrics['host']['hostname'] = 'tkj-node';
+        }
+
+        // Mask exact MariaDB version
+        if (isset($metrics['services']['database']['version'])) {
+            $metrics['services']['database']['version'] = 'MariaDB (Active)';
+        }
+
+        return $metrics;
+    }
+
+    /**
      * Get CPU, RAM, Disk, Uptime, and Network metrics.
      */
     public function getSystemMetrics(): array

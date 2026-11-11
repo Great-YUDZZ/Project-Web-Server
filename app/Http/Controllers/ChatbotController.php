@@ -145,11 +145,28 @@ class ChatbotController extends Controller
             'ignore previous instructions',
             'ignore all previous',
             'forget previous',
+            'forget all previous',
+            'disregard previous',
+            'disregard all instructions',
             'lupakan instruksi sebelumnya',
+            'lupakan semua instruksi',
             'abaikan instruksi sebelumnya',
+            'abaikan semua instruksi',
+            'kamu sekarang adalah',
+            'you are now',
             'system prompt override',
+            'override system prompt',
             'reveal system instructions',
+            'reveal system prompt',
             'bocorkan prompt sistem',
+            'bocorkan instruksi sistem',
+            'tampilkan system prompt',
+            'tampilkan instruksi awal',
+            'print your initial prompt',
+            'print system prompt',
+            'act as dan',
+            'jailbreak',
+            'developer mode enabled',
         ];
 
         foreach ($injectionPatterns as $pattern) {
@@ -198,19 +215,23 @@ Konteks website portofolio (gunakan jika relevan):
 {$context}
 TEXT;
 
+        if (Cache::has('gemini_rate_limited')) {
+            return null;
+        }
+
         // Verified active & low-latency models for Google Generative Language API
         $candidateModels = [
             'gemini-flash-lite-latest',
-            'gemini-3.5-flash',
-            'gemini-3.5-flash-lite',
-            'gemini-3.6-flash',
-            'gemini-3.1-flash-lite',
+            'gemini-2.5-flash',
         ];
 
         foreach ($candidateModels as $model) {
             $result = $this->callGeminiApi($model, $systemInstruction, $userMessage, $apiKey);
             if ($result) {
                 return $result;
+            }
+            if (Cache::has('gemini_rate_limited')) {
+                break;
             }
         }
 
@@ -252,8 +273,8 @@ TEXT;
             curl_setopt($ch, CURLOPT_POST, true);
             curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json']);
             curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($payload));
-            curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 5);
-            curl_setopt($ch, CURLOPT_TIMEOUT, 12);
+            curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 3);
+            curl_setopt($ch, CURLOPT_TIMEOUT, 6);
             // CRITICAL: Force IPv4: server's IPv6 route to Google times out
             curl_setopt($ch, CURLOPT_IPRESOLVE, CURL_IPRESOLVE_V4);
             curl_setopt($ch, CURLOPT_RESOLVE, ["generativelanguage.googleapis.com:443:{$ipv4}"]);
@@ -269,6 +290,14 @@ TEXT;
                 if ($reply) {
                     return trim($reply);
                 }
+            }
+
+            if ($httpCode === 429) {
+                Cache::put('gemini_rate_limited', true, 60);
+                try {
+                    Log::warning("Gemini API rate limited (HTTP 429). Cooldown aktif selama 60 detik.");
+                } catch (\Throwable $logEx) {}
+                return null;
             }
 
             if ($httpCode !== 200) {

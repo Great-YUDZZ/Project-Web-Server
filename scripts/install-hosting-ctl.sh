@@ -291,6 +291,17 @@ cmd_nginx_save() {
   local src="${1:-}"
   [ -f "$src" ] || die "file temp tidak ditemukan"
   grep -q "server_name" "$src" || die "config harus mengandung server_name"
+
+  if grep -Eiq '\b(fastcgi_param\s+PHP_VALUE|fastcgi_param\s+PHP_ADMIN_VALUE|autoindex\s+on|lua_|perl_)\b' "$src"; then
+    die "config mengandung direktif terlarang (PHP_VALUE / autoindex / script module)"
+  fi
+  if grep -Eiq '\b(root|alias)\s+(?!\/var\/www\/)' "$src"; then
+    die "root atau alias harus berada di dalam direktori /var/www/"
+  fi
+  if grep -Eiq '\b(access_log|error_log)\s+(?!\/var\/log\/nginx\/|\b(off|syslog:)\b)' "$src"; then
+    die "log file hanya diizinkan di /var/log/nginx/ atau off"
+  fi
+
   local bak="$PRIMARY_VHOST.bak.$(date +%s)"
   cp -a "$PRIMARY_VHOST" "$bak" 2>/dev/null || die "tidak bisa backup vhost asli"
   cp "$src" "$PRIMARY_VHOST.tmp"
@@ -340,7 +351,7 @@ cmd_ufw_del() {
   printf '%s' "$port" | grep -Eq '^[0-9]{1,5}(:[0-9]{1,5})?$' || die "port tidak valid"
   case "$proto" in tcp|udp) ;; *) die "protokol tidak valid" ;; esac
   local num
-  num="$(ufw status numbered 2>/dev/null | grep -E "[\[] *[0-9]+[\]]" | grep -F "$port" | head -n 1 | sed -E 's/.*\[([0-9]+)\].*/\1/' || true)"
+  num="$(ufw status numbered 2>/dev/null | grep -E "\[\s*[0-9]+\]" | grep -E "\b${port}/${proto}\b|\b${port}\b" | head -n 1 | sed -E 's/.*\[([0-9]+)\].*/\1/' || true)"
   if [ -z "$num" ]; then die "aturan port $port tidak ditemukan"; fi
   echo "y" | ufw delete "$num" >/dev/null 2>&1 || die "gagal menghapus aturan ufw"
   echo "Aturan port $port dihapus."
@@ -356,6 +367,9 @@ is_protected_vhost() {
 
 find_vhost_file() {
   local target="$1"
+  case "$target" in
+    *[!a-zA-Z0-9._-]*|"") return 1 ;;
+  esac
   if [ -f "$NGINX_AVAIL/$target" ]; then
     printf '%s' "$NGINX_AVAIL/$target"
     return 0
@@ -364,7 +378,7 @@ find_vhost_file() {
   for f in "$NGINX_AVAIL"/*; do
     [ -f "$f" ] || continue
     case "$f" in *.bak) continue ;; esac
-    if grep -Eq "server_name\s+[^;]*\b${target}\b" "$f"; then
+    if grep -Eq "server_name\s+[^;]*[[:space:]]${target}([[:space:];]|$)" "$f"; then
       printf '%s' "$f"
       return 0
     fi
@@ -372,7 +386,7 @@ find_vhost_file() {
   for f in "$NGINX_AVAIL"/*.live.bak; do
     [ -f "$f" ] || continue
     local orig="${f%.live.bak}"
-    if grep -Eq "server_name\s+[^;]*\b${target}\b" "$f"; then
+    if grep -Eq "server_name\s+[^;]*[[:space:]]${target}([[:space:];]|$)" "$f"; then
       printf '%s' "$orig"
       return 0
     fi
@@ -383,6 +397,9 @@ find_vhost_file() {
 cmd_vhost_suspend() {
   local target="${1:-}"
   [ -n "$target" ] || die "domain atau vhost name harus diisi"
+  case "$target" in
+    *[!a-zA-Z0-9._-]*|"") die "target domain atau vhost tidak valid" ;;
+  esac
   if is_protected_vhost "$target"; then
     die "domain $target dilindungi dan tidak boleh disuspend"
   fi
@@ -446,6 +463,9 @@ NGX
 cmd_vhost_unsuspend() {
   local target="${1:-}"
   [ -n "$target" ] || die "domain atau vhost name harus diisi"
+  case "$target" in
+    *[!a-zA-Z0-9._-]*|"") die "target domain atau vhost tidak valid" ;;
+  esac
   local vfile
   vfile="$(find_vhost_file "$target" || true)"
   [ -n "$vfile" ] || die "vhost untuk $target tidak ditemukan di $NGINX_AVAIL"
@@ -471,6 +491,10 @@ cmd_vhost_unsuspend() {
 
 cmd_vhost_status() {
   local target="${1:-}"
+  [ -n "$target" ] || die "domain atau vhost name harus diisi"
+  case "$target" in
+    *[!a-zA-Z0-9._-]*|"") die "target domain atau vhost tidak valid" ;;
+  esac
   [ -n "$target" ] || die "domain atau vhost name harus diisi"
   local vfile
   vfile="$(find_vhost_file "$target" || true)"

@@ -103,7 +103,11 @@ class PublicController extends Controller
      */
     public function telemetry(ServerMonitorService $monitor): JsonResponse
     {
-        return response()->json($monitor->getAllMetrics());
+        if (auth()->check()) {
+            return response()->json($monitor->getAllMetrics());
+        }
+
+        return response()->json($monitor->getPublicMetrics());
     }
 
     /**
