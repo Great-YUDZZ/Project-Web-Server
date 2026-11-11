@@ -14,12 +14,7 @@
         </div>
     </div>
 
-    <div id="hosting-skeleton" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <div class="h-28 animate-pulse rounded-2xl bg-white/5 border border-white/10"></div>
-        <div class="h-28 animate-pulse rounded-2xl bg-white/5 border border-white/10"></div>
-        <div class="h-28 animate-pulse rounded-2xl bg-white/5 border border-white/10"></div>
-        <div class="h-28 animate-pulse rounded-2xl bg-white/5 border border-white/10"></div>
-    </div>
+    <div id="hosting-skeleton" class="hidden"></div>
 
     <!-- Compact Server Ribbon Header -->
     <div class="rounded-2xl bg-[#0f0f0f] border border-white/10 p-5 sm:p-6 shadow-lg shadow-black/40">
@@ -243,18 +238,18 @@
         </div>
     </section>
 
-    <section data-panel="domains" class="hosting-panel hidden space-y-4">
+    <section data-panel="domains" class="hosting-panel hidden space-y-5">
         <!-- Kartu Integrasi Control Panel aaPanel -->
-        <div class="rounded-2xl border border-white/10 bg-[#141414] p-5">
+        <div class="rounded-2xl border border-white/10 bg-[#0f0f0f] p-5 shadow-lg shadow-black/40">
             <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-                <div class="flex items-start gap-3">
-                    <div class="mt-0.5 flex h-9 w-9 items-center justify-center rounded-xl border border-white/10 bg-white/5 font-mono text-xs font-bold text-white">
+                <div class="flex items-start gap-3.5">
+                    <div class="mt-0.5 flex h-10 w-10 items-center justify-center rounded-xl border border-white/15 bg-white/5 font-mono text-xs font-bold text-white shrink-0 shadow-xs">
                         aaP
                     </div>
                     <div>
-                        <div class="flex items-center gap-2">
+                        <div class="flex flex-wrap items-center gap-2">
                             <h3 class="font-mono text-sm font-bold text-white">aaPanel Hosting Control Panel</h3>
-                            <span id="aapanel-badge" class="rounded-full px-2 py-0.5 text-[10px] font-bold {{ !empty($overview['aapanel']['connected']) ? 'bg-emerald-950/60 text-emerald-300 border border-emerald-800/40' : 'bg-stone-800 text-stone-400' }}">
+                            <span id="aapanel-badge" class="whitespace-nowrap inline-flex items-center rounded-full px-2.5 py-0.5 text-[10px] font-bold {{ !empty($overview['aapanel']['connected']) ? 'bg-emerald-950/60 text-emerald-300 border border-emerald-800/40' : 'bg-stone-800 text-stone-400' }}">
                                 {{ !empty($overview['aapanel']['connected']) ? 'TERHUBUNG' : 'STANDBY / OFFLINE' }}
                             </span>
                         </div>
@@ -264,7 +259,7 @@
                     </div>
                 </div>
                 <div class="flex flex-wrap items-center gap-2">
-                    <a href="{{ $overview['aapanelUrl'] ?? 'http://127.0.0.1:7800' }}" target="_blank" rel="noopener" class="inline-flex cursor-pointer items-center gap-1.5 rounded-full border border-white/15 bg-white/5 px-3.5 py-1.5 font-mono text-xs font-semibold text-white transition-colors hover:bg-white/10">
+                    <a href="{{ $overview['aapanelUrl'] ?? 'http://127.0.0.1:7800' }}" target="_blank" rel="noopener" class="inline-flex cursor-pointer items-center gap-1.5 rounded-full border border-white/15 bg-white/5 px-4 py-2 font-mono text-xs font-semibold text-white transition-colors hover:bg-white/10">
                         <span>Buka aaPanel</span>
                         <svg class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
                     </a>
@@ -272,109 +267,126 @@
             </div>
         </div>
 
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
-            <div class="lg:col-span-2 space-y-4">
-                <div class="overflow-x-auto rounded-2xl border border-white/10 bg-[#0f0f0f]">
-                    <table class="w-full text-left font-mono text-xs">
-                        <thead>
-                            <tr class="border-b border-white/10 text-stone-400 bg-white/[0.02]">
-                                <th class="px-5 py-3.5">Domain &amp; Aliases</th>
-                                <th class="px-5 py-3.5">Engine</th>
-                                <th class="px-5 py-3.5">Root / Target</th>
-                                <th class="px-5 py-3.5">Status</th>
-                                <th class="px-5 py-3.5 text-right">Kendali Web</th>
-                            </tr>
-                        </thead>
-                        <tbody id="domains-body">
-                            @forelse($overview['domains'] ?? [] as $domain)
-                                <tr class="border-b border-white/5 hover:bg-white/[0.02] transition-colors">
-                                    <td class="px-5 py-3.5">
-                                        <div class="font-bold text-white">{{ $domain['domain'] }}</div>
-                                        @if(!empty($domain['aliases']))
-                                            <div class="text-[10px] text-stone-500">{{ implode(', ', $domain['aliases']) }}</div>
-                                        @endif
-                                    </td>
-                                    <td class="px-5 py-3.5">
-                                        @if(($domain['engine'] ?? 'nginx') === 'aapanel')
-                                            <span class="rounded-full border border-purple-500/30 bg-purple-950/40 px-2 py-0.5 text-[10px] font-semibold text-purple-300">aaPanel</span>
-                                        @else
-                                            <span class="rounded-full border border-sky-500/30 bg-sky-950/40 px-2 py-0.5 text-[10px] font-semibold text-sky-300">Nginx Native</span>
-                                        @endif
-                                    </td>
-                                    <td class="max-w-60 truncate px-5 py-3.5 text-stone-400" title="{{ $domain['root'] ?? '' }}">
-                                        {{ $domain['root'] ?? '—' }}
-                                    </td>
-                                    <td class="px-5 py-3.5">
-                                        <span class="rounded-full px-2.5 py-0.5 text-[10px] font-bold {{ !empty($domain['suspended']) ? 'bg-rose-950/60 text-rose-300 border border-rose-800/40' : 'bg-emerald-950/60 text-emerald-300 border border-emerald-800/40' }}">
-                                            {{ !empty($domain['suspended']) ? 'TER-SUSPEND (503)' : 'ACTIVE' }}
-                                        </span>
-                                    </td>
-                                    <td class="px-5 py-3.5 text-right">
-                                        @if(!empty($domain['canSuspend']))
-                                            @if(!empty($domain['suspended']))
-                                                <button type="button"
-                                                    data-vhost-toggle="unsuspend"
-                                                    data-domain="{{ $domain['domain'] }}"
-                                                    data-engine="{{ $domain['engine'] ?? 'nginx' }}"
-                                                    data-site-id="{{ $domain['siteId'] ?? '' }}"
-                                                    class="cursor-pointer rounded-full bg-white px-3.5 py-1 text-[11px] font-bold text-black hover:bg-stone-200">
-                                                    Hidupkan
-                                                </button>
-                                            @else
-                                                <button type="button"
-                                                    data-vhost-toggle="suspend"
-                                                    data-domain="{{ $domain['domain'] }}"
-                                                    data-engine="{{ $domain['engine'] ?? 'nginx' }}"
-                                                    data-site-id="{{ $domain['siteId'] ?? '' }}"
-                                                    class="cursor-pointer rounded-full border border-rose-800/60 bg-rose-950/30 px-3.5 py-1 text-[11px] font-bold text-rose-300 hover:bg-rose-900/40">
-                                                    Suspend
-                                                </button>
-                                            @endif
-                                        @else
-                                            <span class="rounded-full border border-white/10 px-3 py-1 text-[11px] text-stone-500" title="Domain utama dilindungi agar admin tidak lockout">Dilindungi</span>
-                                        @endif
-                                    </td>
-                                </tr>
-                            @empty
-                                <tr><td colspan="5" class="px-5 py-8 text-center text-stone-500">Tidak ada vhost terbaca dari server.</td></tr>
-                            @endforelse
-                        </tbody>
-                    </table>
+        <!-- Tabel Utama Domains & VHosts (Full Width) -->
+        <div class="rounded-2xl border border-white/10 bg-[#0f0f0f] shadow-lg shadow-black/40 overflow-hidden">
+            <div class="p-4 sm:p-5 border-b border-white/10 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 bg-white/[0.01]">
+                <div>
+                    <h3 class="font-mono text-sm font-bold text-white">Daftar VirtualHost &amp; Website</h3>
+                    <p class="text-xs text-stone-400 font-body mt-0.5">Kelola status aktif atau suspend pada seluruh domain web di server ini.</p>
                 </div>
-
-                <div class="rounded-2xl border border-white/10 bg-[#141414] p-5">
-                    <h3 class="font-mono text-sm font-bold text-white">Sinkhole DNS Lokal (BIND9)</h3>
-                    <p class="mt-1 text-xs text-stone-400">Blokir atau arahkan domain tertentu khusus untuk klien di jaringan LAN lokal. Domain terlindungi: yuda.local, great-yuda.my.id.</p>
-                    <form id="form-sinkhole" class="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-[1fr_180px_auto]">
-                        <label class="block"><span class="mb-1 block text-xs font-mono text-stone-400">Domain target</span><input name="domain" required placeholder="contoh: google.com" class="w-full rounded-xl border border-white/10 bg-[#0a0a0a] px-3 py-2.5 font-mono text-xs text-white"></label>
-                        <label class="block"><span class="mb-1 block text-xs font-mono text-stone-400">Target IP</span><select name="target_ip" class="w-full rounded-xl border border-white/10 bg-[#0a0a0a] px-3 py-2.5 font-mono text-xs text-white"><option value="0.0.0.0">0.0.0.0 (block)</option><option value="127.0.0.1">127.0.0.1 (local)</option><option value="{{ $overview['server']['sharedIp'] ?? '' }}">{{ $overview['server']['sharedIp'] ?? 'server IP' }}</option></select></label>
-                        <button type="submit" class="cursor-pointer self-end rounded-full bg-white px-5 py-2.5 text-xs font-bold text-black hover:bg-stone-200">Tambah Sinkhole</button>
-                    </form>
-                    <div class="mt-4 space-y-2" id="sinkholes-list">
-                        @forelse($overview['sinkholes'] ?? [] as $sinkhole)
-                            <div class="flex flex-wrap items-center justify-between gap-2 rounded-xl border border-white/10 bg-[#0a0a0a] p-3 font-mono text-xs">
-                                <span class="font-bold text-white">{{ $sinkhole['domain'] }} &rarr; {{ $sinkhole['target_ip'] }} <span class="ml-1 rounded-full bg-rose-950/60 px-2 py-0.5 text-[10px] text-rose-300">TER-SUSPEND</span></span>
-                                <button type="button" data-del-sinkhole="{{ $sinkhole['domain'] }}" class="cursor-pointer rounded-full bg-white px-3 py-1 text-xs font-bold text-black hover:bg-stone-200">Hidupkan</button>
-                            </div>
-                        @empty
-                            <div class="rounded-xl border border-dashed border-white/15 p-6 text-center text-xs text-stone-500">Belum ada domain ter-sinkhole di DNS lokal.</div>
-                        @endforelse
-                    </div>
+                <div class="text-[11px] font-mono text-stone-400 flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_6px_rgba(52,211,153,0.8)]"></span>
+                    <span>Multi-Host Engine Active</span>
                 </div>
             </div>
-            <div class="rounded-2xl border border-white/10 bg-[#141414] p-5 space-y-4">
+            <div class="overflow-x-auto">
+                <table class="w-full text-left font-mono text-xs">
+                    <thead>
+                        <tr class="border-b border-white/10 text-stone-400 bg-white/[0.02]">
+                            <th class="px-5 py-3.5 whitespace-nowrap min-w-[200px]">Domain &amp; Aliases</th>
+                            <th class="px-5 py-3.5 whitespace-nowrap min-w-[130px]">Engine</th>
+                            <th class="px-5 py-3.5 whitespace-nowrap min-w-[220px]">Root / Target</th>
+                            <th class="px-5 py-3.5 whitespace-nowrap min-w-[130px]">Status</th>
+                            <th class="px-5 py-3.5 text-right whitespace-nowrap min-w-[120px]">Kendali Web</th>
+                        </tr>
+                    </thead>
+                    <tbody id="domains-body">
+                        @forelse($overview['domains'] ?? [] as $domain)
+                            <tr class="border-b border-white/5 hover:bg-white/[0.02] transition-colors">
+                                <td class="px-5 py-3.5 whitespace-nowrap">
+                                    <div class="font-bold text-white font-mono">{{ $domain['domain'] }}</div>
+                                    @if(!empty($domain['aliases']))
+                                        <div class="text-[10px] text-stone-500 font-mono mt-0.5 truncate max-w-xs">{{ implode(', ', $domain['aliases']) }}</div>
+                                    @endif
+                                </td>
+                                <td class="px-5 py-3.5 whitespace-nowrap">
+                                    @if(($domain['engine'] ?? 'nginx') === 'aapanel')
+                                        <span class="whitespace-nowrap inline-flex items-center rounded-full border border-purple-500/30 bg-purple-950/40 px-2.5 py-0.5 text-[10px] font-semibold text-purple-300">aaPanel</span>
+                                    @else
+                                        <span class="whitespace-nowrap inline-flex items-center rounded-full border border-sky-500/30 bg-sky-950/40 px-2.5 py-0.5 text-[10px] font-semibold text-sky-300">Nginx Native</span>
+                                    @endif
+                                </td>
+                                <td class="px-5 py-3.5 text-stone-300 font-mono text-xs max-w-xs sm:max-w-md truncate" title="{{ $domain['root'] ?? '' }}">
+                                    {{ $domain['root'] ?? '—' }}
+                                </td>
+                                <td class="px-5 py-3.5 whitespace-nowrap">
+                                    <span class="whitespace-nowrap inline-flex items-center rounded-full px-2.5 py-0.5 text-[10px] font-bold {{ !empty($domain['suspended']) ? 'bg-rose-950/60 text-rose-300 border border-rose-800/40' : 'bg-emerald-950/60 text-emerald-300 border border-emerald-800/40' }}">
+                                        {{ !empty($domain['suspended']) ? 'TER-SUSPEND (503)' : 'ACTIVE' }}
+                                    </span>
+                                </td>
+                                <td class="px-5 py-3.5 text-right whitespace-nowrap">
+                                    @if(!empty($domain['canSuspend']))
+                                        @if(!empty($domain['suspended']))
+                                            <button type="button"
+                                                data-vhost-toggle="unsuspend"
+                                                data-domain="{{ $domain['domain'] }}"
+                                                data-engine="{{ $domain['engine'] ?? 'nginx' }}"
+                                                data-site-id="{{ $domain['siteId'] ?? '' }}"
+                                                class="cursor-pointer whitespace-nowrap rounded-full bg-white px-3.5 py-1 text-[11px] font-bold text-black hover:bg-stone-200 transition-colors">
+                                                Hidupkan
+                                            </button>
+                                        @else
+                                            <button type="button"
+                                                data-vhost-toggle="suspend"
+                                                data-domain="{{ $domain['domain'] }}"
+                                                data-engine="{{ $domain['engine'] ?? 'nginx' }}"
+                                                data-site-id="{{ $domain['siteId'] ?? '' }}"
+                                                class="cursor-pointer whitespace-nowrap rounded-full border border-rose-800/60 bg-rose-950/30 px-3.5 py-1 text-[11px] font-bold text-rose-300 hover:bg-rose-900/40 transition-colors">
+                                                Suspend
+                                            </button>
+                                        @endif
+                                    @else
+                                        <span class="whitespace-nowrap rounded-full border border-white/10 px-3 py-1 text-[11px] text-stone-500 font-mono" title="Domain pemulihan lokal dilindungi agar admin tidak lockout">Dilindungi</span>
+                                    @endif
+                                </td>
+                            </tr>
+                        @empty
+                            <tr><td colspan="5" class="px-5 py-8 text-center text-stone-500 font-mono">Tidak ada vhost terbaca dari server.</td></tr>
+                        @endforelse
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Grid 2 Kolom: Sinkhole DNS Lokal & Petunjuk Mekanisme -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-5">
+            <!-- Sinkhole DNS Lokal (7 Kolom) -->
+            <div class="lg:col-span-7 rounded-2xl border border-white/10 bg-[#0f0f0f] p-5 shadow-lg shadow-black/40 space-y-4">
+                <div>
+                    <h3 class="font-mono text-sm font-bold text-white">Sinkhole DNS Lokal (BIND9)</h3>
+                    <p class="mt-1 text-xs text-stone-400 font-body">Blokir atau arahkan domain tertentu khusus untuk klien di jaringan LAN lokal. Domain terlindungi: yuda.local.</p>
+                </div>
+                <form id="form-sinkhole" class="grid grid-cols-1 gap-3 sm:grid-cols-[1fr_180px_auto]">
+                    <label class="block"><span class="mb-1 block text-xs font-mono text-stone-400">Domain target</span><input name="domain" required placeholder="contoh: google.com" class="w-full rounded-xl border border-white/10 bg-[#080808] px-3.5 py-2.5 font-mono text-xs text-white focus:outline-none focus:border-white/40"></label>
+                    <label class="block"><span class="mb-1 block text-xs font-mono text-stone-400">Target IP</span><select name="target_ip" class="w-full rounded-xl border border-white/10 bg-[#080808] px-3.5 py-2.5 font-mono text-xs text-white focus:outline-none focus:border-white/40"><option value="0.0.0.0">0.0.0.0 (block)</option><option value="127.0.0.1">127.0.0.1 (local)</option><option value="{{ $overview['server']['sharedIp'] ?? '' }}">{{ $overview['server']['sharedIp'] ?? 'server IP' }}</option></select></label>
+                    <button type="submit" class="cursor-pointer self-end rounded-full bg-white px-5 py-2.5 text-xs font-bold text-black hover:bg-stone-200 transition-colors">Tambah Sinkhole</button>
+                </form>
+                <div class="space-y-2 pt-2" id="sinkholes-list">
+                    @forelse($overview['sinkholes'] ?? [] as $sinkhole)
+                        <div class="flex flex-wrap items-center justify-between gap-2 rounded-xl border border-white/10 bg-[#080808] p-3 font-mono text-xs">
+                            <span class="font-bold text-white">{{ $sinkhole['domain'] }} &rarr; {{ $sinkhole['target_ip'] }} <span class="ml-1 rounded-full bg-rose-950/60 px-2 py-0.5 text-[10px] text-rose-300">TER-SUSPEND</span></span>
+                            <button type="button" data-del-sinkhole="{{ $sinkhole['domain'] }}" class="cursor-pointer rounded-full bg-white px-3 py-1 text-xs font-bold text-black hover:bg-stone-200 transition-colors">Hidupkan</button>
+                        </div>
+                    @empty
+                        <div class="rounded-xl border border-dashed border-white/15 p-6 text-center text-xs text-stone-500 font-body">Belum ada domain ter-sinkhole di DNS lokal.</div>
+                    @endforelse
+                </div>
+            </div>
+
+            <!-- Petunjuk Mekanisme Kendali (5 Kolom) -->
+            <div class="lg:col-span-5 rounded-2xl border border-white/10 bg-[#0f0f0f] p-5 shadow-lg shadow-black/40 space-y-4 flex flex-col justify-between">
                 <div>
                     <h3 class="font-mono text-sm font-bold text-white">Mekanisme Kendali Suspend</h3>
-                    <ol class="mt-3 list-decimal space-y-2 pl-5 text-xs text-stone-400 font-body">
-                        <li><strong class="text-white">Nginx Native:</strong> Ketika disuspend, konfigurasi vhost dialihkan ke blok respons HTTP 503 custom maintenance di <span class="font-mono text-white">/maintenance/suspended.html</span> tanpa menghapus file proyek aslinya.</li>
-                        <li><strong class="text-white">aaPanel:</strong> Ketika disuspend, panel mengirim perintah <span class="font-mono text-white">SiteStop</span> via aaPanel REST API langsung ke daemon aaPanel.</li>
-                        <li><strong class="text-white">Proteksi Self-Lockout:</strong> Domain inti <span class="font-mono text-white">great-yuda.my.id</span> dan <span class="font-mono text-white">yuda.local</span> dilindungi secara sistem dan tidak bisa disuspend.</li>
+                    <ol class="mt-3 list-decimal space-y-2.5 pl-5 text-xs text-stone-400 font-body">
+                        <li><strong class="text-white">Nginx Native:</strong> Ketika disuspend, konfigurasi vhost dialihkan ke blok respons HTTP 503 custom maintenance di <span class="font-mono text-white text-[11px]">/maintenance/suspended.html</span> tanpa menghapus berkas proyek aslinya.</li>
+                        <li><strong class="text-white">aaPanel:</strong> Ketika disuspend, panel mengirim perintah <span class="font-mono text-white text-[11px]">SiteStop</span> via aaPanel REST API langsung ke daemon aaPanel (:7800).</li>
+                        <li><strong class="text-white">Proteksi Self-Lockout:</strong> Domain pemulihan LAN <span class="font-mono text-white text-[11px]">yuda.local</span> dilindungi secara sistem dan tidak bisa disuspend agar admin tidak terkunci. Sedangkan domain publik <span class="font-mono text-white text-[11px]">great-yuda.my.id</span> dapat disuspend untuk keperluan pemeliharaan.</li>
                     </ol>
                 </div>
                 <div class="border-t border-white/10 pt-4">
                     <h4 class="font-mono text-xs font-bold text-white">Perintah Cek di Terminal</h4>
-                    <pre class="mt-2 overflow-x-auto rounded-lg bg-black/60 p-2.5 font-mono text-[11px] text-stone-300">sudo hosting-ctl vhost status yudzz-app
-curl -I http://yudzz-app.my.id</pre>
+                    <pre class="mt-2 overflow-x-auto rounded-lg bg-black/60 p-2.5 font-mono text-[11px] text-stone-300 border border-white/5">sudo hosting-ctl vhost status great-yuda.my.id
+curl -I http://great-yuda.my.id</pre>
                 </div>
             </div>
         </div>
@@ -744,27 +756,27 @@ document.addEventListener('DOMContentLoaded', () => {
         body.innerHTML = domains.map((d) => {
             const suspended = !!d.suspended;
             const badge = suspended
-                ? '<span class="rounded-full bg-rose-950/60 px-2.5 py-0.5 text-[10px] font-bold text-rose-300 border border-rose-800/40">TER-SUSPEND (503)</span>'
-                : '<span class="rounded-full bg-emerald-950/60 px-2.5 py-0.5 text-[10px] font-bold text-emerald-300 border border-emerald-800/40">ACTIVE</span>';
+                ? '<span class="whitespace-nowrap inline-flex items-center rounded-full bg-rose-950/60 px-2.5 py-0.5 text-[10px] font-bold text-rose-300 border border-rose-800/40">TER-SUSPEND (503)</span>'
+                : '<span class="whitespace-nowrap inline-flex items-center rounded-full bg-emerald-950/60 px-2.5 py-0.5 text-[10px] font-bold text-emerald-300 border border-emerald-800/40">ACTIVE</span>';
 
             const engineBadge = d.engine === 'aapanel'
-                ? '<span class="rounded-full border border-purple-500/30 bg-purple-950/40 px-2 py-0.5 text-[10px] font-semibold text-purple-300">aaPanel</span>'
-                : '<span class="rounded-full border border-sky-500/30 bg-sky-950/40 px-2 py-0.5 text-[10px] font-semibold text-sky-300">Nginx Native</span>';
+                ? '<span class="whitespace-nowrap inline-flex items-center rounded-full border border-purple-500/30 bg-purple-950/40 px-2.5 py-0.5 text-[10px] font-semibold text-purple-300">aaPanel</span>'
+                : '<span class="whitespace-nowrap inline-flex items-center rounded-full border border-sky-500/30 bg-sky-950/40 px-2.5 py-0.5 text-[10px] font-semibold text-sky-300">Nginx Native</span>';
 
             const action = d.canSuspend
                 ? (suspended
-                    ? '<button type="button" data-vhost-toggle="unsuspend" data-domain="' + escHtml(d.domain) + '" data-engine="' + escHtml(d.engine || 'nginx') + '" data-site-id="' + escHtml(d.siteId || '') + '" class="cursor-pointer rounded-full bg-white px-3.5 py-1 text-[11px] font-bold text-black hover:bg-stone-200">Hidupkan</button>'
-                    : '<button type="button" data-vhost-toggle="suspend" data-domain="' + escHtml(d.domain) + '" data-engine="' + escHtml(d.engine || 'nginx') + '" data-site-id="' + escHtml(d.siteId || '') + '" class="cursor-pointer rounded-full border border-rose-800/60 bg-rose-950/30 px-3.5 py-1 text-[11px] font-bold text-rose-300 hover:bg-rose-900/40">Suspend</button>')
-                : '<span class="rounded-full border border-white/10 px-3 py-1 text-[11px] text-stone-500" title="Domain utama dilindungi agar admin tidak lockout">Dilindungi</span>';
+                    ? '<button type="button" data-vhost-toggle="unsuspend" data-domain="' + escHtml(d.domain) + '" data-engine="' + escHtml(d.engine || 'nginx') + '" data-site-id="' + escHtml(d.siteId || '') + '" class="cursor-pointer whitespace-nowrap rounded-full bg-white px-3.5 py-1 text-[11px] font-bold text-black hover:bg-stone-200 transition-colors">Hidupkan</button>'
+                    : '<button type="button" data-vhost-toggle="suspend" data-domain="' + escHtml(d.domain) + '" data-engine="' + escHtml(d.engine || 'nginx') + '" data-site-id="' + escHtml(d.siteId || '') + '" class="cursor-pointer whitespace-nowrap rounded-full border border-rose-800/60 bg-rose-950/30 px-3.5 py-1 text-[11px] font-bold text-rose-300 hover:bg-rose-900/40 transition-colors">Suspend</button>')
+                : '<span class="whitespace-nowrap rounded-full border border-white/10 px-3 py-1 text-[11px] text-stone-500 font-mono" title="Domain pemulihan lokal dilindungi agar admin tidak lockout">Dilindungi</span>';
 
-            const aliasesText = (d.aliases || []).length ? '<div class="text-[10px] text-stone-500">' + escHtml((d.aliases || []).join(', ')) + '</div>' : '';
+            const aliasesText = (d.aliases || []).length ? '<div class="text-[10px] text-stone-500 font-mono mt-0.5 truncate max-w-xs">' + escHtml((d.aliases || []).join(', ')) + '</div>' : '';
 
             return '<tr class="border-b border-white/5 hover:bg-white/[0.02] transition-colors">' +
-                '<td class="px-5 py-3.5"><div class="font-bold text-white">' + escHtml(d.domain) + '</div>' + aliasesText + '</td>' +
-                '<td class="px-5 py-3.5">' + engineBadge + '</td>' +
-                '<td class="max-w-60 truncate px-5 py-3.5 text-stone-400" title="' + escHtml(d.root || '') + '">' + escHtml(d.root || '—') + '</td>' +
-                '<td class="px-5 py-3.5">' + badge + '</td>' +
-                '<td class="px-5 py-3.5 text-right">' + action + '</td>' +
+                '<td class="px-5 py-3.5 whitespace-nowrap"><div class="font-bold text-white font-mono">' + escHtml(d.domain) + '</div>' + aliasesText + '</td>' +
+                '<td class="px-5 py-3.5 whitespace-nowrap">' + engineBadge + '</td>' +
+                '<td class="px-5 py-3.5 text-stone-300 font-mono text-xs max-w-xs sm:max-w-md truncate" title="' + escHtml(d.root || '') + '">' + escHtml(d.root || '—') + '</td>' +
+                '<td class="px-5 py-3.5 whitespace-nowrap">' + badge + '</td>' +
+                '<td class="px-5 py-3.5 text-right whitespace-nowrap">' + action + '</td>' +
                 '</tr>';
         }).join('');
     }
@@ -782,7 +794,6 @@ document.addEventListener('DOMContentLoaded', () => {
     async function refreshOverview(manual = false) {
         if (fetching) return;
         fetching = true;
-        if (skeleton) skeleton.classList.remove('hidden');
         if (errorBox) errorBox.classList.add('hidden');
         const btn = document.getElementById('btn-refresh');
         const icon = document.getElementById('refresh-icon');
@@ -790,11 +801,9 @@ document.addEventListener('DOMContentLoaded', () => {
         try {
             const data = await api(overviewUrl);
             renderOverview(data);
-            if (skeleton) skeleton.classList.add('hidden');
         } catch (err) {
             if (errorText) errorText.textContent = err.message || 'Gagal memuat data hosting.';
             errorBox?.classList.remove('hidden');
-            skeleton?.classList.add('hidden');
         } finally {
             fetching = false;
             if (manual && icon) icon.classList.remove('animate-spin');
