@@ -116,111 +116,146 @@
             </div>
         </div>
 
-        <!-- 3 Windows Task Manager Live Streaming Charts -->
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-5 sm:gap-6">
-            <!-- CPU Utilization -->
-            <div class="p-4 sm:p-5 rounded-2xl bg-[#080808] border border-white/10 flex flex-col justify-between">
-                <div>
-                    <div class="flex justify-between items-start mb-2">
+        <!-- Master-Detail Windows Task Manager Container -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-6">
+            
+            <!-- Sisi Kiri: 4 Kartu Metrik Bertumpuk (Master Stack - 4 Kolom di lg) -->
+            <div class="lg:col-span-4 space-y-3">
+                <!-- 1. CPU Item -->
+                <button type="button" data-tm-tab="cpu" class="tm-tab-btn w-full text-left p-3.5 sm:p-4 rounded-xl border transition-all cursor-pointer bg-sky-950/20 border-sky-500/50 shadow-md shadow-sky-950/30">
+                    <div class="flex items-start justify-between">
                         <div>
-                            <div class="flex items-center gap-1.5 text-xs font-mono text-sky-400 font-semibold uppercase tracking-wider">
+                            <div class="flex items-center gap-1.5 text-xs font-mono font-bold uppercase tracking-wider text-sky-400">
                                 <span class="w-1.5 h-1.5 rounded-full bg-sky-400 shadow-[0_0_6px_rgba(56,189,248,0.8)]"></span>
-                                <span>CPU Utilization</span>
+                                <span>CPU</span>
                             </div>
-                            <div class="text-[11px] text-stone-400 font-mono mt-0.5">
+                            <div class="text-[11px] font-mono text-stone-400 mt-0.5" id="tm-list-cpu-sub">
                                 <span id="metric-cpu-cores">{{ $serverMetrics['system']['cpu']['cores'] }} Cores</span> &bull; <span id="metric-cpu-load">Load: {{ $serverMetrics['system']['cpu']['load_1m'] }}</span>
                             </div>
                         </div>
-                        <div class="text-right">
-                            <span id="metric-cpu-percent" class="text-2xl sm:text-3xl font-bold text-white font-mono tracking-tight">{{ $serverMetrics['system']['cpu']['percent'] }}%</span>
-                            <div class="text-[10px] font-mono text-stone-400">100% Scale</div>
-                        </div>
+                        <span id="metric-cpu-percent" class="text-xl sm:text-2xl font-bold font-mono text-white tracking-tight">{{ $serverMetrics['system']['cpu']['percent'] }}%</span>
                     </div>
-                    <!-- Canvas Chart -->
-                    <div class="relative w-full h-28 my-2 rounded-xl bg-[#040404] border border-white/10 overflow-hidden">
-                        <canvas id="chart-cpu" class="w-full h-full block"></canvas>
+                    <div class="mt-2.5 h-7 w-full rounded bg-[#040404] border border-white/5 overflow-hidden">
+                        <canvas id="mini-cpu-canvas" class="w-full h-full block"></canvas>
                     </div>
-                </div>
-                <div class="pt-2 border-t border-white/5 flex items-center justify-between text-[11px] font-mono text-stone-400">
-                    <span>60 Detik Terakhir</span>
-                    <span class="text-stone-300 font-medium">Beban CPU</span>
-                </div>
-            </div>
+                </button>
 
-            <!-- Memory RAM -->
-            <div class="p-4 sm:p-5 rounded-2xl bg-[#080808] border border-white/10 flex flex-col justify-between">
-                <div>
-                    <div class="flex justify-between items-start mb-2">
+                <!-- 2. Memory Item -->
+                <button type="button" data-tm-tab="ram" class="tm-tab-btn w-full text-left p-3.5 sm:p-4 rounded-xl border border-white/10 bg-[#080808] hover:border-white/20 hover:bg-white/[0.02] transition-all cursor-pointer">
+                    <div class="flex items-start justify-between">
                         <div>
-                            <div class="flex items-center gap-1.5 text-xs font-mono text-purple-400 font-semibold uppercase tracking-wider">
+                            <div class="flex items-center gap-1.5 text-xs font-mono font-bold uppercase tracking-wider text-purple-400">
                                 <span class="w-1.5 h-1.5 rounded-full bg-purple-400 shadow-[0_0_6px_rgba(192,132,252,0.8)]"></span>
                                 <span>Memori RAM</span>
                             </div>
-                            <div class="text-[11px] text-stone-400 font-mono mt-0.5">
-                                <span id="metric-ram-details">{{ $serverMetrics['system']['ram']['used_formatted'] }} / {{ $serverMetrics['system']['ram']['total_formatted'] }}</span>
+                            <div class="text-[11px] font-mono text-stone-400 mt-0.5 truncate" id="metric-ram-details">
+                                {{ $serverMetrics['system']['ram']['used_formatted'] }} / {{ $serverMetrics['system']['ram']['total_formatted'] }}
                             </div>
                         </div>
-                        <div class="text-right">
-                            <span id="metric-ram-percent" class="text-2xl sm:text-3xl font-bold text-white font-mono tracking-tight">{{ $serverMetrics['system']['ram']['percent'] }}%</span>
-                            <div id="metric-ram-free" class="text-[10px] font-mono text-stone-400">{{ $serverMetrics['system']['ram']['free_formatted'] }} free</div>
+                        <span id="metric-ram-percent" class="text-xl sm:text-2xl font-bold font-mono text-white tracking-tight">{{ $serverMetrics['system']['ram']['percent'] }}%</span>
+                    </div>
+                    <div class="mt-2.5 h-7 w-full rounded bg-[#040404] border border-white/5 overflow-hidden">
+                        <canvas id="mini-ram-canvas" class="w-full h-full block"></canvas>
+                    </div>
+                </button>
+
+                <!-- 3. Network Item -->
+                <button type="button" data-tm-tab="net" class="tm-tab-btn w-full text-left p-3.5 sm:p-4 rounded-xl border border-white/10 bg-[#080808] hover:border-white/20 hover:bg-white/[0.02] transition-all cursor-pointer">
+                    <div class="flex items-start justify-between">
+                        <div>
+                            <div class="flex items-center gap-1.5 text-xs font-mono font-bold uppercase tracking-wider text-emerald-400">
+                                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-[0_0_6px_rgba(52,211,153,0.8)]"></span>
+                                <span>Network</span>
+                            </div>
+                            <div class="text-[11px] font-mono text-stone-400 mt-0.5 truncate" id="tm-list-net-sub">
+                                &darr; <span id="metric-net-rx">{{ $serverMetrics['system']['network']['rx_formatted'] ?? '0 KB/s' }}</span> &bull; &uarr; <span id="metric-net-tx">{{ $serverMetrics['system']['network']['tx_formatted'] ?? '0 KB/s' }}</span>
+                            </div>
+                        </div>
+                        <span id="metric-net-total" class="text-xl sm:text-2xl font-bold font-mono text-white tracking-tight">{{ $serverMetrics['system']['network']['total_formatted'] ?? '0 KB/s' }}</span>
+                    </div>
+                    <div class="mt-2.5 h-7 w-full rounded bg-[#040404] border border-white/5 overflow-hidden">
+                        <canvas id="mini-net-canvas" class="w-full h-full block"></canvas>
+                    </div>
+                </button>
+
+                <!-- 4. Disk Item -->
+                <button type="button" data-tm-tab="disk" class="tm-tab-btn w-full text-left p-3.5 sm:p-4 rounded-xl border border-white/10 bg-[#080808] hover:border-white/20 hover:bg-white/[0.02] transition-all cursor-pointer">
+                    <div class="flex items-start justify-between">
+                        <div>
+                            <div class="flex items-center gap-1.5 text-xs font-mono font-bold uppercase tracking-wider text-amber-400">
+                                <span class="w-1.5 h-1.5 rounded-full bg-amber-400 shadow-[0_0_6px_rgba(251,191,36,0.8)]"></span>
+                                <span>Disk NVMe</span>
+                            </div>
+                            <div class="text-[11px] font-mono text-stone-400 mt-0.5 truncate" id="metric-disk-details">
+                                {{ $serverMetrics['system']['disk']['used_formatted'] }} / {{ $serverMetrics['system']['disk']['total_formatted'] }}
+                            </div>
+                        </div>
+                        <span id="metric-disk-percent" class="text-xl sm:text-2xl font-bold font-mono text-white tracking-tight">{{ $serverMetrics['system']['disk']['percent'] }}%</span>
+                    </div>
+                    <div class="mt-2.5 h-7 w-full rounded bg-[#040404] border border-white/5 overflow-hidden">
+                        <canvas id="mini-disk-canvas" class="w-full h-full block"></canvas>
+                    </div>
+                </button>
+            </div>
+
+            <!-- Sisi Kanan: Detail Panel Grafik Besar (Detail View - 8 Kolom di lg) -->
+            <div class="lg:col-span-8 bg-[#080808] rounded-2xl border border-white/10 p-5 sm:p-6 flex flex-col justify-between">
+                <div>
+                    <!-- Detail Header -->
+                    <div class="flex items-start justify-between border-b border-white/5 pb-4 mb-4">
+                        <div>
+                            <div class="flex items-center gap-2">
+                                <span id="tm-detail-badge" class="w-2.5 h-2.5 rounded-full bg-sky-400 shadow-[0_0_8px_rgba(56,189,248,0.8)]"></span>
+                                <h3 id="tm-detail-title" class="text-base sm:text-lg font-bold text-white font-body">CPU Utilization</h3>
+                            </div>
+                            <div id="tm-detail-subtitle" class="text-xs font-mono text-stone-400 mt-1">
+                                Debian 13 Baremetal &bull; 60 Detik Terakhir
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <div class="text-right">
+                                <div id="tm-detail-big-value" class="text-2xl sm:text-3xl font-mono font-bold text-white tracking-tight">
+                                    {{ $serverMetrics['system']['cpu']['percent'] }}%
+                                </div>
+                                <div id="tm-detail-scale-label" class="text-[10px] font-mono text-stone-400">Skala 0-100%</div>
+                            </div>
+                            <button type="button" id="btn-maximize-chart" class="p-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/15 text-stone-300 hover:text-white transition-colors cursor-pointer" title="Perbesar / Maximize Grafik">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"/></svg>
+                            </button>
                         </div>
                     </div>
-                    <!-- Canvas Chart -->
-                    <div class="relative w-full h-28 my-2 rounded-xl bg-[#040404] border border-white/10 overflow-hidden">
-                        <canvas id="chart-ram" class="w-full h-full block"></canvas>
+
+                    <!-- Large Task Manager Canvas Chart -->
+                    <div class="relative w-full h-56 sm:h-64 rounded-xl bg-[#030303] border border-white/10 overflow-hidden">
+                        <canvas id="main-taskmanager-canvas" class="w-full h-full block"></canvas>
                     </div>
                 </div>
-                <div class="pt-2 border-t border-white/5 flex items-center justify-between text-[11px] font-mono text-stone-400">
-                    <span>60 Detik Terakhir</span>
-                    <span class="text-stone-300 font-medium">Penggunaan RAM</span>
+
+                <!-- Technical Deep Stats (Grid Bawah) -->
+                <div id="tm-detail-stats" class="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-5 pt-4 border-t border-white/10">
+                    <div class="p-2.5 rounded-lg bg-[#040404] border border-white/5">
+                        <span class="block text-[10px] uppercase font-mono text-stone-500">Beban CPU</span>
+                        <span id="tm-stat-1" class="block font-mono text-xs sm:text-sm font-bold text-white mt-0.5">{{ $serverMetrics['system']['cpu']['percent'] }}%</span>
+                    </div>
+                    <div class="p-2.5 rounded-lg bg-[#040404] border border-white/5">
+                        <span class="block text-[10px] uppercase font-mono text-stone-500">Cores</span>
+                        <span id="tm-stat-2" class="block font-mono text-xs sm:text-sm font-bold text-white mt-0.5">{{ $serverMetrics['system']['cpu']['cores'] }} Cores</span>
+                    </div>
+                    <div class="p-2.5 rounded-lg bg-[#040404] border border-white/5">
+                        <span class="block text-[10px] uppercase font-mono text-stone-500">Load 1m / 5m</span>
+                        <span id="tm-stat-3" class="block font-mono text-xs sm:text-sm font-bold text-white mt-0.5">{{ $serverMetrics['system']['cpu']['load_1m'] }} / {{ $serverMetrics['system']['cpu']['load_5m'] ?? 0 }}</span>
+                    </div>
+                    <div class="p-2.5 rounded-lg bg-[#040404] border border-white/5">
+                        <span class="block text-[10px] uppercase font-mono text-stone-500">Host Uptime</span>
+                        <span id="tm-stat-4" class="block font-mono text-xs sm:text-sm font-bold text-white mt-0.5">{{ $serverMetrics['system']['uptime']['formatted'] }}</span>
+                    </div>
                 </div>
             </div>
 
-            <!-- Network Throughput -->
-            <div class="p-4 sm:p-5 rounded-2xl bg-[#080808] border border-white/10 flex flex-col justify-between">
-                <div>
-                    <div class="flex justify-between items-start mb-2">
-                        <div>
-                            <div class="flex items-center gap-1.5 text-xs font-mono text-emerald-400 font-semibold uppercase tracking-wider">
-                                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-[0_0_6px_rgba(52,211,153,0.8)]"></span>
-                                <span>Network Throughput</span>
-                            </div>
-                            <div class="text-[11px] text-stone-400 font-mono mt-0.5 flex items-center gap-2">
-                                <span>&darr; RX: <strong id="metric-net-rx" class="text-white">{{ $serverMetrics['system']['network']['rx_formatted'] ?? '0 KB/s' }}</strong></span>
-                                <span>&uarr; TX: <strong id="metric-net-tx" class="text-white">{{ $serverMetrics['system']['network']['tx_formatted'] ?? '0 KB/s' }}</strong></span>
-                            </div>
-                        </div>
-                        <div class="text-right">
-                            <span id="metric-net-total" class="text-2xl sm:text-3xl font-bold text-white font-mono tracking-tight">{{ $serverMetrics['system']['network']['total_formatted'] ?? '0 KB/s' }}</span>
-                            <div class="text-[10px] font-mono text-stone-400">Auto-scale KB/s</div>
-                        </div>
-                    </div>
-                    <!-- Canvas Chart -->
-                    <div class="relative w-full h-28 my-2 rounded-xl bg-[#040404] border border-white/10 overflow-hidden">
-                        <canvas id="chart-net" class="w-full h-full block"></canvas>
-                    </div>
-                </div>
-                <div class="pt-2 border-t border-white/5 flex items-center justify-between text-[11px] font-mono text-stone-400">
-                    <span>60 Detik Terakhir</span>
-                    <span class="text-stone-300 font-medium" id="metric-net-interface">Interface: {{ implode(', ', $serverMetrics['system']['network']['interfaces'] ?? ['eth0']) }}</span>
-                </div>
-            </div>
         </div>
 
-        <!-- 5 LEMP Stack & Storage Statuses -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 mt-6 pt-5 border-t border-white/10">
-            <!-- Storage NVMe -->
-            <div class="p-3.5 rounded-xl bg-[#080808] border border-white/10 flex items-center justify-between">
-                <div>
-                    <div class="flex items-center gap-2">
-                        <span class="w-2 h-2 rounded-full bg-amber-400 shadow-[0_0_6px_rgba(251,191,36,0.8)]"></span>
-                        <span class="text-xs font-semibold text-white font-body">Disk NVMe</span>
-                    </div>
-                    <div class="text-[11px] text-stone-400 font-mono mt-1" id="metric-disk-details">{{ $serverMetrics['system']['disk']['used_formatted'] }} / {{ $serverMetrics['system']['disk']['total_formatted'] }}</div>
-                </div>
-                <span id="metric-disk-percent" class="text-xs font-mono font-bold text-stone-200">{{ $serverMetrics['system']['disk']['percent'] }}%</span>
-            </div>
-
+        <!-- 4 LEMP Stack Daemons -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-6 pt-5 border-t border-white/10">
             <div class="p-3.5 rounded-xl bg-[#080808] border border-white/10 flex items-center justify-between">
                 <div>
                     <div class="flex items-center gap-2">
@@ -340,6 +375,34 @@
 
     </div>
 
+    <!-- Modal Maximize Telemetry Inspection -->
+    <div id="modal-telemetry-maximize" class="fixed inset-0 z-50 bg-black/90 backdrop-blur-md hidden flex items-center justify-center p-4 sm:p-8">
+        <div class="w-full max-w-5xl bg-[#0a0a0a] border border-white/15 rounded-2xl p-5 sm:p-7 shadow-2xl flex flex-col justify-between max-h-[92vh]">
+            <div class="flex items-center justify-between border-b border-white/10 pb-4 mb-4">
+                <div class="flex items-center gap-3">
+                    <span id="modal-tm-badge" class="w-2.5 h-2.5 rounded-full bg-sky-400 shadow-[0_0_10px_rgba(56,189,248,0.8)]"></span>
+                    <div>
+                        <h3 id="modal-tm-title" class="text-base sm:text-lg font-bold font-body text-white">CPU Utilization - Inspeksi Resolusi Tinggi</h3>
+                        <div id="modal-tm-subtitle" class="text-xs font-mono text-stone-400">Live 60 Detik Telemetri Baremetal Linux</div>
+                    </div>
+                </div>
+                <div class="flex items-center gap-4">
+                    <span id="modal-tm-value" class="text-2xl sm:text-3xl font-mono font-bold text-white tracking-tight">0%</span>
+                    <button type="button" id="btn-close-maximize" class="p-2 rounded-xl bg-white/5 hover:bg-white/15 text-stone-300 hover:text-white transition-colors cursor-pointer" title="Tutup Modal (ESC)">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+                    </button>
+                </div>
+            </div>
+            <div class="relative w-full h-80 sm:h-96 rounded-xl bg-[#030303] border border-white/10 overflow-hidden my-2">
+                <canvas id="modal-taskmanager-canvas" class="w-full h-full block"></canvas>
+            </div>
+            <div class="flex items-center justify-between text-xs font-mono text-stone-400 pt-3 border-t border-white/10">
+                <span>Tekan ESC atau tombol silang untuk kembali</span>
+                <span id="modal-tm-status" class="text-emerald-400 flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> Live Streaming 3s</span>
+            </div>
+        </div>
+    </div>
+
 </div>
 @endsection
 
@@ -350,16 +413,31 @@ class TaskManagerCanvasChart {
         this.canvas = document.getElementById(canvasId);
         if (!this.canvas) return;
         this.ctx = this.canvas.getContext('2d');
-        this.maxPoints = options.maxPoints || 30; // 30 titik x 3 detik = 90 detik riwayat
+        this.maxPoints = options.maxPoints || 30;
         this.strokeColor = options.strokeColor || '#38bdf8';
         this.fillColor = options.fillColor || 'rgba(56, 189, 248, 0.18)';
         this.gridColor = options.gridColor || 'rgba(255, 255, 255, 0.05)';
         this.fixedMax = options.fixedMax ?? 100;
         this.minMax = options.minMax ?? 100;
-        this.data = new Array(this.maxPoints).fill(Number(options.initialValue) || 0);
+        this.data = options.initialData ? [...options.initialData] : new Array(this.maxPoints).fill(Number(options.initialValue) || 0);
         this.dpr = window.devicePixelRatio || 1;
         this.resize();
         window.addEventListener('resize', () => this.resize());
+    }
+
+    setOptions(opts = {}) {
+        if (opts.strokeColor) this.strokeColor = opts.strokeColor;
+        if (opts.fillColor) this.fillColor = opts.fillColor;
+        if (opts.fixedMax !== undefined) this.fixedMax = opts.fixedMax;
+        if (opts.minMax !== undefined) this.minMax = opts.minMax;
+        this.draw();
+    }
+
+    setData(arr) {
+        if (Array.isArray(arr)) {
+            this.data = [...arr];
+            this.draw();
+        }
     }
 
     resize() {
@@ -391,19 +469,16 @@ class TaskManagerCanvasChart {
 
         ctx.clearRect(0, 0, w, h);
 
-        // Skala vertikal
         let maxVal = this.fixedMax;
         if (maxVal === null || maxVal === undefined) {
             const dataMax = Math.max(...this.data, 0);
             maxVal = Math.max(dataMax * 1.25, this.minMax);
         }
 
-        // 1. Gridlines ala Windows Task Manager (Dotted)
         ctx.strokeStyle = this.gridColor;
         ctx.lineWidth = 1;
         ctx.setLineDash([2, 2]);
 
-        // Horizontal Grid (25%, 50%, 75%)
         for (let i = 1; i <= 3; i++) {
             const y = Math.round((h / 4) * i) + 0.5;
             ctx.beginPath();
@@ -412,9 +487,8 @@ class TaskManagerCanvasChart {
             ctx.stroke();
         }
 
-        // Vertical Grid (6 kolom)
-        for (let i = 1; i <= 5; i++) {
-            const x = Math.round((w / 6) * i) + 0.5;
+        for (let i = 1; i <= 6; i++) {
+            const x = Math.round((w / 7) * i) + 0.5;
             ctx.beginPath();
             ctx.moveTo(x, 0);
             ctx.lineTo(x, h);
@@ -423,7 +497,6 @@ class TaskManagerCanvasChart {
 
         ctx.setLineDash([]);
 
-        // 2. Kalkulasi Koordinat Titik
         const step = w / (this.maxPoints - 1);
         const points = [];
         for (let i = 0; i < this.data.length; i++) {
@@ -436,7 +509,6 @@ class TaskManagerCanvasChart {
 
         if (points.length < 2) return;
 
-        // 3. Area Fill (Gradient)
         const gradient = ctx.createLinearGradient(0, 0, 0, h);
         gradient.addColorStop(0, this.fillColor);
         gradient.addColorStop(1, 'rgba(0, 0, 0, 0)');
@@ -452,7 +524,6 @@ class TaskManagerCanvasChart {
         ctx.fillStyle = gradient;
         ctx.fill();
 
-        // 4. Line Stroke
         ctx.beginPath();
         ctx.moveTo(points[0].x, points[0].y);
         for (let i = 1; i < points.length; i++) {
@@ -463,7 +534,6 @@ class TaskManagerCanvasChart {
         ctx.lineJoin = 'round';
         ctx.stroke();
 
-        // 5. Live Head Dot (Titik Aktif Terkanan)
         const lastPoint = points[points.length - 1];
         ctx.beginPath();
         ctx.arc(lastPoint.x - 2, lastPoint.y, 2.5, 0, Math.PI * 2);
@@ -482,32 +552,270 @@ document.addEventListener('DOMContentLoaded', () => {
     const toggleLiveBtn = document.getElementById('btn-toggle-live');
     const toggleLiveDot = document.getElementById('toggle-live-dot');
     const toggleLiveText = document.getElementById('toggle-live-text');
+    const maximizeBtn = document.getElementById('btn-maximize-chart');
+    const maximizeModal = document.getElementById('modal-telemetry-maximize');
+    const closeMaximizeBtn = document.getElementById('btn-close-maximize');
 
     if (!refreshBtn) return;
 
-    // Inisialisasi 3 Grafik Windows Task Manager
-    const cpuChart = new TaskManagerCanvasChart('chart-cpu', {
-        initialValue: {{ $serverMetrics['system']['cpu']['percent'] ?? 0 }},
+    let activeTab = 'cpu';
+    const buffers = {
+        cpu: new Array(30).fill({{ $serverMetrics['system']['cpu']['percent'] ?? 0 }}),
+        ram: new Array(30).fill({{ $serverMetrics['system']['ram']['percent'] ?? 0 }}),
+        net: new Array(30).fill({{ $serverMetrics['system']['network']['total_kbps'] ?? 0 }}),
+        disk: new Array(30).fill({{ $serverMetrics['system']['disk']['percent'] ?? 0 }})
+    };
+
+    let latestMetrics = {
+        cpu: { percent: {{ $serverMetrics['system']['cpu']['percent'] ?? 0 }}, cores: {{ $serverMetrics['system']['cpu']['cores'] ?? 1 }}, load_1m: '{{ $serverMetrics['system']['cpu']['load_1m'] ?? 0 }}', load_5m: '{{ $serverMetrics['system']['cpu']['load_5m'] ?? 0 }}' },
+        ram: { percent: {{ $serverMetrics['system']['ram']['percent'] ?? 0 }}, used: '{{ $serverMetrics['system']['ram']['used_formatted'] }}', total: '{{ $serverMetrics['system']['ram']['total_formatted'] }}', free: '{{ $serverMetrics['system']['ram']['free_formatted'] }}' },
+        net: { total_kbps: {{ $serverMetrics['system']['network']['total_kbps'] ?? 0 }}, total_fmt: '{{ $serverMetrics['system']['network']['total_formatted'] ?? '0 KB/s' }}', rx_fmt: '{{ $serverMetrics['system']['network']['rx_formatted'] ?? '0 KB/s' }}', tx_fmt: '{{ $serverMetrics['system']['network']['tx_formatted'] ?? '0 KB/s' }}', interfaces: @json($serverMetrics['system']['network']['interfaces'] ?? ['eth0']) },
+        disk: { percent: {{ $serverMetrics['system']['disk']['percent'] ?? 0 }}, used: '{{ $serverMetrics['system']['disk']['used_formatted'] }}', total: '{{ $serverMetrics['system']['disk']['total_formatted'] }}', free: '{{ $serverMetrics['system']['disk']['free_formatted'] }}' },
+        uptime: '{{ $serverMetrics['system']['uptime']['formatted'] }}'
+    };
+
+    const tabConfig = {
+        cpu: {
+            title: 'CPU Utilization',
+            subtitle: 'Debian 13 Baremetal &bull; 60 Detik Terakhir',
+            color: '#38bdf8',
+            fill: 'rgba(56, 189, 248, 0.18)',
+            fixedMax: 100,
+            scaleText: 'Skala 0-100%',
+            badgeClass: 'bg-sky-400 shadow-[0_0_8px_rgba(56,189,248,0.8)]',
+            activeClass: 'bg-sky-950/20 border-sky-500/50 shadow-md shadow-sky-950/30'
+        },
+        ram: {
+            title: 'Memori RAM Allocation',
+            subtitle: 'Alokasi Fisik DDR &bull; 60 Detik Terakhir',
+            color: '#c084fc',
+            fill: 'rgba(192, 132, 252, 0.18)',
+            fixedMax: 100,
+            scaleText: 'Skala 0-100%',
+            badgeClass: 'bg-purple-400 shadow-[0_0_8px_rgba(192,132,252,0.8)]',
+            activeClass: 'bg-purple-950/20 border-purple-500/50 shadow-md shadow-purple-950/30'
+        },
+        net: {
+            title: 'Network Throughput (I/O)',
+            subtitle: 'Throughput Linux Kernel `/proc/net/dev`',
+            color: '#34d399',
+            fill: 'rgba(52, 211, 153, 0.18)',
+            fixedMax: null,
+            minMax: 50,
+            scaleText: 'Auto-scale KB/s',
+            badgeClass: 'bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.8)]',
+            activeClass: 'bg-emerald-950/20 border-emerald-500/50 shadow-md shadow-emerald-950/30'
+        },
+        disk: {
+            title: 'Disk Storage NVMe',
+            subtitle: 'Partisi Root Mount `/` Filesystem',
+            color: '#fbbf24',
+            fill: 'rgba(251, 191, 36, 0.18)',
+            fixedMax: 100,
+            scaleText: 'Skala 0-100%',
+            badgeClass: 'bg-amber-400 shadow-[0_0_8px_rgba(251,191,36,0.8)]',
+            activeClass: 'bg-amber-950/20 border-amber-500/50 shadow-md shadow-amber-950/30'
+        }
+    };
+
+    // Mini Sparklines
+    const miniCpuChart = new TaskManagerCanvasChart('mini-cpu-canvas', {
+        initialValue: buffers.cpu[buffers.cpu.length - 1],
         fixedMax: 100,
         strokeColor: '#38bdf8',
-        fillColor: 'rgba(56, 189, 248, 0.18)'
+        fillColor: 'rgba(56, 189, 248, 0.15)'
     });
-
-    const ramChart = new TaskManagerCanvasChart('chart-ram', {
-        initialValue: {{ $serverMetrics['system']['ram']['percent'] ?? 0 }},
+    const miniRamChart = new TaskManagerCanvasChart('mini-ram-canvas', {
+        initialValue: buffers.ram[buffers.ram.length - 1],
         fixedMax: 100,
         strokeColor: '#c084fc',
-        fillColor: 'rgba(192, 132, 252, 0.18)'
+        fillColor: 'rgba(192, 132, 252, 0.15)'
     });
-
-    const netChart = new TaskManagerCanvasChart('chart-net', {
-        initialValue: {{ $serverMetrics['system']['network']['total_kbps'] ?? 0 }},
+    const miniNetChart = new TaskManagerCanvasChart('mini-net-canvas', {
+        initialValue: buffers.net[buffers.net.length - 1],
         fixedMax: null,
         minMax: 50,
         strokeColor: '#34d399',
-        fillColor: 'rgba(52, 211, 153, 0.18)'
+        fillColor: 'rgba(52, 211, 153, 0.15)'
+    });
+    const miniDiskChart = new TaskManagerCanvasChart('mini-disk-canvas', {
+        initialValue: buffers.disk[buffers.disk.length - 1],
+        fixedMax: 100,
+        strokeColor: '#fbbf24',
+        fillColor: 'rgba(251, 191, 36, 0.15)'
     });
 
+    // Main Big Chart
+    const mainChart = new TaskManagerCanvasChart('main-taskmanager-canvas', {
+        initialData: buffers.cpu,
+        fixedMax: 100,
+        strokeColor: tabConfig.cpu.color,
+        fillColor: tabConfig.cpu.fill
+    });
+
+    // Modal Maximize Chart
+    let modalChart = null;
+
+    function renderDetailView() {
+        const cfg = tabConfig[activeTab];
+        if (!cfg) return;
+
+        // Header detail
+        const titleEl = document.getElementById('tm-detail-title');
+        const subEl = document.getElementById('tm-detail-subtitle');
+        const badgeEl = document.getElementById('tm-detail-badge');
+        const scaleEl = document.getElementById('tm-detail-scale-label');
+        const bigValEl = document.getElementById('tm-detail-big-value');
+
+        if (titleEl) titleEl.textContent = cfg.title;
+        if (subEl) subEl.innerHTML = cfg.subtitle;
+        if (badgeEl) badgeEl.className = 'w-2.5 h-2.5 rounded-full ' + cfg.badgeClass;
+        if (scaleEl) scaleEl.textContent = cfg.scaleText;
+
+        // Big value & bottom stats grid
+        const s1 = document.getElementById('tm-stat-1');
+        const s2 = document.getElementById('tm-stat-2');
+        const s3 = document.getElementById('tm-stat-3');
+        const s4 = document.getElementById('tm-stat-4');
+        const p1 = s1?.previousElementSibling;
+        const p2 = s2?.previousElementSibling;
+        const p3 = s3?.previousElementSibling;
+        const p4 = s4?.previousElementSibling;
+
+        if (activeTab === 'cpu') {
+            if (bigValEl) bigValEl.textContent = `${latestMetrics.cpu.percent}%`;
+            if (p1) p1.textContent = 'Beban CPU';
+            if (s1) s1.textContent = `${latestMetrics.cpu.percent}%`;
+            if (p2) p2.textContent = 'Cores';
+            if (s2) s2.textContent = `${latestMetrics.cpu.cores} Cores`;
+            if (p3) p3.textContent = 'Load 1m / 5m';
+            if (s3) s3.textContent = `${latestMetrics.cpu.load_1m} / ${latestMetrics.cpu.load_5m}`;
+            if (p4) p4.textContent = 'Host Uptime';
+            if (s4) s4.textContent = latestMetrics.uptime;
+        } else if (activeTab === 'ram') {
+            if (bigValEl) bigValEl.textContent = `${latestMetrics.ram.percent}%`;
+            if (p1) p1.textContent = 'Memori Terpakai';
+            if (s1) s1.textContent = latestMetrics.ram.used;
+            if (p2) p2.textContent = 'Total RAM';
+            if (s2) s2.textContent = latestMetrics.ram.total;
+            if (p3) p3.textContent = 'Free RAM';
+            if (s3) s3.textContent = latestMetrics.ram.free;
+            if (p4) p4.textContent = 'Persentase';
+            if (s4) s4.textContent = `${latestMetrics.ram.percent}%`;
+        } else if (activeTab === 'net') {
+            if (bigValEl) bigValEl.textContent = latestMetrics.net.total_fmt;
+            if (p1) p1.textContent = 'Download (RX)';
+            if (s1) s1.textContent = latestMetrics.net.rx_fmt;
+            if (p2) p2.textContent = 'Upload (TX)';
+            if (s2) s2.textContent = latestMetrics.net.tx_fmt;
+            if (p3) p3.textContent = 'Throughput Total';
+            if (s3) s3.textContent = latestMetrics.net.total_fmt;
+            if (p4) p4.textContent = 'Interface Aktif';
+            if (s4) s4.textContent = latestMetrics.net.interfaces.join(', ');
+        } else if (activeTab === 'disk') {
+            if (bigValEl) bigValEl.textContent = `${latestMetrics.disk.percent}%`;
+            if (p1) p1.textContent = 'Disk Digunakan';
+            if (s1) s1.textContent = latestMetrics.disk.used;
+            if (p2) p2.textContent = 'Total Kapasitas';
+            if (s2) s2.textContent = latestMetrics.disk.total;
+            if (p3) p3.textContent = 'Sisa Bebas';
+            if (s3) s3.textContent = latestMetrics.disk.free;
+            if (p4) p4.textContent = 'Mount Point';
+            if (s4) s4.textContent = '/ (NVMe Root)';
+        }
+
+        // Switch main chart options & buffer
+        mainChart.setOptions({
+            strokeColor: cfg.color,
+            fillColor: cfg.fill,
+            fixedMax: cfg.fixedMax,
+            minMax: cfg.minMax ?? 100
+        });
+        mainChart.setData(buffers[activeTab]);
+
+        // If modal open, update modal too
+        if (modalChart && maximizeModal && !maximizeModal.classList.contains('hidden')) {
+            updateModalView();
+        }
+    }
+
+    function switchTab(name) {
+        if (!tabConfig[name]) return;
+        activeTab = name;
+
+        document.querySelectorAll('.tm-tab-btn').forEach(btn => {
+            const tab = btn.dataset.tmTab;
+            if (tab === name) {
+                btn.className = `tm-tab-btn w-full text-left p-3.5 sm:p-4 rounded-xl border transition-all cursor-pointer ${tabConfig[name].activeClass}`;
+            } else {
+                btn.className = 'tm-tab-btn w-full text-left p-3.5 sm:p-4 rounded-xl border border-white/10 bg-[#080808] hover:border-white/20 hover:bg-white/[0.02] transition-all cursor-pointer';
+            }
+        });
+
+        renderDetailView();
+    }
+
+    document.querySelectorAll('.tm-tab-btn').forEach(btn => {
+        btn.addEventListener('click', () => switchTab(btn.dataset.tmTab));
+    });
+
+    // Maximize Modal Logic
+    function updateModalView() {
+        const cfg = tabConfig[activeTab];
+        if (!cfg) return;
+        const mTitle = document.getElementById('modal-tm-title');
+        const mBadge = document.getElementById('modal-tm-badge');
+        const mVal = document.getElementById('modal-tm-value');
+        if (mTitle) mTitle.textContent = `${cfg.title} - Inspeksi Resolusi Tinggi`;
+        if (mBadge) mBadge.className = `w-2.5 h-2.5 rounded-full ${cfg.badgeClass}`;
+        
+        if (activeTab === 'net') {
+            if (mVal) mVal.textContent = latestMetrics.net.total_fmt;
+        } else {
+            if (mVal) mVal.textContent = `${latestMetrics[activeTab].percent}%`;
+        }
+
+        if (modalChart) {
+            modalChart.setOptions({
+                strokeColor: cfg.color,
+                fillColor: cfg.fill,
+                fixedMax: cfg.fixedMax,
+                minMax: cfg.minMax ?? 100
+            });
+            modalChart.setData(buffers[activeTab]);
+        }
+    }
+
+    if (maximizeBtn && maximizeModal) {
+        maximizeBtn.addEventListener('click', () => {
+            maximizeModal.classList.remove('hidden');
+            if (!modalChart) {
+                modalChart = new TaskManagerCanvasChart('modal-taskmanager-canvas', {
+                    initialData: buffers[activeTab],
+                    fixedMax: tabConfig[activeTab].fixedMax,
+                    strokeColor: tabConfig[activeTab].color,
+                    fillColor: tabConfig[activeTab].fill
+                });
+            } else {
+                modalChart.resize();
+            }
+            updateModalView();
+        });
+    }
+
+    if (closeMaximizeBtn && maximizeModal) {
+        closeMaximizeBtn.addEventListener('click', () => {
+            maximizeModal.classList.add('hidden');
+        });
+    }
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && maximizeModal && !maximizeModal.classList.contains('hidden')) {
+            maximizeModal.classList.add('hidden');
+        }
+    });
+
+    // Polling System
     let isLive = true;
     let pollTimer = null;
     let isFetching = false;
@@ -532,43 +840,76 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!res.ok) throw new Error('Failed to fetch');
             const data = await res.json();
 
-            // CPU
+            // 1. CPU
             const cpu = data.system.cpu;
-            if (document.getElementById('metric-cpu-percent')) document.getElementById('metric-cpu-percent').textContent = `${cpu.percent}%`;
-            if (document.getElementById('metric-cpu-load')) document.getElementById('metric-cpu-load').textContent = `Load: ${cpu.load_1m}`;
-            if (document.getElementById('metric-cpu-cores')) document.getElementById('metric-cpu-cores').textContent = `${cpu.cores} Cores`;
-            cpuChart.push(Number(cpu.percent) || 0);
+            latestMetrics.cpu = {
+                percent: Number(cpu.percent) || 0,
+                cores: cpu.cores,
+                load_1m: cpu.load_1m,
+                load_5m: cpu.load_5m || 0
+            };
+            buffers.cpu.push(latestMetrics.cpu.percent);
+            if (buffers.cpu.length > 30) buffers.cpu.shift();
+            miniCpuChart.push(latestMetrics.cpu.percent);
+            if (document.getElementById('metric-cpu-percent')) document.getElementById('metric-cpu-percent').textContent = `${latestMetrics.cpu.percent}%`;
+            if (document.getElementById('metric-cpu-load')) document.getElementById('metric-cpu-load').textContent = `Load: ${latestMetrics.cpu.load_1m}`;
+            if (document.getElementById('metric-cpu-cores')) document.getElementById('metric-cpu-cores').textContent = `${latestMetrics.cpu.cores} Cores`;
 
-            // RAM
+            // 2. RAM
             const ram = data.system.ram;
-            if (document.getElementById('metric-ram-percent')) document.getElementById('metric-ram-percent').textContent = `${ram.percent}%`;
+            latestMetrics.ram = {
+                percent: Number(ram.percent) || 0,
+                used: ram.used_formatted,
+                total: ram.total_formatted,
+                free: ram.free_formatted
+            };
+            buffers.ram.push(latestMetrics.ram.percent);
+            if (buffers.ram.length > 30) buffers.ram.shift();
+            miniRamChart.push(latestMetrics.ram.percent);
+            if (document.getElementById('metric-ram-percent')) document.getElementById('metric-ram-percent').textContent = `${latestMetrics.ram.percent}%`;
             if (document.getElementById('metric-ram-details')) document.getElementById('metric-ram-details').textContent = `${ram.used_formatted} / ${ram.total_formatted}`;
-            if (document.getElementById('metric-ram-free')) document.getElementById('metric-ram-free').textContent = `${ram.free_formatted} free`;
-            ramChart.push(Number(ram.percent) || 0);
 
-            // Network
+            // 3. Network
             const net = data.system.network;
             if (net) {
-                if (document.getElementById('metric-net-total')) document.getElementById('metric-net-total').textContent = net.total_formatted || '0 KB/s';
-                if (document.getElementById('metric-net-rx')) document.getElementById('metric-net-rx').textContent = net.rx_formatted || '0 KB/s';
-                if (document.getElementById('metric-net-tx')) document.getElementById('metric-net-tx').textContent = net.tx_formatted || '0 KB/s';
-                if (document.getElementById('metric-net-interface') && net.interfaces) {
-                    document.getElementById('metric-net-interface').textContent = `Interface: ${net.interfaces.join(', ')}`;
-                }
-                netChart.push(Number(net.total_kbps) || 0);
+                latestMetrics.net = {
+                    total_kbps: Number(net.total_kbps) || 0,
+                    total_fmt: net.total_formatted || '0 KB/s',
+                    rx_fmt: net.rx_formatted || '0 KB/s',
+                    tx_fmt: net.tx_formatted || '0 KB/s',
+                    interfaces: net.interfaces || ['eth0']
+                };
+                buffers.net.push(latestMetrics.net.total_kbps);
+                if (buffers.net.length > 30) buffers.net.shift();
+                miniNetChart.push(latestMetrics.net.total_kbps);
+                if (document.getElementById('metric-net-total')) document.getElementById('metric-net-total').textContent = latestMetrics.net.total_fmt;
+                if (document.getElementById('metric-net-rx')) document.getElementById('metric-net-rx').textContent = latestMetrics.net.rx_fmt;
+                if (document.getElementById('metric-net-tx')) document.getElementById('metric-net-tx').textContent = latestMetrics.net.tx_fmt;
             }
 
-            // Disk NVMe
+            // 4. Disk
             const disk = data.system.disk;
-            if (document.getElementById('metric-disk-percent')) document.getElementById('metric-disk-percent').textContent = `${disk.percent}%`;
+            latestMetrics.disk = {
+                percent: Number(disk.percent) || 0,
+                used: disk.used_formatted,
+                total: disk.total_formatted,
+                free: disk.free_formatted
+            };
+            buffers.disk.push(latestMetrics.disk.percent);
+            if (buffers.disk.length > 30) buffers.disk.shift();
+            miniDiskChart.push(latestMetrics.disk.percent);
+            if (document.getElementById('metric-disk-percent')) document.getElementById('metric-disk-percent').textContent = `${latestMetrics.disk.percent}%`;
             if (document.getElementById('metric-disk-details')) document.getElementById('metric-disk-details').textContent = `${disk.used_formatted} / ${disk.total_formatted}`;
 
-            // Latency & Uptime
+            // Uptime & LEMP daemons
+            latestMetrics.uptime = data.system.uptime.formatted;
             const db = data.services.database;
             if (document.getElementById('metric-db-latency')) document.getElementById('metric-db-latency').textContent = `${db.latency_ms ?? '-'}ms latency`;
-            if (document.getElementById('metric-host-uptime')) document.getElementById('metric-host-uptime').textContent = `Up ${data.system.uptime.formatted}`;
+            if (document.getElementById('metric-host-uptime')) document.getElementById('metric-host-uptime').textContent = `Up ${latestMetrics.uptime}`;
 
-            // Time
+            // Render detail view
+            renderDetailView();
+
             const now = new Date();
             if (lastUpdated) lastUpdated.textContent = `Sync: ${now.toTimeString().split(' ')[0]}`;
         } catch (err) {
@@ -623,6 +964,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    renderDetailView();
     startPolling();
 });
 </script>

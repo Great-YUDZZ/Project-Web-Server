@@ -67,94 +67,165 @@
         </div>
     </div>
 
-    <!-- 5 Telemetry Metrics Cards (with Real-time Task Manager Canvas Charts) -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
-        <!-- 1. CPU -->
-        <div class="rounded-2xl border border-white/10 bg-[#0f0f0f] p-4 sm:p-5 shadow-lg shadow-black/40 flex flex-col justify-between">
+    <!-- Master-Detail Windows Task Manager Performance Monitor -->
+    <div class="rounded-2xl border border-white/10 bg-[#0f0f0f] p-5 sm:p-6 shadow-lg shadow-black/40">
+        <div class="flex flex-wrap items-center justify-between gap-4 border-b border-white/10 pb-4 mb-5">
             <div>
-                <div class="flex items-center justify-between">
-                    <span class="text-[11px] uppercase tracking-wider font-mono text-sky-400 font-semibold flex items-center gap-1.5">
-                        <span class="w-1.5 h-1.5 rounded-full bg-sky-400 shadow-[0_0_6px_rgba(56,189,248,0.8)]"></span>
-                        <span>CPU Load</span>
-                    </span>
-                    <span id="stat-cpu" class="font-mono text-lg font-bold text-white">{{ $overview['server']['cpuLoadPercent'] ?? 0 }}%</span>
+                <div class="text-[11px] uppercase tracking-wider font-mono text-stone-400 mb-1 flex items-center gap-2">
+                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.8)]"></span>
+                    <span>Live Telemetry &bull; Windows Task Manager View</span>
                 </div>
-                <div class="relative w-full h-14 my-2.5 rounded-lg bg-[#040404] border border-white/10 overflow-hidden">
-                    <canvas id="chart-hosting-cpu" class="w-full h-full block"></canvas>
-                </div>
+                <h2 class="text-base sm:text-lg font-bold font-body text-white tracking-tight">Performa Server &amp; <span class="font-display font-semibold text-stone-300">Konsumsi Resource</span></h2>
             </div>
-            <div id="stat-cpu-detail" class="text-[11px] font-mono text-stone-400 truncate">{{ $overview['server']['cpuCores'] ?? 1 }} cores active</div>
-        </div>
-
-        <!-- 2. RAM -->
-        <div class="rounded-2xl border border-white/10 bg-[#0f0f0f] p-4 sm:p-5 shadow-lg shadow-black/40 flex flex-col justify-between">
-            <div>
-                <div class="flex items-center justify-between">
-                    <span class="text-[11px] uppercase tracking-wider font-mono text-purple-400 font-semibold flex items-center gap-1.5">
-                        <span class="w-1.5 h-1.5 rounded-full bg-purple-400 shadow-[0_0_6px_rgba(192,132,252,0.8)]"></span>
-                        <span>RAM Usage</span>
-                    </span>
-                    <span id="stat-ram" class="font-mono text-lg font-bold text-white">{{ $overview['server']['memory']['percent'] ?? 0 }}%</span>
-                </div>
-                <div class="relative w-full h-14 my-2.5 rounded-lg bg-[#040404] border border-white/10 overflow-hidden">
-                    <canvas id="chart-hosting-ram" class="w-full h-full block"></canvas>
-                </div>
-            </div>
-            <div id="stat-ram-detail" class="text-[11px] font-mono text-stone-400 truncate">{{ $overview['server']['memory']['usedMb'] ?? 0 }} / {{ $overview['server']['memory']['totalMb'] ?? 0 }} MB</div>
-        </div>
-
-        <!-- 3. Network -->
-        <div class="rounded-2xl border border-white/10 bg-[#0f0f0f] p-4 sm:p-5 shadow-lg shadow-black/40 flex flex-col justify-between">
-            <div>
-                <div class="flex items-center justify-between">
-                    <span class="text-[11px] uppercase tracking-wider font-mono text-emerald-400 font-semibold flex items-center gap-1.5">
-                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-[0_0_6px_rgba(52,211,153,0.8)]"></span>
-                        <span>Network I/O</span>
-                    </span>
-                    <span id="stat-net" class="font-mono text-lg font-bold text-white">{{ $overview['server']['network']['total_formatted'] ?? '0 KB/s' }}</span>
-                </div>
-                <div class="relative w-full h-14 my-2.5 rounded-lg bg-[#040404] border border-white/10 overflow-hidden">
-                    <canvas id="chart-hosting-net" class="w-full h-full block"></canvas>
-                </div>
-            </div>
-            <div class="text-[11px] font-mono text-stone-400 truncate flex items-center justify-between">
-                <span>&darr; <strong id="stat-net-rx" class="text-white">{{ $overview['server']['network']['rx_formatted'] ?? '0 KB/s' }}</strong></span>
-                <span>&uarr; <strong id="stat-net-tx" class="text-white">{{ $overview['server']['network']['tx_formatted'] ?? '0 KB/s' }}</strong></span>
+            <div class="flex items-center gap-2 text-xs font-mono text-stone-400">
+                <span>Polling: 5s</span>
             </div>
         </div>
 
-        <!-- 4. Disk NVMe -->
-        <div class="rounded-2xl border border-white/10 bg-[#0f0f0f] p-4 sm:p-5 shadow-lg shadow-black/40 flex flex-col justify-between">
-            <div>
-                <div class="flex items-center justify-between">
-                    <span class="text-[11px] uppercase tracking-wider font-mono text-amber-400 font-semibold flex items-center gap-1.5">
-                        <span class="w-1.5 h-1.5 rounded-full bg-amber-400 shadow-[0_0_6px_rgba(251,191,36,0.8)]"></span>
-                        <span>Disk NVMe</span>
-                    </span>
-                    <span id="stat-disk" class="font-mono text-lg font-bold text-white">{{ $overview['server']['disks'][0]['usePercent'] ?? 0 }}%</span>
-                </div>
-                <div class="mt-4 h-2 w-full overflow-hidden rounded-full bg-white/10">
-                    <div id="bar-disk" class="h-full rounded-full bg-amber-400 transition-all duration-500" style="width:{{ min(100, max(0, $overview['server']['disks'][0]['usePercent'] ?? 0)) }}%"></div>
-                </div>
-            </div>
-            <div id="stat-disk-detail" class="mt-4 text-[11px] font-mono text-stone-400 truncate">{{ $overview['server']['disks'][0]['usedGb'] ?? 0 }} / {{ $overview['server']['disks'][0]['sizeGb'] ?? 0 }} GB</div>
-        </div>
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-6">
+            <!-- Sisi Kiri: 5 Kartu Metrik Bertumpuk (Master Stack - 4 Kolom di lg) -->
+            <div class="lg:col-span-4 space-y-2.5">
+                <!-- 1. CPU -->
+                <button type="button" data-hosting-tm-tab="cpu" class="hosting-tm-tab-btn w-full text-left p-3 sm:p-3.5 rounded-xl border transition-all cursor-pointer bg-sky-950/20 border-sky-500/50 shadow-md shadow-sky-950/30">
+                    <div class="flex items-start justify-between">
+                        <div>
+                            <div class="flex items-center gap-1.5 text-xs font-mono font-bold uppercase tracking-wider text-sky-400">
+                                <span class="w-1.5 h-1.5 rounded-full bg-sky-400 shadow-[0_0_6px_rgba(56,189,248,0.8)]"></span>
+                                <span>CPU</span>
+                            </div>
+                            <div id="stat-cpu-detail" class="text-[11px] font-mono text-stone-400 mt-0.5 truncate">{{ $overview['server']['cpuCores'] ?? 1 }} cores active</div>
+                        </div>
+                        <span id="stat-cpu" class="text-lg sm:text-xl font-bold font-mono text-white tracking-tight">{{ $overview['server']['cpuLoadPercent'] ?? 0 }}%</span>
+                    </div>
+                    <div class="mt-2 h-6 w-full rounded bg-[#040404] border border-white/5 overflow-hidden">
+                        <canvas id="mini-hosting-cpu" class="w-full h-full block"></canvas>
+                    </div>
+                </button>
 
-        <!-- 5. Active Services -->
-        <div class="rounded-2xl border border-white/10 bg-[#0f0f0f] p-4 sm:p-5 shadow-lg shadow-black/40 flex flex-col justify-between">
-            <div>
-                <div class="flex items-center justify-between">
-                    <span class="text-[11px] uppercase tracking-wider font-mono text-stone-300 font-semibold flex items-center gap-1.5">
-                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-[0_0_6px_rgba(52,211,153,0.8)]"></span>
-                        <span>Services</span>
-                    </span>
-                    <span id="stat-svc" class="font-mono text-lg font-bold text-white">{{ count(array_filter($overview['services'] ?? [], fn ($s) => ($s['status'] ?? '') === 'running')) }}/{{ count($overview['services'] ?? []) }}</span>
+                <!-- 2. RAM -->
+                <button type="button" data-hosting-tm-tab="ram" class="hosting-tm-tab-btn w-full text-left p-3 sm:p-3.5 rounded-xl border border-white/10 bg-[#080808] hover:border-white/20 hover:bg-white/[0.02] transition-all cursor-pointer">
+                    <div class="flex items-start justify-between">
+                        <div>
+                            <div class="flex items-center gap-1.5 text-xs font-mono font-bold uppercase tracking-wider text-purple-400">
+                                <span class="w-1.5 h-1.5 rounded-full bg-purple-400 shadow-[0_0_6px_rgba(192,132,252,0.8)]"></span>
+                                <span>Memory RAM</span>
+                            </div>
+                            <div id="stat-ram-detail" class="text-[11px] font-mono text-stone-400 mt-0.5 truncate">{{ $overview['server']['memory']['usedMb'] ?? 0 }} / {{ $overview['server']['memory']['totalMb'] ?? 0 }} MB</div>
+                        </div>
+                        <span id="stat-ram" class="text-lg sm:text-xl font-bold font-mono text-white tracking-tight">{{ $overview['server']['memory']['percent'] ?? 0 }}%</span>
+                    </div>
+                    <div class="mt-2 h-6 w-full rounded bg-[#040404] border border-white/5 overflow-hidden">
+                        <canvas id="mini-hosting-ram" class="w-full h-full block"></canvas>
+                    </div>
+                </button>
+
+                <!-- 3. Network -->
+                <button type="button" data-hosting-tm-tab="net" class="hosting-tm-tab-btn w-full text-left p-3 sm:p-3.5 rounded-xl border border-white/10 bg-[#080808] hover:border-white/20 hover:bg-white/[0.02] transition-all cursor-pointer">
+                    <div class="flex items-start justify-between">
+                        <div>
+                            <div class="flex items-center gap-1.5 text-xs font-mono font-bold uppercase tracking-wider text-emerald-400">
+                                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-[0_0_6px_rgba(52,211,153,0.8)]"></span>
+                                <span>Network</span>
+                            </div>
+                            <div class="text-[11px] font-mono text-stone-400 mt-0.5 truncate">
+                                &darr; <strong id="stat-net-rx" class="text-white">{{ $overview['server']['network']['rx_formatted'] ?? '0 KB/s' }}</strong> &bull; &uarr; <strong id="stat-net-tx" class="text-white">{{ $overview['server']['network']['tx_formatted'] ?? '0 KB/s' }}</strong>
+                            </div>
+                        </div>
+                        <span id="stat-net" class="text-lg sm:text-xl font-bold font-mono text-white tracking-tight">{{ $overview['server']['network']['total_formatted'] ?? '0 KB/s' }}</span>
+                    </div>
+                    <div class="mt-2 h-6 w-full rounded bg-[#040404] border border-white/5 overflow-hidden">
+                        <canvas id="mini-hosting-net" class="w-full h-full block"></canvas>
+                    </div>
+                </button>
+
+                <!-- 4. Disk NVMe -->
+                <button type="button" data-hosting-tm-tab="disk" class="hosting-tm-tab-btn w-full text-left p-3 sm:p-3.5 rounded-xl border border-white/10 bg-[#080808] hover:border-white/20 hover:bg-white/[0.02] transition-all cursor-pointer">
+                    <div class="flex items-start justify-between">
+                        <div>
+                            <div class="flex items-center gap-1.5 text-xs font-mono font-bold uppercase tracking-wider text-amber-400">
+                                <span class="w-1.5 h-1.5 rounded-full bg-amber-400 shadow-[0_0_6px_rgba(251,191,36,0.8)]"></span>
+                                <span>Disk NVMe</span>
+                            </div>
+                            <div id="stat-disk-detail" class="text-[11px] font-mono text-stone-400 mt-0.5 truncate">{{ $overview['server']['disks'][0]['usedGb'] ?? 0 }} / {{ $overview['server']['disks'][0]['sizeGb'] ?? 0 }} GB</div>
+                        </div>
+                        <span id="stat-disk" class="text-lg sm:text-xl font-bold font-mono text-white tracking-tight">{{ $overview['server']['disks'][0]['usePercent'] ?? 0 }}%</span>
+                    </div>
+                    <div class="mt-2.5 h-2 w-full overflow-hidden rounded-full bg-white/10">
+                        <div id="bar-disk" class="h-full rounded-full bg-amber-400 transition-all duration-500" style="width:{{ min(100, max(0, $overview['server']['disks'][0]['usePercent'] ?? 0)) }}%"></div>
+                    </div>
+                </button>
+
+                <!-- 5. Services -->
+                <button type="button" data-hosting-tm-tab="services" class="hosting-tm-tab-btn w-full text-left p-3 sm:p-3.5 rounded-xl border border-white/10 bg-[#080808] hover:border-white/20 hover:bg-white/[0.02] transition-all cursor-pointer">
+                    <div class="flex items-start justify-between">
+                        <div>
+                            <div class="flex items-center gap-1.5 text-xs font-mono font-bold uppercase tracking-wider text-stone-300">
+                                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-[0_0_6px_rgba(52,211,153,0.8)]"></span>
+                                <span>Services</span>
+                            </div>
+                            <div class="text-[11px] font-mono text-stone-400 mt-0.5 truncate">WHM allowlist daemons</div>
+                        </div>
+                        <span id="stat-svc" class="text-lg sm:text-xl font-bold font-mono text-white tracking-tight">{{ count(array_filter($overview['services'] ?? [], fn ($s) => ($s['status'] ?? '') === 'running')) }}/{{ count($overview['services'] ?? []) }}</span>
+                    </div>
+                    <div class="mt-2.5 h-2 w-full overflow-hidden rounded-full bg-white/10">
+                        <div id="bar-svc" class="h-full rounded-full bg-emerald-400 transition-all duration-500" style="width:100%"></div>
+                    </div>
+                </button>
+            </div>
+
+            <!-- Sisi Kanan: Detail Panel Grafik Besar (Detail View - 8 Kolom di lg) -->
+            <div class="lg:col-span-8 bg-[#080808] rounded-2xl border border-white/10 p-5 sm:p-6 flex flex-col justify-between">
+                <div>
+                    <!-- Detail Header -->
+                    <div class="flex items-start justify-between border-b border-white/5 pb-4 mb-4">
+                        <div>
+                            <div class="flex items-center gap-2">
+                                <span id="hosting-tm-badge" class="w-2.5 h-2.5 rounded-full bg-sky-400 shadow-[0_0_8px_rgba(56,189,248,0.8)]"></span>
+                                <h3 id="hosting-tm-title" class="text-base sm:text-lg font-bold text-white font-body">CPU Utilization</h3>
+                            </div>
+                            <div id="hosting-tm-subtitle" class="text-xs font-mono text-stone-400 mt-1">
+                                Host Baremetal &bull; 60 Detik Terakhir
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <div class="text-right">
+                                <div id="hosting-tm-big-value" class="text-2xl sm:text-3xl font-mono font-bold text-white tracking-tight">
+                                    {{ $overview['server']['cpuLoadPercent'] ?? 0 }}%
+                                </div>
+                                <div id="hosting-tm-scale-label" class="text-[10px] font-mono text-stone-400">Skala 0-100%</div>
+                            </div>
+                            <button type="button" id="btn-hosting-maximize" class="p-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/15 text-stone-300 hover:text-white transition-colors cursor-pointer" title="Perbesar / Maximize Grafik">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"/></svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Large Task Manager Canvas Chart -->
+                    <div class="relative w-full h-56 sm:h-64 rounded-xl bg-[#030303] border border-white/10 overflow-hidden">
+                        <canvas id="hosting-main-canvas" class="w-full h-full block"></canvas>
+                    </div>
                 </div>
-                <div class="mt-4 h-2 w-full overflow-hidden rounded-full bg-white/10">
-                    <div id="bar-svc" class="h-full rounded-full bg-emerald-400 transition-all duration-500" style="width:100%"></div>
+
+                <!-- Technical Deep Stats (Grid Bawah) -->
+                <div id="hosting-tm-stats" class="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-5 pt-4 border-t border-white/10">
+                    <div class="p-2.5 rounded-lg bg-[#040404] border border-white/5">
+                        <span class="block text-[10px] uppercase font-mono text-stone-500">CPU Load</span>
+                        <span id="htm-stat-1" class="block font-mono text-xs sm:text-sm font-bold text-white mt-0.5">{{ $overview['server']['cpuLoadPercent'] ?? 0 }}%</span>
+                    </div>
+                    <div class="p-2.5 rounded-lg bg-[#040404] border border-white/5">
+                        <span class="block text-[10px] uppercase font-mono text-stone-500">Cores</span>
+                        <span id="htm-stat-2" class="block font-mono text-xs sm:text-sm font-bold text-white mt-0.5">{{ $overview['server']['cpuCores'] ?? 1 }} Cores</span>
+                    </div>
+                    <div class="p-2.5 rounded-lg bg-[#040404] border border-white/5">
+                        <span class="block text-[10px] uppercase font-mono text-stone-500">Load Average</span>
+                        <span id="htm-stat-3" class="block font-mono text-xs sm:text-sm font-bold text-white mt-0.5">{{ implode(' / ', $overview['server']['loadAvg'] ?? [0, 0, 0]) }}</span>
+                    </div>
+                    <div class="p-2.5 rounded-lg bg-[#040404] border border-white/5">
+                        <span class="block text-[10px] uppercase font-mono text-stone-500">Server IP</span>
+                        <span id="htm-stat-4" class="block font-mono text-xs sm:text-sm font-bold text-white mt-0.5">{{ $overview['server']['sharedIp'] ?? '127.0.0.1' }}</span>
+                    </div>
                 </div>
             </div>
-            <div class="mt-4 text-[11px] font-mono text-stone-400 truncate">WHM allowlist daemons</div>
         </div>
     </div>
 
@@ -676,6 +747,34 @@ curl -I http://great-yuda.my.id</pre>
         </div>
     </section>
 
+    <!-- Modal Maximize Hosting Telemetry Inspection -->
+    <div id="modal-hosting-maximize" class="fixed inset-0 z-50 bg-black/90 backdrop-blur-md hidden flex items-center justify-center p-4 sm:p-8">
+        <div class="w-full max-w-5xl bg-[#0a0a0a] border border-white/15 rounded-2xl p-5 sm:p-7 shadow-2xl flex flex-col justify-between max-h-[92vh]">
+            <div class="flex items-center justify-between border-b border-white/10 pb-4 mb-4">
+                <div class="flex items-center gap-3">
+                    <span id="modal-htm-badge" class="w-2.5 h-2.5 rounded-full bg-sky-400 shadow-[0_0_10px_rgba(56,189,248,0.8)]"></span>
+                    <div>
+                        <h3 id="modal-htm-title" class="text-base sm:text-lg font-bold font-body text-white">CPU Utilization - Inspeksi Resolusi Tinggi</h3>
+                        <div id="modal-htm-subtitle" class="text-xs font-mono text-stone-400">Live 60 Detik Telemetri Hosting Baremetal</div>
+                    </div>
+                </div>
+                <div class="flex items-center gap-4">
+                    <span id="modal-htm-value" class="text-2xl sm:text-3xl font-mono font-bold text-white tracking-tight">0%</span>
+                    <button type="button" id="btn-close-hosting-maximize" class="p-2 rounded-xl bg-white/5 hover:bg-white/15 text-stone-300 hover:text-white transition-colors cursor-pointer" title="Tutup Modal (ESC)">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+                    </button>
+                </div>
+            </div>
+            <div class="relative w-full h-80 sm:h-96 rounded-xl bg-[#030303] border border-white/10 overflow-hidden my-2">
+                <canvas id="modal-hosting-canvas" class="w-full h-full block"></canvas>
+            </div>
+            <div class="flex items-center justify-between text-xs font-mono text-stone-400 pt-3 border-t border-white/10">
+                <span>Tekan ESC atau tombol silang untuk kembali</span>
+                <span class="text-emerald-400 flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> Live Streaming 5s</span>
+            </div>
+        </div>
+    </div>
+
 </div>
 @endsection
 
@@ -692,10 +791,25 @@ class TaskManagerCanvasChart {
         this.gridColor = options.gridColor || 'rgba(255, 255, 255, 0.05)';
         this.fixedMax = options.fixedMax ?? 100;
         this.minMax = options.minMax ?? 100;
-        this.data = new Array(this.maxPoints).fill(Number(options.initialValue) || 0);
+        this.data = options.initialData ? [...options.initialData] : new Array(this.maxPoints).fill(Number(options.initialValue) || 0);
         this.dpr = window.devicePixelRatio || 1;
         this.resize();
         window.addEventListener('resize', () => this.resize());
+    }
+
+    setOptions(opts = {}) {
+        if (opts.strokeColor) this.strokeColor = opts.strokeColor;
+        if (opts.fillColor) this.fillColor = opts.fillColor;
+        if (opts.fixedMax !== undefined) this.fixedMax = opts.fixedMax;
+        if (opts.minMax !== undefined) this.minMax = opts.minMax;
+        this.draw();
+    }
+
+    setData(arr) {
+        if (Array.isArray(arr)) {
+            this.data = [...arr];
+            this.draw();
+        }
     }
 
     resize() {
@@ -737,16 +851,16 @@ class TaskManagerCanvasChart {
         ctx.lineWidth = 1;
         ctx.setLineDash([2, 2]);
 
-        for (let i = 1; i <= 2; i++) {
-            const y = Math.round((h / 3) * i) + 0.5;
+        for (let i = 1; i <= 3; i++) {
+            const y = Math.round((h / 4) * i) + 0.5;
             ctx.beginPath();
             ctx.moveTo(0, y);
             ctx.lineTo(w, y);
             ctx.stroke();
         }
 
-        for (let i = 1; i <= 4; i++) {
-            const x = Math.round((w / 5) * i) + 0.5;
+        for (let i = 1; i <= 5; i++) {
+            const x = Math.round((w / 6) * i) + 0.5;
             ctx.beginPath();
             ctx.moveTo(x, 0);
             ctx.lineTo(x, h);
@@ -788,13 +902,13 @@ class TaskManagerCanvasChart {
             ctx.lineTo(points[i].x, points[i].y);
         }
         ctx.strokeStyle = this.strokeColor;
-        ctx.lineWidth = 1.5;
+        ctx.lineWidth = 1.6;
         ctx.lineJoin = 'round';
         ctx.stroke();
 
         const lastPoint = points[points.length - 1];
         ctx.beginPath();
-        ctx.arc(lastPoint.x - 2, lastPoint.y, 2, 0, Math.PI * 2);
+        ctx.arc(lastPoint.x - 2, lastPoint.y, 2.5, 0, Math.PI * 2);
         ctx.fillStyle = this.strokeColor;
         ctx.shadowColor = this.strokeColor;
         ctx.shadowBlur = 5;
@@ -814,27 +928,281 @@ document.addEventListener('DOMContentLoaded', () => {
     let fetching = false;
     let pollTimer = null;
 
-    // Charts Telemetri Task Manager
-    const hostingCpuChart = new TaskManagerCanvasChart('chart-hosting-cpu', {
-        initialValue: {{ $overview['server']['cpuLoadPercent'] ?? 0 }},
+    // Master-Detail Hosting Tab State
+    let activeHostingTab = 'cpu';
+    const hostingBuffers = {
+        cpu: new Array(25).fill({{ $overview['server']['cpuLoadPercent'] ?? 0 }}),
+        ram: new Array(25).fill({{ $overview['server']['memory']['percent'] ?? 0 }}),
+        net: new Array(25).fill({{ $overview['server']['network']['total_kbps'] ?? 0 }}),
+        disk: new Array(25).fill({{ $overview['server']['disks'][0]['usePercent'] ?? 0 }}),
+        services: new Array(25).fill(100)
+    };
+
+    let latestHostingMetrics = {
+        cpu: { percent: {{ $overview['server']['cpuLoadPercent'] ?? 0 }}, cores: {{ $overview['server']['cpuCores'] ?? 1 }}, loadAvg: @json($overview['server']['loadAvg'] ?? [0, 0, 0]) },
+        ram: { percent: {{ $overview['server']['memory']['percent'] ?? 0 }}, usedMb: {{ $overview['server']['memory']['usedMb'] ?? 0 }}, totalMb: {{ $overview['server']['memory']['totalMb'] ?? 0 }} },
+        net: { total_kbps: {{ $overview['server']['network']['total_kbps'] ?? 0 }}, total_fmt: '{{ $overview['server']['network']['total_formatted'] ?? '0 KB/s' }}', rx_fmt: '{{ $overview['server']['network']['rx_formatted'] ?? '0 KB/s' }}', tx_fmt: '{{ $overview['server']['network']['tx_formatted'] ?? '0 KB/s' }}' },
+        disk: { percent: {{ $overview['server']['disks'][0]['usePercent'] ?? 0 }}, usedGb: {{ $overview['server']['disks'][0]['usedGb'] ?? 0 }}, sizeGb: {{ $overview['server']['disks'][0]['sizeGb'] ?? 0 }} },
+        services: { running: {{ count(array_filter($overview['services'] ?? [], fn ($s) => ($s['status'] ?? '') === 'running')) }}, total: {{ count($overview['services'] ?? []) }} },
+        sharedIp: '{{ $overview['server']['sharedIp'] ?? '127.0.0.1' }}',
+        uptime: '{{ $overview['server']['uptimeSeconds'] ?? 0 }}'
+    };
+
+    const hostingTabConfig = {
+        cpu: {
+            title: 'CPU Utilization',
+            subtitle: 'Host Baremetal &bull; 60 Detik Terakhir',
+            color: '#38bdf8',
+            fill: 'rgba(56, 189, 248, 0.18)',
+            fixedMax: 100,
+            scaleText: 'Skala 0-100%',
+            badgeClass: 'bg-sky-400 shadow-[0_0_8px_rgba(56,189,248,0.8)]',
+            activeClass: 'bg-sky-950/20 border-sky-500/50 shadow-md shadow-sky-950/30'
+        },
+        ram: {
+            title: 'Memory RAM Usage',
+            subtitle: 'Alokasi Fisik DDR &bull; 60 Detik Terakhir',
+            color: '#c084fc',
+            fill: 'rgba(192, 132, 252, 0.18)',
+            fixedMax: 100,
+            scaleText: 'Skala 0-100%',
+            badgeClass: 'bg-purple-400 shadow-[0_0_8px_rgba(192,132,252,0.8)]',
+            activeClass: 'bg-purple-950/20 border-purple-500/50 shadow-md shadow-purple-950/30'
+        },
+        net: {
+            title: 'Network Throughput (I/O)',
+            subtitle: 'Throughput Linux Kernel `/proc/net/dev`',
+            color: '#34d399',
+            fill: 'rgba(52, 211, 153, 0.18)',
+            fixedMax: null,
+            minMax: 50,
+            scaleText: 'Auto-scale KB/s',
+            badgeClass: 'bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.8)]',
+            activeClass: 'bg-emerald-950/20 border-emerald-500/50 shadow-md shadow-emerald-950/30'
+        },
+        disk: {
+            title: 'Disk Storage NVMe',
+            subtitle: 'Partisi Root Mount `/` Filesystem',
+            color: '#fbbf24',
+            fill: 'rgba(251, 191, 36, 0.18)',
+            fixedMax: 100,
+            scaleText: 'Skala 0-100%',
+            badgeClass: 'bg-amber-400 shadow-[0_0_8px_rgba(251,191,36,0.8)]',
+            activeClass: 'bg-amber-950/20 border-amber-500/50 shadow-md shadow-amber-950/30'
+        },
+        services: {
+            title: 'Active Daemon Services',
+            subtitle: 'Status Daemon LEMP & WHM Allowlist',
+            color: '#10b981',
+            fill: 'rgba(16, 185, 129, 0.18)',
+            fixedMax: 100,
+            scaleText: 'Uptime 100%',
+            badgeClass: 'bg-emerald-400 shadow-[0_0_8px_rgba(16,185,129,0.8)]',
+            activeClass: 'bg-emerald-950/20 border-emerald-500/50 shadow-md shadow-emerald-950/30'
+        }
+    };
+
+    // Mini Sparklines
+    const miniHostingCpu = new TaskManagerCanvasChart('mini-hosting-cpu', {
+        initialValue: hostingBuffers.cpu[hostingBuffers.cpu.length - 1],
         fixedMax: 100,
         strokeColor: '#38bdf8',
-        fillColor: 'rgba(56, 189, 248, 0.18)'
+        fillColor: 'rgba(56, 189, 248, 0.15)'
     });
-
-    const hostingRamChart = new TaskManagerCanvasChart('chart-hosting-ram', {
-        initialValue: {{ $overview['server']['memory']['percent'] ?? 0 }},
+    const miniHostingRam = new TaskManagerCanvasChart('mini-hosting-ram', {
+        initialValue: hostingBuffers.ram[hostingBuffers.ram.length - 1],
         fixedMax: 100,
         strokeColor: '#c084fc',
-        fillColor: 'rgba(192, 132, 252, 0.18)'
+        fillColor: 'rgba(192, 132, 252, 0.15)'
     });
-
-    const hostingNetChart = new TaskManagerCanvasChart('chart-hosting-net', {
-        initialValue: {{ $overview['server']['network']['total_kbps'] ?? 0 }},
+    const miniHostingNet = new TaskManagerCanvasChart('mini-hosting-net', {
+        initialValue: hostingBuffers.net[hostingBuffers.net.length - 1],
         fixedMax: null,
         minMax: 50,
         strokeColor: '#34d399',
-        fillColor: 'rgba(52, 211, 153, 0.18)'
+        fillColor: 'rgba(52, 211, 153, 0.15)'
+    });
+
+    // Main Big Hosting Chart
+    const hostingMainChart = new TaskManagerCanvasChart('hosting-main-canvas', {
+        initialData: hostingBuffers.cpu,
+        fixedMax: 100,
+        strokeColor: hostingTabConfig.cpu.color,
+        fillColor: hostingTabConfig.cpu.fill
+    });
+
+    // Modal Maximize Chart
+    let modalHostingChart = null;
+
+    function renderHostingDetailView() {
+        const cfg = hostingTabConfig[activeHostingTab];
+        if (!cfg) return;
+
+        const titleEl = document.getElementById('hosting-tm-title');
+        const subEl = document.getElementById('hosting-tm-subtitle');
+        const badgeEl = document.getElementById('hosting-tm-badge');
+        const scaleEl = document.getElementById('hosting-tm-scale-label');
+        const bigValEl = document.getElementById('hosting-tm-big-value');
+
+        if (titleEl) titleEl.textContent = cfg.title;
+        if (subEl) subEl.innerHTML = cfg.subtitle;
+        if (badgeEl) badgeEl.className = 'w-2.5 h-2.5 rounded-full ' + cfg.badgeClass;
+        if (scaleEl) scaleEl.textContent = cfg.scaleText;
+
+        const s1 = document.getElementById('htm-stat-1');
+        const s2 = document.getElementById('htm-stat-2');
+        const s3 = document.getElementById('htm-stat-3');
+        const s4 = document.getElementById('htm-stat-4');
+        const p1 = s1?.previousElementSibling;
+        const p2 = s2?.previousElementSibling;
+        const p3 = s3?.previousElementSibling;
+        const p4 = s4?.previousElementSibling;
+
+        if (activeHostingTab === 'cpu') {
+            if (bigValEl) bigValEl.textContent = `${latestHostingMetrics.cpu.percent}%`;
+            if (p1) p1.textContent = 'CPU Load';
+            if (s1) s1.textContent = `${latestHostingMetrics.cpu.percent}%`;
+            if (p2) p2.textContent = 'Cores';
+            if (s2) s2.textContent = `${latestHostingMetrics.cpu.cores} Cores`;
+            if (p3) p3.textContent = 'Load Average';
+            if (s3) s3.textContent = (latestHostingMetrics.cpu.loadAvg || []).join(' / ');
+            if (p4) p4.textContent = 'Server IP';
+            if (s4) s4.textContent = latestHostingMetrics.sharedIp;
+        } else if (activeHostingTab === 'ram') {
+            if (bigValEl) bigValEl.textContent = `${latestHostingMetrics.ram.percent}%`;
+            if (p1) p1.textContent = 'Memori Terpakai';
+            if (s1) s1.textContent = `${latestHostingMetrics.ram.usedMb} MB`;
+            if (p2) p2.textContent = 'Total RAM';
+            if (s2) s2.textContent = `${latestHostingMetrics.ram.totalMb} MB`;
+            if (p3) p3.textContent = 'Persentase';
+            if (s3) s3.textContent = `${latestHostingMetrics.ram.percent}%`;
+            if (p4) p4.textContent = 'Sisa Estimasi';
+            if (s4) s4.textContent = `${Math.max(0, latestHostingMetrics.ram.totalMb - latestHostingMetrics.ram.usedMb)} MB free`;
+        } else if (activeHostingTab === 'net') {
+            if (bigValEl) bigValEl.textContent = latestHostingMetrics.net.total_fmt;
+            if (p1) p1.textContent = 'Download (RX)';
+            if (s1) s1.textContent = latestHostingMetrics.net.rx_fmt;
+            if (p2) p2.textContent = 'Upload (TX)';
+            if (s2) s2.textContent = latestHostingMetrics.net.tx_fmt;
+            if (p3) p3.textContent = 'Throughput Total';
+            if (s3) s3.textContent = latestHostingMetrics.net.total_fmt;
+            if (p4) p4.textContent = 'Throughput Rate';
+            if (s4) s4.textContent = `${latestHostingMetrics.net.total_kbps} KB/s`;
+        } else if (activeHostingTab === 'disk') {
+            if (bigValEl) bigValEl.textContent = `${latestHostingMetrics.disk.percent}%`;
+            if (p1) p1.textContent = 'Disk Digunakan';
+            if (s1) s1.textContent = `${latestHostingMetrics.disk.usedGb} GB`;
+            if (p2) p2.textContent = 'Total Kapasitas';
+            if (s2) s2.textContent = `${latestHostingMetrics.disk.sizeGb} GB`;
+            if (p3) p3.textContent = 'Sisa Bebas';
+            if (s3) s3.textContent = `${Math.max(0, latestHostingMetrics.disk.sizeGb - latestHostingMetrics.disk.usedGb)} GB`;
+            if (p4) p4.textContent = 'Mount Point';
+            if (s4) s4.textContent = '/ (NVMe Root)';
+        } else if (activeHostingTab === 'services') {
+            if (bigValEl) bigValEl.textContent = `${latestHostingMetrics.services.running}/${latestHostingMetrics.services.total}`;
+            if (p1) p1.textContent = 'Running Daemons';
+            if (s1) s1.textContent = `${latestHostingMetrics.services.running} Active`;
+            if (p2) p2.textContent = 'Total Terdaftar';
+            if (s2) s2.textContent = `${latestHostingMetrics.services.total} Layanan`;
+            if (p3) p3.textContent = 'Status Kesehatan';
+            if (s3) s3.textContent = latestHostingMetrics.services.running === latestHostingMetrics.services.total ? 'Optimal (100%)' : 'Perlu Tindakan';
+            if (p4) p4.textContent = 'Manajemen';
+            if (s4) s4.textContent = 'Tab Services';
+        }
+
+        hostingMainChart.setOptions({
+            strokeColor: cfg.color,
+            fillColor: cfg.fill,
+            fixedMax: cfg.fixedMax,
+            minMax: cfg.minMax ?? 100
+        });
+        hostingMainChart.setData(hostingBuffers[activeHostingTab]);
+
+        if (modalHostingChart && document.getElementById('modal-hosting-maximize') && !document.getElementById('modal-hosting-maximize').classList.contains('hidden')) {
+            updateHostingModalView();
+        }
+    }
+
+    function switchHostingTab(name) {
+        if (!hostingTabConfig[name]) return;
+        activeHostingTab = name;
+
+        document.querySelectorAll('.hosting-tm-tab-btn').forEach(btn => {
+            const tab = btn.dataset.hostingTmTab;
+            if (tab === name) {
+                btn.className = `hosting-tm-tab-btn w-full text-left p-3 sm:p-3.5 rounded-xl border transition-all cursor-pointer ${hostingTabConfig[name].activeClass}`;
+            } else {
+                btn.className = 'hosting-tm-tab-btn w-full text-left p-3 sm:p-3.5 rounded-xl border border-white/10 bg-[#080808] hover:border-white/20 hover:bg-white/[0.02] transition-all cursor-pointer';
+            }
+        });
+
+        renderHostingDetailView();
+    }
+
+    document.querySelectorAll('.hosting-tm-tab-btn').forEach(btn => {
+        btn.addEventListener('click', () => switchHostingTab(btn.dataset.hostingTmTab));
+    });
+
+    // Maximize Modal Logic
+    const hostingMaximizeBtn = document.getElementById('btn-hosting-maximize');
+    const hostingMaximizeModal = document.getElementById('modal-hosting-maximize');
+    const closeHostingMaximizeBtn = document.getElementById('btn-close-hosting-maximize');
+
+    function updateHostingModalView() {
+        const cfg = hostingTabConfig[activeHostingTab];
+        if (!cfg) return;
+        const mTitle = document.getElementById('modal-htm-title');
+        const mBadge = document.getElementById('modal-htm-badge');
+        const mVal = document.getElementById('modal-htm-value');
+        if (mTitle) mTitle.textContent = `${cfg.title} - Inspeksi Resolusi Tinggi`;
+        if (mBadge) mBadge.className = `w-2.5 h-2.5 rounded-full ${cfg.badgeClass}`;
+        
+        if (activeHostingTab === 'net') {
+            if (mVal) mVal.textContent = latestHostingMetrics.net.total_fmt;
+        } else if (activeHostingTab === 'services') {
+            if (mVal) mVal.textContent = `${latestHostingMetrics.services.running}/${latestHostingMetrics.services.total}`;
+        } else {
+            if (mVal) mVal.textContent = `${latestHostingMetrics[activeHostingTab].percent}%`;
+        }
+
+        if (modalHostingChart) {
+            modalHostingChart.setOptions({
+                strokeColor: cfg.color,
+                fillColor: cfg.fill,
+                fixedMax: cfg.fixedMax,
+                minMax: cfg.minMax ?? 100
+            });
+            modalHostingChart.setData(hostingBuffers[activeHostingTab]);
+        }
+    }
+
+    if (hostingMaximizeBtn && hostingMaximizeModal) {
+        hostingMaximizeBtn.addEventListener('click', () => {
+            hostingMaximizeModal.classList.remove('hidden');
+            if (!modalHostingChart) {
+                modalHostingChart = new TaskManagerCanvasChart('modal-hosting-canvas', {
+                    initialData: hostingBuffers[activeHostingTab],
+                    fixedMax: hostingTabConfig[activeHostingTab].fixedMax,
+                    strokeColor: hostingTabConfig[activeHostingTab].color,
+                    fillColor: hostingTabConfig[activeHostingTab].fill
+                });
+            } else {
+                modalHostingChart.resize();
+            }
+            updateHostingModalView();
+        });
+    }
+
+    if (closeHostingMaximizeBtn && hostingMaximizeModal) {
+        closeHostingMaximizeBtn.addEventListener('click', () => {
+            hostingMaximizeModal.classList.add('hidden');
+        });
+    }
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && hostingMaximizeModal && !hostingMaximizeModal.classList.contains('hidden')) {
+            hostingMaximizeModal.classList.add('hidden');
+        }
     });
 
     const tabs = [...document.querySelectorAll('.hosting-tab')];
@@ -892,21 +1260,14 @@ document.addEventListener('DOMContentLoaded', () => {
         set('strip-uptime', formatUptime(server.uptimeSeconds));
         set('stat-cpu', (server.cpuLoadPercent ?? 0) + '%');
         set('stat-cpu-detail', (server.cpuCores || 1) + ' cores active');
-        if (server.cpuLoadPercent !== undefined) {
-            hostingCpuChart?.push(Number(server.cpuLoadPercent) || 0);
-        }
 
         set('stat-ram', (server.memory?.percent ?? 0) + '%');
         set('stat-ram-detail', (server.memory?.usedMb ?? 0) + ' / ' + (server.memory?.totalMb ?? 0) + ' MB');
-        if (server.memory?.percent !== undefined) {
-            hostingRamChart?.push(Number(server.memory.percent) || 0);
-        }
 
         if (server.network) {
             set('stat-net', server.network.total_formatted || '0 KB/s');
             set('stat-net-rx', server.network.rx_formatted || '0 KB/s');
             set('stat-net-tx', server.network.tx_formatted || '0 KB/s');
-            hostingNetChart?.push(Number(server.network.total_kbps) || 0);
         }
 
         set('stat-disk', (disks.usePercent ?? 0) + '%');
@@ -917,6 +1278,58 @@ document.addEventListener('DOMContentLoaded', () => {
         const running = services.filter((s) => s.status === 'running').length;
         set('stat-svc', running + '/' + services.length);
         setWidth('bar-svc', services.length ? (running / services.length) * 100 : 0);
+
+        // Update latestHostingMetrics & buffers
+        latestHostingMetrics.cpu = {
+            percent: Number(server.cpuLoadPercent) || 0,
+            cores: server.cpuCores || 1,
+            loadAvg: server.loadAvg || [0, 0, 0]
+        };
+        hostingBuffers.cpu.push(latestHostingMetrics.cpu.percent);
+        if (hostingBuffers.cpu.length > 25) hostingBuffers.cpu.shift();
+        miniHostingCpu?.push(latestHostingMetrics.cpu.percent);
+
+        latestHostingMetrics.ram = {
+            percent: Number(server.memory?.percent) || 0,
+            usedMb: Number(server.memory?.usedMb) || 0,
+            totalMb: Number(server.memory?.totalMb) || 0
+        };
+        hostingBuffers.ram.push(latestHostingMetrics.ram.percent);
+        if (hostingBuffers.ram.length > 25) hostingBuffers.ram.shift();
+        miniHostingRam?.push(latestHostingMetrics.ram.percent);
+
+        if (server.network) {
+            latestHostingMetrics.net = {
+                total_kbps: Number(server.network.total_kbps) || 0,
+                total_fmt: server.network.total_formatted || '0 KB/s',
+                rx_fmt: server.network.rx_formatted || '0 KB/s',
+                tx_fmt: server.network.tx_formatted || '0 KB/s'
+            };
+            hostingBuffers.net.push(latestHostingMetrics.net.total_kbps);
+            if (hostingBuffers.net.length > 25) hostingBuffers.net.shift();
+            miniHostingNet?.push(latestHostingMetrics.net.total_kbps);
+        }
+
+        latestHostingMetrics.disk = {
+            percent: Number(disks.usePercent) || 0,
+            usedGb: Number(disks.usedGb) || 0,
+            sizeGb: Number(disks.sizeGb) || 0
+        };
+        hostingBuffers.disk.push(latestHostingMetrics.disk.percent);
+        if (hostingBuffers.disk.length > 25) hostingBuffers.disk.shift();
+
+        latestHostingMetrics.services = {
+            running: running,
+            total: services.length
+        };
+        const svcPercent = services.length ? (running / services.length) * 100 : 100;
+        hostingBuffers.services.push(svcPercent);
+        if (hostingBuffers.services.length > 25) hostingBuffers.services.shift();
+
+        latestHostingMetrics.sharedIp = server.sharedIp || '127.0.0.1';
+        latestHostingMetrics.uptime = formatUptime(server.uptimeSeconds);
+
+        renderHostingDetailView();
 
         set('storage-os', server.distro || '');
         set('storage-kernel', server.kernel || '');
@@ -1228,6 +1641,7 @@ document.addEventListener('DOMContentLoaded', () => {
         } catch (err) { showToast(err.message, 'error'); }
     });
 
+    renderHostingDetailView();
     refreshOverview(true);
     startPolling();
 });
