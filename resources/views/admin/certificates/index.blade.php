@@ -19,7 +19,7 @@
     </div>
 
     <!-- Search / Filter -->
-    <div class="p-4 rounded-2xl bg-[#141414] border border-white/10 shadow-xs">
+    <div class="p-4 rounded-2xl bg-[#0f0f0f] border border-white/10 shadow-xs">
         <form action="{{ route('admin.certificates.index') }}" method="GET" class="flex gap-3">
             <input type="text" name="q" value="{{ request('q') }}" placeholder="Cari nama sertifikat, penerbit, nomor registrasi, atau kompetensi..."
                    class="flex-1 px-4 py-2 rounded-xl bg-[#0a0a0a] border border-white/15 text-white placeholder-stone-600 text-xs font-body focus:bg-black focus:outline-none focus:border-white focus:ring-1 focus:ring-white/20 transition-all">
@@ -35,7 +35,7 @@
     </div>
 
     <!-- Certificates Table -->
-    <div class="rounded-2xl border border-white/10 bg-[#141414] shadow-xs overflow-hidden">
+    <div class="rounded-2xl border border-white/10 bg-[#0f0f0f] shadow-xs overflow-hidden">
         <div class="overflow-x-auto">
             <table class="w-full text-left font-body text-xs">
                 <thead>

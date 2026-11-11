@@ -181,15 +181,23 @@ class HostingPanelTest extends TestCase
     {
         $admin = User::first();
 
-        $response = $this->actingAs($admin)->postJson('/admin/hosting/vhosts/great-yuda.my.id/toggle', [
-            'action' => 'suspend',
-        ]);
-        $response->assertStatus(422);
-
+        // yuda.local adalah recovery panel admin dan WAJIB ditolak (422)
         $responseLocal = $this->actingAs($admin)->postJson('/admin/hosting/vhosts/yuda.local/toggle', [
             'action' => 'suspend',
         ]);
-        $responseLocal->assertStatus(422);
+        $responseLocal->assertStatus(422)
+            ->assertJsonPath('ok', false);
+
+        // great-yuda.my.id BISA disuspend (bukan domain dilindungi)
+        $responseGreat = $this->actingAs($admin)->postJson('/admin/hosting/vhosts/great-yuda.my.id/toggle', [
+            'action' => 'suspend',
+        ]);
+        $this->assertContains($responseGreat->getStatusCode(), [200, 503]);
+
+        // Kembalikan ke unsuspend agar state kembali aktif
+        $this->actingAs($admin)->postJson('/admin/hosting/vhosts/great-yuda.my.id/toggle', [
+            'action' => 'unsuspend',
+        ]);
     }
 
     public function test_toggle_vhost_validates_action_input(): void

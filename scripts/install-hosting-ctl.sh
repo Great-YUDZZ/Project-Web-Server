@@ -349,7 +349,7 @@ cmd_ufw_del() {
 is_protected_vhost() {
   local target="$1"
   case "$target" in
-    project_tkj_yuda2|great-yuda.my.id|yuda.local|localhost|127.0.0.1) return 0 ;;
+    yuda_local|yuda.local|localhost|127.0.0.1) return 0 ;;
   esac
   return 1
 }

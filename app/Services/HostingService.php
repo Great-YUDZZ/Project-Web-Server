@@ -401,9 +401,7 @@ class HostingService
     {
         $domain = strtolower(trim($domain));
         $protected = array_map('strtolower', (array) config('hosting.vhost.protected', [
-            'project_tkj_yuda2',
-            'great-yuda.my.id',
-            'www.great-yuda.my.id',
+            'yuda_local',
             'yuda.local',
             'localhost',
             '127.0.0.1',

@@ -27,7 +27,7 @@
     @endif
 
     <!-- Search & Filter Bar -->
-    <div class="p-4 rounded-2xl bg-[#141414] border border-white/10 shadow-xs">
+    <div class="p-4 rounded-2xl bg-[#0f0f0f] border border-white/10 shadow-xs">
         <form action="{{ route('admin.posts.index') }}" method="GET" class="flex flex-col sm:flex-row gap-3">
             <div class="flex-1 relative">
                 <input type="text" name="q" value="{{ request('q') }}" placeholder="Cari judul artikel, topik, atau kategori..."
@@ -55,7 +55,7 @@
     </div>
 
     <!-- Posts Table -->
-    <div class="rounded-2xl border border-white/10 bg-[#141414] shadow-xs overflow-hidden">
+    <div class="rounded-2xl border border-white/10 bg-[#0f0f0f] shadow-xs overflow-hidden">
         <div class="overflow-x-auto">
             <table class="w-full text-left font-body text-xs">
                 <thead>

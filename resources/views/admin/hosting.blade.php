@@ -21,92 +21,153 @@
         <div class="h-28 animate-pulse rounded-2xl bg-white/5 border border-white/10"></div>
     </div>
 
-    <div class="rounded-2xl bg-[#0a0a0a] border border-white/10 p-6 shadow-lg shadow-black/40">
+    <!-- Compact Server Ribbon Header -->
+    <div class="rounded-2xl bg-[#0f0f0f] border border-white/10 p-5 sm:p-6 shadow-lg shadow-black/40">
         <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
             <div>
-                <div class="text-[11px] uppercase tracking-wider font-mono text-stone-400">cPanel &amp; WHM &bull; Lokal / LAN</div>
+                <div class="text-[11px] uppercase tracking-wider font-mono text-stone-400 flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_6px_rgba(52,211,153,0.8)]"></span>
+                    <span>cPanel &amp; WHM &bull; Debian 13 Baremetal</span>
+                </div>
                 <h2 class="mt-1 text-xl sm:text-2xl font-bold font-body text-white tracking-tight">Server &amp; Web Hosting Control Center</h2>
-                <p class="mt-1 text-xs text-stone-400 font-body">Jalan juga via <span class="font-mono text-white">yuda.local</span> saat offline. Sinkhole menutup domain online lain hanya di DNS lokal BIND9.</p>
+                <p class="mt-1 text-xs text-stone-400 font-body">Manajemen virtualhost Nginx, kontrol panel aaPanel, DNS zone BIND9, dan daemon layanan.</p>
             </div>
-            <div class="flex flex-wrap items-center gap-2">
+            <div class="flex flex-wrap items-center gap-2.5">
                 <button type="button" id="btn-heal" class="flex cursor-pointer items-center gap-2 rounded-full bg-white px-4 py-2 text-xs font-bold text-black transition-colors hover:bg-stone-200 disabled:opacity-50">
                     <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
                     <span>Verify &amp; Heal All</span>
                 </button>
                 <button type="button" id="btn-refresh" class="flex cursor-pointer items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-2 text-xs font-semibold text-stone-200 transition-colors hover:bg-white/10">
                     <svg id="refresh-icon" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" /></svg>
-                    Refresh
+                    <span>Sync</span>
                 </button>
             </div>
         </div>
 
         <div class="mt-5 grid grid-cols-2 gap-3 border-t border-white/10 pt-4 font-mono text-xs sm:grid-cols-3 lg:grid-cols-6">
-            <div>
-                <span class="block text-[10px] uppercase text-stone-500">Primary Domain</span>
-                <span class="block truncate font-bold text-white">great-yuda.my.id</span>
+            <div class="p-2.5 rounded-xl bg-[#080808] border border-white/5">
+                <span class="block text-[10px] uppercase text-stone-500 font-medium">Primary Domain</span>
+                <span class="block truncate font-bold text-white mt-0.5">great-yuda.my.id</span>
             </div>
-            <div>
-                <span class="block text-[10px] uppercase text-stone-500">DNS Lokal</span>
-                <span class="block font-bold text-white">yuda.local</span>
+            <div class="p-2.5 rounded-xl bg-[#080808] border border-white/5">
+                <span class="block text-[10px] uppercase text-stone-500 font-medium">DNS Recovery</span>
+                <span class="block font-bold text-white mt-0.5">yuda.local</span>
             </div>
-            <div>
-                <span class="block text-[10px] uppercase text-stone-500">Server IP</span>
-                <span id="strip-ip" class="block font-bold text-white">{{ $overview['server']['sharedIp'] ?? '127.0.0.1' }}</span>
+            <div class="p-2.5 rounded-xl bg-[#080808] border border-white/5">
+                <span class="block text-[10px] uppercase text-stone-500 font-medium">Server IP</span>
+                <span id="strip-ip" class="block font-bold text-white mt-0.5">{{ $overview['server']['sharedIp'] ?? '127.0.0.1' }}</span>
             </div>
-            <div>
-                <span class="block text-[10px] uppercase text-stone-500">Web Server</span>
-                <span class="block font-bold text-white">Nginx 1.22 (HTTP/2)</span>
+            <div class="p-2.5 rounded-xl bg-[#080808] border border-white/5">
+                <span class="block text-[10px] uppercase text-stone-500 font-medium">Web Server</span>
+                <span class="block font-bold text-white mt-0.5">Nginx 1.22 (HTTP/2)</span>
             </div>
-            <div>
-                <span class="block text-[10px] uppercase text-stone-500">Database</span>
-                <span class="block font-bold text-white">MariaDB (:3306)</span>
+            <div class="p-2.5 rounded-xl bg-[#080808] border border-white/5">
+                <span class="block text-[10px] uppercase text-stone-500 font-medium">Database</span>
+                <span class="block font-bold text-white mt-0.5">MariaDB (:3306)</span>
             </div>
-            <div>
-                <span class="block text-[10px] uppercase text-stone-500">Uptime</span>
-                <span id="strip-uptime" class="block font-bold text-white">{{ $overview['server']['uptimeSeconds'] ?? 0 }}s</span>
+            <div class="p-2.5 rounded-xl bg-[#080808] border border-white/5">
+                <span class="block text-[10px] uppercase text-stone-500 font-medium">Uptime</span>
+                <span id="strip-uptime" class="block font-bold text-white mt-0.5">{{ $overview['server']['uptimeSeconds'] ?? 0 }}s</span>
             </div>
         </div>
     </div>
 
+    <!-- 4 Telemetry Metrics Cards -->
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <div class="rounded-2xl border border-white/10 bg-[#141414] p-5">
+        <div class="rounded-2xl border border-white/10 bg-[#0f0f0f] p-5 shadow-lg shadow-black/40">
             <div class="flex items-center justify-between">
-                <span class="text-[11px] uppercase tracking-wider font-mono text-stone-400">CPU</span>
+                <span class="text-[11px] uppercase tracking-wider font-mono text-stone-400">CPU Load</span>
                 <span id="stat-cpu" class="font-mono text-lg font-bold text-white">{{ $overview['server']['cpuLoadPercent'] ?? 0 }}%</span>
             </div>
             <div class="mt-3 h-1.5 w-full overflow-hidden rounded-full bg-white/10"><div id="bar-cpu" class="h-full rounded-full bg-white transition-all duration-500" style="width:{{ min(100, max(0, $overview['server']['cpuLoadPercent'] ?? 0)) }}%"></div></div>
-            <div id="stat-cpu-detail" class="mt-2 text-[11px] font-mono text-stone-500">{{ $overview['server']['cpuCores'] ?? 1 }} cores</div>
+            <div id="stat-cpu-detail" class="mt-2 text-[11px] font-mono text-stone-500">{{ $overview['server']['cpuCores'] ?? 1 }} cores active</div>
         </div>
-        <div class="rounded-2xl border border-white/10 bg-[#141414] p-5">
+        <div class="rounded-2xl border border-white/10 bg-[#0f0f0f] p-5 shadow-lg shadow-black/40">
             <div class="flex items-center justify-between">
-                <span class="text-[11px] uppercase tracking-wider font-mono text-stone-400">RAM</span>
+                <span class="text-[11px] uppercase tracking-wider font-mono text-stone-400">RAM Usage</span>
                 <span id="stat-ram" class="font-mono text-lg font-bold text-white">{{ $overview['server']['memory']['percent'] ?? 0 }}%</span>
             </div>
             <div class="mt-3 h-1.5 w-full overflow-hidden rounded-full bg-white/10"><div id="bar-ram" class="h-full rounded-full bg-white transition-all duration-500" style="width:{{ min(100, max(0, $overview['server']['memory']['percent'] ?? 0)) }}%"></div></div>
             <div id="stat-ram-detail" class="mt-2 text-[11px] font-mono text-stone-500">{{ $overview['server']['memory']['usedMb'] ?? 0 }} / {{ $overview['server']['memory']['totalMb'] ?? 0 }} MB</div>
         </div>
-        <div class="rounded-2xl border border-white/10 bg-[#141414] p-5">
+        <div class="rounded-2xl border border-white/10 bg-[#0f0f0f] p-5 shadow-lg shadow-black/40">
             <div class="flex items-center justify-between">
-                <span class="text-[11px] uppercase tracking-wider font-mono text-stone-400">Disk</span>
+                <span class="text-[11px] uppercase tracking-wider font-mono text-stone-400">Disk NVMe</span>
                 <span id="stat-disk" class="font-mono text-lg font-bold text-white">{{ $overview['server']['disks'][0]['usePercent'] ?? 0 }}%</span>
             </div>
             <div class="mt-3 h-1.5 w-full overflow-hidden rounded-full bg-white/10"><div id="bar-disk" class="h-full rounded-full bg-white transition-all duration-500" style="width:{{ min(100, max(0, $overview['server']['disks'][0]['usePercent'] ?? 0)) }}%"></div></div>
             <div id="stat-disk-detail" class="mt-2 text-[11px] font-mono text-stone-500">{{ $overview['server']['disks'][0]['usedGb'] ?? 0 }} / {{ $overview['server']['disks'][0]['sizeGb'] ?? 0 }} GB</div>
         </div>
-        <div class="rounded-2xl border border-white/10 bg-[#141414] p-5">
+        <div class="rounded-2xl border border-white/10 bg-[#0f0f0f] p-5 shadow-lg shadow-black/40">
             <div class="flex items-center justify-between">
-                <span class="text-[11px] uppercase tracking-wider font-mono text-stone-400">Services</span>
+                <span class="text-[11px] uppercase tracking-wider font-mono text-stone-400">Active Services</span>
                 <span id="stat-svc" class="font-mono text-lg font-bold text-white">{{ count(array_filter($overview['services'] ?? [], fn ($s) => ($s['status'] ?? '') === 'running')) }}/{{ count($overview['services'] ?? []) }}</span>
             </div>
             <div class="mt-3 h-1.5 w-full overflow-hidden rounded-full bg-white/10"><div id="bar-svc" class="h-full rounded-full bg-emerald-400 transition-all duration-500" style="width:100%"></div></div>
-            <div class="mt-2 text-[11px] font-mono text-stone-500">WHM allowlist &bull; live</div>
+            <div class="mt-2 text-[11px] font-mono text-stone-500">WHM allowlist daemons</div>
         </div>
     </div>
 
-    <div class="flex flex-wrap items-center gap-2" id="tabs">
-        @foreach(['cpanel' => 'cPanel Home', 'storage' => 'Storage &amp; Vitals', 'domains' => 'Domains &amp; VHosts', 'dns' => 'DNS &amp; Sinkhole', 'services' => 'Services (WHM)', 'databases' => 'Databases', 'firewall' => 'Firewall &amp; Ports', 'cron' => 'Cron Jobs', 'nginx' => 'Nginx Studio'] as $key => $label)
-            <button type="button" data-tab="{{ $key }}" class="hosting-tab flex cursor-pointer items-center gap-2 rounded-full border px-3.5 py-2 font-mono text-xs font-semibold transition-all {{ ($tab ?? 'cpanel') === $key ? 'bg-white text-black border-white' : 'border-white/10 bg-[#141414] text-stone-400 hover:text-white' }}">{!! $label !!}</button>
-        @endforeach
+    <!-- Segmented Module Categories & Tabs -->
+    <div class="bg-[#0f0f0f] p-4 sm:p-5 rounded-2xl border border-white/10 shadow-lg shadow-black/40 space-y-3" id="tabs">
+        <div class="flex items-center justify-between border-b border-white/10 pb-3">
+            <div class="text-xs font-mono font-bold text-white uppercase tracking-wider flex items-center gap-2">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-[0_0_6px_rgba(52,211,153,0.8)]"></span>
+                <span>Modul Kendali Server &amp; Hosting</span>
+            </div>
+            <span class="text-[11px] font-mono text-stone-400 hidden sm:inline">Pilih modul untuk mengelola komponen</span>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+            <!-- 1. Web & Domains -->
+            <div class="p-3 rounded-xl bg-[#080808] border border-white/10 flex flex-col justify-between">
+                <div class="text-[10px] font-mono uppercase text-stone-400 tracking-wider mb-2.5 flex items-center justify-between">
+                    <span>1. Web &amp; Domains</span>
+                    <span class="w-1.5 h-1.5 rounded-full bg-sky-400 shadow-[0_0_6px_rgba(56,189,248,0.8)]"></span>
+                </div>
+                <div class="flex flex-wrap gap-2">
+                    <button type="button" data-tab="domains" class="hosting-tab flex-1 flex cursor-pointer items-center justify-center gap-1.5 rounded-lg px-2.5 py-1.5 font-mono text-xs font-semibold transition-all">Domains</button>
+                    <button type="button" data-tab="dns" class="hosting-tab flex-1 flex cursor-pointer items-center justify-center gap-1.5 rounded-lg px-2.5 py-1.5 font-mono text-xs font-semibold transition-all">DNS &amp; Sinkhole</button>
+                </div>
+            </div>
+
+            <!-- 2. Server & WHM -->
+            <div class="p-3 rounded-xl bg-[#080808] border border-white/10 flex flex-col justify-between">
+                <div class="text-[10px] font-mono uppercase text-stone-400 tracking-wider mb-2.5 flex items-center justify-between">
+                    <span>2. Server &amp; WHM</span>
+                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-[0_0_6px_rgba(52,211,153,0.8)]"></span>
+                </div>
+                <div class="flex flex-wrap gap-2">
+                    <button type="button" data-tab="cpanel" class="hosting-tab flex-1 flex cursor-pointer items-center justify-center gap-1.5 rounded-lg px-2.5 py-1.5 font-mono text-xs font-semibold transition-all">Overview</button>
+                    <button type="button" data-tab="services" class="hosting-tab flex-1 flex cursor-pointer items-center justify-center gap-1.5 rounded-lg px-2.5 py-1.5 font-mono text-xs font-semibold transition-all">Services</button>
+                    <button type="button" data-tab="storage" class="hosting-tab flex-1 flex cursor-pointer items-center justify-center gap-1.5 rounded-lg px-2.5 py-1.5 font-mono text-xs font-semibold transition-all">Storage</button>
+                </div>
+            </div>
+
+            <!-- 3. Keamanan -->
+            <div class="p-3 rounded-xl bg-[#080808] border border-white/10 flex flex-col justify-between">
+                <div class="text-[10px] font-mono uppercase text-stone-400 tracking-wider mb-2.5 flex items-center justify-between">
+                    <span>3. Keamanan</span>
+                    <span class="w-1.5 h-1.5 rounded-full bg-amber-400 shadow-[0_0_6px_rgba(251,191,36,0.8)]"></span>
+                </div>
+                <div class="flex flex-wrap gap-2">
+                    <button type="button" data-tab="firewall" class="hosting-tab w-full flex cursor-pointer items-center justify-center gap-1.5 rounded-lg px-2.5 py-1.5 font-mono text-xs font-semibold transition-all">Firewall &amp; Ports</button>
+                </div>
+            </div>
+
+            <!-- 4. Data & Otomasi -->
+            <div class="p-3 rounded-xl bg-[#080808] border border-white/10 flex flex-col justify-between">
+                <div class="text-[10px] font-mono uppercase text-stone-400 tracking-wider mb-2.5 flex items-center justify-between">
+                    <span>4. Data &amp; Studio</span>
+                    <span class="w-1.5 h-1.5 rounded-full bg-purple-400 shadow-[0_0_6px_rgba(192,132,252,0.8)]"></span>
+                </div>
+                <div class="flex flex-wrap gap-2">
+                    <button type="button" data-tab="databases" class="hosting-tab flex-1 flex cursor-pointer items-center justify-center gap-1.5 rounded-lg px-2.5 py-1.5 font-mono text-xs font-semibold transition-all">MariaDB</button>
+                    <button type="button" data-tab="cron" class="hosting-tab flex-1 flex cursor-pointer items-center justify-center gap-1.5 rounded-lg px-2.5 py-1.5 font-mono text-xs font-semibold transition-all">Cron</button>
+                    <button type="button" data-tab="nginx" class="hosting-tab flex-1 flex cursor-pointer items-center justify-center gap-1.5 rounded-lg px-2.5 py-1.5 font-mono text-xs font-semibold transition-all">Nginx</button>
+                </div>
+            </div>
+        </div>
     </div>
 
     <section data-panel="cpanel" class="hosting-panel space-y-4">
@@ -213,42 +274,42 @@
 
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
             <div class="lg:col-span-2 space-y-4">
-                <div class="overflow-x-auto rounded-2xl border border-white/10 bg-[#141414]">
+                <div class="overflow-x-auto rounded-2xl border border-white/10 bg-[#0f0f0f]">
                     <table class="w-full text-left font-mono text-xs">
                         <thead>
-                            <tr class="border-b border-white/10 text-stone-500">
-                                <th class="px-4 py-3">Domain &amp; Aliases</th>
-                                <th class="px-4 py-3">Engine</th>
-                                <th class="px-4 py-3">Root / Target</th>
-                                <th class="px-4 py-3">Status</th>
-                                <th class="px-4 py-3 text-right">Kendali Web</th>
+                            <tr class="border-b border-white/10 text-stone-400 bg-white/[0.02]">
+                                <th class="px-5 py-3.5">Domain &amp; Aliases</th>
+                                <th class="px-5 py-3.5">Engine</th>
+                                <th class="px-5 py-3.5">Root / Target</th>
+                                <th class="px-5 py-3.5">Status</th>
+                                <th class="px-5 py-3.5 text-right">Kendali Web</th>
                             </tr>
                         </thead>
                         <tbody id="domains-body">
                             @forelse($overview['domains'] ?? [] as $domain)
-                                <tr class="border-b border-white/5">
-                                    <td class="px-4 py-3">
+                                <tr class="border-b border-white/5 hover:bg-white/[0.02] transition-colors">
+                                    <td class="px-5 py-3.5">
                                         <div class="font-bold text-white">{{ $domain['domain'] }}</div>
                                         @if(!empty($domain['aliases']))
                                             <div class="text-[10px] text-stone-500">{{ implode(', ', $domain['aliases']) }}</div>
                                         @endif
                                     </td>
-                                    <td class="px-4 py-3">
+                                    <td class="px-5 py-3.5">
                                         @if(($domain['engine'] ?? 'nginx') === 'aapanel')
                                             <span class="rounded-full border border-purple-500/30 bg-purple-950/40 px-2 py-0.5 text-[10px] font-semibold text-purple-300">aaPanel</span>
                                         @else
                                             <span class="rounded-full border border-sky-500/30 bg-sky-950/40 px-2 py-0.5 text-[10px] font-semibold text-sky-300">Nginx Native</span>
                                         @endif
                                     </td>
-                                    <td class="max-w-60 truncate px-4 py-3 text-stone-400" title="{{ $domain['root'] ?? '' }}">
+                                    <td class="max-w-60 truncate px-5 py-3.5 text-stone-400" title="{{ $domain['root'] ?? '' }}">
                                         {{ $domain['root'] ?? '—' }}
                                     </td>
-                                    <td class="px-4 py-3">
+                                    <td class="px-5 py-3.5">
                                         <span class="rounded-full px-2.5 py-0.5 text-[10px] font-bold {{ !empty($domain['suspended']) ? 'bg-rose-950/60 text-rose-300 border border-rose-800/40' : 'bg-emerald-950/60 text-emerald-300 border border-emerald-800/40' }}">
                                             {{ !empty($domain['suspended']) ? 'TER-SUSPEND (503)' : 'ACTIVE' }}
                                         </span>
                                     </td>
-                                    <td class="px-4 py-3 text-right">
+                                    <td class="px-5 py-3.5 text-right">
                                         @if(!empty($domain['canSuspend']))
                                             @if(!empty($domain['suspended']))
                                                 <button type="button"
@@ -275,7 +336,7 @@
                                     </td>
                                 </tr>
                             @empty
-                                <tr><td colspan="5" class="px-4 py-8 text-center text-stone-500">Tidak ada vhost terbaca dari server.</td></tr>
+                                <tr><td colspan="5" class="px-5 py-8 text-center text-stone-500">Tidak ada vhost terbaca dari server.</td></tr>
                             @endforelse
                         </tbody>
                     </table>
@@ -578,7 +639,7 @@ document.addEventListener('DOMContentLoaded', () => {
         currentTab = name;
         tabs.forEach((t) => {
             const active = t.dataset.tab === name;
-            t.className = 'hosting-tab flex cursor-pointer items-center gap-2 rounded-full border px-3.5 py-2 font-mono text-xs font-semibold transition-all ' + (active ? 'bg-white text-black border-white' : 'border-white/10 bg-[#141414] text-stone-400 hover:text-white');
+            t.className = 'hosting-tab flex cursor-pointer items-center justify-center gap-1.5 rounded-lg px-2.5 py-1.5 font-mono text-xs font-semibold transition-all ' + (active ? 'bg-white text-black font-bold shadow-md shadow-black/40' : 'bg-white/5 border border-white/10 text-stone-400 hover:text-white hover:bg-white/10');
         });
         panels.forEach((p) => p.classList.toggle('hidden', p.dataset.panel !== name));
         try { history.replaceState(null, '', '?tab=' + name); } catch (e) {}
@@ -698,12 +759,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const aliasesText = (d.aliases || []).length ? '<div class="text-[10px] text-stone-500">' + escHtml((d.aliases || []).join(', ')) + '</div>' : '';
 
-            return '<tr class="border-b border-white/5">' +
-                '<td class="px-4 py-3"><div class="font-bold text-white">' + escHtml(d.domain) + '</div>' + aliasesText + '</td>' +
-                '<td class="px-4 py-3">' + engineBadge + '</td>' +
-                '<td class="max-w-60 truncate px-4 py-3 text-stone-400" title="' + escHtml(d.root || '') + '">' + escHtml(d.root || '—') + '</td>' +
-                '<td class="px-4 py-3">' + badge + '</td>' +
-                '<td class="px-4 py-3 text-right">' + action + '</td>' +
+            return '<tr class="border-b border-white/5 hover:bg-white/[0.02] transition-colors">' +
+                '<td class="px-5 py-3.5"><div class="font-bold text-white">' + escHtml(d.domain) + '</div>' + aliasesText + '</td>' +
+                '<td class="px-5 py-3.5">' + engineBadge + '</td>' +
+                '<td class="max-w-60 truncate px-5 py-3.5 text-stone-400" title="' + escHtml(d.root || '') + '">' + escHtml(d.root || '—') + '</td>' +
+                '<td class="px-5 py-3.5">' + badge + '</td>' +
+                '<td class="px-5 py-3.5 text-right">' + action + '</td>' +
                 '</tr>';
         }).join('');
     }

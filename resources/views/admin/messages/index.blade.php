@@ -22,7 +22,7 @@
     </div>
 
     <!-- Filter Bar -->
-    <div class="flex flex-wrap items-center justify-between gap-4 p-4 rounded-2xl bg-[#141414] border border-white/10 shadow-xs font-body text-xs">
+    <div class="flex flex-wrap items-center justify-between gap-4 p-4 rounded-2xl bg-[#0f0f0f] border border-white/10 shadow-xs font-body text-xs">
         <div class="flex flex-wrap gap-2">
             <a href="{{ route('admin.messages.index') }}" class="px-3.5 py-1.5 rounded-xl transition-all {{ !request('status') ? 'bg-white text-black font-bold shadow-xs' : 'bg-white/5 border border-white/10 text-stone-400 hover:bg-white/10 hover:text-white' }}">
                 Semua Pesan ({{ \App\Models\Message::count() }})
@@ -45,7 +45,7 @@
     </div>
 
     <!-- Messages Table -->
-    <div class="rounded-2xl border border-white/10 bg-[#141414] shadow-xs overflow-hidden">
+    <div class="rounded-2xl border border-white/10 bg-[#0f0f0f] shadow-xs overflow-hidden">
         <div class="overflow-x-auto">
             <table class="w-full text-left font-body text-xs">
                 <thead>
