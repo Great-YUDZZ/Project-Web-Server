@@ -89,7 +89,7 @@ class TkjPortfolioTest extends TestCase
     {
         $response = $this->post('/login', [
             'email' => 'admin@tkj.lan',
-            'password' => 'AdminTKJ2026!',
+            'password' => 'YudaHosting2026!',
         ]);
 
         $response->assertRedirect(route('admin.dashboard'));

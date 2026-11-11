@@ -15,13 +15,39 @@ class BlogContentRenderer
             return '';
         }
 
-        // 1. Parse tag video kustom [video: URL | Caption] atau [video: URL]
-        $content = self::processVideoTags($rawContent);
+        // 1. Ekstrak tag video kustom [video: URL | Caption] ke token placeholder
+        $videoBlocks = [];
+        $pattern = '/\[video:\s*([^\|\]]+)(?:\|\s*([^\]]+))?\]/i';
 
-        // 2. Render Markdown ke HTML
-        $html = Str::markdown($content);
+        $content = preg_replace_callback($pattern, function ($matches) use (&$videoBlocks) {
+            $url = trim($matches[1]);
+            $caption = isset($matches[2]) ? trim($matches[2]) : '';
 
-        // 3. Post-process tag <img> menjadi figure responsif dengan trigger lightbox
+            // Validasi URL video hanya boleh HTTP/HTTPS atau path relatif
+            if (!preg_match('/^(https?:\/\/|\/|storage\/)/i', $url)) {
+                return '';
+            }
+
+            $token = 'BLOGVIDEOBLOCK' . count($videoBlocks) . 'SECURE';
+            $videoBlocks[$token] = self::buildVideoHtml($url, $caption);
+
+            return $token;
+        }, $rawContent);
+
+        // 2. Render Markdown ke HTML dengan sanitasi XSS ketat
+        $html = Str::markdown($content, [
+            'html_input' => 'strip',
+            'allow_unsafe_links' => false,
+            'max_nesting_level' => 15,
+        ]);
+
+        // 3. Masukkan kembali HTML video pada token placeholder
+        foreach ($videoBlocks as $token => $videoHtml) {
+            $html = str_replace('<p>' . $token . '</p>', $videoHtml, $html);
+            $html = str_replace($token, $videoHtml, $html);
+        }
+
+        // 4. Post-process tag <img> menjadi figure responsif dengan trigger lightbox
         $html = self::processImagesForLightbox($html);
 
         return $html;
@@ -38,6 +64,11 @@ class BlogContentRenderer
         return preg_replace_callback($pattern, function ($matches) {
             $url = trim($matches[1]);
             $caption = isset($matches[2]) ? trim($matches[2]) : '';
+
+            // Validasi URL video hanya boleh HTTP/HTTPS atau path relatif
+            if (!preg_match('/^(https?:\/\/|\/|storage\/)/i', $url)) {
+                return '';
+            }
 
             return self::buildVideoHtml($url, $caption);
         }, $content);
@@ -120,6 +151,11 @@ class BlogContentRenderer
             $alt = '';
             if (preg_match('/alt=["\']([^"\']*)["\']/i', $beforeSrc . ' ' . $afterSrc, $altMatches)) {
                 $alt = trim($altMatches[1]);
+            }
+
+            // Cegah skema URI berbahaya
+            if (preg_match('/^(javascript:|vbscript:|data:\s*text\/html)/i', trim($src))) {
+                return '';
             }
 
             $safeSrc = htmlspecialchars($src, ENT_QUOTES, 'UTF-8');

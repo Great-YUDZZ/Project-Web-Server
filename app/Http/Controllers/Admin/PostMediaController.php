@@ -64,7 +64,7 @@ class PostMediaController extends Controller
             'file' => [
                 'required',
                 'file',
-                'mimes:jpg,jpeg,png,webp,gif,svg,mp4,webm,ogg,quicktime',
+                'mimes:jpg,jpeg,png,webp,gif,mp4,webm,ogg,quicktime',
                 'max:51200', // Maks 50 MB
             ],
         ]);

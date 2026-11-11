@@ -53,7 +53,7 @@ class ProjectController extends Controller
             'is_featured' => ['nullable', 'boolean'],
             'is_hero' => ['nullable', 'boolean'],
             'order' => ['nullable', 'integer', 'min:0'],
-            'topology_image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp,svg', 'max:4096'],
+            'topology_image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:4096'],
         ]);
 
         if (empty($validated['slug'])) {
@@ -104,7 +104,7 @@ class ProjectController extends Controller
             'is_featured' => ['nullable', 'boolean'],
             'is_hero' => ['nullable', 'boolean'],
             'order' => ['nullable', 'integer', 'min:0'],
-            'topology_image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp,svg', 'max:4096'],
+            'topology_image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:4096'],
         ]);
 
         $validated['is_featured'] = $request->boolean('is_featured');

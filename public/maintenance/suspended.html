@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Situs Dinonaktifkan Sementara &bull; 503</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            background-color: #050505;
+            color: #d6d3d1;
+            font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+            line-height: 1.5;
+        }
+        .container {
+            max-width: 32rem;
+            width: 100%;
+            background: #0f0f0f;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 1.25rem;
+            padding: 2.25rem 2rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+        }
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(225, 29, 72, 0.12);
+            border: 1px solid rgba(225, 29, 72, 0.35);
+            color: #fda4af;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 0.35rem 0.85rem;
+            border-radius: 9999px;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+        .indicator {
+            width: 0.5rem;
+            height: 0.5rem;
+            background-color: #f43f5e;
+            border-radius: 9999px;
+            display: inline-block;
+        }
+        h1 {
+            color: #ffffff;
+            font-size: 1.625rem;
+            font-weight: 800;
+            letter-spacing: -0.025em;
+            margin-top: 1.25rem;
+            margin-bottom: 0.75rem;
+            line-height: 1.25;
+        }
+        p {
+            color: #a8a29e;
+            font-size: 0.925rem;
+            margin-bottom: 1.5rem;
+        }
+        .details-box {
+            background: #070707;
+            border: 1px solid rgba(255, 255, 255, 0.07);
+            border-radius: 0.875rem;
+            padding: 1rem 1.25rem;
+            margin-bottom: 1.75rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+        }
+        .details-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.35rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .details-row:last-child {
+            border-bottom: none;
+        }
+        .details-label {
+            color: #78716c;
+        }
+        .details-val {
+            color: #e7e5e4;
+            font-weight: 600;
+        }
+        .actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: #ffffff;
+            color: #000000;
+            font-weight: 700;
+            font-size: 0.8125rem;
+            padding: 0.75rem 1.25rem;
+            border-radius: 9999px;
+            text-decoration: none;
+            transition: background 0.15s ease;
+        }
+        .btn-primary:hover {
+            background: #e7e5e4;
+        }
+        .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            color: #d6d3d1;
+            font-weight: 600;
+            font-size: 0.8125rem;
+            padding: 0.75rem 1.25rem;
+            border-radius: 9999px;
+            text-decoration: none;
+            transition: all 0.15s ease;
+        }
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+    <main class="container">
+        <div class="badge">
+            <span class="indicator"></span>
+            <span>HTTP 503 &bull; Suspended</span>
+        </div>
+        <h1>Situs Dinonaktifkan Sementara</h1>
+        <p>Akses ke layanan website ini sedang dinonaktifkan sementara oleh Administrator Hosting Server. Seluruh data dan konfigurasi tetap aman tersimpan.</p>
+        <div class="details-box">
+            <div class="details-row">
+                <span class="details-label">Status Layanan</span>
+                <span class="details-val">Disuspend / Dimatikan</span>
+            </div>
+            <div class="details-row">
+                <span class="details-label">Kode Respons</span>
+                <span class="details-val">503 Service Unavailable</span>
+            </div>
+            <div class="details-row">
+                <span class="details-label">Pusat Kendali</span>
+                <span class="details-val">Admin Hosting Control Center</span>
+            </div>
+        </div>
+        <div class="actions">
+            <a href="javascript:location.reload()" class="btn-primary">Periksa Ulang</a>
+            <a href="http://great-yuda.my.id" class="btn-secondary">Ke Halaman Utama Server</a>
+        </div>
+    </main>
+</body>
+</html>

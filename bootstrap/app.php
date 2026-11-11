@@ -16,10 +16,6 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->trustProxies(at: '*');
 
         $middleware->append(\App\Http\Middleware\SecurityHardeningMiddleware::class);
-
-        $middleware->validateCsrfTokens(except: [
-            'chatbot/message',
-        ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         $exceptions->shouldRenderJsonWhen(

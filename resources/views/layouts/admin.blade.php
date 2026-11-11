@@ -104,6 +104,13 @@
                 @endif
             </a>
 
+            <a href="{{ route('admin.hosting.index') }}" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/20 {{ request()->routeIs('admin.hosting.*') ? 'bg-white/10 text-white font-bold shadow-md shadow-black/40 border border-white/20' : 'text-stone-400 hover:bg-white/[0.05] hover:text-white' }}">
+                <svg class="w-4 h-4 text-current" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01" />
+                </svg>
+                <span>Hosting &amp; cPanel</span>
+            </a>
+
             <div class="pt-4 border-t border-white/10 mt-4">
                 <a href="{{ route('home') }}" target="_blank" class="flex items-center gap-3 px-3.5 py-2 rounded-xl text-stone-400 hover:text-white hover:bg-white/[0.05] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/20">
                     <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">

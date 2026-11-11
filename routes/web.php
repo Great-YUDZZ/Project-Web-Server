@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\CertificateController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\HostingController;
 use App\Http\Controllers\Admin\MessageController;
 use App\Http\Controllers\Admin\PostController as AdminPostController;
 use App\Http\Controllers\Admin\PostMediaController;
@@ -47,6 +48,27 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     Route::get('/', fn () => redirect()->route('admin.dashboard'));
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/dashboard/server-metrics', [DashboardController::class, 'serverMetrics'])->name('dashboard.server-metrics');
+
+    // Hosting & cPanel (lokal + sinkhole DNS), hanya auth admin
+    Route::get('/hosting', [HostingController::class, 'index'])->name('hosting.index');
+    Route::get('/hosting/overview', [HostingController::class, 'overview'])->name('hosting.overview')->middleware('throttle:60,1');
+    Route::post('/hosting/services/heal', [HostingController::class, 'healAll'])->name('hosting.services.heal')->middleware('throttle:10,1');
+    Route::post('/hosting/services/{id}/control', [HostingController::class, 'controlService'])->name('hosting.services.control')->middleware('throttle:30,1');
+    Route::post('/hosting/sinkholes', [HostingController::class, 'storeSinkhole'])->name('hosting.sinkholes.store')->middleware('throttle:20,1');
+    Route::delete('/hosting/sinkholes/{domain}', [HostingController::class, 'destroySinkhole'])->name('hosting.sinkholes.destroy')->middleware('throttle:20,1');
+    Route::post('/hosting/vhosts/{domain}/toggle', [HostingController::class, 'toggleVhost'])->name('hosting.vhosts.toggle')->middleware('throttle:30,1');
+    Route::post('/hosting/dns-records', [HostingController::class, 'storeDnsRecord'])->name('hosting.dns.store')->middleware('throttle:20,1');
+    Route::delete('/hosting/dns-records', [HostingController::class, 'destroyDnsRecord'])->name('hosting.dns.destroy')->middleware('throttle:20,1');
+    Route::post('/hosting/nginx', [HostingController::class, 'saveNginx'])->name('hosting.nginx.save')->middleware('throttle:5,1');
+    Route::post('/hosting/firewall/toggle', [HostingController::class, 'toggleFirewall'])->name('hosting.firewall.toggle')->middleware('throttle:10,1');
+    Route::post('/hosting/firewall/rules', [HostingController::class, 'storeFirewallRule'])->name('hosting.firewall.store')->middleware('throttle:20,1');
+    Route::delete('/hosting/firewall/rules', [HostingController::class, 'destroyFirewallRule'])->name('hosting.firewall.destroy')->middleware('throttle:20,1');
+    Route::post('/hosting/cron', [HostingController::class, 'storeCron'])->name('hosting.cron.store')->middleware('throttle:20,1');
+    Route::post('/hosting/cron/{id}/run', [HostingController::class, 'runCron'])->name('hosting.cron.run')->middleware('throttle:10,1');
+    Route::delete('/hosting/cron/{id}', [HostingController::class, 'destroyCron'])->name('hosting.cron.destroy')->middleware('throttle:20,1');
+    Route::post('/hosting/databases', [HostingController::class, 'storeDatabase'])->name('hosting.databases.store')->middleware('throttle:10,1');
+    Route::delete('/hosting/databases/{name}', [HostingController::class, 'destroyDatabase'])->name('hosting.databases.destroy')->middleware('throttle:5,1');
+    Route::post('/hosting/databases/backup', [HostingController::class, 'backupDatabase'])->name('hosting.databases.backup')->middleware('throttle:3,1');
 
     // CRUD Projects
     Route::patch('/projects/{project}/toggle-hero', [ProjectController::class, 'toggleHero'])->name('projects.toggle-hero');
