@@ -90,6 +90,12 @@ class HostingService
                 'usedGb' => $diskUsedGb,
                 'usePercent' => $metrics['system']['disk']['percent'] ?? 0,
             ]],
+            'network' => $metrics['system']['network'] ?? [
+                'rx_formatted' => '0 B/s',
+                'tx_formatted' => '0 B/s',
+                'total_formatted' => '0 B/s',
+                'total_kbps' => 0,
+            ],
             'uptimeSeconds' => $metrics['system']['uptime']['seconds'] ?? 0,
         ];
     }

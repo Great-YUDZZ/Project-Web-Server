@@ -116,56 +116,111 @@
             </div>
         </div>
 
-        <!-- 3 Hardware Resource Bars -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-5 sm:gap-6">
-            <!-- CPU -->
-            <div class="space-y-3 p-4 sm:p-5 rounded-xl bg-[#080808] border border-white/10">
-                <div class="flex justify-between items-baseline">
-                    <span class="text-xs font-mono text-stone-400 uppercase tracking-wider">Beban CPU</span>
-                    <span id="metric-cpu-percent" class="text-2xl font-bold text-white font-mono">{{ $serverMetrics['system']['cpu']['percent'] }}%</span>
+        <!-- 3 Windows Task Manager Live Streaming Charts -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-5 sm:gap-6">
+            <!-- CPU Utilization -->
+            <div class="p-4 sm:p-5 rounded-2xl bg-[#080808] border border-white/10 flex flex-col justify-between">
+                <div>
+                    <div class="flex justify-between items-start mb-2">
+                        <div>
+                            <div class="flex items-center gap-1.5 text-xs font-mono text-sky-400 font-semibold uppercase tracking-wider">
+                                <span class="w-1.5 h-1.5 rounded-full bg-sky-400 shadow-[0_0_6px_rgba(56,189,248,0.8)]"></span>
+                                <span>CPU Utilization</span>
+                            </div>
+                            <div class="text-[11px] text-stone-400 font-mono mt-0.5">
+                                <span id="metric-cpu-cores">{{ $serverMetrics['system']['cpu']['cores'] }} Cores</span> &bull; <span id="metric-cpu-load">Load: {{ $serverMetrics['system']['cpu']['load_1m'] }}</span>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <span id="metric-cpu-percent" class="text-2xl sm:text-3xl font-bold text-white font-mono tracking-tight">{{ $serverMetrics['system']['cpu']['percent'] }}%</span>
+                            <div class="text-[10px] font-mono text-stone-400">100% Scale</div>
+                        </div>
+                    </div>
+                    <!-- Canvas Chart -->
+                    <div class="relative w-full h-28 my-2 rounded-xl bg-[#040404] border border-white/10 overflow-hidden">
+                        <canvas id="chart-cpu" class="w-full h-full block"></canvas>
+                    </div>
                 </div>
-                <div class="h-2 w-full bg-white/10 rounded-full overflow-hidden">
-                    <div id="metric-cpu-bar" class="h-full rounded-full bg-white transition-all duration-700" style="width: {{ $serverMetrics['system']['cpu']['percent'] }}%;"></div>
-                </div>
-                <div class="flex justify-between text-[11px] text-stone-400 font-mono pt-1">
-                    <span id="metric-cpu-load">Load: {{ $serverMetrics['system']['cpu']['load_1m'] }}</span>
-                    <span id="metric-cpu-cores">{{ $serverMetrics['system']['cpu']['cores'] }} Cores</span>
+                <div class="pt-2 border-t border-white/5 flex items-center justify-between text-[11px] font-mono text-stone-400">
+                    <span>60 Detik Terakhir</span>
+                    <span class="text-stone-300 font-medium">Beban CPU</span>
                 </div>
             </div>
 
-            <!-- RAM -->
-            <div class="space-y-3 p-4 sm:p-5 rounded-xl bg-[#080808] border border-white/10">
-                <div class="flex justify-between items-baseline">
-                    <span class="text-xs font-mono text-stone-400 uppercase tracking-wider">Memori RAM</span>
-                    <span id="metric-ram-percent" class="text-2xl font-bold text-white font-mono">{{ $serverMetrics['system']['ram']['percent'] }}%</span>
+            <!-- Memory RAM -->
+            <div class="p-4 sm:p-5 rounded-2xl bg-[#080808] border border-white/10 flex flex-col justify-between">
+                <div>
+                    <div class="flex justify-between items-start mb-2">
+                        <div>
+                            <div class="flex items-center gap-1.5 text-xs font-mono text-purple-400 font-semibold uppercase tracking-wider">
+                                <span class="w-1.5 h-1.5 rounded-full bg-purple-400 shadow-[0_0_6px_rgba(192,132,252,0.8)]"></span>
+                                <span>Memori RAM</span>
+                            </div>
+                            <div class="text-[11px] text-stone-400 font-mono mt-0.5">
+                                <span id="metric-ram-details">{{ $serverMetrics['system']['ram']['used_formatted'] }} / {{ $serverMetrics['system']['ram']['total_formatted'] }}</span>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <span id="metric-ram-percent" class="text-2xl sm:text-3xl font-bold text-white font-mono tracking-tight">{{ $serverMetrics['system']['ram']['percent'] }}%</span>
+                            <div id="metric-ram-free" class="text-[10px] font-mono text-stone-400">{{ $serverMetrics['system']['ram']['free_formatted'] }} free</div>
+                        </div>
+                    </div>
+                    <!-- Canvas Chart -->
+                    <div class="relative w-full h-28 my-2 rounded-xl bg-[#040404] border border-white/10 overflow-hidden">
+                        <canvas id="chart-ram" class="w-full h-full block"></canvas>
+                    </div>
                 </div>
-                <div class="h-2 w-full bg-white/10 rounded-full overflow-hidden">
-                    <div id="metric-ram-bar" class="h-full rounded-full bg-white transition-all duration-700" style="width: {{ $serverMetrics['system']['ram']['percent'] }}%;"></div>
-                </div>
-                <div class="flex justify-between text-[11px] text-stone-400 font-mono pt-1">
-                    <span id="metric-ram-details">{{ $serverMetrics['system']['ram']['used_formatted'] }} / {{ $serverMetrics['system']['ram']['total_formatted'] }}</span>
-                    <span id="metric-ram-free">{{ $serverMetrics['system']['ram']['free_formatted'] }} free</span>
+                <div class="pt-2 border-t border-white/5 flex items-center justify-between text-[11px] font-mono text-stone-400">
+                    <span>60 Detik Terakhir</span>
+                    <span class="text-stone-300 font-medium">Penggunaan RAM</span>
                 </div>
             </div>
 
-            <!-- Disk -->
-            <div class="space-y-3 p-4 sm:p-5 rounded-xl bg-[#080808] border border-white/10">
-                <div class="flex justify-between items-baseline">
-                    <span class="text-xs font-mono text-stone-400 uppercase tracking-wider">Storage NVMe</span>
-                    <span id="metric-disk-percent" class="text-2xl font-bold text-white font-mono">{{ $serverMetrics['system']['disk']['percent'] }}%</span>
+            <!-- Network Throughput -->
+            <div class="p-4 sm:p-5 rounded-2xl bg-[#080808] border border-white/10 flex flex-col justify-between">
+                <div>
+                    <div class="flex justify-between items-start mb-2">
+                        <div>
+                            <div class="flex items-center gap-1.5 text-xs font-mono text-emerald-400 font-semibold uppercase tracking-wider">
+                                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-[0_0_6px_rgba(52,211,153,0.8)]"></span>
+                                <span>Network Throughput</span>
+                            </div>
+                            <div class="text-[11px] text-stone-400 font-mono mt-0.5 flex items-center gap-2">
+                                <span>&darr; RX: <strong id="metric-net-rx" class="text-white">{{ $serverMetrics['system']['network']['rx_formatted'] ?? '0 KB/s' }}</strong></span>
+                                <span>&uarr; TX: <strong id="metric-net-tx" class="text-white">{{ $serverMetrics['system']['network']['tx_formatted'] ?? '0 KB/s' }}</strong></span>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <span id="metric-net-total" class="text-2xl sm:text-3xl font-bold text-white font-mono tracking-tight">{{ $serverMetrics['system']['network']['total_formatted'] ?? '0 KB/s' }}</span>
+                            <div class="text-[10px] font-mono text-stone-400">Auto-scale KB/s</div>
+                        </div>
+                    </div>
+                    <!-- Canvas Chart -->
+                    <div class="relative w-full h-28 my-2 rounded-xl bg-[#040404] border border-white/10 overflow-hidden">
+                        <canvas id="chart-net" class="w-full h-full block"></canvas>
+                    </div>
                 </div>
-                <div class="h-2 w-full bg-white/10 rounded-full overflow-hidden">
-                    <div id="metric-disk-bar" class="h-full rounded-full bg-white transition-all duration-700" style="width: {{ $serverMetrics['system']['disk']['percent'] }}%;"></div>
-                </div>
-                <div class="flex justify-between text-[11px] text-stone-400 font-mono pt-1">
-                    <span id="metric-disk-details">{{ $serverMetrics['system']['disk']['used_formatted'] }} / {{ $serverMetrics['system']['disk']['total_formatted'] }}</span>
-                    <span id="metric-disk-free">{{ $serverMetrics['system']['disk']['free_formatted'] }} free</span>
+                <div class="pt-2 border-t border-white/5 flex items-center justify-between text-[11px] font-mono text-stone-400">
+                    <span>60 Detik Terakhir</span>
+                    <span class="text-stone-300 font-medium" id="metric-net-interface">Interface: {{ implode(', ', $serverMetrics['system']['network']['interfaces'] ?? ['eth0']) }}</span>
                 </div>
             </div>
         </div>
 
-        <!-- 4 LEMP Stack Daemons -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-6 pt-5 border-t border-white/10">
+        <!-- 5 LEMP Stack & Storage Statuses -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 mt-6 pt-5 border-t border-white/10">
+            <!-- Storage NVMe -->
+            <div class="p-3.5 rounded-xl bg-[#080808] border border-white/10 flex items-center justify-between">
+                <div>
+                    <div class="flex items-center gap-2">
+                        <span class="w-2 h-2 rounded-full bg-amber-400 shadow-[0_0_6px_rgba(251,191,36,0.8)]"></span>
+                        <span class="text-xs font-semibold text-white font-body">Disk NVMe</span>
+                    </div>
+                    <div class="text-[11px] text-stone-400 font-mono mt-1" id="metric-disk-details">{{ $serverMetrics['system']['disk']['used_formatted'] }} / {{ $serverMetrics['system']['disk']['total_formatted'] }}</div>
+                </div>
+                <span id="metric-disk-percent" class="text-xs font-mono font-bold text-stone-200">{{ $serverMetrics['system']['disk']['percent'] }}%</span>
+            </div>
+
             <div class="p-3.5 rounded-xl bg-[#080808] border border-white/10 flex items-center justify-between">
                 <div>
                     <div class="flex items-center gap-2">
@@ -290,6 +345,136 @@
 
 @push('admin_scripts')
 <script>
+class TaskManagerCanvasChart {
+    constructor(canvasId, options = {}) {
+        this.canvas = document.getElementById(canvasId);
+        if (!this.canvas) return;
+        this.ctx = this.canvas.getContext('2d');
+        this.maxPoints = options.maxPoints || 30; // 30 titik x 3 detik = 90 detik riwayat
+        this.strokeColor = options.strokeColor || '#38bdf8';
+        this.fillColor = options.fillColor || 'rgba(56, 189, 248, 0.18)';
+        this.gridColor = options.gridColor || 'rgba(255, 255, 255, 0.05)';
+        this.fixedMax = options.fixedMax ?? 100;
+        this.minMax = options.minMax ?? 100;
+        this.data = new Array(this.maxPoints).fill(Number(options.initialValue) || 0);
+        this.dpr = window.devicePixelRatio || 1;
+        this.resize();
+        window.addEventListener('resize', () => this.resize());
+    }
+
+    resize() {
+        if (!this.canvas) return;
+        const rect = this.canvas.getBoundingClientRect();
+        this.width = rect.width || 300;
+        this.height = rect.height || 100;
+        this.canvas.width = Math.floor(this.width * this.dpr);
+        this.canvas.height = Math.floor(this.height * this.dpr);
+        this.ctx.setTransform(1, 0, 0, 1, 0, 0);
+        this.ctx.scale(this.dpr, this.dpr);
+        this.draw();
+    }
+
+    push(val) {
+        const num = typeof val === 'number' && !isNaN(val) ? val : 0;
+        this.data.push(num);
+        if (this.data.length > this.maxPoints) {
+            this.data.shift();
+        }
+        this.draw();
+    }
+
+    draw() {
+        if (!this.ctx || !this.width || !this.height) return;
+        const ctx = this.ctx;
+        const w = this.width;
+        const h = this.height;
+
+        ctx.clearRect(0, 0, w, h);
+
+        // Skala vertikal
+        let maxVal = this.fixedMax;
+        if (maxVal === null || maxVal === undefined) {
+            const dataMax = Math.max(...this.data, 0);
+            maxVal = Math.max(dataMax * 1.25, this.minMax);
+        }
+
+        // 1. Gridlines ala Windows Task Manager (Dotted)
+        ctx.strokeStyle = this.gridColor;
+        ctx.lineWidth = 1;
+        ctx.setLineDash([2, 2]);
+
+        // Horizontal Grid (25%, 50%, 75%)
+        for (let i = 1; i <= 3; i++) {
+            const y = Math.round((h / 4) * i) + 0.5;
+            ctx.beginPath();
+            ctx.moveTo(0, y);
+            ctx.lineTo(w, y);
+            ctx.stroke();
+        }
+
+        // Vertical Grid (6 kolom)
+        for (let i = 1; i <= 5; i++) {
+            const x = Math.round((w / 6) * i) + 0.5;
+            ctx.beginPath();
+            ctx.moveTo(x, 0);
+            ctx.lineTo(x, h);
+            ctx.stroke();
+        }
+
+        ctx.setLineDash([]);
+
+        // 2. Kalkulasi Koordinat Titik
+        const step = w / (this.maxPoints - 1);
+        const points = [];
+        for (let i = 0; i < this.data.length; i++) {
+            const val = Math.max(0, this.data[i]);
+            const normalized = Math.min(1, val / maxVal);
+            const x = i * step;
+            const y = h - (normalized * (h - 8)) - 4;
+            points.push({ x, y });
+        }
+
+        if (points.length < 2) return;
+
+        // 3. Area Fill (Gradient)
+        const gradient = ctx.createLinearGradient(0, 0, 0, h);
+        gradient.addColorStop(0, this.fillColor);
+        gradient.addColorStop(1, 'rgba(0, 0, 0, 0)');
+
+        ctx.beginPath();
+        ctx.moveTo(points[0].x, points[0].y);
+        for (let i = 1; i < points.length; i++) {
+            ctx.lineTo(points[i].x, points[i].y);
+        }
+        ctx.lineTo(w, h);
+        ctx.lineTo(0, h);
+        ctx.closePath();
+        ctx.fillStyle = gradient;
+        ctx.fill();
+
+        // 4. Line Stroke
+        ctx.beginPath();
+        ctx.moveTo(points[0].x, points[0].y);
+        for (let i = 1; i < points.length; i++) {
+            ctx.lineTo(points[i].x, points[i].y);
+        }
+        ctx.strokeStyle = this.strokeColor;
+        ctx.lineWidth = 1.75;
+        ctx.lineJoin = 'round';
+        ctx.stroke();
+
+        // 5. Live Head Dot (Titik Aktif Terkanan)
+        const lastPoint = points[points.length - 1];
+        ctx.beginPath();
+        ctx.arc(lastPoint.x - 2, lastPoint.y, 2.5, 0, Math.PI * 2);
+        ctx.fillStyle = this.strokeColor;
+        ctx.shadowColor = this.strokeColor;
+        ctx.shadowBlur = 6;
+        ctx.fill();
+        ctx.shadowBlur = 0;
+    }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     const refreshBtn = document.getElementById('btn-refresh-metrics');
     const refreshIcon = document.getElementById('refresh-icon');
@@ -299,6 +484,29 @@ document.addEventListener('DOMContentLoaded', () => {
     const toggleLiveText = document.getElementById('toggle-live-text');
 
     if (!refreshBtn) return;
+
+    // Inisialisasi 3 Grafik Windows Task Manager
+    const cpuChart = new TaskManagerCanvasChart('chart-cpu', {
+        initialValue: {{ $serverMetrics['system']['cpu']['percent'] ?? 0 }},
+        fixedMax: 100,
+        strokeColor: '#38bdf8',
+        fillColor: 'rgba(56, 189, 248, 0.18)'
+    });
+
+    const ramChart = new TaskManagerCanvasChart('chart-ram', {
+        initialValue: {{ $serverMetrics['system']['ram']['percent'] ?? 0 }},
+        fixedMax: 100,
+        strokeColor: '#c084fc',
+        fillColor: 'rgba(192, 132, 252, 0.18)'
+    });
+
+    const netChart = new TaskManagerCanvasChart('chart-net', {
+        initialValue: {{ $serverMetrics['system']['network']['total_kbps'] ?? 0 }},
+        fixedMax: null,
+        minMax: 50,
+        strokeColor: '#34d399',
+        fillColor: 'rgba(52, 211, 153, 0.18)'
+    });
 
     let isLive = true;
     let pollTimer = null;
@@ -327,32 +535,32 @@ document.addEventListener('DOMContentLoaded', () => {
             // CPU
             const cpu = data.system.cpu;
             if (document.getElementById('metric-cpu-percent')) document.getElementById('metric-cpu-percent').textContent = `${cpu.percent}%`;
-            if (document.getElementById('metric-cpu-bar')) {
-                const bar = document.getElementById('metric-cpu-bar');
-                bar.style.width = `${cpu.percent}%`;
-                bar.style.backgroundColor = cpu.percent >= 85 ? '#E11D48' : '#FFFFFF';
-            }
             if (document.getElementById('metric-cpu-load')) document.getElementById('metric-cpu-load').textContent = `Load: ${cpu.load_1m}`;
-            
+            if (document.getElementById('metric-cpu-cores')) document.getElementById('metric-cpu-cores').textContent = `${cpu.cores} Cores`;
+            cpuChart.push(Number(cpu.percent) || 0);
+
             // RAM
             const ram = data.system.ram;
             if (document.getElementById('metric-ram-percent')) document.getElementById('metric-ram-percent').textContent = `${ram.percent}%`;
-            if (document.getElementById('metric-ram-bar')) {
-                const bar = document.getElementById('metric-ram-bar');
-                bar.style.width = `${ram.percent}%`;
-                bar.style.backgroundColor = ram.percent >= 85 ? '#E11D48' : '#FFFFFF';
-            }
             if (document.getElementById('metric-ram-details')) document.getElementById('metric-ram-details').textContent = `${ram.used_formatted} / ${ram.total_formatted}`;
             if (document.getElementById('metric-ram-free')) document.getElementById('metric-ram-free').textContent = `${ram.free_formatted} free`;
+            ramChart.push(Number(ram.percent) || 0);
 
-            // Disk
+            // Network
+            const net = data.system.network;
+            if (net) {
+                if (document.getElementById('metric-net-total')) document.getElementById('metric-net-total').textContent = net.total_formatted || '0 KB/s';
+                if (document.getElementById('metric-net-rx')) document.getElementById('metric-net-rx').textContent = net.rx_formatted || '0 KB/s';
+                if (document.getElementById('metric-net-tx')) document.getElementById('metric-net-tx').textContent = net.tx_formatted || '0 KB/s';
+                if (document.getElementById('metric-net-interface') && net.interfaces) {
+                    document.getElementById('metric-net-interface').textContent = `Interface: ${net.interfaces.join(', ')}`;
+                }
+                netChart.push(Number(net.total_kbps) || 0);
+            }
+
+            // Disk NVMe
             const disk = data.system.disk;
             if (document.getElementById('metric-disk-percent')) document.getElementById('metric-disk-percent').textContent = `${disk.percent}%`;
-            if (document.getElementById('metric-disk-bar')) {
-                const bar = document.getElementById('metric-disk-bar');
-                bar.style.width = `${disk.percent}%`;
-                bar.style.backgroundColor = disk.percent >= 85 ? '#E11D48' : '#FFFFFF';
-            }
             if (document.getElementById('metric-disk-details')) document.getElementById('metric-disk-details').textContent = `${disk.used_formatted} / ${disk.total_formatted}`;
 
             // Latency & Uptime

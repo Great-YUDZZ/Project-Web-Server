@@ -20,7 +20,7 @@ class ServerMonitorService
     }
 
     /**
-     * Get CPU, RAM, Disk, and Uptime metrics.
+     * Get CPU, RAM, Disk, Uptime, and Network metrics.
      */
     public function getSystemMetrics(): array
     {
@@ -28,12 +28,14 @@ class ServerMonitorService
         $ram = $this->getMemoryMetrics();
         $disk = $this->getDiskMetrics();
         $uptime = $this->getUptimeMetrics();
+        $network = $this->getNetworkMetrics();
 
         return [
             'cpu' => $cpu,
             'ram' => $ram,
             'disk' => $disk,
             'uptime' => $uptime,
+            'network' => $network,
         ];
     }
 
@@ -189,6 +191,81 @@ class ServerMonitorService
         return [
             'seconds' => $seconds,
             'formatted' => implode(' ', $formatted),
+        ];
+    }
+
+    /**
+     * Get real-time Network throughput metrics from /proc/net/dev delta.
+     */
+    public function getNetworkMetrics(): array
+    {
+        $rxBytes = 0;
+        $txBytes = 0;
+        $activeIfaces = [];
+        $netDev = @file_get_contents('/proc/net/dev');
+
+        if ($netDev) {
+            $lines = explode("\n", trim($netDev));
+            foreach ($lines as $line) {
+                if (! str_contains($line, ':')) {
+                    continue;
+                }
+                [$iface, $data] = explode(':', $line, 2);
+                $iface = trim($iface);
+                if ($iface === 'lo' || str_starts_with($iface, 'docker') || str_starts_with($iface, 'br-')) {
+                    continue;
+                }
+                $cols = preg_split('/\s+/', trim($data));
+                if (count($cols) >= 9) {
+                    $rx = (int) $cols[0];
+                    $tx = (int) $cols[8];
+                    $rxBytes += $rx;
+                    $txBytes += $tx;
+                    $activeIfaces[] = $iface;
+                }
+            }
+        }
+
+        $now = microtime(true);
+        $prev = cache()->get('server_monitor_net_stat');
+        cache()->put('server_monitor_net_stat', [
+            'rx_bytes' => $rxBytes,
+            'tx_bytes' => $txBytes,
+            'time' => $now,
+        ], now()->addMinutes(5));
+
+        $rxRate = 0.0;
+        $txRate = 0.0;
+        if ($prev && isset($prev['rx_bytes'], $prev['tx_bytes'], $prev['time'])) {
+            $diffTime = $now - (float) $prev['time'];
+            if ($diffTime > 0.1) {
+                $diffRx = $rxBytes - (int) $prev['rx_bytes'];
+                $diffTx = $txBytes - (int) $prev['tx_bytes'];
+                if ($diffRx >= 0) {
+                    $rxRate = $diffRx / $diffTime;
+                }
+                if ($diffTx >= 0) {
+                    $txRate = $diffTx / $diffTime;
+                }
+            }
+        }
+
+        $rxKbps = round($rxRate / 1024, 1);
+        $txKbps = round($txRate / 1024, 1);
+        $totalKbps = round(($rxRate + $txRate) / 1024, 1);
+
+        return [
+            'rx_bps' => round($rxRate, 2),
+            'tx_bps' => round($txRate, 2),
+            'rx_kbps' => $rxKbps,
+            'tx_kbps' => $txKbps,
+            'total_kbps' => $totalKbps,
+            'rx_formatted' => $this->formatBytes($rxRate) . '/s',
+            'tx_formatted' => $this->formatBytes($txRate) . '/s',
+            'total_formatted' => $this->formatBytes($rxRate + $txRate) . '/s',
+            'total_bytes_rx' => $rxBytes,
+            'total_bytes_tx' => $txBytes,
+            'interfaces' => array_values(array_unique($activeIfaces)),
         ];
     }
 
