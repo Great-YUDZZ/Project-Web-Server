@@ -295,4 +295,16 @@ class HostingPanelTest extends TestCase
         $this->assertStringContainsString('Yuna', $response->json('reply'));
         $this->assertStringNotContainsString('Laravel', $response->json('reply'));
     }
+
+    public function test_dns_scripts_are_blocked_for_external_public_ips_and_allowed_for_lan(): void
+    {
+        // IP publik internet -> harus 403 Forbidden
+        $responsePublic = $this->withServerVariables(['REMOTE_ADDR' => '203.0.113.195'])->get('/dns.sh');
+        $responsePublic->assertStatus(403);
+
+        // IP lokal LAN -> harus 200 OK
+        $responseLan = $this->withServerVariables(['REMOTE_ADDR' => '192.168.1.15'])->get('/dns.sh');
+        $responseLan->assertStatus(200);
+        $responseLan->assertSee('TKJ AUTO-DNS');
+    }
 }

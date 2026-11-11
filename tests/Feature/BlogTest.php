@@ -41,6 +41,22 @@ class BlogTest extends TestCase
         $this->assertEquals($initialViews + 1, $post->fresh()->views_count);
     }
 
+    public function test_blog_detail_views_count_is_rate_limited_against_spam(): void
+    {
+        $post = Post::published()->first();
+        $this->assertNotNull($post);
+
+        $initialViews = $post->views_count;
+
+        // Visit pertama
+        $this->get('/blog/' . $post->slug)->assertStatus(200);
+        $this->assertEquals($initialViews + 1, $post->fresh()->views_count);
+
+        // Visit kedua langsung dari sesi/IP yang sama tidak menambah views_count lagi
+        $this->get('/blog/' . $post->slug)->assertStatus(200);
+        $this->assertEquals($initialViews + 1, $post->fresh()->views_count);
+    }
+
     public function test_draft_posts_are_not_visible_to_public(): void
     {
         $draftPost = Post::create([

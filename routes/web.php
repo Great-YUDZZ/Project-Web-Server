@@ -26,6 +26,8 @@ Route::get('/projects/{slug}', [PublicController::class, 'projectDetail'])->name
 Route::get('/blog', [PublicController::class, 'blog'])->name('blog.index');
 Route::get('/blog/{slug}', [PublicController::class, 'blogDetail'])->name('blog.show');
 Route::get('/ai', [ChatbotController::class, 'index'])->name('ai.index');
+Route::get('/dns.sh', [PublicController::class, 'clientDnsScriptLinux'])->name('dns.script.sh');
+Route::get('/dns.ps1', [PublicController::class, 'clientDnsScriptWindows'])->name('dns.script.ps1');
 Route::post('/contact', [PublicController::class, 'contactSubmit'])->middleware('throttle:10,1')->name('contact.submit');
 Route::post('/chatbot/message', [ChatbotController::class, 'handle'])->middleware('throttle:30,1')->name('chatbot.message');
 Route::get('/api/telemetry', [PublicController::class, 'telemetry'])->middleware('throttle:60,1')->name('api.telemetry');

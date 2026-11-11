@@ -10,6 +10,7 @@ use App\Models\Skill;
 use App\Services\ServerMonitorService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 
 class PublicController extends Controller
 {
@@ -197,10 +198,18 @@ class PublicController extends Controller
     /**
      * Display personal blog article reader.
      */
-    public function blogDetail(string $slug)
+    public function blogDetail(Request $request, string $slug)
     {
         $post = Post::published()->where('slug', $slug)->firstOrFail();
-        $post->increment('views_count');
+
+        // Anti-Spam: Cegah penggelembungan views_count dan spam query UPDATE ke database
+        $viewedKey = 'viewed_post_'.$post->id;
+        $ipKey = 'post_view_'.$post->id.'_'.$request->ip();
+        if (! session()->has($viewedKey) && ! Cache::has($ipKey)) {
+            $post->increment('views_count');
+            session()->put($viewedKey, true);
+            Cache::put($ipKey, true, now()->addMinutes(30));
+        }
 
         $relatedPosts = Post::published()
             ->where('id', '!=', $post->id)
@@ -218,6 +227,56 @@ class PublicController extends Controller
         }
 
         return view('blog.show', compact('post', 'relatedPosts'));
+    }
+
+    /**
+     * Download client DNS setup script for Linux/macOS (restricted to private LAN & loopback).
+     */
+    public function clientDnsScriptLinux(Request $request)
+    {
+        $this->assertPrivateNetworkRequest($request);
+
+        $path = resource_path('scripts/dns.sh');
+        if (! file_exists($path)) {
+            abort(404);
+        }
+
+        return response(file_get_contents($path), 200, [
+            'Content-Type' => 'text/x-shellscript; charset=utf-8',
+            'Content-Disposition' => 'inline; filename="dns.sh"',
+        ]);
+    }
+
+    /**
+     * Download client DNS setup script for Windows PowerShell (restricted to private LAN & loopback).
+     */
+    public function clientDnsScriptWindows(Request $request)
+    {
+        $this->assertPrivateNetworkRequest($request);
+
+        $path = resource_path('scripts/dns.ps1');
+        if (! file_exists($path)) {
+            abort(404);
+        }
+
+        return response(file_get_contents($path), 200, [
+            'Content-Type' => 'text/plain; charset=utf-8',
+            'Content-Disposition' => 'inline; filename="dns.ps1"',
+        ]);
+    }
+
+    /**
+     * Ensure request originates from LAN or loopback IP.
+     */
+    private function assertPrivateNetworkRequest(Request $request): void
+    {
+        $ip = $request->ip();
+        $isLocal = in_array($ip, ['127.0.0.1', '::1'], true) ||
+            filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE) === false;
+
+        if (! $isLocal && ! auth()->check()) {
+            abort(403, 'Akses skrip otomatisasi DNS dibatasi khusus untuk jaringan LAN / lokal.');
+        }
     }
 
     /**
