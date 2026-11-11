@@ -241,7 +241,10 @@ class PublicController extends Controller
             abort(404);
         }
 
-        return response(file_get_contents($path), 200, [
+        $serverIp = $request->server('SERVER_ADDR') ?: gethostbyname(gethostname());
+        $content = str_replace('__SERVER_IP__', $serverIp, file_get_contents($path));
+
+        return response($content, 200, [
             'Content-Type' => 'text/x-shellscript; charset=utf-8',
             'Content-Disposition' => 'inline; filename="dns.sh"',
         ]);
@@ -259,7 +262,10 @@ class PublicController extends Controller
             abort(404);
         }
 
-        return response(file_get_contents($path), 200, [
+        $serverIp = $request->server('SERVER_ADDR') ?: gethostbyname(gethostname());
+        $content = str_replace('__SERVER_IP__', $serverIp, file_get_contents($path));
+
+        return response($content, 200, [
             'Content-Type' => 'text/plain; charset=utf-8',
             'Content-Disposition' => 'inline; filename="dns.ps1"',
         ]);

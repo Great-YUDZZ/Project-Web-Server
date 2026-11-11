@@ -87,9 +87,14 @@ class TkjPortfolioTest extends TestCase
 
     public function test_admin_can_login_with_valid_credentials(): void
     {
+        $admin = User::first();
+        $admin->update([
+            'password' => \Illuminate\Support\Facades\Hash::make('TempTestPass#99'),
+        ]);
+
         $response = $this->post('/login', [
-            'email' => 'admin@tkj.lan',
-            'password' => 'YudaHosting2026!',
+            'email' => $admin->email,
+            'password' => 'TempTestPass#99',
         ]);
 
         $response->assertRedirect(route('admin.dashboard'));

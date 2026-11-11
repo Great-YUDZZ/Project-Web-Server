@@ -13,11 +13,18 @@ class AdminUserSeeder extends Seeder
      */
     public function run(): void
     {
+        $email = env('ADMIN_EMAIL', 'admin@tkj.lan');
+        $password = env('ADMIN_PASSWORD');
+
+        if (! $password) {
+            $password = bin2hex(random_bytes(12));
+        }
+
         User::updateOrCreate(
-            ['email' => 'admin@tkj.lan'],
+            ['email' => $email],
             [
                 'name' => 'I Made Yuda Pramana (Admin TKJ)',
-                'password' => Hash::make('YudaHosting2026!'),
+                'password' => Hash::make($password),
                 'email_verified_at' => now(),
             ]
         );

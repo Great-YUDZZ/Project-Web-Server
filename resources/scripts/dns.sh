@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Script Konfigurasi DNS Otomatis untuk Klien Linux & macOS
 set -e
-SERVER_IP="192.168.1.2"
+SERVER_IP="__SERVER_IP__"
 
 echo "=========================================================="
 echo " [TKJ AUTO-DNS] Mengonfigurasi DNS Klien ke $SERVER_IP"

@@ -27,8 +27,6 @@
         <env name="DB_HOST" value="127.0.0.1"/>
         <env name="DB_PORT" value="3306"/>
         <env name="DB_DATABASE" value="project_tkj_yuda2"/>
-        <env name="DB_USERNAME" value="yuda_user"/>
-        <env name="DB_PASSWORD" value="yuda123"/>
         <env name="MAIL_MAILER" value="array"/>
         <env name="QUEUE_CONNECTION" value="sync"/>
         <env name="SESSION_DRIVER" value="array"/>

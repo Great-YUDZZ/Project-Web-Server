@@ -1,6 +1,6 @@
 # Script Konfigurasi DNS Otomatis untuk Klien Windows
 # Memerlukan hak akses Administrator
-$ServerIP = "192.168.1.2"
+$ServerIP = "__SERVER_IP__"
 
 Write-Host "==========================================================" -ForegroundColor Cyan
 Write-Host " [TKJ AUTO-DNS] Mengonfigurasi DNS Klien ke $ServerIP" -ForegroundColor Cyan
